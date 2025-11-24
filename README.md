@@ -17,6 +17,7 @@ This repository contains the React-based web frontend for **From Abyss Media**. 
 - **Federation Features:** Integration with ActivityPub for decentralized social interactions
 - **Responsive Design:** Mobile-first, optimized for all screen sizes
 - **Real-time Features:** WebSocket-powered live updates and notifications
+- **Authentication:** Complete OIDC integration with LifeAuth (Tellurian Corp's Identity Provider)
 
 For detailed architecture and design documentation, please refer to the [From Abyss Media Workspace](https://github.com/TellurianCorp/from-abyss-workspace).
 
@@ -71,6 +72,24 @@ The web application will be available at `http://localhost:5173`.
 - **State Management:** React Context, React Query (to be added)
 - **HTTP Client:** Axios (to be added)
 - **WebSocket:** Socket.io-client (to be added)
+- **Authentication:** OIDC with LifeAuth
+
+---
+
+## Authentication
+
+The webfront integrates with **LifeAuth**, Tellurian Corp's Identity Provider (from the Lifelogger product), using OpenID Connect (OIDC). The authentication flow is handled entirely by the backend API, with the frontend managing session state via secure cookies.
+
+### Authentication Components
+
+- **`AuthProvider`:** Context provider for global authentication state
+- **`LoginButton`:** Initiates OIDC login flow
+- **`LogoutButton`:** Logs out the current user
+- **`UserProfile`:** Displays authenticated user information
+- **`AuthGuard`:** Protects content from unauthenticated access
+- **`ProtectedRoute`:** Protects entire routes in React Router
+
+For detailed implementation information, see the [OIDC Frontend Implementation Guide](docs/oidc-frontend-implementation.md).
 
 ---
 

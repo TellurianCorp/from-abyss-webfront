@@ -1,0 +1,198 @@
+/* Authentication Components Styles */
+
+/* Login Button */
+.login-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background-color: #b91c1c;
+}
+
+.login-button:active {
+  background-color: #991b1b;
+}
+
+/* Logout Button */
+.logout-button {
+  padding: 0.5rem 1rem;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #4b5563;
+}
+
+.logout-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* User Profile */
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #1f2937;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.user-profile__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-profile__avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-profile__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.user-profile__name {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.user-profile__email {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.user-profile__verified {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #10b981;
+}
+
+.user-profile__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Auth Guard */
+.auth-guard__loading,
+.auth-guard__unauthenticated {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.auth-guard__unauthenticated h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.auth-guard__unauthenticated p {
+  margin-bottom: 1.5rem;
+  color: #6b7280;
+}
+
+/* Protected Route Loading */
+.protected-route__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #dc2626;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* App Header Example */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #111827;
+  color: white;
+  border-bottom: 1px solid #374151;
+}
+
+.app-header__logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.app-header__nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.app-header__nav a {
+  color: #d1d5db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.app-header__nav a:hover {
+  color: white;
+}
+
+.app-header__auth {
+  display: flex;
+  align-items: center;
+}
+
+.app-header__user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-header__user .avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.app-header__user span {
+  font-weight: 500;
+}
