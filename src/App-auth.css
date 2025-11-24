@@ -1,0 +1,111 @@
+/* Authentication-specific styles for App.tsx */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #dc2626;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #fff;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #dc2626;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #999;
+}
+
+.authenticated-content {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.authenticated-content h3 {
+  margin-top: 0;
+  color: #10b981;
+}
+
+.user-details {
+  margin-top: 1rem;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-details p {
+  margin: 0.5rem 0;
+}
+
+.info-section {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.info-section h3 {
+  color: #dc2626;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  border-top: 1px solid #333;
+  margin-top: 4rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
