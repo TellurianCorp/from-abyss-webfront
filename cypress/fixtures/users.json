@@ -1,0 +1,32 @@
+{
+  "validUser": {
+    "id": 1,
+    "lifeauth_sub": "test-user-sub-123",
+    "name": "Test User",
+    "email": "test@fromabyss.media",
+    "email_verified": true,
+    "picture": "https://example.com/avatar.jpg",
+    "created_at": "2025-11-24T00:00:00Z",
+    "updated_at": "2025-11-24T00:00:00Z"
+  },
+  "unverifiedUser": {
+    "id": 2,
+    "lifeauth_sub": "test-user-sub-456",
+    "name": "Unverified User",
+    "email": "unverified@fromabyss.media",
+    "email_verified": false,
+    "picture": null,
+    "created_at": "2025-11-24T00:00:00Z",
+    "updated_at": "2025-11-24T00:00:00Z"
+  },
+  "adminUser": {
+    "id": 3,
+    "lifeauth_sub": "admin-user-sub-789",
+    "name": "Admin User",
+    "email": "admin@fromabyss.media",
+    "email_verified": true,
+    "picture": "https://example.com/admin-avatar.jpg",
+    "created_at": "2025-11-24T00:00:00Z",
+    "updated_at": "2025-11-24T00:00:00Z"
+  }
+}
