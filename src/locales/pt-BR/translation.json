@@ -157,6 +157,8 @@
       "empty": "Nenhum vídeo disponível.",
       "views": "visualizações",
       "visitChannel": "Visitar Canal",
+      "retry": "Tentar Novamente",
+      "retrying": "Tentando novamente...",
       "date": {
         "today": "Hoje",
         "yesterday": "Ontem",

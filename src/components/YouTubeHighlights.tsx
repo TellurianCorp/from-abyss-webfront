@@ -25,62 +25,69 @@ export function YouTubeHighlights() {
   const [videos, setVideos] = useState<VideoInfo[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [retrying, setRetrying] = useState(false)
+
+  const fetchVideos = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      setRetrying(false)
+      
+      const response = await fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=5`))
+      
+      if (!response.ok) {
+        // Check if response is JSON before trying to parse
+        const contentType = response.headers.get('content-type')
+        let errorMessage = `Failed to fetch videos: ${response.status}`
+        
+        if (contentType && contentType.includes('application/json')) {
+          try {
+            const errorData = await response.json()
+            if (errorData.message) {
+              errorMessage = errorData.message
+            } else if (errorData.error) {
+              errorMessage = errorData.error
+            }
+          } catch {
+            // If JSON parsing fails, use default message
+          }
+        }
+        throw new Error(errorMessage)
+      }
+      
+      // Check Content-Type before parsing JSON
+      const contentType = response.headers.get('content-type')
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error(`Expected JSON but got ${contentType || 'unknown content type'}`)
+      }
+      
+      const data: YouTubeResponse = await response.json()
+      setVideos(data.data || [])
+    } catch (err) {
+      console.error('Error fetching YouTube videos:', err)
+      const errorMessage = err instanceof Error ? err.message : 'Failed to load videos'
+      setError(errorMessage)
+      // Log more details for debugging
+      if (err instanceof Error) {
+        console.error('Error details:', {
+          message: err.message,
+          stack: err.stack,
+          name: err.name
+        })
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-        
-        const response = await fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=5`))
-        
-        if (!response.ok) {
-          // Check if response is JSON before trying to parse
-          const contentType = response.headers.get('content-type')
-          let errorMessage = `Failed to fetch videos: ${response.status}`
-          
-          if (contentType && contentType.includes('application/json')) {
-            try {
-              const errorData = await response.json()
-              if (errorData.message) {
-                errorMessage = errorData.message
-              } else if (errorData.error) {
-                errorMessage = errorData.error
-              }
-            } catch {
-              // If JSON parsing fails, use default message
-            }
-          }
-          throw new Error(errorMessage)
-        }
-        
-        // Check Content-Type before parsing JSON
-        const contentType = response.headers.get('content-type')
-        if (!contentType || !contentType.includes('application/json')) {
-          throw new Error(`Expected JSON but got ${contentType || 'unknown content type'}`)
-        }
-        
-        const data: YouTubeResponse = await response.json()
-        setVideos(data.data || [])
-      } catch (err) {
-        console.error('Error fetching YouTube videos:', err)
-        const errorMessage = err instanceof Error ? err.message : 'Failed to load videos'
-        setError(errorMessage)
-        // Log more details for debugging
-        if (err instanceof Error) {
-          console.error('Error details:', {
-            message: err.message,
-            stack: err.stack,
-            name: err.name
-          })
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchVideos()
   }, [])
+
+  const handleRetry = () => {
+    setRetrying(true)
+    fetchVideos()
+  }
 
   const formatViewCount = (count: number): string => {
     if (count >= 1000000) {
@@ -105,6 +112,23 @@ export function YouTubeHighlights() {
     return t('youtube.highlights.date.yearsAgo', { count: Math.floor(diffInDays / 365) })
   }
 
+  const formatDuration = (duration: string): string => {
+    if (!duration) return ''
+    
+    // Parse ISO 8601 duration (PT15M30S format)
+    const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/)
+    if (!match) return duration
+    
+    const hours = parseInt(match[1] || '0', 10)
+    const minutes = parseInt(match[2] || '0', 10)
+    const seconds = parseInt(match[3] || '0', 10)
+    
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    }
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+  }
+
   if (loading) {
     return (
       <section className="section youtube-section">
@@ -112,8 +136,17 @@ export function YouTubeHighlights() {
           <h2>{t('youtube.highlights.title')}</h2>
           <p>{t('youtube.highlights.description')}</p>
         </div>
-        <div className="youtube-loading">
-          <p>{t('youtube.highlights.loading')}</p>
+        <div className="youtube-videos youtube-loading-state">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="youtube-video-skeleton">
+              <div className="skeleton-thumbnail"></div>
+              <div className="skeleton-content">
+                <div className="skeleton-title"></div>
+                <div className="skeleton-title skeleton-title-short"></div>
+                <div className="skeleton-meta"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     )
@@ -127,7 +160,16 @@ export function YouTubeHighlights() {
           <p>{t('youtube.highlights.description')}</p>
         </div>
         <div className="youtube-error">
-          <p>{t('youtube.highlights.error')}</p>
+          <div className="error-icon">⚠️</div>
+          <p>{error}</p>
+          <button 
+            className="youtube-retry-button"
+            onClick={handleRetry}
+            disabled={retrying}
+            aria-label="Retry loading videos"
+          >
+            {retrying ? t('youtube.highlights.retrying') : t('youtube.highlights.retry')}
+          </button>
         </div>
       </section>
     )
@@ -171,14 +213,29 @@ export function YouTubeHighlights() {
               aria-label={`${video.title} - ${formatViewCount(video.viewCount)} views`}
             >
             <div className="youtube-video-thumbnail">
-              <img src={video.thumbnail} alt={video.title} loading="lazy" />
+              <img 
+                src={video.thumbnail} 
+                alt={video.title} 
+                loading="lazy"
+                onError={(e) => {
+                  // Fallback to placeholder if thumbnail fails to load
+                  const target = e.target as HTMLImageElement
+                  target.src = 'https://via.placeholder.com/320x180?text=Video+Thumbnail'
+                }}
+              />
+              {video.duration && (
+                <div className="youtube-video-duration">
+                  {formatDuration(video.duration)}
+                </div>
+              )}
               <div className="youtube-video-overlay">
                 <svg
-                  width="24"
-                  height="24"
+                  width="32"
+                  height="32"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
                 >
                   <path
                     d="M8 5v14l11-7z"
@@ -193,9 +250,17 @@ export function YouTubeHighlights() {
                 <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
                   <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
                   <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
+                  <span className="meta-icon">👁</span>
                   {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
                 </span>
+                {video.likeCount > 0 && (
+                  <span className="youtube-video-likes">
+                    <span className="meta-icon">👍</span>
+                    {formatViewCount(video.likeCount)}
+                  </span>
+                )}
                 <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
+                  <span className="meta-icon">📅</span>
                   {formatDate(video.publishedAt)}
                 </time>
               </div>

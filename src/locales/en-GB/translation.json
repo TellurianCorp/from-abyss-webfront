@@ -157,6 +157,8 @@
       "empty": "No videos available.",
       "views": "views",
       "visitChannel": "Visit Channel",
+      "retry": "Retry",
+      "retrying": "Retrying...",
       "date": {
         "today": "Today",
         "yesterday": "Yesterday",
