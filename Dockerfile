@@ -1,4 +1,21 @@
-# Production Dockerfile for webfront
+# Development stage
+FROM node:20-alpine AS development
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Expose port
+EXPOSE 3000
+
+# Run Vite dev server
+CMD ["npm", "run", "dev"]
+
+# Build stage for production
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -18,7 +35,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:20-alpine
+FROM node:20-alpine AS production
 
 WORKDIR /app
 

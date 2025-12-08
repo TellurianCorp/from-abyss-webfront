@@ -6,14 +6,19 @@
  * Configuration priority:
  * 1. VITE_API_BASE_URL environment variable
  * 2. VITE_API_URL environment variable (fallback)
- * 3. Empty string (uses relative paths, works with Vite proxy in dev and production routing)
+ * 3. Empty string (uses relative paths, works with Vite proxy in dev)
  * 
- * In development, Vite proxy routes /api/* to http://localhost:8080
- * In production, the web server should route API requests appropriately
+ * Environments:
+ * - Development (local): Uses Vite proxy to route /v1/* to http://localhost:8080
+ * - Development (Docker): Uses Vite proxy to route /v1/* to http://api:8080
+ * - Production: VITE_API_BASE_URL should be set to https://api.fromabyss.com
  */
 
 /**
  * Get the API base URL from environment variables or use relative paths
+ * 
+ * In production, VITE_API_BASE_URL should be set to https://api.fromabyss.com
+ * In development, leave it empty to use Vite proxy
  */
 export const getApiBaseUrl = (): string => {
   // Check for environment variables first
@@ -24,8 +29,13 @@ export const getApiBaseUrl = (): string => {
     return envBaseUrl.replace(/\/$/, '')
   }
   
-  // Return empty string to use relative paths
-  // This works with Vite proxy in dev and production routing
+  // In production mode, if no base URL is set, default to production API
+  if (import.meta.env.PROD) {
+    // Production default: api.fromabyss.com
+    return 'https://api.fromabyss.com'
+  }
+  
+  // Development: return empty string to use relative paths with Vite proxy
   return ''
 }
 
