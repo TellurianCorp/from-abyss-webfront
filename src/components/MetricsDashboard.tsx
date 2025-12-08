@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { apiUrl, API_ENDPOINTS } from '../utils/api';
 import './MetricsDashboard.css';
 
 interface SyncMetrics {
@@ -46,9 +47,9 @@ const MetricsDashboard: React.FC = () => {
   const fetchMetrics = async () => {
     try {
       const [syncRes, securityRes, dbRes] = await Promise.all([
-        fetch('http://localhost:8080/v1/microblog/metrics/sync'),
-        fetch('http://localhost:8080/v1/microblog/metrics/security'),
-        fetch('http://localhost:8080/v1/microblog/metrics/database'),
+        fetch(apiUrl(API_ENDPOINTS.microblog.metrics.sync)),
+        fetch(apiUrl(API_ENDPOINTS.microblog.metrics.security)),
+        fetch(apiUrl(API_ENDPOINTS.microblog.metrics.database)),
       ]);
 
       if (syncRes.ok) {

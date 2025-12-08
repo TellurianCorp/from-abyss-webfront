@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { apiUrl, API_ENDPOINTS } from '../utils/api';
 import './Notifications.css';
 
 interface Notification {
@@ -47,7 +48,7 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8080/v1/microblog/notifications?userId=${userId}&limit=20`
+        apiUrl(`${API_ENDPOINTS.microblog.notifications.base}?userId=${userId}&limit=20`)
       );
       if (response.ok) {
         const data = await response.json();
@@ -65,7 +66,7 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/v1/microblog/notifications/unread-count?userId=${userId}`
+        apiUrl(`${API_ENDPOINTS.microblog.notifications.unreadCount}?userId=${userId}`)
       );
       if (response.ok) {
         const data = await response.json();
@@ -79,7 +80,7 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
   const markAsRead = async (notificationId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/v1/microblog/notifications/${notificationId}/read?userId=${userId}`,
+        apiUrl(`${API_ENDPOINTS.microblog.notifications.markRead(notificationId)}?userId=${userId}`),
         { method: 'POST' }
       );
       if (response.ok) {
@@ -96,7 +97,7 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
   const markAllAsRead = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/v1/microblog/notifications/read-all?userId=${userId}`,
+        apiUrl(`${API_ENDPOINTS.microblog.notifications.markAllRead}?userId=${userId}`),
         { method: 'POST' }
       );
       if (response.ok) {

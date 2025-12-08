@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AdminNavbar } from '../components/AdminNavbar'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 
 interface PatreonUser {
   id: string
@@ -58,8 +59,6 @@ export function AdminPatreon() {
   const [error, setError] = useState<string | null>(null)
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null)
 
-  const API_BASE = '/v1/patreon'
-
   interface PatreonAPICampaign {
     id: string
     attributes?: {
@@ -109,7 +108,7 @@ export function AdminPatreon() {
       const refreshParam = forceRefresh ? '?refresh=true' : ''
 
       // Fetch user info
-      const userResponse = await fetch(`${API_BASE}/user${refreshParam}`)
+      const userResponse = await fetch(apiUrl(`${API_ENDPOINTS.patreon.user}${refreshParam}`))
       if (userResponse.ok) {
         try {
           const userData = await userResponse.json()
@@ -136,7 +135,7 @@ export function AdminPatreon() {
       }
 
       // Fetch campaigns
-      const campaignsResponse = await fetch(`${API_BASE}/campaigns${refreshParam}`)
+      const campaignsResponse = await fetch(apiUrl(`${API_ENDPOINTS.patreon.campaigns}${refreshParam}`))
       if (campaignsResponse.ok) {
         try {
           const campaignsData = await campaignsResponse.json()
@@ -165,7 +164,7 @@ export function AdminPatreon() {
       }
 
       // Fetch stats
-      const statsResponse = await fetch(`${API_BASE}/stats${refreshParam}`)
+      const statsResponse = await fetch(apiUrl(`${API_ENDPOINTS.patreon.stats}${refreshParam}`))
       if (statsResponse.ok) {
         try {
           const statsData = await statsResponse.json()
@@ -194,7 +193,7 @@ export function AdminPatreon() {
   const fetchTiersForCampaign = async (campaignID: string, forceRefresh = false) => {
     try {
       const refreshParam = forceRefresh ? '?refresh=true' : ''
-      const response = await fetch(`${API_BASE}/campaigns/${campaignID}/tiers${refreshParam}`)
+      const response = await fetch(apiUrl(`${API_ENDPOINTS.patreon.tiers(campaignID)}${refreshParam}`))
       if (response.ok) {
         const tiersData = await response.json()
         if (tiersData.data) {
@@ -218,7 +217,7 @@ export function AdminPatreon() {
   const fetchMembersForCampaign = async (campaignID: string, forceRefresh = false) => {
     try {
       const refreshParam = forceRefresh ? '&refresh=true' : ''
-      const response = await fetch(`${API_BASE}/campaigns/${campaignID}/members?page_size=100${refreshParam}`)
+      const response = await fetch(apiUrl(`${API_ENDPOINTS.patreon.members(campaignID)}?page_size=100${refreshParam}`))
       if (response.ok) {
         const membersData = await response.json()
         if (membersData.data) {
@@ -249,7 +248,7 @@ export function AdminPatreon() {
 
   const handleClearCache = async () => {
     try {
-      const response = await fetch(`${API_BASE}/cache/clear`, {
+      const response = await fetch(apiUrl(API_ENDPOINTS.patreon.cacheClear), {
         method: 'POST',
       })
       if (response.ok) {
@@ -268,7 +267,7 @@ export function AdminPatreon() {
 
   const handleSaveTier = async (updatedTier: PatreonTier) => {
     try {
-      const response = await fetch(`${API_BASE}/tiers/${updatedTier.id}`, {
+      const response = await fetch(apiUrl(API_ENDPOINTS.patreon.updateTier(updatedTier.id)), {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

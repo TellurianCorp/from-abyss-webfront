@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import FollowButton from './FollowButton'
 import Notifications from './Notifications'
 import './MicroblogTimeline.css'
@@ -30,8 +31,6 @@ interface TimelineResponse {
   prev?: string
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8080'
-
 interface MicroblogTimelineProps {
   userId?: string
 }
@@ -51,7 +50,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
       setLoading(true)
       setError(null)
 
-      const response = await fetch(`${API_BASE_URL}/v1/microblog/timeline?limit=20`)
+      const response = await fetch(apiUrl(`${API_ENDPOINTS.microblog.timeline}?limit=20`))
       
       if (!response.ok) {
         throw new Error(`Failed to fetch timeline: ${response.status}`)
@@ -82,7 +81,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
 
   const handleLike = async (postId: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/v1/microblog/posts/${postId}/like`, {
+      const response = await fetch(apiUrl(API_ENDPOINTS.microblog.likePost(postId)), {
         method: 'POST',
       })
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import './PatreonManagement.css'
 
 interface PatreonUser {
@@ -29,15 +30,13 @@ export function PatreonManagement() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const API_BASE = '/v1/patreon'
-
   const fetchPatreonData = React.useCallback(async () => {
     setLoading(true)
     setError(null)
 
     try {
       // Fetch user info
-      const userResponse = await fetch(`${API_BASE}/user`)
+      const userResponse = await fetch(apiUrl(API_ENDPOINTS.patreon.user))
       if (userResponse.ok) {
         try {
           const userData = await userResponse.json()
@@ -61,7 +60,7 @@ export function PatreonManagement() {
       }
 
       // Fetch campaigns
-      const campaignsResponse = await fetch(`${API_BASE}/campaigns`)
+      const campaignsResponse = await fetch(apiUrl(API_ENDPOINTS.patreon.campaigns))
       if (campaignsResponse.ok) {
         try {
           const campaignsData = await campaignsResponse.json()
@@ -89,7 +88,7 @@ export function PatreonManagement() {
       }
 
       // Fetch stats
-      const statsResponse = await fetch(`${API_BASE}/stats`)
+      const statsResponse = await fetch(apiUrl(API_ENDPOINTS.patreon.stats))
       if (statsResponse.ok) {
         try {
           const statsData = await statsResponse.json()

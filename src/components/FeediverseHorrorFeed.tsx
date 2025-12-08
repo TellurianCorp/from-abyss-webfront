@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import './FeediverseHorrorFeed.css'
 
 interface FeedItem {
@@ -48,8 +49,6 @@ interface TimelineResponse {
   next?: string
   prev?: string
 }
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 export function FeediverseHorrorFeed() {
   const { t } = useTranslation()
@@ -122,7 +121,7 @@ export function FeediverseHorrorFeed() {
           const controller = new AbortController()
           const timeoutId = setTimeout(() => controller.abort(), 5000)
           
-          const feediverseResponse = await fetch(`${API_BASE_URL}/v1/feediverse/horror?limit=5`, {
+          const feediverseResponse = await fetch(apiUrl(`${API_ENDPOINTS.feediverse.horror}?limit=5`), {
             signal: controller.signal
           })
           
@@ -145,7 +144,7 @@ export function FeediverseHorrorFeed() {
         
         // Fetch Microblog timeline
         try {
-          const microblogResponse = await fetch(`${API_BASE_URL}/v1/microblog/timeline?limit=5`)
+          const microblogResponse = await fetch(apiUrl(`${API_ENDPOINTS.microblog.timeline}?limit=5`))
           
           if (microblogResponse.ok) {
             const microblogData: TimelineResponse = await microblogResponse.json()
@@ -213,7 +212,7 @@ export function FeediverseHorrorFeed() {
     e.stopPropagation()
     
     try {
-      const response = await fetch(`${API_BASE_URL}/v1/microblog/posts/${postId}/like`, {
+      const response = await fetch(apiUrl(API_ENDPOINTS.microblog.likePost(postId)), {
         method: 'POST',
       })
 

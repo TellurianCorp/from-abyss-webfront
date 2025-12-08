@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import './YouTubeManagement.css'
 
 interface ChannelInfo {
@@ -33,8 +34,6 @@ interface ChannelStats {
   channelId: string
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8080'
-
 export function YouTubeManagement() {
   const { t } = useTranslation()
   const [channelInfo, setChannelInfo] = useState<ChannelInfo | null>(null)
@@ -56,9 +55,9 @@ export function YouTubeManagement() {
 
       // Fetch all data in parallel
       const [channelRes, videosRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/v1/youtube/channel`),
-        fetch(`${API_BASE_URL}/v1/youtube/videos?limit=10`),
-        fetch(`${API_BASE_URL}/v1/youtube/stats`),
+        fetch(apiUrl(API_ENDPOINTS.youtube.channel)),
+        fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=10`)),
+        fetch(apiUrl(API_ENDPOINTS.youtube.stats)),
       ])
 
       if (!channelRes.ok || !videosRes.ok || !statsRes.ok) {
@@ -88,9 +87,9 @@ export function YouTubeManagement() {
       setError(null)
 
       const [channelRes, videosRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/v1/youtube/channel?refresh=true`),
-        fetch(`${API_BASE_URL}/v1/youtube/videos?limit=10&refresh=true`),
-        fetch(`${API_BASE_URL}/v1/youtube/stats`),
+        fetch(apiUrl(`${API_ENDPOINTS.youtube.channel}?refresh=true`)),
+        fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=10&refresh=true`)),
+        fetch(apiUrl(API_ENDPOINTS.youtube.stats)),
       ])
 
       if (!channelRes.ok || !videosRes.ok || !statsRes.ok) {
@@ -118,7 +117,7 @@ export function YouTubeManagement() {
 
   const handleClearCache = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/v1/youtube/cache/clear`, {
+      const response = await fetch(apiUrl(API_ENDPOINTS.youtube.cacheClear), {
         method: 'POST',
       })
 

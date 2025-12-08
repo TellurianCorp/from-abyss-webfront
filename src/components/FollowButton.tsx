@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { apiUrl, API_ENDPOINTS } from '../utils/api';
 import './FollowButton.css';
 
 interface FollowButtonProps {
@@ -34,7 +35,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/v1/microblog/follow', {
+      const response = await fetch(apiUrl(API_ENDPOINTS.microblog.follow), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +70,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/v1/microblog/follow', {
+      const response = await fetch(apiUrl(API_ENDPOINTS.microblog.follow), {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
