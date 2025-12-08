@@ -138,9 +138,9 @@ export function YouTubeHighlights() {
         </div>
         <div className="youtube-videos youtube-loading-state">
           {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="youtube-video-skeleton">
+            <div key={i} className="card youtube-video-skeleton">
               <div className="skeleton-thumbnail"></div>
-              <div className="skeleton-content">
+              <div className="card-body skeleton-content">
                 <div className="skeleton-title"></div>
                 <div className="skeleton-title skeleton-title-short"></div>
                 <div className="skeleton-meta"></div>
@@ -199,7 +199,7 @@ export function YouTubeHighlights() {
         {videos.map((video) => (
           <article
             key={video.id}
-            className="youtube-video-item"
+            className="card youtube-video-card"
             role="listitem"
             itemScope
             itemType="https://schema.org/VideoObject"
@@ -210,64 +210,68 @@ export function YouTubeHighlights() {
               target="_blank"
               rel="noreferrer noopener"
               itemProp="url"
+              className="youtube-video-link"
               aria-label={`${video.title} - ${formatViewCount(video.viewCount)} views`}
             >
-            <div className="youtube-video-thumbnail">
-              <img 
-                src={video.thumbnail} 
-                alt={video.title} 
-                loading="lazy"
-                onError={(e) => {
-                  // Fallback to placeholder if thumbnail fails to load
-                  const target = e.target as HTMLImageElement
-                  target.src = 'https://via.placeholder.com/320x180?text=Video+Thumbnail'
-                }}
-              />
-              {video.duration && (
-                <div className="youtube-video-duration">
-                  {formatDuration(video.duration)}
-                </div>
-              )}
-              <div className="youtube-video-overlay">
-                <i className="fas fa-play youtube-play-icon" aria-hidden="true"></i>
-              </div>
-            </div>
-            <div className="youtube-video-info">
-              <h3 className="youtube-video-title" itemProp="name">{video.title}</h3>
-              {video.description && (
-                <p className="youtube-video-description" itemProp="description">
-                  {video.description.length > 150 
-                    ? `${video.description.substring(0, 150)}...` 
-                    : video.description}
-                </p>
-              )}
-              <div className="youtube-video-meta">
-                <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
-                  <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
-                  <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
-                  <i className="fas fa-eye meta-icon" aria-hidden="true"></i>
-                  {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
-                </span>
-                {video.likeCount > 0 && (
-                  <span className="youtube-video-likes">
-                    <i className="fas fa-thumbs-up meta-icon" aria-hidden="true"></i>
-                    {formatViewCount(video.likeCount)}
-                  </span>
-                )}
+              <div className="youtube-video-thumbnail">
+                <img 
+                  src={video.thumbnail} 
+                  alt={video.title} 
+                  className="card-img-top"
+                  loading="lazy"
+                  onError={(e) => {
+                    // Fallback to placeholder if thumbnail fails to load
+                    const target = e.target as HTMLImageElement
+                    target.src = 'https://via.placeholder.com/320x180?text=Video+Thumbnail'
+                  }}
+                />
                 {video.duration && (
-                  <span className="youtube-video-duration-text">
-                    <i className="fas fa-clock meta-icon" aria-hidden="true"></i>
+                  <div className="youtube-video-duration">
                     {formatDuration(video.duration)}
-                  </span>
+                  </div>
                 )}
-                <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
-                  <i className="fas fa-calendar meta-icon" aria-hidden="true"></i>
-                  {formatDate(video.publishedAt)}
-                </time>
+                <div className="youtube-video-overlay">
+                  <i className="fas fa-play youtube-play-icon" aria-hidden="true"></i>
+                </div>
               </div>
-              <meta itemProp="thumbnailUrl" content={video.thumbnail} />
-              <meta itemProp="duration" content={video.duration} />
-            </div>
+              <div className="card-body">
+                <h5 className="card-title youtube-video-title" itemProp="name">{video.title}</h5>
+                {video.description && (
+                  <p className="card-text youtube-video-description" itemProp="description">
+                    {video.description.length > 150 
+                      ? `${video.description.substring(0, 150)}...` 
+                      : video.description}
+                  </p>
+                )}
+                <div className="card-text youtube-video-meta">
+                  <small className="text-muted">
+                    <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
+                      <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
+                      <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
+                      <i className="fas fa-eye meta-icon" aria-hidden="true"></i>
+                      {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
+                    </span>
+                    {video.likeCount > 0 && (
+                      <span className="youtube-video-likes">
+                        <i className="fas fa-thumbs-up meta-icon" aria-hidden="true"></i>
+                        {formatViewCount(video.likeCount)}
+                      </span>
+                    )}
+                    {video.duration && (
+                      <span className="youtube-video-duration-text">
+                        <i className="fas fa-clock meta-icon" aria-hidden="true"></i>
+                        {formatDuration(video.duration)}
+                      </span>
+                    )}
+                    <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
+                      <i className="fas fa-calendar meta-icon" aria-hidden="true"></i>
+                      {formatDate(video.publishedAt)}
+                    </time>
+                  </small>
+                </div>
+                <meta itemProp="thumbnailUrl" content={video.thumbnail} />
+                <meta itemProp="duration" content={video.duration} />
+              </div>
             </a>
           </article>
         ))}
