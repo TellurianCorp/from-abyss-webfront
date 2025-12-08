@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import './YouTubeHighlights.css'
 
 interface VideoInfo {
@@ -19,8 +20,6 @@ interface YouTubeResponse {
   count: number
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8080'
-
 export function YouTubeHighlights() {
   const { t } = useTranslation()
   const [videos, setVideos] = useState<VideoInfo[]>([])
@@ -33,7 +32,7 @@ export function YouTubeHighlights() {
         setLoading(true)
         setError(null)
         
-        const response = await fetch(`${API_BASE_URL}/v1/youtube/videos?limit=5`)
+        const response = await fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=5`))
         
         if (!response.ok) {
           // Try to get error message from response
