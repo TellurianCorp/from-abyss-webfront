@@ -148,20 +148,28 @@ export function YouTubeHighlights() {
   }
 
   return (
-    <section className="section youtube-section">
+    <section className="section youtube-section" itemScope itemType="https://schema.org/ItemList">
       <div className="section-header">
-        <h2>{t('youtube.highlights.title')}</h2>
-        <p>{t('youtube.highlights.description')}</p>
+        <h2 itemProp="name">{t('youtube.highlights.title')}</h2>
+        <p itemProp="description">{t('youtube.highlights.description')}</p>
       </div>
-      <div className="youtube-videos">
+      <div className="youtube-videos" role="list">
         {videos.map((video) => (
-          <a
+          <article
             key={video.id}
-            href={`https://www.youtube.com/watch?v=${video.id}`}
-            target="_blank"
-            rel="noreferrer"
             className="youtube-video-item"
+            role="listitem"
+            itemScope
+            itemType="https://schema.org/VideoObject"
+            itemProp="itemListElement"
           >
+            <a
+              href={`https://www.youtube.com/watch?v=${video.id}`}
+              target="_blank"
+              rel="noreferrer noopener"
+              itemProp="url"
+              aria-label={`${video.title} - ${formatViewCount(video.viewCount)} views`}
+            >
             <div className="youtube-video-thumbnail">
               <img src={video.thumbnail} alt={video.title} loading="lazy" />
               <div className="youtube-video-overlay">
@@ -180,21 +188,35 @@ export function YouTubeHighlights() {
               </div>
             </div>
             <div className="youtube-video-info">
-              <h3 className="youtube-video-title">{video.title}</h3>
+              <h3 className="youtube-video-title" itemProp="name">{video.title}</h3>
               <div className="youtube-video-meta">
-                <span className="youtube-video-views">{formatViewCount(video.viewCount)} {t('youtube.highlights.views')}</span>
-                <span className="youtube-video-date">{formatDate(video.publishedAt)}</span>
+                <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
+                  <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
+                  <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
+                  {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
+                </span>
+                <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
+                  {formatDate(video.publishedAt)}
+                </time>
               </div>
+              <meta itemProp="thumbnailUrl" content={video.thumbnail} />
+              <meta itemProp="duration" content={video.duration} />
             </div>
-          </a>
+            </a>
+          </article>
         ))}
       </div>
       <a
         className="youtube-cta"
         href="https://www.youtube.com/@fromabyssmedia"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
+        itemProp="publisher"
+        itemScope
+        itemType="https://schema.org/YouTubeChannel"
       >
+        <meta itemProp="name" content="From Abyss Media" />
+        <meta itemProp="url" content="https://www.youtube.com/@fromabyssmedia" />
         {t('youtube.highlights.visitChannel')}
       </a>
     </section>

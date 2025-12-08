@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
@@ -17,29 +18,75 @@ export function Landing() {
     t('mission.goals.document'),
   ]
 
+  // Add structured data for SEO
+  useEffect(() => {
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'From Abyss Media - Horror Social Network',
+      description: t('tv.description'),
+      url: 'https://fromabyss.com/',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: t('tv.title'),
+            url: 'https://fromabyss.com/#tv'
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: t('mission.title'),
+            url: 'https://fromabyss.com/#mission'
+          }
+        ]
+      }
+    }
+
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.id = 'landing-page-structured-data'
+    script.textContent = JSON.stringify(structuredData)
+    document.head.appendChild(script)
+
+    return () => {
+      const existing = document.getElementById('landing-page-structured-data')
+      if (existing) existing.remove()
+    }
+  }, [t])
+
   return (
     <div className="page">
       <Navbar />
 
-      <div className="page-content">
+      <main className="page-content" role="main">
         <div className="grid-columns">
           <div className="column column-left">
-            <section className="section tv-section" id="tv">
+            <article className="section tv-section" id="tv" itemScope itemType="https://schema.org/VideoObject">
               <div className="section-header">
-                <h2>{t('tv.title')}</h2>
-                <p>{t('tv.description')}</p>
+                <h2 itemProp="name">{t('tv.title')}</h2>
+                <p itemProp="description">{t('tv.description')}</p>
               </div>
               <p className="tv-description">{t('tv.fullDescription')}</p>
-              <div className="tv-pillars">
-                <span>{t('tv.pillars.documentary')}</span>
-                <span>{t('tv.pillars.liveStreams')}</span>
-                <span>{t('tv.pillars.deepDives')}</span>
-                <span>{t('tv.pillars.showcases')}</span>
+              <div className="tv-pillars" role="list">
+                <span role="listitem">{t('tv.pillars.documentary')}</span>
+                <span role="listitem">{t('tv.pillars.liveStreams')}</span>
+                <span role="listitem">{t('tv.pillars.deepDives')}</span>
+                <span role="listitem">{t('tv.pillars.showcases')}</span>
               </div>
-              <a className="tv-cta" href="https://www.youtube.com/@fromabyssmedia" target="_blank" rel="noreferrer">
+              <a 
+                className="tv-cta" 
+                href="https://www.youtube.com/@fromabyssmedia" 
+                target="_blank" 
+                rel="noreferrer noopener"
+                itemProp="url"
+                aria-label={`${t('tv.visitChannel')} - From Abyss Media YouTube Channel`}
+              >
                 {t('tv.visitChannel')}
               </a>
-            </section>
+            </article>
             <YouTubeHighlights />
           </div>
 
@@ -48,14 +95,14 @@ export function Landing() {
           </div>
 
           <div className="column column-right">
-            <section className="section">
+            <section className="section" id="mission" itemScope itemType="https://schema.org/AboutPage">
               <div className="section-header">
-                <h2>{t('mission.title')}</h2>
-                <p>{t('mission.description')}</p>
+                <h2 itemProp="name">{t('mission.title')}</h2>
+                <p itemProp="description">{t('mission.description')}</p>
               </div>
-              <ol className="goal-list">
+              <ol className="goal-list" role="list">
                 {goals.map((goal, index) => (
-                  <li key={index}>{goal}</li>
+                  <li key={index} role="listitem" itemProp="about">{goal}</li>
                 ))}
               </ol>
             </section>
@@ -71,21 +118,21 @@ export function Landing() {
             <PatreonSimpleCTA />
           </div>
         </div>
-      </div>
-      <footer className="footer">
-        <img className="footer-logo" src="/imgs/tellurian_white.png" alt="Tellurian" />
-        <div className="footer-links">
-          <Link to="/about" className="footer-link">{t('footer.aboutUs')}</Link>
-          <span className="footer-separator">|</span>
-          <Link to="/editorial" className="footer-link">{t('footer.focusEditorial')}</Link>
-          <span className="footer-separator">|</span>
-          <Link to="/contact" className="footer-link">{t('footer.contactUs')}</Link>
-          <span className="footer-separator">|</span>
-          <Link to="/patreon" className="footer-link">{t('footer.supportUs', 'Support Us')}</Link>
-        </div>
+      </main>
+      <footer className="footer" role="contentinfo" itemScope itemType="https://schema.org/WPFooter">
+        <img className="footer-logo" src="/imgs/tellurian_white.png" alt="Tellurian" itemProp="logo" />
+        <nav className="footer-links" aria-label="Footer navigation">
+          <Link to="/about" className="footer-link" itemProp="url">{t('footer.aboutUs')}</Link>
+          <span className="footer-separator" aria-hidden="true">|</span>
+          <Link to="/editorial" className="footer-link" itemProp="url">{t('footer.focusEditorial')}</Link>
+          <span className="footer-separator" aria-hidden="true">|</span>
+          <Link to="/contact" className="footer-link" itemProp="url">{t('footer.contactUs')}</Link>
+          <span className="footer-separator" aria-hidden="true">|</span>
+          <Link to="/patreon" className="footer-link" itemProp="url">{t('footer.supportUs', 'Support Us')}</Link>
+        </nav>
         <div className="footer-text-container">
-          <p className="footer-text">{t('common.madeBy')}</p>
-          <p className="footer-text">{t('common.allRightsReserved')}</p>
+          <p className="footer-text" itemProp="copyrightHolder">{t('common.madeBy')}</p>
+          <p className="footer-text" itemProp="copyrightYear">{t('common.allRightsReserved')}</p>
         </div>
       </footer>
     </div>

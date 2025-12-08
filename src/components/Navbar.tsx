@@ -13,14 +13,30 @@ function getIssueNumber() {
 export function Navbar() {
   const { t } = useTranslation()
 
+  const menuItems = [
+    { id: 'articles', label: t('navbar.menu.articles', 'Articles'), url: '/editorial#articles' },
+    { id: 'comics', label: t('navbar.menu.comics', 'Comics'), url: '/editorial#comics' },
+    { id: 'books', label: t('navbar.menu.books', 'Books'), url: '/editorial#books' },
+    { id: 'music', label: t('navbar.menu.music', 'Music'), url: '/editorial#music' },
+    { id: 'games', label: t('navbar.menu.games', 'Games'), url: '/editorial#games' },
+    { id: 'movies', label: t('navbar.menu.movies', 'Movies'), url: '/editorial#movies' },
+  ]
+
   return (
-    <nav className="navbar">
+    <header className="navbar" role="banner" itemScope itemType="https://schema.org/WPHeader">
       <WeatherShader />
-      <div className="navbar-content">
+      <nav className="navbar-content" aria-label="Main navigation">
         <div className="navbar-top">
           <div className="navbar-left">
-            <Link to="/">
-              <img src="/imgs/logo.png" alt="From Abyss Media" className="navbar-logo" />
+            <Link to="/" aria-label="From Abyss Media Home">
+              <img 
+                src="/imgs/logo.png" 
+                alt="From Abyss Media" 
+                className="navbar-logo" 
+                itemProp="logo"
+                width="40"
+                height="40"
+              />
             </Link>
             <div className="navbar-brand">
               <span className="navbar-badge">{t('navbar.badge')}</span>
@@ -34,25 +50,23 @@ export function Navbar() {
           </div>
         </div>
         <div className="navbar-menu-row">
-          <div className="navbar-menu">
-            {[
-              { id: 'articles', label: t('navbar.menu.articles', 'Articles') },
-              { id: 'comics', label: t('navbar.menu.comics', 'Comics') },
-              { id: 'books', label: t('navbar.menu.books', 'Books') },
-              { id: 'music', label: t('navbar.menu.music', 'Music') },
-              { id: 'games', label: t('navbar.menu.games', 'Games') },
-              { id: 'movies', label: t('navbar.menu.movies', 'Movies') },
-            ].map((item, index, array) => (
-              <span key={item.id}>
-                <a href={`#${item.id}`} className="navbar-menu-item">
-                  {item.label}
-                </a>
-                {index < array.length - 1 && <span className="navbar-menu-separator">|</span>}
-              </span>
+          <ul className="navbar-menu" role="menubar" itemScope itemType="https://schema.org/SiteNavigationElement">
+            {menuItems.map((item, index, array) => (
+              <li key={item.id} role="none">
+                <Link 
+                  to={item.url} 
+                  className="navbar-menu-item"
+                  role="menuitem"
+                  itemProp="url"
+                >
+                  <span itemProp="name">{item.label}</span>
+                </Link>
+                {index < array.length - 1 && <span className="navbar-menu-separator" aria-hidden="true">|</span>}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }

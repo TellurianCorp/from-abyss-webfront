@@ -10,7 +10,7 @@ Allow: /imgs/
 Allow: /fonts/
 
 # Sitemap location
-Sitemap: https://fromabyss.media/sitemap.xml
+Sitemap: https://fromabyss.com/sitemap.xml
 
 # Crawl-delay (optional, adjust as needed)
 Crawl-delay: 1

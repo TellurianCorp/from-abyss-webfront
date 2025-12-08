@@ -259,10 +259,10 @@ export function FeediverseHorrorFeed() {
 
   if (loading) {
     return (
-      <section className="section feediverse-section">
+      <section className="section feediverse-section" itemScope itemType="https://schema.org/ItemList">
         <div className="section-header">
-          <h2>{t('feediverse.horror.title')}</h2>
-          <p>{t('feediverse.horror.description')}</p>
+          <h2 itemProp="name">{t('feediverse.horror.title')}</h2>
+          <p itemProp="description">{t('feediverse.horror.description')}</p>
         </div>
         <div className="feediverse-loading">
           <p>{t('feediverse.horror.loading')}</p>
@@ -286,40 +286,54 @@ export function FeediverseHorrorFeed() {
   }
 
   return (
-    <section className="section feediverse-section">
+    <section className="section feediverse-section" itemScope itemType="https://schema.org/ItemList">
       <div className="section-header">
-        <h2>{t('feediverse.horror.title', 'Horror Community Feed')}</h2>
-        <p>{t('feediverse.horror.description', 'Latest from the horror community across Fediverse and From Abyss Media.')}</p>
+        <h2 itemProp="name">{t('feediverse.horror.title', 'Horror Community Feed')}</h2>
+        <p itemProp="description">{t('feediverse.horror.description', 'Latest from the horror community across Fediverse and From Abyss Media.')}</p>
       </div>
-      <div className="feediverse-items">
+      <div className="feediverse-items" role="list">
         {feedItems.map((item) => {
           const hasActions = item.type === 'microblog' && item.microblogData
           
           return (
-            <div key={item.id} className={hasActions ? 'feediverse-item-wrapper' : ''}>
+            <article 
+              key={item.id} 
+              className={hasActions ? 'feediverse-item-wrapper' : ''}
+              role="listitem"
+              itemScope
+              itemType={item.type === 'microblog' ? 'https://schema.org/SocialMediaPosting' : 'https://schema.org/Article'}
+              itemProp="itemListElement"
+            >
               <a
                 href={item.link}
                 target={item.link.startsWith('#') ? undefined : '_blank'}
-                rel={item.link.startsWith('#') ? undefined : 'noreferrer'}
+                rel={item.link.startsWith('#') ? undefined : 'noreferrer noopener'}
                 className={hasActions ? 'feediverse-item' : 'feediverse-item feediverse-item-standalone'}
+                itemProp="url"
               >
                 <div className="feediverse-item-content">
-                  <h3 className="feediverse-item-title">{item.title}</h3>
-                  <p className="feediverse-item-description">{item.description}</p>
+                  <h3 className="feediverse-item-title" itemProp="headline">{item.title}</h3>
+                  <p className="feediverse-item-description" itemProp="description">{item.description}</p>
                   <div className="feediverse-item-meta">
                     {item.author && (
-                      <span className="feediverse-item-author">{item.author}</span>
+                      <span className="feediverse-item-author" itemProp="author" itemScope itemType="https://schema.org/Person">
+                        <span itemProp="name">{item.author}</span>
+                      </span>
                     )}
-                    <span className="feediverse-item-date">{formatDate(item.publishedAt)}</span>
+                    <time className="feediverse-item-date" itemProp="datePublished" dateTime={item.publishedAt}>
+                      {formatDate(item.publishedAt)}
+                    </time>
                     {item.source && (
-                      <span className="feediverse-item-source">{item.source}</span>
+                      <span className="feediverse-item-source" itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+                        <span itemProp="name">{item.source}</span>
+                      </span>
                     )}
                     {item.type === 'microblog' && (
                       <span className="feediverse-item-source" style={{ marginLeft: '0.5rem' }}>Community</span>
                     )}
                   </div>
                   {item.tags && item.tags.length > 0 && (
-                    <div className="feediverse-item-tags">
+                    <div className="feediverse-item-tags" itemProp="keywords">
                       {item.tags.map((tag, index) => (
                         <span key={index} className="feediverse-tag">{tag}</span>
                       ))}
@@ -373,7 +387,7 @@ export function FeediverseHorrorFeed() {
                   </button>
                 </div>
               )}
-            </div>
+            </article>
           )
         })}
       </div>
@@ -381,7 +395,8 @@ export function FeediverseHorrorFeed() {
         className="feediverse-cta"
         href="https://feediverse.example.com/horror"
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
+        aria-label={t('feediverse.horror.exploreMore')}
       >
         {t('feediverse.horror.exploreMore')}
       </a>
