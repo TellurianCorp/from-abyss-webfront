@@ -53,7 +53,31 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
       const response = await fetch(apiUrl(`${API_ENDPOINTS.microblog.timeline}?limit=20`))
       
       if (!response.ok) {
-        throw new Error(`Failed to fetch timeline: ${response.status}`)
+        // Check if response is JSON before trying to parse
+        const contentType = response.headers.get('content-type')
+        let errorMessage = `Failed to fetch timeline: ${response.status}`
+        
+        if (contentType && contentType.includes('application/json')) {
+          try {
+            const errorData = await response.json()
+            if (errorData.message) {
+              errorMessage = errorData.message
+            } else if (errorData.error) {
+              errorMessage = errorData.error
+            }
+          } catch {
+            // If JSON parsing fails, use default message
+          }
+        }
+        throw new Error(errorMessage)
+      }
+
+      // Check Content-Type before parsing JSON
+      const contentType = response.headers.get('content-type')
+      if (!contentType || !contentType.includes('application/json')) {
+        const errorMessage = `Microblog API returned non-JSON response: ${contentType || 'unknown content type'}`
+        console.error(errorMessage)
+        throw new Error(errorMessage)
       }
 
       const data: TimelineResponse = await response.json()
