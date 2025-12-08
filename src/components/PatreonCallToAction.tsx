@@ -24,8 +24,27 @@ interface PatreonStats {
   total_campaigns: number
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8080'
-const API_BASE = '/api/v1/patreon'
+interface PatreonAPICampaign {
+  id: string
+  attributes?: {
+    creation_name?: string
+    summary?: string
+    patron_count?: number
+  }
+}
+
+interface PatreonAPITier {
+  id: string
+  attributes?: {
+    title?: string
+    description?: string
+    amount_cents?: number
+    patron_count?: number
+    published?: boolean
+  }
+}
+
+const API_BASE = '/v1/patreon'
 
 export function PatreonCallToAction() {
   const { t } = useTranslation()
@@ -52,7 +71,7 @@ export function PatreonCallToAction() {
         if (campaignsResponse.ok) {
           const campaignsData = await campaignsResponse.json()
           if (campaignsData.data) {
-            const campaignsList = campaignsData.data.map((campaign: any) => ({
+            const campaignsList = (campaignsData.data as PatreonAPICampaign[]).map((campaign) => ({
               id: campaign.id,
               creation_name: campaign.attributes?.creation_name || '',
               summary: campaign.attributes?.summary || '',
@@ -67,8 +86,8 @@ export function PatreonCallToAction() {
               if (tiersResponse.ok) {
                 const tiersData = await tiersResponse.json()
                 if (tiersData.data) {
-                  const tiersList = tiersData.data
-                    .map((tier: any) => ({
+                  const tiersList = (tiersData.data as PatreonAPITier[])
+                    .map((tier) => ({
                       id: tier.id,
                       title: tier.attributes?.title || '',
                       description: tier.attributes?.description || '',

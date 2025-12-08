@@ -19,7 +19,7 @@ import { updateSEO, addStructuredData, type SEOData } from '../utils/seo'
 export function useSEO(data: SEOData): void {
   useEffect(() => {
     updateSEO(data)
-  }, [data.title, data.description, data.image, data.url, data.type, data.siteName, data.keywords])
+  }, [data])
 }
 
 /**
@@ -41,6 +41,8 @@ export function useStructuredData(
   type: 'WebSite' | 'Article' | 'Organization',
   data: Record<string, unknown>
 ): void {
+  const dataString = JSON.stringify(data)
+  
   useEffect(() => {
     addStructuredData(data, type)
     
@@ -54,5 +56,5 @@ export function useStructuredData(
         }
       })
     }
-  }, [type, JSON.stringify(data)])
+  }, [type, dataString])
 }

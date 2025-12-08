@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import './WeatherShader.css'
 
 type WeatherType = 'snow' | 'rain' | 'fog' | 'deadmoon' | 'dying-red'
+
+interface ParticleStyle {
+  left: string
+  animationDelay: string
+  animationDuration: string
+  top?: string
+}
 
 export function WeatherShader() {
   const [weatherType, setWeatherType] = useState<WeatherType>('snow')
@@ -13,27 +20,47 @@ export function WeatherShader() {
     setWeatherType(randomType)
   }, [])
 
+  // Generate snowflake styles once
+  const snowflakeStyles = useMemo<ParticleStyle[]>(() => {
+    return Array.from({ length: 30 }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${3 + Math.random() * 5}s`
+    }))
+  }, [])
+
+  // Generate raindrop styles once
+  const raindropStyles = useMemo<ParticleStyle[]>(() => {
+    return Array.from({ length: 60 }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 1.5}s`,
+      animationDuration: `${0.3 + Math.random() * 0.7}s`
+    }))
+  }, [])
+
+  // Generate dying particle styles once
+  const dyingParticleStyles = useMemo<ParticleStyle[]>(() => {
+    return Array.from({ length: 20 }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${4 + Math.random() * 4}s`
+    }))
+  }, [])
+
   return (
     <div className={`weather-shader weather-shader-${weatherType}`}>
       {weatherType === 'snow' && (
         <>
-          {Array.from({ length: 30 }).map((_, i) => (
-            <div key={i} className="snowflake" style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 5}s`
-            }} />
+          {snowflakeStyles.map((style, i) => (
+            <div key={i} className="snowflake" style={style} />
           ))}
         </>
       )}
       {weatherType === 'rain' && (
         <>
-          {Array.from({ length: 60 }).map((_, i) => (
-            <div key={i} className="raindrop" style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 1.5}s`,
-              animationDuration: `${0.3 + Math.random() * 0.7}s`
-            }} />
+          {raindropStyles.map((style, i) => (
+            <div key={i} className="raindrop" style={style} />
           ))}
         </>
       )}
@@ -61,13 +88,8 @@ export function WeatherShader() {
       )}
       {weatherType === 'dying-red' && (
         <>
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div key={i} className="dying-particle" style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${4 + Math.random() * 4}s`
-            }} />
+          {dyingParticleStyles.map((style, i) => (
+            <div key={i} className="dying-particle" style={style} />
           ))}
         </>
       )}

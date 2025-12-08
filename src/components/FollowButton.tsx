@@ -34,7 +34,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/microblog/follow', {
+      const response = await fetch('http://localhost:8080/v1/microblog/follow', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/microblog/follow', {
+      const response = await fetch('http://localhost:8080/v1/microblog/follow', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

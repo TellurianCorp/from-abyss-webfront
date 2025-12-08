@@ -122,7 +122,7 @@ export function FeediverseHorrorFeed() {
           const controller = new AbortController()
           const timeoutId = setTimeout(() => controller.abort(), 5000)
           
-          const feediverseResponse = await fetch(`${API_BASE_URL}/api/v1/feediverse/horror?limit=5`, {
+          const feediverseResponse = await fetch(`${API_BASE_URL}/v1/feediverse/horror?limit=5`, {
             signal: controller.signal
           })
           
@@ -137,7 +137,7 @@ export function FeediverseHorrorFeed() {
             const mockItems = getMockData().map(item => ({ ...item, type: 'feediverse' as const }))
             allItems.push(...mockItems)
           }
-        } catch (err) {
+        } catch {
           // Use mock data on error
           const mockItems = getMockData().map(item => ({ ...item, type: 'feediverse' as const }))
           allItems.push(...mockItems)
@@ -145,7 +145,7 @@ export function FeediverseHorrorFeed() {
         
         // Fetch Microblog timeline
         try {
-          const microblogResponse = await fetch(`${API_BASE_URL}/api/v1/microblog/timeline?limit=5`)
+          const microblogResponse = await fetch(`${API_BASE_URL}/v1/microblog/timeline?limit=5`)
           
           if (microblogResponse.ok) {
             const microblogData: TimelineResponse = await microblogResponse.json()
@@ -213,7 +213,7 @@ export function FeediverseHorrorFeed() {
     e.stopPropagation()
     
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/microblog/posts/${postId}/like`, {
+      const response = await fetch(`${API_BASE_URL}/v1/microblog/posts/${postId}/like`, {
         method: 'POST',
       })
 

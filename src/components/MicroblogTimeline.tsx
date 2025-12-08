@@ -51,7 +51,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
       setLoading(true)
       setError(null)
 
-      const response = await fetch(`${API_BASE_URL}/api/v1/microblog/timeline?limit=20`)
+      const response = await fetch(`${API_BASE_URL}/v1/microblog/timeline?limit=20`)
       
       if (!response.ok) {
         throw new Error(`Failed to fetch timeline: ${response.status}`)
@@ -82,7 +82,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
 
   const handleLike = async (postId: string) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/microblog/posts/${postId}/like`, {
+      const response = await fetch(`${API_BASE_URL}/v1/microblog/posts/${postId}/like`, {
         method: 'POST',
       })
 

@@ -4,13 +4,6 @@ import { Navbar as BootstrapNavbar, Nav, Container, NavDropdown } from 'react-bo
 import { useTranslation } from 'react-i18next'
 import { LanguageSelector } from './LanguageSelector'
 
-function getIssueNumber() {
-  const now = new Date()
-  const year = now.getUTCFullYear()
-  const month = (now.getUTCMonth() + 1).toString().padStart(2, '0')
-  return `${year}.${month}`
-}
-
 export function AdminNavbar() {
   const { t } = useTranslation()
   const location = useLocation()

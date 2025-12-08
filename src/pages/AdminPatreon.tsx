@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AdminNavbar } from '../components/AdminNavbar'
 
@@ -58,13 +58,50 @@ export function AdminPatreon() {
   const [error, setError] = useState<string | null>(null)
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null)
 
-  const API_BASE = '/api/v1/patreon'
+  const API_BASE = '/v1/patreon'
 
-  useEffect(() => {
-    fetchPatreonData()
-  }, [])
+  interface PatreonAPICampaign {
+    id: string
+    attributes?: {
+      creation_name?: string
+      summary?: string
+      patron_count?: number
+    }
+  }
 
-  const fetchPatreonData = async (forceRefresh = false) => {
+  interface PatreonAPITier {
+    id: string
+    attributes?: {
+      title?: string
+      description?: string
+      amount_cents?: number
+      patron_count?: number
+      published?: boolean
+    }
+  }
+
+  interface PatreonAPIMember {
+    id: string
+    attributes?: {
+      full_name?: string
+      email?: string
+      patron_status?: string
+      lifetime_support_cents?: number
+      currently_entitled_amount_cents?: number
+      last_charge_date?: string | null
+      last_charge_status?: string | null
+      pledge_relationship_start?: string | null
+    }
+    relationships?: {
+      tier?: {
+        data?: {
+          id?: string
+        }
+      }
+    }
+  }
+
+  const fetchPatreonData = React.useCallback(async (forceRefresh = false) => {
     setLoading(true)
     setError(null)
 
@@ -104,12 +141,12 @@ export function AdminPatreon() {
         try {
           const campaignsData = await campaignsResponse.json()
           if (campaignsData.data) {
-            const campaignsList = campaignsData.data.map((campaign: any) => ({
-              id: campaign.id,
-              creation_name: campaign.attributes?.creation_name || '',
-              summary: campaign.attributes?.summary || '',
-              patron_count: campaign.attributes?.patron_count || 0,
-            }))
+          const campaignsList = (campaignsData.data as PatreonAPICampaign[]).map((campaign) => ({
+            id: campaign.id,
+            creation_name: campaign.attributes?.creation_name || '',
+            summary: campaign.attributes?.summary || '',
+            patron_count: campaign.attributes?.patron_count || 0,
+          }))
             setCampaigns(campaignsList)
 
             // Fetch tiers for each campaign
@@ -148,7 +185,11 @@ export function AdminPatreon() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [t])
+
+  useEffect(() => {
+    fetchPatreonData()
+  }, [fetchPatreonData])
 
   const fetchTiersForCampaign = async (campaignID: string, forceRefresh = false) => {
     try {
@@ -157,7 +198,7 @@ export function AdminPatreon() {
       if (response.ok) {
         const tiersData = await response.json()
         if (tiersData.data) {
-          const tiersList = tiersData.data.map((tier: any) => ({
+          const tiersList = (tiersData.data as PatreonAPITier[]).map((tier) => ({
             id: tier.id,
             title: tier.attributes?.title || '',
             description: tier.attributes?.description || '',
@@ -181,7 +222,7 @@ export function AdminPatreon() {
       if (response.ok) {
         const membersData = await response.json()
         if (membersData.data) {
-          const membersList = membersData.data.map((member: any) => ({
+          const membersList = (membersData.data as PatreonAPIMember[]).map((member) => ({
             id: member.id,
             full_name: member.attributes?.full_name || '',
             email: member.attributes?.email || '',
@@ -577,32 +618,32 @@ export function AdminPatreon() {
                   <li>
                     <strong>{t('patreon.api.getUser') || 'Get User Info'}</strong>
                     <br />
-                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /api/v1/patreon/user</code>
+                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /v1/patreon/user</code>
                   </li>
                   <li>
                     <strong>{t('patreon.api.getCampaigns') || 'Get Campaigns'}</strong>
                     <br />
-                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /api/v1/patreon/campaigns</code>
+                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /v1/patreon/campaigns</code>
                   </li>
                   <li>
                     <strong>{t('patreon.api.getStats') || 'Get Statistics'}</strong>
                     <br />
-                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /api/v1/patreon/stats</code>
+                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /v1/patreon/stats</code>
                   </li>
                   <li>
                     <strong>{t('patreon.api.clearCache') || 'Clear Cache'}</strong>
                     <br />
-                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>POST /api/v1/patreon/cache/clear</code>
+                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>POST /v1/patreon/cache/clear</code>
                   </li>
                   <li>
                     <strong>{t('patreon.api.getTiers') || 'Get Tiers'}</strong>
                     <br />
-                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /api/v1/patreon/campaigns/:campaignId/tiers</code>
+                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /v1/patreon/campaigns/:campaignId/tiers</code>
                   </li>
                   <li>
                     <strong>{t('patreon.api.getMembers') || 'Get Members'}</strong>
                     <br />
-                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /api/v1/patreon/campaigns/:campaignId/members</code>
+                    <code style={{ fontSize: '0.8rem', color: 'var(--sepia)' }}>GET /v1/patreon/campaigns/:campaignId/members</code>
                   </li>
                 </ul>
               </section>

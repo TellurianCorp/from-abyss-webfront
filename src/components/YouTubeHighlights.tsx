@@ -33,7 +33,7 @@ export function YouTubeHighlights() {
         setLoading(true)
         setError(null)
         
-        const response = await fetch(`${API_BASE_URL}/api/v1/youtube/videos?limit=5`)
+        const response = await fetch(`${API_BASE_URL}/v1/youtube/videos?limit=5`)
         
         if (!response.ok) {
           // Try to get error message from response

@@ -46,9 +46,9 @@ const MetricsDashboard: React.FC = () => {
   const fetchMetrics = async () => {
     try {
       const [syncRes, securityRes, dbRes] = await Promise.all([
-        fetch('http://localhost:8080/api/v1/microblog/metrics/sync'),
-        fetch('http://localhost:8080/api/v1/microblog/metrics/security'),
-        fetch('http://localhost:8080/api/v1/microblog/metrics/database'),
+        fetch('http://localhost:8080/v1/microblog/metrics/sync'),
+        fetch('http://localhost:8080/v1/microblog/metrics/security'),
+        fetch('http://localhost:8080/v1/microblog/metrics/database'),
       ]);
 
       if (syncRes.ok) {

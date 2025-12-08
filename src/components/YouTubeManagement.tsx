@@ -56,9 +56,9 @@ export function YouTubeManagement() {
 
       // Fetch all data in parallel
       const [channelRes, videosRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/api/v1/youtube/channel`),
-        fetch(`${API_BASE_URL}/api/v1/youtube/videos?limit=10`),
-        fetch(`${API_BASE_URL}/api/v1/youtube/stats`),
+        fetch(`${API_BASE_URL}/v1/youtube/channel`),
+        fetch(`${API_BASE_URL}/v1/youtube/videos?limit=10`),
+        fetch(`${API_BASE_URL}/v1/youtube/stats`),
       ])
 
       if (!channelRes.ok || !videosRes.ok || !statsRes.ok) {
@@ -88,9 +88,9 @@ export function YouTubeManagement() {
       setError(null)
 
       const [channelRes, videosRes, statsRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/api/v1/youtube/channel?refresh=true`),
-        fetch(`${API_BASE_URL}/api/v1/youtube/videos?limit=10&refresh=true`),
-        fetch(`${API_BASE_URL}/api/v1/youtube/stats`),
+        fetch(`${API_BASE_URL}/v1/youtube/channel?refresh=true`),
+        fetch(`${API_BASE_URL}/v1/youtube/videos?limit=10&refresh=true`),
+        fetch(`${API_BASE_URL}/v1/youtube/stats`),
       ])
 
       if (!channelRes.ok || !videosRes.ok || !statsRes.ok) {
@@ -118,7 +118,7 @@ export function YouTubeManagement() {
 
   const handleClearCache = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/v1/youtube/cache/clear`, {
+      const response = await fetch(`${API_BASE_URL}/v1/youtube/cache/clear`, {
         method: 'POST',
       })
 

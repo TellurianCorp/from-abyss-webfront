@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import './PatreonManagement.css'
@@ -29,13 +29,9 @@ export function PatreonManagement() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const API_BASE = '/api/v1/patreon'
+  const API_BASE = '/v1/patreon'
 
-  useEffect(() => {
-    fetchPatreonData()
-  }, [])
-
-  const fetchPatreonData = async () => {
+  const fetchPatreonData = React.useCallback(async () => {
     setLoading(true)
     setError(null)
 
@@ -70,8 +66,16 @@ export function PatreonManagement() {
         try {
           const campaignsData = await campaignsResponse.json()
           if (campaignsData.data) {
+            interface PatreonAPICampaign {
+              id: string
+              attributes?: {
+                creation_name?: string
+                summary?: string
+                patron_count?: number
+              }
+            }
             setCampaigns(
-              campaignsData.data.map((campaign: any) => ({
+              (campaignsData.data as PatreonAPICampaign[]).map((campaign) => ({
                 id: campaign.id,
                 creation_name: campaign.attributes?.creation_name || '',
                 summary: campaign.attributes?.summary || '',
@@ -103,7 +107,11 @@ export function PatreonManagement() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [t])
+
+  useEffect(() => {
+    fetchPatreonData()
+  }, [fetchPatreonData])
 
   const handleRefresh = () => {
     fetchPatreonData()

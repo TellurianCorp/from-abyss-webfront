@@ -27,7 +27,6 @@ const defaultSEO: Required<SEOData> = {
  */
 export function updateSEO(data: SEOData): void {
   const seo = { ...defaultSEO, ...data }
-  const baseUrl = 'https://fromabyss.media'
 
   // Primary meta tags
   if (seo.title) {

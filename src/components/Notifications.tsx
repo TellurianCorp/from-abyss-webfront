@@ -39,15 +39,15 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
 
       return () => clearInterval(interval);
     }
-  }, [userId, isOpen]);
+  }, [userId, isOpen, fetchNotifications, fetchUnreadCount]);
 
-  const fetchNotifications = async () => {
+  const fetchNotifications = React.useCallback(async () => {
     if (!userId) return;
 
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/microblog/notifications?userId=${userId}&limit=20`
+        `http://localhost:8080/v1/microblog/notifications?userId=${userId}&limit=20`
       );
       if (response.ok) {
         const data = await response.json();
@@ -58,14 +58,14 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [userId]);
 
-  const fetchUnreadCount = async () => {
+  const fetchUnreadCount = React.useCallback(async () => {
     if (!userId) return;
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/microblog/notifications/unread-count?userId=${userId}`
+        `http://localhost:8080/v1/microblog/notifications/unread-count?userId=${userId}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -74,12 +74,12 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
     } catch (error) {
       console.error('Error fetching unread count:', error);
     }
-  };
+  }, [userId]);
 
   const markAsRead = async (notificationId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/microblog/notifications/${notificationId}/read?userId=${userId}`,
+        `http://localhost:8080/v1/microblog/notifications/${notificationId}/read?userId=${userId}`,
         { method: 'POST' }
       );
       if (response.ok) {
@@ -96,7 +96,7 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
   const markAllAsRead = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/microblog/notifications/read-all?userId=${userId}`,
+        `http://localhost:8080/v1/microblog/notifications/read-all?userId=${userId}`,
         { method: 'POST' }
       );
       if (response.ok) {

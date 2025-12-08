@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import './PatreonSimpleCTA.css'
 
 export function PatreonSimpleCTA() {
-  const { t } = useTranslation()
-
   return (
     <section className="section patreon-simple-cta-section">
       <Link to="/patreon" className="patreon-simple-cta-link">

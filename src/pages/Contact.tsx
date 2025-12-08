@@ -81,7 +81,7 @@ export function Contact() {
       // TODO: Replace with actual API endpoint
       const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:8080'
       
-      const response = await fetch(`${API_BASE_URL}/api/v1/contact`, {
+      const response = await fetch(`${API_BASE_URL}/v1/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
