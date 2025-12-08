@@ -56,5 +56,6 @@ export function useStructuredData(
         }
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, dataString])
 }
