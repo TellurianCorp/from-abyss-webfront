@@ -1,0 +1,215 @@
+.weather-shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Snow Effect - usando cores da paleta */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 3px;
+  height: 3px;
+  background: rgba(232, 226, 217, 0.5);
+  border-radius: 50%;
+  animation: snowfall linear infinite;
+  box-shadow: 0 0 3px rgba(232, 226, 217, 0.3);
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(150px) translateX(15px) rotate(180deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(300px) translateX(-15px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Rain Effect - usando cores da paleta */
+.raindrop {
+  position: absolute;
+  top: -10px;
+  width: 1.5px;
+  height: 15px;
+  background: linear-gradient(
+    to bottom,
+    rgba(179, 161, 142, 0.5) 0%,
+    rgba(138, 110, 84, 0.3) 100%
+  );
+  animation: rainfall linear infinite;
+  box-shadow: 0 0 2px rgba(179, 161, 142, 0.3);
+}
+
+@keyframes rainfall {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(300px);
+    opacity: 0.2;
+  }
+}
+
+/* Fog Effect - usando cores da paleta */
+.fog-layer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 161, 142, 0.12) 0%,
+    rgba(138, 110, 84, 0.08) 40%,
+    transparent 70%
+  );
+  animation: fogdrift linear infinite;
+  filter: blur(50px);
+}
+
+@keyframes fogdrift {
+  0% {
+    transform: translateX(-15%) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateX(15%) scale(1.15);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(-15%) scale(1);
+    opacity: 0.25;
+  }
+}
+
+/* Additional fog layers for depth */
+.weather-shader-fog .fog-layer:nth-child(2) {
+  animation-duration: 20s;
+  filter: blur(60px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 161, 142, 0.1) 0%,
+    rgba(138, 110, 84, 0.06) 50%,
+    transparent 80%
+  );
+}
+
+.weather-shader-fog .fog-layer:nth-child(3) {
+  animation-duration: 25s;
+  filter: blur(80px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(179, 161, 142, 0.08) 0%,
+    rgba(138, 110, 84, 0.05) 60%,
+    transparent 90%
+  );
+}
+
+/* Deadmoon Rising Effect */
+.deadmoon {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(
+    circle,
+    rgba(179, 161, 142, 0.4) 0%,
+    rgba(138, 110, 84, 0.3) 40%,
+    rgba(176, 58, 58, 0.2) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: deadmoon-rise 12s ease-in-out infinite;
+  box-shadow: 
+    0 0 30px rgba(138, 110, 84, 0.4),
+    0 0 60px rgba(176, 58, 58, 0.2),
+    inset -10px -10px 20px rgba(12, 12, 12, 0.3);
+  filter: blur(2px);
+}
+
+.deadmoon-particle {
+  position: absolute;
+  bottom: -20px;
+  width: 2px;
+  height: 2px;
+  background: rgba(179, 161, 142, 0.3);
+  border-radius: 50%;
+  animation: deadmoon-particle-rise linear infinite;
+  box-shadow: 0 0 4px rgba(138, 110, 84, 0.4);
+}
+
+@keyframes deadmoon-rise {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(-50%) translateY(-120px) scale(1.1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-200px) scale(0.9);
+    opacity: 0.2;
+  }
+}
+
+@keyframes deadmoon-particle-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-100px) translateX(10px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-200px) translateX(-10px);
+    opacity: 0;
+  }
+}
+
+/* Dying Red Effect - Avermelhado Morrendo */
+.dying-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(
+    circle,
+    rgba(176, 58, 58, 0.8) 0%,
+    rgba(176, 58, 58, 0.4) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  animation: dying-red-fade ease-out infinite;
+  box-shadow: 
+    0 0 6px rgba(176, 58, 58, 0.6),
+    0 0 12px rgba(176, 58, 58, 0.3);
+}
+
+@keyframes dying-red-fade {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.8;
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.5) translate(10px, -20px);
+    opacity: 0.4;
+    filter: brightness(0.7);
+  }
+  100% {
+    transform: scale(0.3) translate(20px, -40px);
+    opacity: 0;
+    filter: brightness(0.3);
+  }
+}

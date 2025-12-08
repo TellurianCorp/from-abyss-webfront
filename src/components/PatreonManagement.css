@@ -1,0 +1,139 @@
+.admin-panel.patreon {
+  background: rgba(138, 110, 84, 0.1);
+  border: 1px solid rgba(138, 110, 84, 0.3);
+}
+
+.patreon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.patreon-refresh-btn {
+  background: transparent;
+  border: 1px solid var(--sepia);
+  color: var(--bone);
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.patreon-refresh-btn:hover {
+  background: rgba(138, 110, 84, 0.2);
+  border-color: var(--bone);
+}
+
+.patreon-user {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(138, 110, 84, 0.2);
+}
+
+.patreon-user-name {
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: var(--bone);
+}
+
+.patreon-user-email {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.patreon-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.patreon-stats article {
+  text-align: center;
+}
+
+.patreon-stat-label {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.patreon-stats strong {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--bone);
+  font-weight: 600;
+}
+
+.patreon-campaigns {
+  margin-bottom: 1rem;
+}
+
+.patreon-campaigns h4 {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0 0 0.75rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.patreon-campaign-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.patreon-campaign-item {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: rgba(138, 110, 84, 0.05);
+  border-left: 2px solid var(--sepia);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.patreon-campaign-item strong {
+  color: var(--bone);
+  font-weight: 600;
+}
+
+.patreon-campaign-item span {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.patreon-campaign-summary {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0.5rem 0 0 0;
+  line-height: 1.4;
+}
+
+.patreon-actions {
+  margin-top: 1rem;
+}
+
+.patreon-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--sepia);
+  color: var(--bone);
+  text-decoration: none;
+  border: 1px solid var(--sepia);
+  transition: all 0.2s;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.patreon-btn:hover {
+  background: rgba(138, 110, 84, 0.8);
+  border-color: var(--bone);
+}
+
+.patreon-error {
+  color: var(--blood);
+  margin: 0.5rem 0;
+}

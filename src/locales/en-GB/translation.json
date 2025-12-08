@@ -1,0 +1,420 @@
+{
+  "common": {
+    "exitToPortal": "Exit to portal",
+    "returnToPortal": "Return to portal",
+    "returnToAdmin": "← Back to Admin",
+    "cancel": "Cancel",
+    "save": "Save",
+    "madeBy": "Made by Tellurian + From Abyss Studio",
+    "allRightsReserved": "All rights reserved"
+  },
+  "footer": {
+    "aboutUs": "About us",
+    "focusEditorial": "Focus editorial",
+    "contactUs": "Contact us"
+  },
+  "navbar": {
+    "badge": "Connecting the global horror community",
+    "issue": "Issue #{{issue}} · Zine Dispatch",
+    "eyebrow": "From Abyss Media",
+    "title": "From Abyss Portal"
+  },
+  "koliseum": {
+    "console": {
+      "eyebrow": "Koliseum Console",
+      "title": "Comprehensive Administration",
+      "description": "Manage matches, rituals, and community signals through the Koliseum API. This dashboard mirrors the cult's competitive pulse.",
+      "liveQueue": "Live queue",
+      "highlights": "Highlights",
+      "apiQuickLinks": "API quick links",
+      "openApiAdmin": "Open Koliseum API admin",
+      "swaggerUI": "Swagger UI"
+    },
+    "queue": {
+      "matchWaiting": "Match #435 waiting approval",
+      "modderSubmission": "Modder submission \"Neon Abbey\" pending scan",
+      "latencyAlert": "Latency spike alert: lobby 14"
+    },
+    "highlights": {
+      "tournaments": "Cross-federation tournaments every Friday",
+      "artifactVault": "Artifact vault 03 synced with API feed",
+      "rituals": "Player-driven rituals now trending in cult circles"
+    },
+    "endpoints": {
+      "listServers": "List servers",
+      "serverMetrics": "Server metrics",
+      "startStopRestart": "Start/stop/restart",
+      "playerStats": "Player stats",
+      "leaderboard": "Leaderboard",
+      "matchHistory": "Match history"
+    },
+    "stats": {
+      "playersOnline": "Players online",
+      "lobbiesActive": "Lobbies active",
+      "matchApproval": "Match approval"
+    },
+    "admin": {
+      "stats": "Koliseum stats",
+      "openComprehensiveConsole": "Open comprehensive console"
+    }
+  },
+  "admin": {
+    "eyebrow": "From Abyss Control",
+    "title": "Guardian dashboard",
+    "description": "Operational oversight for the Cult. Monitor federal feeds, moderation queues, and system health from here.",
+    "metrics": {
+      "activeSessions": "Active Sessions",
+      "signalQueue": "Signal Queue",
+      "federatedMentions": "Federated Mentions"
+    },
+    "actions": {
+      "title": "Actions & Rituals",
+      "runFederationSync": "Run federation sync",
+      "reviewQueuedEssays": "Review queued essays",
+      "spotlightWatchParty": "Spotlight: Community Watch Party"
+    },
+    "incidentFeed": {
+      "title": "Incident feed",
+      "remoteArtUpload": "Remote art upload failed (retrying, 12:41 UTC)",
+      "atProtocolRelay": "AT Protocol relay 03 connected (12:10 UTC)",
+      "qaReport": "New Tellurian QA report ready (11:58 UTC)"
+    }
+  },
+  "platform": {
+    "layers": {
+      "title": "Platform Architecture",
+      "description": "Two repositories define the From Abyss experience and the governing standards that keep everything aligned.",
+      "webfront": {
+        "title": "from-abyss-webfront",
+        "description": "React-based multimedia portal that showcases the horror social network, editorial stories, and immersive experiences fans interact with daily."
+      },
+      "api": {
+        "title": "from-abyss-api",
+        "description": "Golang control layer serving REST/GraphQL endpoints, ActivityPub/AT Protocol federation, media pipelines, identity management, and MVC orchestration."
+      }
+    }
+  },
+  "editorial": {
+    "title": "Editorial Focus",
+    "description": "Rooted in horror, informed by tech, and delivered through storytelling.",
+    "features": {
+      "socialNetwork": {
+        "title": "Social Network",
+        "description": "Genre-focused community where fans share reviews, art, theories, and collections while preserving identity across federated platforms.",
+        "notes": {
+          "follow": "Follow creators and developers",
+          "join": "Join themed circles, watch parties, and micro-communities",
+          "engage": "Engage regardless of account origin"
+        }
+      },
+      "gameReviews": {
+        "title": "In-Depth Game Reviews",
+        "description": "Dissecting fear through narrative pacing, world-building, sound design, mechanics, and the systems that define horror experiences.",
+        "notes": {
+          "visual": "Visual storytelling",
+          "mechanic": "Mechanic analysis",
+          "platform": "Underlying platform technology"
+        }
+      },
+      "essays": {
+        "title": "Analytical Features & Essays",
+        "description": "Explorations of horror psychology, mythic roots, tension, AI influence, and the ethical consequences of digital dread.",
+        "notes": {
+          "psychology": "Horror psychology",
+          "tech": "Emerging tech impact",
+          "philosophical": "Philosophical context"
+        }
+      },
+      "multimedia": {
+        "title": "Multimedia Productions",
+        "description": "Podcasts, video essays, micro-analyses, and social storytelling that document how fear evolves alongside technology.",
+        "notes": {
+          "interviews": "Developer interviews",
+          "lore": "Lore breakdowns",
+          "moodboards": "Social media moodboards"
+        }
+      }
+    }
+  },
+  "tv": {
+    "title": "From Abyss TV",
+    "description": "Broadcast dispatch that brings shows, interviews, and cinematic storytelling into the portal.",
+    "fullDescription": "Serialised essays, live watch parties, and tech-driven breakdowns stream through the webfront and API, layering editors, dev interviews, and community signals into one cinematic broadcast feed.",
+    "pillars": {
+      "documentary": "Documentary-style shows",
+      "liveStreams": "Live streams & watch parties",
+      "deepDives": "Technical deep-dives",
+      "showcases": "Community showcases"
+    },
+    "visitChannel": "Visit YouTube Channel"
+  },
+  "youtube": {
+    "highlights": {
+      "title": "YouTube Highlights",
+      "description": "Latest videos from our channel",
+      "loading": "Loading videos...",
+      "error": "Unable to load videos at this time.",
+      "empty": "No videos available.",
+      "views": "views",
+      "visitChannel": "Visit Channel",
+      "date": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "daysAgo": "{{count}} days ago",
+        "weeksAgo": "{{count}} weeks ago",
+        "monthsAgo": "{{count}} months ago",
+        "yearsAgo": "{{count}} years ago"
+      }
+    },
+    "admin": {
+      "title": "YouTube Channel Manager",
+      "loading": "Loading YouTube data...",
+      "retry": "Retry",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing...",
+      "clearCache": "Clear Cache",
+      "latestVideos": "Latest Videos",
+      "noVideos": "No videos available",
+      "views": "views",
+      "debugInfo": "Debug Information",
+      "stats": {
+        "subscribers": "Subscribers",
+        "videos": "Videos",
+        "views": "Total Views"
+      }
+    }
+  },
+  "zine": {
+    "notes": {
+      "title": "Dispatch notes",
+      "description": "Collage cues for the zine-style direction.",
+      "items": {
+        "typefaces": "Cut-and-paste typefaces, paper textures, and halftone gradients give every section a tactile edge.",
+        "borders": "Layered stickers and torn-paper borders emphasize featured highlights like a printed spread.",
+        "highlights": "Red staples, night-vision green highlights, and glitchy scanlines nod to underground mags.",
+        "fonts": "Mix wide display fonts with condensed stats to echo zine mastheads and indie broadsheets."
+      }
+    }
+  },
+  "tech": {
+    "title": "Tech–horror intersection",
+    "description": "The themes that drive our coverage and inspire the platform's storytelling.",
+    "themes": {
+      "ai": "AI-driven horror & emergent behavior",
+      "autonomy": "Digital autonomy, uncanny valley, and haunted software",
+      "vr": "VR/XR immersion and procedural madness",
+      "surveillance": "Surveillance narratives, body-tech, and identity loss"
+    }
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "Guiding intentions that shape every release and feature.",
+    "goals": {
+      "connect": "Connect the global horror community via a decentralised, open platform.",
+      "illuminate": "Illuminate the craft of horror through art, psychology, and technology.",
+      "build": "Build a space for creators to collaborate and engage meaningfully.",
+      "document": "Document the evolution of horror as a long-term cultural archive."
+    }
+  },
+  "backoffice": {
+    "title": "Backoffice",
+    "description": "Access the Guardian Dashboard via the <code>/admin</code> path.",
+    "note": "The Guardian Dashboard interface only appears when visiting <code>/admin</code>. Use federated tooling, moderated feeds, and operational dashboards from here."
+  },
+  "patreon": {
+    "admin": {
+      "title": "Patreon Integration",
+      "openManagement": "Open Patreon Management",
+      "eyebrow": "Patreon Integration",
+      "pageTitle": "Patreon Management Console",
+      "pageDescription": "Manage your Patreon campaigns, members, and content"
+    },
+    "loading": "Loading Patreon data...",
+    "error": {
+      "title": "Error",
+      "fetchFailed": "Failed to fetch Patreon data. Please check your API configuration."
+    },
+    "retry": "Retry",
+    "refresh": "Refresh",
+    "lastRefresh": "Last refreshed",
+    "user": {
+      "title": "Account Information",
+      "name": "Name",
+      "email": "Email",
+      "id": "User ID"
+    },
+    "stats": {
+      "title": "Campaign Statistics",
+      "campaigns": "Campaigns",
+      "patrons": "Total Patrons"
+    },
+    "campaigns": {
+      "title": "Campaigns",
+      "patrons": "patrons",
+      "total": "campaigns"
+    },
+    "actions": {
+      "title": "Actions",
+      "refresh": "Refresh Data",
+      "clearCache": "Clear Cache",
+      "manageOAuth": "Manage OAuth App"
+    },
+    "api": {
+      "title": "API Endpoints",
+      "getUser": "Get User Info",
+      "getCampaigns": "Get Campaigns",
+      "getStats": "Get Statistics",
+      "getTiers": "Get Tiers",
+      "getMembers": "Get Members",
+      "clearCache": "Clear Cache"
+    },
+    "tiers": {
+      "title": "Tiers",
+      "edit": "Edit",
+      "editTitle": "Edit Tier",
+      "description": "Description",
+      "amount": "Amount (cents)",
+      "published": "Published",
+      "updateError": "Failed to update tier. Please try again."
+    },
+    "members": {
+      "title": "Members",
+      "show": "Show Members",
+      "hide": "Hide",
+      "empty": "No members found",
+      "anonymous": "Anonymous",
+      "currentPledge": "Current Pledge",
+      "lifetimeSupport": "Lifetime Support",
+      "lastCharge": "Last Charge",
+      "memberSince": "Member Since",
+      "status": {
+        "active": "Active",
+        "former": "Former"
+      }
+    }
+  },
+  "feediverse": {
+    "horror": {
+      "title": "Feediverse Horror Feed",
+      "description": "Curated horror content from the federated network",
+      "loading": "Loading horror feed...",
+      "error": "Unable to load feed at this time.",
+      "empty": "No horror content available.",
+      "exploreMore": "Explore More on Feediverse",
+      "date": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "daysAgo": "{{count}} days ago",
+        "weeksAgo": "{{count}} weeks ago",
+        "monthsAgo": "{{count}} months ago",
+        "yearsAgo": "{{count}} years ago"
+      }
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "The History of From Abyss",
+    "history": {
+      "p1": "From Abyss emerged from a shared vision to connect the global horror community through a decentralized, open platform. Born from the intersection of horror culture, technology, and independent media, we set out to create a space where creators, fans, and critics could engage meaningfully.",
+      "p2": "Our journey began with a simple observation: horror as a genre thrives on community, yet existing platforms often silo conversations and limit creative expression. We envisioned a platform that would preserve identity across federated networks while celebrating the craft of horror through art, psychology, and technology.",
+      "p3": "Today, From Abyss serves as both a multimedia portal and a social network, featuring in-depth game reviews, analytical essays, multimedia productions, and a federated feed that connects horror enthusiasts worldwide. We document the evolution of horror as a long-term cultural archive, ensuring that the stories, analyses, and conversations that shape the genre are preserved and accessible.",
+      "p4": "Built by Tellurian and From Abyss Studio, our platform represents a commitment to open standards, decentralized architecture, and the belief that horror culture deserves a space that respects both its artistic depth and its community-driven nature."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with the From Abyss team",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this regarding?",
+      "message": "Message",
+      "messagePlaceholder": "Your message...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been sent successfully.",
+      "error": "Sorry, there was an error sending your message. Please try again.",
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address"
+    }
+  },
+  "editorialPage": {
+    "title": "Editorial Focus",
+    "subtitle": "Rooted in horror, informed by tech, and delivered through storytelling.",
+    "description": "Our editorial approach combines deep analysis with accessible storytelling, exploring horror through multiple lenses while maintaining a commitment to independent, thoughtful coverage."
+  },
+  "microblog": {
+    "title": "Horror Community Feed",
+    "description": "Connect with horror enthusiasts from around the world",
+    "loading": "Loading timeline...",
+    "error": "Failed to load timeline",
+    "retry": "Retry",
+    "empty": "No posts yet. Be the first to share!",
+    "like": "Like",
+    "reply": "Reply",
+    "repost": "Repost",
+    "federated": "Federated",
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{{count}}m ago",
+      "hoursAgo": "{{count}}h ago",
+      "daysAgo": "{{count}}d ago",
+      "weeksAgo": "{{count}}w ago",
+      "monthsAgo": "{{count}}mo ago",
+      "yearsAgo": "{{count}}y ago"
+    },
+    "follow": {
+      "follow": "Follow",
+      "unfollow": "Unfollow",
+      "following": "Following...",
+      "unfollowing": "Unfollowing...",
+      "error": {
+        "failed": "Failed to follow/unfollow",
+        "missingParams": "Missing user ID or actor ID"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "empty": "No notifications",
+      "markAllRead": "Mark all as read",
+      "follow": "{{name}} started following you",
+      "like": "{{name}} liked your post",
+      "repost": "{{name}} reposted your post",
+      "reply": "{{name}} replied to your post",
+      "mention": "{{name}} mentioned you"
+    }
+  },
+  "metrics": {
+    "never": "Never",
+    "sync": {
+      "title": "Sync Metrics",
+      "lastSyncTime": "Last Sync Time",
+      "totalSyncs": "Total Syncs",
+      "successfulSyncs": "Successful Syncs",
+      "failedSyncs": "Failed Syncs",
+      "postsSynced": "Posts Synced",
+      "actorsSynced": "Actors Synced",
+      "averageSyncTime": "Average Sync Time",
+      "lastError": "Last Error"
+    },
+    "security": {
+      "title": "Security Metrics",
+      "totalRequests": "Total Requests",
+      "blockedRequests": "Blocked Requests",
+      "rateLimitHits": "Rate Limit Hits",
+      "invalidSignatures": "Invalid Signatures",
+      "replayAttempts": "Replay Attempts",
+      "requestsByInstance": "Requests by Instance"
+    },
+    "database": {
+      "title": "Database Statistics",
+      "posts": "Posts",
+      "actors": "Actors",
+      "followers": "Followers",
+      "unreadNotifications": "Unread Notifications"
+    }
+  }
+}

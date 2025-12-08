@@ -1,0 +1,16 @@
+# robots.txt for From Abyss Media
+User-agent: *
+Allow: /
+
+# Disallow admin area from search engines
+Disallow: /admin/
+
+# Allow all images
+Allow: /imgs/
+Allow: /fonts/
+
+# Sitemap location
+Sitemap: https://fromabyss.media/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1

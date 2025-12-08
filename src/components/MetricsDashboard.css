@@ -1,0 +1,143 @@
+.metrics-dashboard {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.metrics-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #eee;
+}
+
+.metrics-tabs button {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+
+.metrics-tabs button:hover {
+  color: #333;
+}
+
+.metrics-tabs button.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+.metrics-content {
+  min-height: 400px;
+}
+
+.metrics-section h3 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.metric-value.success {
+  color: #28a745;
+}
+
+.metric-value.error {
+  color: #dc3545;
+}
+
+.metric-value.warning {
+  color: #ffc107;
+}
+
+.metric-error {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 12px;
+  color: #856404;
+  margin-top: 16px;
+}
+
+.metrics-instances {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.metrics-instances h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.instances-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.instance-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.instance-name {
+  font-family: monospace;
+  font-size: 14px;
+  color: #333;
+}
+
+.instance-count {
+  font-weight: 600;
+  color: #666;
+}
+
+.metrics-loading {
+  text-align: center;
+  padding: 48px;
+  color: #666;
+}

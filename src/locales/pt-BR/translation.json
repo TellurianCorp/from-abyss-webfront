@@ -1,0 +1,420 @@
+{
+  "common": {
+    "exitToPortal": "Sair para o portal",
+    "returnToPortal": "Voltar para o portal",
+    "returnToAdmin": "← Voltar para Admin",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "madeBy": "Feito por Tellurian + From Abyss Studio",
+    "allRightsReserved": "Todos os direitos reservados"
+  },
+  "footer": {
+    "aboutUs": "Sobre nós",
+    "focusEditorial": "Foco editorial",
+    "contactUs": "Entre em contato"
+  },
+  "navbar": {
+    "badge": "Conectando a comunidade global de horror",
+    "issue": "Edição #{{issue}} · Despacho Zine",
+    "eyebrow": "From Abyss Media",
+    "title": "Portal From Abyss"
+  },
+  "koliseum": {
+    "console": {
+      "eyebrow": "Console Koliseum",
+      "title": "Administração Abrangente",
+      "description": "Gerencie partidas, rituais e sinais da comunidade através da API Koliseum. Este painel reflete o pulso competitivo do culto.",
+      "liveQueue": "Fila ao vivo",
+      "highlights": "Destaques",
+      "apiQuickLinks": "Links rápidos da API",
+      "openApiAdmin": "Abrir administração da API Koliseum",
+      "swaggerUI": "Swagger UI"
+    },
+    "queue": {
+      "matchWaiting": "Partida #435 aguardando aprovação",
+      "modderSubmission": "Submissão de modder \"Neon Abbey\" pendente de verificação",
+      "latencyAlert": "Alerta de pico de latência: lobby 14"
+    },
+    "highlights": {
+      "tournaments": "Torneios entre federações toda sexta-feira",
+      "artifactVault": "Cofre de artefatos 03 sincronizado com feed da API",
+      "rituals": "Rituais conduzidos por jogadores agora em alta nos círculos do culto"
+    },
+    "endpoints": {
+      "listServers": "Listar servidores",
+      "serverMetrics": "Métricas do servidor",
+      "startStopRestart": "Iniciar/parar/reiniciar",
+      "playerStats": "Estatísticas do jogador",
+      "leaderboard": "Tabela de classificação",
+      "matchHistory": "Histórico de partidas"
+    },
+    "stats": {
+      "playersOnline": "Jogadores online",
+      "lobbiesActive": "Lobbies ativos",
+      "matchApproval": "Aprovação de partidas"
+    },
+    "admin": {
+      "stats": "Estatísticas do Koliseum",
+      "openComprehensiveConsole": "Abrir console abrangente"
+    }
+  },
+  "admin": {
+    "eyebrow": "From Abyss Control",
+    "title": "Painel do Guardião",
+    "description": "Supervisão operacional para o Culto. Monitore feeds federados, filas de moderação e saúde do sistema a partir daqui.",
+    "metrics": {
+      "activeSessions": "Sessões Ativas",
+      "signalQueue": "Fila de Sinais",
+      "federatedMentions": "Menções Federadas"
+    },
+    "actions": {
+      "title": "Ações e Rituais",
+      "runFederationSync": "Executar sincronização de federação",
+      "reviewQueuedEssays": "Revisar ensaios na fila",
+      "spotlightWatchParty": "Destaque: Watch Party da Comunidade"
+    },
+    "incidentFeed": {
+      "title": "Feed de Incidentes",
+      "remoteArtUpload": "Upload de arte remoto falhou (tentando novamente, 12:41 UTC)",
+      "atProtocolRelay": "Relé do Protocolo AT 03 conectado (12:10 UTC)",
+      "qaReport": "Novo relatório QA Tellurian pronto (11:58 UTC)"
+    }
+  },
+  "platform": {
+    "layers": {
+      "title": "Arquitetura da Plataforma",
+      "description": "Dois repositórios definem a experiência From Abyss e os padrões que mantêm tudo alinhado.",
+      "webfront": {
+        "title": "from-abyss-webfront",
+        "description": "Portal multimídia baseado em React que apresenta a rede social de horror, histórias editoriais e experiências imersivas com as quais os fãs interagem diariamente."
+      },
+      "api": {
+        "title": "from-abyss-api",
+        "description": "Camada de controle Golang que serve endpoints REST/GraphQL, federação ActivityPub/AT Protocol, pipelines de mídia, gerenciamento de identidade e orquestração MVC."
+      }
+    }
+  },
+  "editorial": {
+    "title": "Foco Editorial",
+    "description": "Enraizado no horror, informado pela tecnologia e entregue através da narrativa.",
+    "features": {
+      "socialNetwork": {
+        "title": "Rede Social",
+        "description": "Comunidade focada em gênero onde os fãs compartilham resenhas, arte, teorias e coleções, preservando a identidade em plataformas federadas.",
+        "notes": {
+          "follow": "Seguir criadores e desenvolvedores",
+          "join": "Participar de círculos temáticos, watch parties e micro-comunidades",
+          "engage": "Interagir independentemente da origem da conta"
+        }
+      },
+      "gameReviews": {
+        "title": "Resenhas Profundas de Jogos",
+        "description": "Dissecando o medo através do ritmo narrativo, construção de mundo, design de som, mecânicas e os sistemas que definem experiências de horror.",
+        "notes": {
+          "visual": "Narrativa visual",
+          "mechanic": "Análise de mecânicas",
+          "platform": "Tecnologia de plataforma subjacente"
+        }
+      },
+      "essays": {
+        "title": "Recursos Analíticos e Ensaios",
+        "description": "Explorações da psicologia do horror, raízes míticas, tensão, influência da IA e as consequências éticas do pavor digital.",
+        "notes": {
+          "psychology": "Psicologia do horror",
+          "tech": "Impacto de tecnologias emergentes",
+          "philosophical": "Contexto filosófico"
+        }
+      },
+      "multimedia": {
+        "title": "Produções Multimídia",
+        "description": "Podcasts, ensaios em vídeo, micro-análises e narrativas sociais que documentam como o medo evolui junto com a tecnologia.",
+        "notes": {
+          "interviews": "Entrevistas com desenvolvedores",
+          "lore": "Análises de lore",
+          "moodboards": "Moodboards de mídia social"
+        }
+      }
+    }
+  },
+  "tv": {
+    "title": "From Abyss TV",
+    "description": "Despacho de transmissão que traz shows, entrevistas e narrativa cinematográfica para o portal.",
+    "fullDescription": "Ensaios serializados, watch parties ao vivo e análises orientadas por tecnologia fluem através do webfront e API, sobrepondo editores, entrevistas com desenvolvedores e sinais da comunidade em um feed de transmissão cinematográfico.",
+    "pillars": {
+      "documentary": "Shows estilo documentário",
+      "liveStreams": "Transmissões ao vivo e watch parties",
+      "deepDives": "Análises técnicas profundas",
+      "showcases": "Mostras da comunidade"
+    },
+    "visitChannel": "Visitar Canal do YouTube"
+  },
+  "youtube": {
+    "highlights": {
+      "title": "Destaques do YouTube",
+      "description": "Últimos vídeos do nosso canal",
+      "loading": "Carregando vídeos...",
+      "error": "Não foi possível carregar os vídeos no momento.",
+      "empty": "Nenhum vídeo disponível.",
+      "views": "visualizações",
+      "visitChannel": "Visitar Canal",
+      "date": {
+        "today": "Hoje",
+        "yesterday": "Ontem",
+        "daysAgo": "{{count}} dias atrás",
+        "weeksAgo": "{{count}} semanas atrás",
+        "monthsAgo": "{{count}} meses atrás",
+        "yearsAgo": "{{count}} anos atrás"
+      }
+    },
+    "admin": {
+      "title": "Gerenciador de Canal YouTube",
+      "loading": "Carregando dados do YouTube...",
+      "retry": "Tentar Novamente",
+      "refresh": "Atualizar",
+      "refreshing": "Atualizando...",
+      "clearCache": "Limpar Cache",
+      "latestVideos": "Últimos Vídeos",
+      "noVideos": "Nenhum vídeo disponível",
+      "views": "visualizações",
+      "debugInfo": "Informações de Debug",
+      "stats": {
+        "subscribers": "Inscritos",
+        "videos": "Vídeos",
+        "views": "Visualizações Totais"
+      }
+    }
+  },
+  "zine": {
+    "notes": {
+      "title": "Notas de Despacho",
+      "description": "Pistas de colagem para a direção estilo zine.",
+      "items": {
+        "typefaces": "Tipografias recortadas e coladas, texturas de papel e gradientes de meios-tons dão a cada seção uma borda tátil.",
+        "borders": "Adesivos em camadas e bordas de papel rasgado enfatizam destaques em destaque como uma página impressa.",
+        "highlights": "Grampos vermelhos, destaques verde visão noturna e linhas de varredura com glitch fazem referência a revistas underground.",
+        "fonts": "Misture fontes de exibição largas com estatísticas condensadas para ecoar cabeçalhos de zines e jornais independentes."
+      }
+    }
+  },
+  "tech": {
+    "title": "Interseção Tecnologia–Horror",
+    "description": "Os temas que impulsionam nossa cobertura e inspiram a narrativa da plataforma.",
+    "themes": {
+      "ai": "Horror orientado por IA e comportamento emergente",
+      "autonomy": "Autonomia digital, vale estranho e software assombrado",
+      "vr": "Imersão VR/XR e loucura procedural",
+      "surveillance": "Narrativas de vigilância, tecnologia corporal e perda de identidade"
+    }
+  },
+  "mission": {
+    "title": "Nossa Missão",
+    "description": "Intenções orientadoras que moldam cada lançamento e recurso.",
+    "goals": {
+      "connect": "Conectar a comunidade global de horror através de uma plataforma descentralizada e aberta.",
+      "illuminate": "Iluminar a arte do horror através da arte, psicologia e tecnologia.",
+      "build": "Construir um espaço para criadores colaborarem e se envolverem de forma significativa.",
+      "document": "Documentar a evolução do horror como um arquivo cultural de longo prazo."
+    }
+  },
+  "backoffice": {
+    "title": "Backoffice",
+    "description": "Acesse o Painel do Guardião via o caminho <code>/admin</code>.",
+    "note": "A interface do Painel do Guardião só aparece ao visitar <code>/admin</code>. Use ferramentas federadas, feeds moderados e painéis operacionais a partir daqui."
+  },
+  "patreon": {
+    "admin": {
+      "title": "Integração Patreon",
+      "openManagement": "Abrir Gerenciamento Patreon",
+      "eyebrow": "Integração Patreon",
+      "pageTitle": "Console de Gerenciamento Patreon",
+      "pageDescription": "Gerencie suas campanhas, membros e conteúdo do Patreon"
+    },
+    "loading": "Carregando dados do Patreon...",
+    "error": {
+      "title": "Erro",
+      "fetchFailed": "Falha ao buscar dados do Patreon. Verifique sua configuração da API."
+    },
+    "retry": "Tentar novamente",
+    "refresh": "Atualizar",
+    "lastRefresh": "Última atualização",
+    "user": {
+      "title": "Informações da Conta",
+      "name": "Nome",
+      "email": "Email",
+      "id": "ID do Usuário"
+    },
+    "stats": {
+      "title": "Estatísticas de Campanha",
+      "campaigns": "Campanhas",
+      "patrons": "Total de Patronos"
+    },
+    "campaigns": {
+      "title": "Campanhas",
+      "patrons": "patronos",
+      "total": "campanhas"
+    },
+    "actions": {
+      "title": "Ações",
+      "refresh": "Atualizar Dados",
+      "clearCache": "Limpar Cache",
+      "manageOAuth": "Gerenciar App OAuth"
+    },
+    "api": {
+      "title": "Endpoints da API",
+      "getUser": "Obter Informações do Usuário",
+      "getCampaigns": "Obter Campanhas",
+      "getStats": "Obter Estatísticas",
+      "getTiers": "Obter Níveis",
+      "getMembers": "Obter Membros",
+      "clearCache": "Limpar Cache"
+    },
+    "tiers": {
+      "title": "Níveis",
+      "edit": "Editar",
+      "editTitle": "Editar Nível",
+      "description": "Descrição",
+      "amount": "Valor (centavos)",
+      "published": "Publicado",
+      "updateError": "Falha ao atualizar nível. Por favor, tente novamente."
+    },
+    "members": {
+      "title": "Membros",
+      "show": "Mostrar Membros",
+      "hide": "Ocultar",
+      "empty": "Nenhum membro encontrado",
+      "anonymous": "Anônimo",
+      "currentPledge": "Contribuição Atual",
+      "lifetimeSupport": "Suporte Total",
+      "lastCharge": "Última Cobrança",
+      "memberSince": "Membro Desde",
+      "status": {
+        "active": "Ativo",
+        "former": "Ex-membro"
+      }
+    }
+  },
+  "feediverse": {
+    "horror": {
+      "title": "Feed Feediverse de Horror",
+      "description": "Conteúdo de horror curado da rede federada",
+      "loading": "Carregando feed de horror...",
+      "error": "Não foi possível carregar o feed no momento.",
+      "empty": "Nenhum conteúdo de horror disponível.",
+      "exploreMore": "Explorar Mais no Feediverse",
+      "date": {
+        "today": "Hoje",
+        "yesterday": "Ontem",
+        "daysAgo": "{{count}} dias atrás",
+        "weeksAgo": "{{count}} semanas atrás",
+        "monthsAgo": "{{count}} meses atrás",
+        "yearsAgo": "{{count}} anos atrás"
+      }
+    }
+  },
+  "about": {
+    "title": "Sobre Nós",
+    "subtitle": "A História do From Abyss",
+    "history": {
+      "p1": "O From Abyss surgiu de uma visão compartilhada de conectar a comunidade global de horror através de uma plataforma descentralizada e aberta. Nascido da interseção entre cultura de horror, tecnologia e mídia independente, nos propusemos a criar um espaço onde criadores, fãs e críticos pudessem se envolver de forma significativa.",
+      "p2": "Nossa jornada começou com uma observação simples: o horror como gênero prospera na comunidade, mas as plataformas existentes frequentemente isolam conversas e limitam a expressão criativa. Imaginamos uma plataforma que preservaria a identidade em redes federadas enquanto celebra a arte do horror através da arte, psicologia e tecnologia.",
+      "p3": "Hoje, o From Abyss serve tanto como portal multimídia quanto como rede social, apresentando resenhas profundas de jogos, ensaios analíticos, produções multimídia e um feed federado que conecta entusiastas de horror em todo o mundo. Documentamos a evolução do horror como um arquivo cultural de longo prazo, garantindo que as histórias, análises e conversas que moldam o gênero sejam preservadas e acessíveis.",
+      "p4": "Construído por Tellurian e From Abyss Studio, nossa plataforma representa um compromisso com padrões abertos, arquitetura descentralizada e a crença de que a cultura de horror merece um espaço que respeita tanto sua profundidade artística quanto sua natureza orientada pela comunidade."
+    }
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Entre em contato com a equipe do From Abyss",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Seu nome",
+      "email": "Email",
+      "emailPlaceholder": "seu.email@exemplo.com",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Sobre o que se trata?",
+      "message": "Mensagem",
+      "messagePlaceholder": "Sua mensagem...",
+      "submit": "Enviar Mensagem",
+      "sending": "Enviando...",
+      "success": "Obrigado! Sua mensagem foi enviada com sucesso.",
+      "error": "Desculpe, houve um erro ao enviar sua mensagem. Por favor, tente novamente.",
+      "required": "Este campo é obrigatório",
+      "invalidEmail": "Por favor, insira um endereço de email válido"
+    }
+  },
+  "editorialPage": {
+    "title": "Foco Editorial",
+    "subtitle": "Enraizado no horror, informado pela tecnologia e entregue através da narrativa.",
+    "description": "Nossa abordagem editorial combina análise profunda com narrativa acessível, explorando o horror através de múltiplas lentes enquanto mantém um compromisso com cobertura independente e reflexiva."
+  },
+  "microblog": {
+    "title": "Feed da Comunidade de Horror",
+    "description": "Conecte-se com entusiastas de horror de todo o mundo",
+    "loading": "Carregando timeline...",
+    "error": "Falha ao carregar timeline",
+    "retry": "Tentar novamente",
+    "empty": "Ainda não há posts. Seja o primeiro a compartilhar!",
+    "like": "Curtir",
+    "reply": "Responder",
+    "repost": "Republicar",
+    "federated": "Federado",
+    "time": {
+      "justNow": "Agora",
+      "minutesAgo": "há {{count}}min",
+      "hoursAgo": "há {{count}}h",
+      "daysAgo": "há {{count}}d",
+      "weeksAgo": "há {{count}}sem",
+      "monthsAgo": "há {{count}}mes",
+      "yearsAgo": "há {{count}}a"
+    },
+    "follow": {
+      "follow": "Seguir",
+      "unfollow": "Deixar de seguir",
+      "following": "Seguindo...",
+      "unfollowing": "Deixando de seguir...",
+      "error": {
+        "failed": "Falha ao seguir/deixar de seguir",
+        "missingParams": "Faltando ID do usuário ou do ator"
+      }
+    },
+    "notifications": {
+      "title": "Notificações",
+      "empty": "Sem notificações",
+      "markAllRead": "Marcar todas como lidas",
+      "follow": "{{name}} começou a te seguir",
+      "like": "{{name}} curtiu seu post",
+      "repost": "{{name}} republicou seu post",
+      "reply": "{{name}} respondeu seu post",
+      "mention": "{{name}} te mencionou"
+    }
+  },
+  "metrics": {
+    "never": "Nunca",
+    "sync": {
+      "title": "Métricas de Sincronização",
+      "lastSyncTime": "Última Sincronização",
+      "totalSyncs": "Total de Sincronizações",
+      "successfulSyncs": "Sincronizações Bem-sucedidas",
+      "failedSyncs": "Sincronizações Falhas",
+      "postsSynced": "Posts Sincronizados",
+      "actorsSynced": "Atores Sincronizados",
+      "averageSyncTime": "Tempo Médio de Sincronização",
+      "lastError": "Último Erro"
+    },
+    "security": {
+      "title": "Métricas de Segurança",
+      "totalRequests": "Total de Requisições",
+      "blockedRequests": "Requisições Bloqueadas",
+      "rateLimitHits": "Limites de Taxa Atingidos",
+      "invalidSignatures": "Assinaturas Inválidas",
+      "replayAttempts": "Tentativas de Replay",
+      "requestsByInstance": "Requisições por Instância"
+    },
+    "database": {
+      "title": "Estatísticas do Banco de Dados",
+      "posts": "Posts",
+      "actors": "Atores",
+      "followers": "Seguidores",
+      "unreadNotifications": "Notificações Não Lidas"
+    }
+  }
+}
