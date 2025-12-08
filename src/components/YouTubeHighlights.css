@@ -108,11 +108,6 @@
   gap: 1rem;
 }
 
-.error-icon {
-  font-size: 2rem;
-  color: var(--blood);
-  opacity: 0.8;
-}
 
 .youtube-retry-button {
   margin-top: 0.5rem;
@@ -253,7 +248,8 @@
 }
 
 .youtube-play-icon {
-  font-size: 2rem;
+  width: 48px;
+  height: 48px;
   color: var(--blood);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
 }
@@ -312,18 +308,6 @@
   align-items: center;
 }
 
-.meta-icon {
-  display: inline-block;
-  margin-right: 0.4rem;
-  font-size: 0.875rem;
-  color: var(--sepia);
-  opacity: 0.85;
-  width: 1em;
-  text-align: center;
-  flex-shrink: 0;
-  line-height: 1;
-  vertical-align: middle;
-}
 
 .youtube-video-views,
 .youtube-video-likes,
@@ -343,13 +327,14 @@
   color: var(--sepia);
 }
 
-.youtube-video-likes {
-  color: var(--muted);
+.youtube-video-date::before {
+  content: '·';
+  margin-right: 0.75rem;
+  color: var(--sepia);
 }
 
-.youtube-video-likes .meta-icon {
-  color: var(--blood);
-  opacity: 0.9;
+.youtube-video-likes {
+  color: var(--muted);
 }
 
 .youtube-video-duration-text {
@@ -374,10 +359,8 @@
 }
 
 .youtube-cta::after {
-  content: '\f061';
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-  font-size: 0.7rem;
+  content: '→';
+  margin-left: 0.5rem;
   transition: transform 0.2s ease;
 }
 
@@ -438,7 +421,7 @@
   .youtube-video-thumbnail,
   .youtube-video-thumbnail .card-img-top,
   .youtube-video-overlay,
-  .youtube-play-icon,
+  .youtube-play-icon svg,
   .youtube-cta {
     transition: none;
     animation: none;

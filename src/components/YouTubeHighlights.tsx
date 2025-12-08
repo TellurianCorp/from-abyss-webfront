@@ -160,7 +160,6 @@ export function YouTubeHighlights() {
           <p>{t('youtube.highlights.description')}</p>
         </div>
         <div className="youtube-error">
-          <i className="fas fa-triangle-exclamation error-icon" aria-hidden="true"></i>
           <p>{error}</p>
           <button 
             className="youtube-retry-button"
@@ -230,9 +229,22 @@ export function YouTubeHighlights() {
                     {formatDuration(video.duration)}
                   </div>
                 )}
-                <div className="youtube-video-overlay">
-                  <i className="fas fa-play youtube-play-icon" aria-hidden="true"></i>
-                </div>
+              <div className="youtube-video-overlay">
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="youtube-play-icon"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8 5v14l11-7z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
               </div>
               <div className="card-body">
                 <h5 className="card-title youtube-video-title" itemProp="name">{video.title}</h5>
@@ -248,23 +260,19 @@ export function YouTubeHighlights() {
                     <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
                       <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
                       <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
-                      <i className="fas fa-eye meta-icon" aria-hidden="true"></i>
                       {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
                     </span>
                     {video.likeCount > 0 && (
                       <span className="youtube-video-likes">
-                        <i className="fas fa-thumbs-up meta-icon" aria-hidden="true"></i>
                         {formatViewCount(video.likeCount)}
                       </span>
                     )}
                     {video.duration && (
                       <span className="youtube-video-duration-text">
-                        <i className="fas fa-clock meta-icon" aria-hidden="true"></i>
                         {formatDuration(video.duration)}
                       </span>
                     )}
                     <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
-                      <i className="fas fa-calendar meta-icon" aria-hidden="true"></i>
                       {formatDate(video.publishedAt)}
                     </time>
                   </small>
