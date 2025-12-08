@@ -233,7 +233,16 @@ export function YouTubeHighlights() {
               </div>
             </div>
             <div className="youtube-video-info">
-              <h3 className="youtube-video-title" itemProp="name">{video.title}</h3>
+              <div className="youtube-video-header">
+                <h3 className="youtube-video-title" itemProp="name">{video.title}</h3>
+                {video.description && (
+                  <p className="youtube-video-description" itemProp="description">
+                    {video.description.length > 120 
+                      ? `${video.description.substring(0, 120)}...` 
+                      : video.description}
+                  </p>
+                )}
+              </div>
               <div className="youtube-video-meta">
                 <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
                   <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
