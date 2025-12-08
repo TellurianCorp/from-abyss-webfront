@@ -25,23 +25,6 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    if (userId) {
-      fetchNotifications();
-      fetchUnreadCount();
-      
-      // Poll for new notifications every 30 seconds
-      const interval = setInterval(() => {
-        fetchUnreadCount();
-        if (isOpen) {
-          fetchNotifications();
-        }
-      }, 30000);
-
-      return () => clearInterval(interval);
-    }
-  }, [userId, isOpen, fetchNotifications, fetchUnreadCount]);
-
   const fetchNotifications = React.useCallback(async () => {
     if (!userId) return;
 
@@ -76,6 +59,23 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
       console.error('Error fetching unread count:', error);
     }
   }, [userId]);
+
+  useEffect(() => {
+    if (userId) {
+      fetchNotifications();
+      fetchUnreadCount();
+      
+      // Poll for new notifications every 30 seconds
+      const interval = setInterval(() => {
+        fetchUnreadCount();
+        if (isOpen) {
+          fetchNotifications();
+        }
+      }, 30000);
+
+      return () => clearInterval(interval);
+    }
+  }, [userId, isOpen, fetchNotifications, fetchUnreadCount]);
 
   const markAsRead = async (notificationId: string) => {
     try {

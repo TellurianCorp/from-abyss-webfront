@@ -1,6 +1,5 @@
-# Development Dockerfile for webfront
-# This is optimized for development with volume mounts
-FROM node:20-alpine
+# Production Dockerfile for webfront
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -10,9 +9,26 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
-# Expose port 3000 (matching docker-compose.yml and vite.config.ts)
+# Copy source code
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install serve globally for serving static files
+RUN npm install -g serve
+
+# Copy built files from builder
+COPY --from=builder /app/dist ./dist
+
+# Expose port (Railway will inject PORT variable)
 EXPOSE 3000
 
-# Start Vite dev server
-# Note: Source code is mounted as a volume in docker-compose.yml
-CMD ["npm", "run", "dev"]
+# Serve the built files
+# Railway injects PORT variable, so we use it
+CMD ["sh", "-c", "serve -s dist -l ${PORT:-3000}"]

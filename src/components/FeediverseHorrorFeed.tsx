@@ -37,6 +37,7 @@ interface MicroblogPost {
   repostCount: number
   replyCount: number
   federated: boolean
+  liked?: boolean
 }
 
 interface FeediverseResponse {
