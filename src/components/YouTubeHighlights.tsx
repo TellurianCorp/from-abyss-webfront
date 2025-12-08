@@ -35,19 +35,29 @@ export function YouTubeHighlights() {
         const response = await fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=5`))
         
         if (!response.ok) {
-          // Try to get error message from response
+          // Check if response is JSON before trying to parse
+          const contentType = response.headers.get('content-type')
           let errorMessage = `Failed to fetch videos: ${response.status}`
-          try {
-            const errorData = await response.json()
-            if (errorData.message) {
-              errorMessage = errorData.message
-            } else if (errorData.error) {
-              errorMessage = errorData.error
+          
+          if (contentType && contentType.includes('application/json')) {
+            try {
+              const errorData = await response.json()
+              if (errorData.message) {
+                errorMessage = errorData.message
+              } else if (errorData.error) {
+                errorMessage = errorData.error
+              }
+            } catch {
+              // If JSON parsing fails, use default message
             }
-          } catch {
-            // If JSON parsing fails, use default message
           }
           throw new Error(errorMessage)
+        }
+        
+        // Check Content-Type before parsing JSON
+        const contentType = response.headers.get('content-type')
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error(`Expected JSON but got ${contentType || 'unknown content type'}`)
         }
         
         const data: YouTubeResponse = await response.json()

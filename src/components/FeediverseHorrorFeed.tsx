@@ -148,6 +148,13 @@ export function FeediverseHorrorFeed() {
           const microblogResponse = await fetch(apiUrl(`${API_ENDPOINTS.microblog.timeline}?limit=5`))
           
           if (microblogResponse.ok) {
+            // Check Content-Type before parsing JSON
+            const contentType = microblogResponse.headers.get('content-type')
+            if (!contentType || !contentType.includes('application/json')) {
+              console.warn('Microblog API returned non-JSON response:', contentType)
+              return
+            }
+            
             const microblogData: TimelineResponse = await microblogResponse.json()
             const microblogItems: FeedItem[] = (microblogData.posts || []).map(post => {
               // Extract first line or first 100 chars as title
