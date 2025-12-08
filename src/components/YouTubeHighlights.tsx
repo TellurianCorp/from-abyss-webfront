@@ -223,48 +223,47 @@ export function YouTubeHighlights() {
                   target.src = 'https://via.placeholder.com/320x180?text=Video+Thumbnail'
                 }}
               />
+              {video.duration && (
+                <div className="youtube-video-duration">
+                  {formatDuration(video.duration)}
+                </div>
+              )}
               <div className="youtube-video-overlay">
                 <i className="fas fa-play youtube-play-icon" aria-hidden="true"></i>
               </div>
             </div>
             <div className="youtube-video-info">
-              <div className="youtube-video-header">
-                <h3 className="youtube-video-title" itemProp="name">{video.title}</h3>
-                {video.description && (
-                  <p className="youtube-video-description" itemProp="description">
-                    {video.description.length > 120 
-                      ? `${video.description.substring(0, 120)}...` 
-                      : video.description}
-                  </p>
-                )}
-              </div>
+              <h3 className="youtube-video-title" itemProp="name">{video.title}</h3>
+              {video.description && (
+                <p className="youtube-video-description" itemProp="description">
+                  {video.description.length > 150 
+                    ? `${video.description.substring(0, 150)}...` 
+                    : video.description}
+                </p>
+              )}
               <div className="youtube-video-meta">
-                <div className="youtube-video-meta-row">
-                  <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
-                    <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
-                    <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
-                    <i className="fas fa-eye meta-icon" aria-hidden="true"></i>
-                    {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
+                <span className="youtube-video-views" itemProp="interactionStatistic" itemScope itemType="https://schema.org/InteractionCounter">
+                  <meta itemProp="interactionType" content="https://schema.org/WatchAction" />
+                  <meta itemProp="userInteractionCount" content={video.viewCount.toString()} />
+                  <i className="fas fa-eye meta-icon" aria-hidden="true"></i>
+                  {formatViewCount(video.viewCount)} {t('youtube.highlights.views')}
+                </span>
+                {video.likeCount > 0 && (
+                  <span className="youtube-video-likes">
+                    <i className="fas fa-thumbs-up meta-icon" aria-hidden="true"></i>
+                    {formatViewCount(video.likeCount)}
                   </span>
-                  {video.likeCount > 0 && (
-                    <span className="youtube-video-likes">
-                      <i className="fas fa-thumbs-up meta-icon" aria-hidden="true"></i>
-                      {formatViewCount(video.likeCount)}
-                    </span>
-                  )}
-                </div>
-                <div className="youtube-video-meta-row">
-                  {video.duration && (
-                    <span className="youtube-video-duration-text">
-                      <i className="fas fa-clock meta-icon" aria-hidden="true"></i>
-                      {formatDuration(video.duration)}
-                    </span>
-                  )}
-                  <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
-                    <i className="fas fa-calendar meta-icon" aria-hidden="true"></i>
-                    {formatDate(video.publishedAt)}
-                  </time>
-                </div>
+                )}
+                {video.duration && (
+                  <span className="youtube-video-duration-text">
+                    <i className="fas fa-clock meta-icon" aria-hidden="true"></i>
+                    {formatDuration(video.duration)}
+                  </span>
+                )}
+                <time className="youtube-video-date" itemProp="uploadDate" dateTime={video.publishedAt}>
+                  <i className="fas fa-calendar meta-icon" aria-hidden="true"></i>
+                  {formatDate(video.publishedAt)}
+                </time>
               </div>
               <meta itemProp="thumbnailUrl" content={video.thumbnail} />
               <meta itemProp="duration" content={video.duration} />
