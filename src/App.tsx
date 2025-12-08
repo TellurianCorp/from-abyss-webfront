@@ -7,7 +7,9 @@ import { Editorial } from './pages/Editorial'
 import { Patreon } from './pages/Patreon'
 import { Admin } from './pages/Admin'
 import { AdminPatreon } from './pages/AdminPatreon'
+import { AdminLogin } from './pages/AdminLogin'
 import { KoliseumAdmin } from './pages/KoliseumAdmin'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -16,9 +18,31 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/editorial" element={<Editorial />} />
       <Route path="/patreon" element={<Patreon />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/patreon" element={<AdminPatreon />} />
-      <Route path="/koliseum-admin" element={<KoliseumAdmin />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/patreon"
+        element={
+          <ProtectedRoute>
+            <AdminPatreon />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/koliseum-admin"
+        element={
+          <ProtectedRoute>
+            <KoliseumAdmin />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/" element={<Landing />} />
     </Routes>
   )

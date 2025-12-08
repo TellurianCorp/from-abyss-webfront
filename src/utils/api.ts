@@ -98,4 +98,11 @@ export const API_ENDPOINTS = {
     base: '/v1/feediverse',
     horror: '/v1/feediverse/horror',
   },
+  // Admin endpoints
+  admin: {
+    base: '/v1/admin',
+    login: '/v1/admin/login',
+    logout: '/v1/admin/logout',
+    me: '/v1/admin/me',
+  },
 } as const
