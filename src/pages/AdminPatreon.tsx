@@ -100,6 +100,30 @@ export function AdminPatreon() {
     }
   }
 
+  const fetchTiersForCampaign = React.useCallback(async (campaignID: string, forceRefresh = false) => {
+    try {
+      const refreshParam = forceRefresh ? '?refresh=true' : ''
+      const response = await fetch(apiUrl(`${API_ENDPOINTS.patreon.tiers(campaignID)}${refreshParam}`))
+      if (response.ok) {
+        const tiersData = await response.json()
+        if (tiersData.data) {
+          const tiersList = (tiersData.data as PatreonAPITier[]).map((tier) => ({
+            id: tier.id,
+            title: tier.attributes?.title || '',
+            description: tier.attributes?.description || '',
+            amount_cents: tier.attributes?.amount_cents || 0,
+            patron_count: tier.attributes?.patron_count || 0,
+            published: tier.attributes?.published || false,
+            campaign_id: campaignID,
+          }))
+          setTiers((prev) => ({ ...prev, [campaignID]: tiersList }))
+        }
+      }
+    } catch (err) {
+      console.error(`Failed to fetch tiers for campaign ${campaignID}:`, err)
+    }
+  }, [])
+
   const fetchPatreonData = React.useCallback(async (forceRefresh = false) => {
     setLoading(true)
     setError(null)
@@ -184,35 +208,11 @@ export function AdminPatreon() {
     } finally {
       setLoading(false)
     }
-  }, [t])
+  }, [t, fetchTiersForCampaign])
 
   useEffect(() => {
     fetchPatreonData()
   }, [fetchPatreonData])
-
-  const fetchTiersForCampaign = async (campaignID: string, forceRefresh = false) => {
-    try {
-      const refreshParam = forceRefresh ? '?refresh=true' : ''
-      const response = await fetch(apiUrl(`${API_ENDPOINTS.patreon.tiers(campaignID)}${refreshParam}`))
-      if (response.ok) {
-        const tiersData = await response.json()
-        if (tiersData.data) {
-          const tiersList = (tiersData.data as PatreonAPITier[]).map((tier) => ({
-            id: tier.id,
-            title: tier.attributes?.title || '',
-            description: tier.attributes?.description || '',
-            amount_cents: tier.attributes?.amount_cents || 0,
-            patron_count: tier.attributes?.patron_count || 0,
-            published: tier.attributes?.published || false,
-            campaign_id: campaignID,
-          }))
-          setTiers((prev) => ({ ...prev, [campaignID]: tiersList }))
-        }
-      }
-    } catch (err) {
-      console.error(`Failed to fetch tiers for campaign ${campaignID}:`, err)
-    }
-  }
 
   const fetchMembersForCampaign = async (campaignID: string, forceRefresh = false) => {
     try {

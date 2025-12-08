@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useState } from 'react'
 import './WeatherShader.css'
 
 type WeatherType = 'snow' | 'rain' | 'fog' | 'deadmoon' | 'dying-red'
@@ -11,42 +11,39 @@ interface ParticleStyle {
 }
 
 export function WeatherShader() {
-  const [weatherType, setWeatherType] = useState<WeatherType>('snow')
-
-  useEffect(() => {
-    // Escolhe aleatoriamente entre neve, chuva, névoa, deadmoon rising e avermelhado morrendo
+  // Escolhe aleatoriamente entre neve, chuva, névoa, deadmoon rising e avermelhado morrendo
+  const [weatherType] = useState<WeatherType>(() => {
     const types: WeatherType[] = ['snow', 'rain', 'fog', 'deadmoon', 'dying-red']
-    const randomType = types[Math.floor(Math.random() * types.length)]
-    setWeatherType(randomType)
-  }, [])
+    return types[Math.floor(Math.random() * types.length)]
+  })
 
-  // Generate snowflake styles once
-  const snowflakeStyles = useMemo<ParticleStyle[]>(() => {
+  // Generate snowflake styles once using lazy initialization
+  const snowflakeStyles = useState<ParticleStyle[]>(() => {
     return Array.from({ length: 30 }).map(() => ({
       left: `${Math.random() * 100}%`,
       animationDelay: `${Math.random() * 3}s`,
       animationDuration: `${3 + Math.random() * 5}s`
     }))
-  }, [])
+  })[0]
 
-  // Generate raindrop styles once
-  const raindropStyles = useMemo<ParticleStyle[]>(() => {
+  // Generate raindrop styles once using lazy initialization
+  const raindropStyles = useState<ParticleStyle[]>(() => {
     return Array.from({ length: 60 }).map(() => ({
       left: `${Math.random() * 100}%`,
       animationDelay: `${Math.random() * 1.5}s`,
       animationDuration: `${0.3 + Math.random() * 0.7}s`
     }))
-  }, [])
+  })[0]
 
-  // Generate dying particle styles once
-  const dyingParticleStyles = useMemo<ParticleStyle[]>(() => {
+  // Generate dying particle styles once using lazy initialization
+  const dyingParticleStyles = useState<ParticleStyle[]>(() => {
     return Array.from({ length: 20 }).map(() => ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       animationDelay: `${Math.random() * 3}s`,
       animationDuration: `${4 + Math.random() * 4}s`
     }))
-  }, [])
+  })[0]
 
   return (
     <div className={`weather-shader weather-shader-${weatherType}`}>
