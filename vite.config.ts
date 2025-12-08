@@ -42,5 +42,5 @@ export default defineConfig(({ mode }) => {
     },
     // Ensure proper handling of static assets
     publicDir: 'public',
-  },
+  }
 })
