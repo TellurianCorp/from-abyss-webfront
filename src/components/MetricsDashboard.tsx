@@ -55,16 +55,22 @@ const MetricsDashboard: React.FC = () => {
       if (syncRes.ok) {
         const syncData = await syncRes.json();
         setSyncMetrics(syncData);
+      } else if (syncRes.status !== 404) {
+        console.error('Error fetching sync metrics:', syncRes.status, syncRes.statusText);
       }
 
       if (securityRes.ok) {
         const securityData = await securityRes.json();
         setSecurityMetrics(securityData);
+      } else if (securityRes.status !== 404) {
+        console.error('Error fetching security metrics:', securityRes.status, securityRes.statusText);
       }
 
       if (dbRes.ok) {
         const dbData = await dbRes.json();
         setDbStats(dbData);
+      } else if (dbRes.status !== 404) {
+        console.error('Error fetching database metrics:', dbRes.status, dbRes.statusText);
       }
     } catch (error) {
       console.error('Error fetching metrics:', error);
@@ -112,10 +118,11 @@ const MetricsDashboard: React.FC = () => {
       </div>
 
       <div className="metrics-content">
-        {activeTab === 'sync' && syncMetrics && (
-          <div className="metrics-section">
-            <h3>{t('metrics.sync.title')}</h3>
-            <div className="metrics-grid">
+        {activeTab === 'sync' && (
+          syncMetrics ? (
+            <div className="metrics-section">
+              <h3>{t('metrics.sync.title')}</h3>
+              <div className="metrics-grid">
               <div className="metric-card">
                 <div className="metric-label">{t('metrics.sync.lastSyncTime')}</div>
                 <div className="metric-value">{formatTime(syncMetrics.lastSyncTime)}</div>
@@ -151,12 +158,18 @@ const MetricsDashboard: React.FC = () => {
               </div>
             )}
           </div>
+          ) : (
+            <div className="metrics-section">
+              <p className="metrics-unavailable">{t('metrics.unavailable', 'Metrics endpoint not available')}</p>
+            </div>
+          )
         )}
 
-        {activeTab === 'security' && securityMetrics && (
-          <div className="metrics-section">
-            <h3>{t('metrics.security.title')}</h3>
-            <div className="metrics-grid">
+        {activeTab === 'security' && (
+          securityMetrics ? (
+            <div className="metrics-section">
+              <h3>{t('metrics.security.title')}</h3>
+              <div className="metrics-grid">
               <div className="metric-card">
                 <div className="metric-label">{t('metrics.security.totalRequests')}</div>
                 <div className="metric-value">{securityMetrics.totalRequests}</div>
@@ -195,12 +208,18 @@ const MetricsDashboard: React.FC = () => {
               </div>
             )}
           </div>
+          ) : (
+            <div className="metrics-section">
+              <p className="metrics-unavailable">{t('metrics.unavailable', 'Metrics endpoint not available')}</p>
+            </div>
+          )
         )}
 
-        {activeTab === 'database' && dbStats && (
-          <div className="metrics-section">
-            <h3>{t('metrics.database.title')}</h3>
-            <div className="metrics-grid">
+        {activeTab === 'database' && (
+          dbStats ? (
+            <div className="metrics-section">
+              <h3>{t('metrics.database.title')}</h3>
+              <div className="metrics-grid">
               <div className="metric-card">
                 <div className="metric-label">{t('metrics.database.posts')}</div>
                 <div className="metric-value">{dbStats.posts}</div>
@@ -219,6 +238,11 @@ const MetricsDashboard: React.FC = () => {
               </div>
             </div>
           </div>
+          ) : (
+            <div className="metrics-section">
+              <p className="metrics-unavailable">{t('metrics.unavailable', 'Metrics endpoint not available')}</p>
+            </div>
+          )
         )}
       </div>
     </div>
