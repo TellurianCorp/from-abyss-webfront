@@ -414,7 +414,7 @@ export function Roadmap() {
 
     if (issuesRes.ok) {
       issues = await issuesRes.json()
-      issues = issues.filter((issue: { pull_request?: unknown }) => !issue.pull_request)
+      issues = issues.filter((issue: GitHubIssue) => !(issue as { pull_request?: unknown }).pull_request)
     }
 
     return {
