@@ -194,6 +194,7 @@ function DefaultErrorFallback({ error, errorInfo, onReset }: FallbackProps): Rea
  * Hook to use error boundary imperatively
  * Throws an error to trigger the nearest error boundary
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export function useThrowError(): (error: Error) => void {
   const [, setError] = React.useState()
 

@@ -16,7 +16,7 @@ export interface ApiError {
   status: number
   statusText: string
   message: string
-  details?: any
+  details?: unknown
 }
 
 export interface ApiResponse<T> {
@@ -36,7 +36,9 @@ class ApiClient {
   private requestInterceptors: Array<(config: RequestInit) => RequestInit> = []
   private responseInterceptors: Array<(response: Response) => Response | Promise<Response>> = []
 
-  constructor(_baseUrl: string = API_BASE_URL) {
+  constructor(baseUrl: string = API_BASE_URL) {
+    // Store baseUrl for future use if needed
+    console.log('ApiClient initialized with baseUrl:', baseUrl);
     this.defaultHeaders = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -140,7 +142,7 @@ class ApiClient {
       }
 
       // Return text for non-JSON responses
-      return await interceptedResponse.text() as any
+      return await interceptedResponse.text() as unknown as T
     } catch (error) {
       clearTimeout(timeoutId)
 
@@ -224,7 +226,7 @@ class ApiClient {
    */
   async post<T>(
     endpoint: string,
-    data?: any,
+    data?: unknown,
     options: RequestOptions = {}
   ): Promise<T> {
     return this.request<T>(endpoint, {
@@ -239,7 +241,7 @@ class ApiClient {
    */
   async put<T>(
     endpoint: string,
-    data?: any,
+    data?: unknown,
     options: RequestOptions = {}
   ): Promise<T> {
     return this.request<T>(endpoint, {
@@ -254,7 +256,7 @@ class ApiClient {
    */
   async patch<T>(
     endpoint: string,
-    data?: any,
+    data?: unknown,
     options: RequestOptions = {}
   ): Promise<T> {
     return this.request<T>(endpoint, {
@@ -285,7 +287,7 @@ class ApiClient {
     // Remove Content-Type header to let browser set it with boundary
     const { headers, ...restOptions } = options
     const uploadHeaders = headers ? { ...headers } : {}
-    delete (uploadHeaders as any)['Content-Type']
+    delete (uploadHeaders as Record<string, unknown>)['Content-Type']
 
     return this.request<T>(endpoint, {
       ...restOptions,

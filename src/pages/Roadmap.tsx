@@ -414,7 +414,7 @@ export function Roadmap() {
 
     if (issuesRes.ok) {
       issues = await issuesRes.json()
-      issues = issues.filter((issue: any) => !issue.pull_request)
+      issues = issues.filter((issue: { pull_request?: unknown }) => !issue.pull_request)
     }
 
     return {
@@ -504,7 +504,7 @@ export function Roadmap() {
       setLastUpdate(Date.now())
       saveCacheData(successfulResults)
       setError(null)
-    } catch (err) {
+    } catch {
       const cached = loadCachedData()
       if (cached) {
         setRoadmapData(cached.repos)
