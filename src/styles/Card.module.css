@@ -1,0 +1,115 @@
+/* Card Component Styles - Horror Zine Theme */
+
+.card {
+  background: linear-gradient(
+    135deg,
+    rgba(12, 12, 12, 0.95) 0%,
+    rgba(18, 18, 18, 0.92) 100%
+  );
+  border: 2px solid rgba(138, 110, 84, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(176, 58, 58, 0.5);
+  box-shadow: var(--shadow-blood);
+  transform: translateY(-2px);
+}
+
+.cardTornPaper {
+  clip-path: var(--torn-paper-clip);
+  border: none;
+  background:
+    linear-gradient(
+      110deg,
+      rgba(232, 226, 217, 0.08) 0%,
+      rgba(232, 226, 217, 0.04) 100%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(138, 110, 84, 0.03) 24px,
+      rgba(138, 110, 84, 0.03) 25px
+    );
+  padding: var(--spacing-xl);
+  position: relative;
+}
+
+.cardTornPaper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(176, 58, 58, 0.02) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(138, 110, 84, 0.03) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.cardHeader {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid rgba(138, 110, 84, 0.2);
+}
+
+.cardTitle {
+  font-family: var(--font-horror);
+  font-size: 1.5rem;
+  color: var(--bone);
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cardBody {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.cardFooter {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(138, 110, 84, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Card Variants */
+.cardBlood {
+  border-color: rgba(176, 58, 58, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(176, 58, 58, 0.05) 0%,
+    rgba(12, 12, 12, 0.95) 50%
+  );
+}
+
+.cardSepia {
+  border-color: rgba(138, 110, 84, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(138, 110, 84, 0.05) 0%,
+    rgba(12, 12, 12, 0.95) 50%
+  );
+}
+
+.cardInteractive {
+  cursor: pointer;
+  user-select: none;
+}
+
+.cardInteractive:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}

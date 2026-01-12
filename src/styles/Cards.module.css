@@ -1,0 +1,194 @@
+/* Section Styles */
+.section {
+  background: rgba(7, 3, 1, 0.85);
+  padding: 2.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 15px 45px rgba(0, 0, 0, 0.7);
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 70%);
+  /* Torn paper border effect */
+  clip-path: var(--torn-paper-clip);
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 1.9rem;
+  color: var(--highlight);
+}
+
+.sectionHeader p {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+/* TV Section */
+.tvSection {
+  border: 1px solid rgba(176, 58, 58, 0.4);
+}
+
+.tvDescription {
+  margin-top: 1rem;
+  color: var(--bone);
+  line-height: 1.6;
+}
+
+.tvPillars {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tvPillars span {
+  border-radius: 999px;
+  border: 1px dashed rgba(176, 58, 58, 0.65);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--bone);
+}
+
+.tvCta {
+  display: inline-flex;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: var(--blood);
+  background: rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+}
+
+.tvCta:hover {
+  border-color: var(--blood);
+  color: #fff;
+}
+
+/* Card Grid */
+.cardGrid {
+  margin-top: 1.8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(16, 12, 10, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 160px;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 70%);
+  /* Torn paper border effect */
+  clip-path: var(--torn-paper-clip);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--sepia);
+}
+
+.card p {
+  margin: 0;
+  color: var(--bone);
+  line-height: 1.5;
+}
+
+/* Highlight Grid */
+.highlightGrid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.highlight {
+  padding: 1.5rem;
+  background: rgba(16, 9, 6, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 230px;
+  /* Torn paper border effect */
+  clip-path: var(--torn-paper-clip);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 25px rgba(0, 0, 0, 0.45);
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 60%);
+}
+
+.highlight h3 {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--sepia);
+}
+
+.highlight p {
+  margin: 0;
+  color: #ded3c5;
+}
+
+.highlight ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #e7dcce;
+  line-height: 1.6;
+}
+
+/* Theme List */
+.themeList {
+  margin-top: 1.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.themeList span {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: #fff;
+}
+
+/* Goal List */
+.goalList {
+  margin: 1.2rem 0 0;
+  padding-left: 1.2rem;
+  color: #d8cbb6;
+  line-height: 1.6;
+}
+
+/* Zine Notes */
+.zineNotes .noteList {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  color: #d8cbb6;
+  line-height: 1.5;
+}
+
+.noteList li::marker {
+  color: var(--color-warm);
+}
+
+/* Backoffice Section */
+.backoffice {
+  background: rgba(255, 255, 255, 0.04);
+  border-style: dashed;
+  border-color: rgba(255, 200, 120, 0.6);
+}
+
+.backofficeNote {
+  margin: 1rem 0 0;
+  color: #f0dbca;
+}

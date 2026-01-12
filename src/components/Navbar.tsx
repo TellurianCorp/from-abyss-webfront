@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { LanguageSelector } from './LanguageSelector'
 import { WeatherShader } from './WeatherShader'
+import styles from '../styles/Navbar.module.css'
 
 function getIssueNumber() {
   const now = new Date()
@@ -23,45 +24,45 @@ export function Navbar() {
   ]
 
   return (
-    <header className="navbar" role="banner" itemScope itemType="https://schema.org/WPHeader">
+    <header className={styles.navbar} role="banner" itemScope itemType="https://schema.org/WPHeader">
       <WeatherShader />
-      <nav className="navbar-content" aria-label="Main navigation">
-        <div className="navbar-top">
-          <div className="navbar-left">
+      <nav className={styles.navbarContent} aria-label="Main navigation">
+        <div className={styles.navbarTop}>
+          <div className={styles.navbarLeft}>
             <Link to="/" aria-label="From Abyss Media Home">
               <img 
                 src="/imgs/logo.png" 
                 alt="From Abyss Media" 
-                className="navbar-logo" 
+                className={styles.navbarLogo} 
                 itemProp="logo"
                 width="40"
                 height="40"
               />
             </Link>
-            <div className="navbar-brand">
-              <span className="navbar-badge">{t('navbar.badge')}</span>
-              <p className="navbar-issue">{t('navbar.issue', { issue: getIssueNumber() })}</p>
+            <div className={styles.navbarBrand}>
+              <span className={styles.navbarBadge}>{t('navbar.badge')}</span>
+              <p className={styles.navbarIssue}>{t('navbar.issue', { issue: getIssueNumber() })}</p>
             </div>
           </div>
-          <div className="navbar-right">
-            <div className="navbar-language">
+          <div className={styles.navbarRight}>
+            <div className={styles.navbarLanguage}>
               <LanguageSelector />
             </div>
           </div>
         </div>
-        <div className="navbar-menu-row">
-          <ul className="navbar-menu" role="menubar" itemScope itemType="https://schema.org/SiteNavigationElement">
+        <div className={styles.navbarMenuRow}>
+          <ul className={styles.navbarMenu} role="menubar" itemScope itemType="https://schema.org/SiteNavigationElement">
             {menuItems.map((item, index, array) => (
               <li key={item.id} role="none">
                 <Link 
                   to={item.url} 
-                  className="navbar-menu-item"
+                  className={styles.navbarMenuItem}
                   role="menuitem"
                   itemProp="url"
                 >
                   <span itemProp="name">{item.label}</span>
                 </Link>
-                {index < array.length - 1 && <span className="navbar-menu-separator" aria-hidden="true">|</span>}
+                {index < array.length - 1 && <span className={styles.navbarMenuSeparator} aria-hidden="true">|</span>}
               </li>
             ))}
           </ul>

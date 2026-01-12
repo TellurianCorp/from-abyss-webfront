@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Special+Elite&family=Share+Tech+Mono&display=swap');
+
+/* Horror font for "join us" text - Evil Dead style */
+@font-face {
+  font-family: 'Horroroid';
+  src: url('/fonts/horroroidbold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Horroroid';
+  src: url('/fonts/horroroid.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root,
+*,
+*::before,
+*::after {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  color: #E8E2D9;
+  background-color: #0C0C0C;
+  --abyss-black: #0C0C0C;
+  --bone: #E8E2D9;
+  --sepia: #8A6E54;
+  --blood: #B03A3A;
+  --muted: #B3A18E;
+  --highlight: var(--bone);
+  /* Torn paper clip-path for card borders */
+  --torn-paper-clip: polygon(
+    0% 3%, 1% 1%, 3% 4%, 4% 2%, 6% 5%, 7% 2%, 9% 4%, 
+    11% 1%, 13% 3%, 15% 1%, 17% 4%, 19% 2%, 21% 5%,
+    23% 1%, 25% 3%, 27% 1%, 29% 4%, 31% 2%, 33% 5%,
+    35% 1%, 37% 3%, 39% 1%, 41% 4%, 43% 2%, 45% 5%,
+    47% 1%, 49% 3%, 51% 1%, 53% 4%, 55% 2%, 57% 5%,
+    59% 1%, 61% 3%, 63% 1%, 65% 4%, 67% 2%, 69% 5%,
+    71% 1%, 73% 3%, 75% 1%, 77% 4%, 79% 2%, 81% 5%,
+    83% 1%, 85% 3%, 87% 1%, 89% 4%, 91% 2%, 93% 5%,
+    95% 1%, 97% 3%, 99% 1%, 100% 4%,
+    100% 96%, 99% 98%, 97% 95%, 95% 99%, 93% 96%,
+    91% 98%, 89% 95%, 87% 99%, 85% 96%, 83% 98%,
+    81% 95%, 79% 99%, 77% 96%, 75% 98%, 73% 95%,
+    71% 99%, 69% 96%, 67% 98%, 65% 95%, 63% 99%,
+    61% 96%, 59% 98%, 57% 95%, 55% 99%, 53% 96%,
+    51% 98%, 49% 95%, 47% 99%, 45% 96%, 43% 98%,
+    41% 95%, 39% 99%, 37% 96%, 35% 98%, 33% 95%,
+    31% 99%, 29% 96%, 27% 98%, 25% 95%, 23% 99%,
+    21% 96%, 19% 98%, 17% 95%, 15% 99%, 13% 96%,
+    11% 98%, 9% 95%, 7% 99%, 6% 96%, 4% 98%,
+    3% 95%, 1% 99%, 0% 97%
+  );
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--abyss-black);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar Styles - Horror Zine Theme with Bones and Skulls */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 30px,
+      rgba(176, 58, 58, 0.06) 30px,
+      rgba(176, 58, 58, 0.06) 32px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(12, 12, 12, 0.95) 0%,
+      rgba(12, 12, 12, 0.98) 50%,
+      rgba(12, 12, 12, 0.95) 100%
+    );
+  border-left: 2px solid rgba(176, 58, 58, 0.25);
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: 
+    linear-gradient(
+      180deg,
+      rgba(138, 110, 84, 0.7) 0%,
+      rgba(138, 110, 84, 0.6) 15%,
+      rgba(176, 58, 58, 0.5) 50%,
+      rgba(138, 110, 84, 0.6) 85%,
+      rgba(138, 110, 84, 0.7) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg width='16' height='90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='bones-pattern' x='0' y='0' width='16' height='45' patternUnits='userSpaceOnUse'%3E%3Cpath d='M3 6 L13 6 M3 9 L13 9 M8 3 L8 12' stroke='%23B03A3A' stroke-opacity='0.5' stroke-width='1.2'/%3E%3Ccircle cx='8' cy='22' r='4' fill='none' stroke='%23B03A3A' stroke-opacity='0.6' stroke-width='1.2'/%3E%3Cpath d='M5 22 L11 22 M8 18 L8 26 M6 19 L10 25 M10 19 L6 25' stroke='%23B03A3A' stroke-opacity='0.6' stroke-width='1'/%3E%3Cpath d='M3 33 L13 33 M3 36 L13 36 M8 28 L8 37' stroke='%23B03A3A' stroke-opacity='0.5' stroke-width='1.2'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='16' height='90' fill='url(%23bones-pattern)'/%3E%3C/svg%3E") repeat-y;
+  border: 2px solid rgba(176, 58, 58, 0.4);
+  border-radius: 8px;
+  box-shadow: 
+    inset 0 0 8px rgba(0, 0, 0, 0.7),
+    inset 0 2px 6px rgba(176, 58, 58, 0.3),
+    0 0 4px rgba(176, 58, 58, 0.4);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: 
+    linear-gradient(
+      180deg,
+      rgba(138, 110, 84, 0.9) 0%,
+      rgba(138, 110, 84, 0.8) 15%,
+      rgba(176, 58, 58, 0.7) 50%,
+      rgba(138, 110, 84, 0.8) 85%,
+      rgba(138, 110, 84, 0.9) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg width='16' height='90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='bones-hover' x='0' y='0' width='16' height='45' patternUnits='userSpaceOnUse'%3E%3Cpath d='M3 6 L13 6 M3 9 L13 9 M8 3 L8 12' stroke='%23B03A3A' stroke-opacity='0.7' stroke-width='1.4'/%3E%3Ccircle cx='8' cy='22' r='4' fill='none' stroke='%23B03A3A' stroke-opacity='0.8' stroke-width='1.4'/%3E%3Cpath d='M5 22 L11 22 M8 18 L8 26 M6 19 L10 25 M10 19 L6 25' stroke='%23B03A3A' stroke-opacity='0.8' stroke-width='1.2'/%3E%3Cpath d='M3 33 L13 33 M3 36 L13 36 M8 28 L8 37' stroke='%23B03A3A' stroke-opacity='0.7' stroke-width='1.4'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='16' height='90' fill='url(%23bones-hover)'/%3E%3C/svg%3E") repeat-y;
+  border-color: rgba(176, 58, 58, 0.6);
+  box-shadow: 
+    inset 0 0 10px rgba(0, 0, 0, 0.7),
+    inset 0 3px 8px rgba(176, 58, 58, 0.5),
+    0 0 6px rgba(176, 58, 58, 0.6);
+  transform: scaleX(1.15);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: 
+    linear-gradient(
+      180deg,
+      rgba(138, 110, 84, 1) 0%,
+      rgba(138, 110, 84, 0.9) 15%,
+      rgba(176, 58, 58, 0.8) 50%,
+      rgba(138, 110, 84, 0.9) 85%,
+      rgba(138, 110, 84, 1) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg width='16' height='90' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='bones-active' x='0' y='0' width='16' height='45' patternUnits='userSpaceOnUse'%3E%3Cpath d='M3 6 L13 6 M3 9 L13 9 M8 3 L8 12' stroke='%23B03A3A' stroke-opacity='0.9' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='22' r='4' fill='none' stroke='%23B03A3A' stroke-opacity='1' stroke-width='1.6'/%3E%3Cpath d='M5 22 L11 22 M8 18 L8 26 M6 19 L10 25 M10 19 L6 25' stroke='%23B03A3A' stroke-opacity='1' stroke-width='1.4'/%3E%3Cpath d='M3 33 L13 33 M3 36 L13 36 M8 28 L8 37' stroke='%23B03A3A' stroke-opacity='0.9' stroke-width='1.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='16' height='90' fill='url(%23bones-active)'/%3E%3C/svg%3E") repeat-y;
+  border-color: rgba(176, 58, 58, 0.8);
+  box-shadow: 
+    inset 0 0 12px rgba(0, 0, 0, 0.8),
+    inset 0 4px 10px rgba(176, 58, 58, 0.6),
+    0 0 8px rgba(176, 58, 58, 0.7);
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(176, 58, 58, 0.6) rgba(12, 12, 12, 0.95);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Bootstrap Navbar Customization */
+.custom-navbar {
+  z-index: 1000;
+}
+
+.custom-nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.custom-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--bone) 0,
+    var(--bone) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  clip-path: polygon(
+    0% 0%,
+    2% 100%,
+    8% 0%,
+    12% 100%,
+    18% 0%,
+    22% 100%,
+    28% 0%,
+    32% 100%,
+    38% 0%,
+    42% 100%,
+    48% 0%,
+    52% 100%,
+    58% 0%,
+    62% 100%,
+    68% 0%,
+    72% 100%,
+    78% 0%,
+    82% 100%,
+    88% 0%,
+    92% 100%,
+    98% 0%,
+    100% 100%
+  );
+}
+
+.custom-nav-link:hover {
+  color: var(--highlight) !important;
+  transform: translateY(-1px);
+}
+
+.custom-nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-collapse {
+  margin-top: 1rem;
+}
+
+@media (min-width: 992px) {
+  .navbar-collapse {
+    margin-top: 0;
+  }
+}
+
+/* Patreon HTML Content Styling */
+.patreon-html-content {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.patreon-html-content p {
+  margin: 0.5rem 0;
+  color: var(--muted);
+}
+
+.patreon-html-content p:first-child {
+  margin-top: 0;
+}
+
+.patreon-html-content p:last-child {
+  margin-bottom: 0;
+}
+
+.patreon-html-content strong,
+.patreon-html-content b {
+  color: var(--bone);
+  font-weight: 600;
+}
+
+.patreon-html-content em,
+.patreon-html-content i {
+  font-style: italic;
+}
+
+.patreon-html-content a {
+  color: var(--sepia);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.patreon-html-content a:hover {
+  color: var(--bone);
+}
+
+.patreon-html-content ul,
+.patreon-html-content ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  color: var(--muted);
+}
+
+.patreon-html-content li {
+  margin: 0.25rem 0;
+}
+
+.patreon-html-content h1,
+.patreon-html-content h2,
+.patreon-html-content h3,
+.patreon-html-content h4,
+.patreon-html-content h5,
+.patreon-html-content h6 {
+  color: var(--bone);
+  margin: 0.75rem 0 0.5rem;
+  font-weight: 600;
+}
+
+.patreon-html-content h1:first-child,
+.patreon-html-content h2:first-child,
+.patreon-html-content h3:first-child,
+.patreon-html-content h4:first-child,
+.patreon-html-content h5:first-child,
+.patreon-html-content h6:first-child {
+  margin-top: 0;
+}
+
+.patreon-html-content code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9em;
+  color: var(--sepia);
+}
+
+.patreon-html-content blockquote {
+  margin: 0.75rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--sepia);
+  color: var(--muted);
+  font-style: italic;
+}

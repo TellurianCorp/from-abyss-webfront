@@ -1,0 +1,187 @@
+/* Layout Component Styles - Horror Zine Theme */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.containerNarrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.containerWide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.containerFluid {
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+/* Grid Layouts */
+.grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.gridCols2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gridCols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gridCols4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .gridCols4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gridCols3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .gridCols2,
+  .gridCols3,
+  .gridCols4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Flex Layouts */
+.flex {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.flexColumn {
+  flex-direction: column;
+}
+
+.flexCenter {
+  justify-content: center;
+  align-items: center;
+}
+
+.flexBetween {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexStart {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flexEnd {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Stack Layout */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.stackSm {
+  gap: var(--spacing-sm);
+}
+
+.stackLg {
+  gap: var(--spacing-lg);
+}
+
+.stackXl {
+  gap: var(--spacing-xl);
+}
+
+/* Section */
+.section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.sectionSm {
+  padding: var(--spacing-lg) 0;
+}
+
+.sectionLg {
+  padding: 4rem 0;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(138, 110, 84, 0.3) 50%,
+    transparent 100%
+  );
+  margin: var(--spacing-lg) 0;
+}
+
+.dividerBlood {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(176, 58, 58, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+/* Spacer */
+.spacerSm {
+  height: var(--spacing-sm);
+}
+
+.spacerMd {
+  height: var(--spacing-md);
+}
+
+.spacerLg {
+  height: var(--spacing-lg);
+}
+
+.spacerXl {
+  height: var(--spacing-xl);
+}
+
+/* Horror Background */
+.horrorBg {
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(176, 58, 58, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(138, 110, 84, 0.03) 0%,
+      transparent 50%
+    ),
+    var(--abyss-black);
+}
+
+/* Torn Paper Background */
+.tornPaperBg {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      rgba(138, 110, 84, 0.02) 24px,
+      rgba(138, 110, 84, 0.02) 25px
+    );
+}

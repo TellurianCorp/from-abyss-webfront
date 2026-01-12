@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { AdminNavbar } from '../components/AdminNavbar'
+import styles from '../styles/Koliseum.module.css'
+import adminStyles from '../styles/Admin.module.css'
 
 export function KoliseumAdmin() {
   const { t } = useTranslation()
@@ -26,17 +28,17 @@ export function KoliseumAdmin() {
   ]
 
   return (
-    <div className="koliseum-page">
+    <div className={styles.koliseumPage}>
       <AdminNavbar />
       <div style={{ paddingTop: '100px' }}>
-        <header className="koliseum-hero">
+        <header className={styles.koliseumHero}>
           <div>
-            <p className="admin-eyebrow">{t('koliseum.console.eyebrow')}</p>
+            <p className={adminStyles.adminEyebrow}>{t('koliseum.console.eyebrow')}</p>
             <h1>{t('koliseum.console.title')}</h1>
-            <p className="admin-lede">{t('koliseum.console.description')}</p>
+            <p className={adminStyles.adminLede}>{t('koliseum.console.description')}</p>
           </div>
         </header>
-      <section className="koliseum-panel">
+      <section className={styles.koliseumPanel}>
         <h3>{t('koliseum.console.liveQueue')}</h3>
         <ul>
           {koliseumQueue.map((item, index) => (
@@ -44,18 +46,18 @@ export function KoliseumAdmin() {
           ))}
         </ul>
       </section>
-      <section className="koliseum-panel">
+      <section className={styles.koliseumPanel}>
         <h3>{t('koliseum.console.highlights')}</h3>
         <ul>
           {koliseumHighlights.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <a className="koliseum-btn" href="https://koliseum.example.com/api/docs" target="_blank" rel="noreferrer">
+        <a className={styles.koliseumBtn} href="https://koliseum.example.com/api/docs" target="_blank" rel="noreferrer">
           {t('koliseum.console.openApiAdmin')}
         </a>
       </section>
-      <section className="koliseum-panel endpoints">
+      <section className={`${styles.koliseumPanel} ${styles.koliseumPanelEndpoints}`}>
         <h3>{t('koliseum.console.apiQuickLinks')}</h3>
         <ul>
           {koliseumEndpoints.map((endpoint) => (
@@ -65,7 +67,7 @@ export function KoliseumAdmin() {
             </li>
           ))}
         </ul>
-        <a className="koliseum-btn" href="http://127.0.0.1:5050/swagger-ui/" target="_blank" rel="noreferrer">
+        <a className={styles.koliseumBtn} href="http://127.0.0.1:5050/swagger-ui/" target="_blank" rel="noreferrer">
           {t('koliseum.console.swaggerUI')}
         </a>
       </section>

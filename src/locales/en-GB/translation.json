@@ -11,6 +11,7 @@
   "footer": {
     "aboutUs": "About us",
     "focusEditorial": "Focus editorial",
+    "roadmap": "Roadmap",
     "contactUs": "Contact us"
   },
   "navbar": {
@@ -387,6 +388,45 @@
       "repost": "{{name}} reposted your post",
       "reply": "{{name}} replied to your post",
       "mention": "{{name}} mentioned you"
+    }
+  },
+  "roadmap": {
+    "title": "Project Roadmap",
+    "subtitle": "Live development status synced from GitHub",
+    "loading": "Loading roadmap data...",
+    "syncing": "Syncing...",
+    "lastSync": "Synced {{time}}",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing...",
+    "allRepositories": "All Repositories",
+    "milestones": "Milestones",
+    "featuresPlanned": "Features & Planned Work",
+    "issues": "Issues",
+    "dueDate": "Due: {{date}}",
+    "noData": "No milestones or roadmap issues available",
+    "moreIssues": "+{{count}} more issues",
+    "clickToView": "Click for details",
+    "note": "Data synced from GitHub. Updates refresh every 10 minutes to respect API limits.",
+    "stats": {
+      "repositories": "Repositories",
+      "milestones": "Milestones",
+      "issues": "Issues",
+      "completion": "Completion"
+    },
+    "modal": {
+      "description": "Description",
+      "progress": "Progress",
+      "of": "of",
+      "issuesCompleted": "issues completed",
+      "dueDate": "Due Date",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "milestone": "Milestone",
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "open": "Open",
+      "closed": "Closed",
+      "noDescription": "No description provided."
     }
   },
   "metrics": {

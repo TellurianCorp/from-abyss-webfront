@@ -1,0 +1,283 @@
+/* Typography Styles - Horror Zine Theme */
+
+.heading1 {
+  font-family: var(--font-horror);
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.2;
+  color: var(--bone);
+  margin: 0 0 var(--spacing-lg);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.heading2 {
+  font-family: var(--font-horror);
+  font-size: 2.25rem;
+  font-weight: bold;
+  line-height: 1.3;
+  color: var(--bone);
+  margin: 0 0 var(--spacing-md);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.heading3 {
+  font-family: var(--font-primary);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--bone);
+  margin: 0 0 var(--spacing-md);
+}
+
+.heading4 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--bone);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.heading5 {
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--bone);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.heading6 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--bone);
+  margin: 0 0 var(--spacing-sm);
+}
+
+/* Body Text */
+.bodyLarge {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.bodySmall {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Text Variants */
+.textBold {
+  font-weight: 700;
+}
+
+.textSemiBold {
+  font-weight: 600;
+}
+
+.textMedium {
+  font-weight: 500;
+}
+
+.textLight {
+  font-weight: 400;
+}
+
+/* Text Colors */
+.textBone {
+  color: var(--bone);
+}
+
+.textBlood {
+  color: var(--blood);
+}
+
+.textSepia {
+  color: var(--sepia);
+}
+
+.textMuted {
+  color: var(--muted);
+}
+
+/* Text Alignment */
+.textLeft {
+  text-align: left;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textRight {
+  text-align: right;
+}
+
+/* Special Typography */
+.textHorror {
+  font-family: var(--font-horror);
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.textTypewriter {
+  font-family: var(--font-typewriter);
+  letter-spacing: 0.02em;
+}
+
+.textMono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.01em;
+}
+
+/* Text Effects */
+.textGlitch {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5),
+      0 0 0 transparent;
+  }
+  91% {
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5),
+      -2px -2px 0 var(--blood),
+      2px 2px 0 var(--sepia);
+  }
+  93% {
+    text-shadow:
+      2px 2px 4px rgba(0, 0, 0, 0.5),
+      2px -2px 0 var(--blood),
+      -2px 2px 0 var(--sepia);
+  }
+}
+
+.textBloodDrip {
+  position: relative;
+}
+
+.textBloodDrip::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 30%;
+  width: 2px;
+  height: 8px;
+  background: linear-gradient(
+    to bottom,
+    var(--blood) 0%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
+/* Paragraph */
+.paragraph {
+  margin: 0 0 var(--spacing-md);
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.paragraphLead {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--bone);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Link */
+.link {
+  color: var(--blood);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: var(--bone);
+  text-decoration: underline;
+}
+
+.linkUnderline {
+  text-decoration: underline;
+}
+
+.linkSepia {
+  color: var(--sepia);
+}
+
+.linkSepia:hover {
+  color: var(--bone);
+}
+
+/* List */
+.list {
+  margin: 0 0 var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  color: var(--muted);
+}
+
+.listUnstyled {
+  list-style: none;
+  padding-left: 0;
+}
+
+.listInline {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* Blockquote */
+.blockquote {
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-left: 4px solid var(--blood);
+  background: rgba(176, 58, 58, 0.05);
+  font-style: italic;
+  color: var(--muted);
+}
+
+.blockquote cite {
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-size: 0.875rem;
+  color: var(--sepia);
+  font-style: normal;
+}
+
+/* Code */
+.code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.125rem 0.25rem;
+  background: rgba(138, 110, 84, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--sepia);
+}
+
+.codeBlock {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  padding: var(--spacing-md);
+  background: rgba(12, 12, 12, 0.8);
+  border: 1px solid rgba(138, 110, 84, 0.3);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: var(--spacing-md) 0;
+  color: var(--bone);
+}

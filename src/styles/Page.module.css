@@ -1,0 +1,105 @@
+.page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 110px 0 0;
+  background:
+    radial-gradient(circle at top, rgba(232, 226, 217, 0.05), transparent 55%),
+    linear-gradient(180deg, rgba(12, 12, 12, 0.9), rgba(12, 12, 12, 1)),
+    url('/imgs/cover.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+}
+
+.pageContent {
+  padding: 2rem 5vw 4rem;
+  width: 100%;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 55%, rgba(0, 0, 0, 0.65));
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23noise)' opacity='0.2'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.gridColumns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2vw, 2.5rem);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.heroActions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.heroActions a {
+  border-radius: 999px;
+  padding: 0.9rem 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 200ms ease;
+}
+
+.heroActions .primary {
+  background: linear-gradient(120deg, var(--sepia), var(--blood));
+  color: #050006;
+}
+
+.heroActions .ghost {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #f7f2e7;
+  background: transparent;
+}
+
+.heroActions a:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1200px) {
+  .gridColumns {
+    grid-template-columns: repeat(2, minmax(230px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .pageContent {
+    padding: 1.8rem 4vw 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridColumns {
+    grid-template-columns: 1fr;
+  }
+}

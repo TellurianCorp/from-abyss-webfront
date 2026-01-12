@@ -5,6 +5,9 @@ import { Navbar } from '../components/Navbar'
 import { YouTubeHighlights } from '../components/YouTubeHighlights'
 import { FeediverseHorrorFeed } from '../components/FeediverseHorrorFeed'
 import { PatreonSimpleCTA } from '../components/PatreonSimpleCTA'
+import pageStyles from '../styles/Page.module.css'
+import cardStyles from '../styles/Cards.module.css'
+import footerStyles from '../styles/Footer.module.css'
 
 const showBackoffice = typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')
 
@@ -58,26 +61,26 @@ export function Landing() {
   }, [t])
 
   return (
-    <div className="page">
+    <div className={pageStyles.page}>
       <Navbar />
 
-      <main className="page-content" role="main">
-        <div className="grid-columns">
-          <div className="column column-left">
-            <article className="section tv-section" id="tv" itemScope itemType="https://schema.org/VideoObject">
-              <div className="section-header">
+      <main className={pageStyles.pageContent} role="main">
+        <div className={pageStyles.gridColumns}>
+          <div className={pageStyles.column}>
+            <article className={`${cardStyles.section} ${cardStyles.tvSection}`} id="tv" itemScope itemType="https://schema.org/VideoObject">
+              <div className={cardStyles.sectionHeader}>
                 <h2 itemProp="name">{t('tv.title')}</h2>
                 <p itemProp="description">{t('tv.description')}</p>
               </div>
-              <p className="tv-description">{t('tv.fullDescription')}</p>
-              <div className="tv-pillars" role="list">
+              <p className={cardStyles.tvDescription}>{t('tv.fullDescription')}</p>
+              <div className={cardStyles.tvPillars} role="list">
                 <span role="listitem">{t('tv.pillars.documentary')}</span>
                 <span role="listitem">{t('tv.pillars.liveStreams')}</span>
                 <span role="listitem">{t('tv.pillars.deepDives')}</span>
                 <span role="listitem">{t('tv.pillars.showcases')}</span>
               </div>
               <a 
-                className="tv-cta" 
+                className={cardStyles.tvCta} 
                 href="https://www.youtube.com/@fromabyssmedia" 
                 target="_blank" 
                 rel="noreferrer noopener"
@@ -90,49 +93,49 @@ export function Landing() {
             <YouTubeHighlights />
           </div>
 
-          <div className="column column-center">
+          <div className={pageStyles.column}>
             <FeediverseHorrorFeed />
           </div>
 
-          <div className="column column-right">
-            <section className="section" id="mission" itemScope itemType="https://schema.org/AboutPage">
-              <div className="section-header">
+          <div className={pageStyles.column}>
+            <section className={cardStyles.section} id="mission" itemScope itemType="https://schema.org/AboutPage">
+              <div className={cardStyles.sectionHeader}>
                 <h2 itemProp="name">{t('mission.title')}</h2>
                 <p itemProp="description">{t('mission.description')}</p>
               </div>
-              <ol className="goal-list" role="list">
+              <ol className={cardStyles.goalList} role="list">
                 {goals.map((goal, index) => (
                   <li key={index} role="listitem" itemProp="about">{goal}</li>
                 ))}
               </ol>
             </section>
             {showBackoffice && (
-              <section className="section backoffice">
-                <div className="section-header">
+              <section className={`${cardStyles.section} ${cardStyles.backoffice}`}>
+                <div className={cardStyles.sectionHeader}>
                   <h2>{t('backoffice.title')}</h2>
                   <p dangerouslySetInnerHTML={{ __html: t('backoffice.description') }} />
                 </div>
-                <p className="backoffice-note" dangerouslySetInnerHTML={{ __html: t('backoffice.note') }} />
+                <p className={cardStyles.backofficeNote} dangerouslySetInnerHTML={{ __html: t('backoffice.note') }} />
               </section>
             )}
             <PatreonSimpleCTA />
           </div>
         </div>
       </main>
-      <footer className="footer" role="contentinfo" itemScope itemType="https://schema.org/WPFooter">
-        <img className="footer-logo" src="/imgs/tellurian_white.png" alt="Tellurian" itemProp="logo" />
-        <nav className="footer-links" aria-label="Footer navigation">
-          <Link to="/about" className="footer-link" itemProp="url">{t('footer.aboutUs')}</Link>
-          <span className="footer-separator" aria-hidden="true">|</span>
-          <Link to="/editorial" className="footer-link" itemProp="url">{t('footer.focusEditorial')}</Link>
-          <span className="footer-separator" aria-hidden="true">|</span>
-          <Link to="/contact" className="footer-link" itemProp="url">{t('footer.contactUs')}</Link>
-          <span className="footer-separator" aria-hidden="true">|</span>
-          <Link to="/patreon" className="footer-link" itemProp="url">{t('footer.supportUs', 'Support Us')}</Link>
+      <footer className={footerStyles.footer} role="contentinfo" itemScope itemType="https://schema.org/WPFooter">
+        <img className={footerStyles.footerLogo} src="/imgs/tellurian_white.png" alt="Tellurian" itemProp="logo" />
+        <nav className={footerStyles.footerLinks} aria-label="Footer navigation">
+          <Link to="/about" className={footerStyles.footerLink} itemProp="url">{t('footer.aboutUs')}</Link>
+          <span className={footerStyles.footerSeparator} aria-hidden="true">|</span>
+          <Link to="/editorial" className={footerStyles.footerLink} itemProp="url">{t('footer.focusEditorial')}</Link>
+          <span className={footerStyles.footerSeparator} aria-hidden="true">|</span>
+          <Link to="/contact" className={footerStyles.footerLink} itemProp="url">{t('footer.contactUs')}</Link>
+          <span className={footerStyles.footerSeparator} aria-hidden="true">|</span>
+          <Link to="/patreon" className={footerStyles.footerLink} itemProp="url">{t('footer.supportUs', 'Support Us')}</Link>
         </nav>
-        <div className="footer-text-container">
-          <p className="footer-text" itemProp="copyrightHolder">{t('common.madeBy')}</p>
-          <p className="footer-text" itemProp="copyrightYear">{t('common.allRightsReserved')}</p>
+        <div className={footerStyles.footerTextContainer}>
+          <p className={footerStyles.footerText} itemProp="copyrightHolder">{t('common.madeBy')}</p>
+          <p className={footerStyles.footerText} itemProp="copyrightYear">{t('common.allRightsReserved')}</p>
         </div>
       </footer>
     </div>

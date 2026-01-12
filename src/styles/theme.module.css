@@ -1,0 +1,69 @@
+/* Theme Variables - Horror Zine Style */
+
+:root {
+  /* Color Palette */
+  --abyss-black: #0C0C0C;
+  --bone: #E8E2D9;
+  --sepia: #8A6E54;
+  --blood: #B03A3A;
+  --muted: #B3A18E;
+  --highlight: var(--bone);
+
+  /* Typography */
+  --font-primary: 'Space Grotesk', system-ui, sans-serif;
+  --font-horror: 'Horroroid', serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-typewriter: 'Special Elite', monospace;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-blood: 0 0 20px rgba(176, 58, 58, 0.3);
+
+  /* Torn Paper Clip Path */
+  --torn-paper-clip: polygon(
+    0% 3%, 1% 1%, 3% 4%, 4% 2%, 6% 5%, 7% 2%, 9% 4%,
+    11% 1%, 13% 3%, 15% 1%, 17% 4%, 19% 2%, 21% 5%,
+    23% 1%, 25% 3%, 27% 1%, 29% 4%, 31% 2%, 33% 5%,
+    35% 1%, 37% 3%, 39% 1%, 41% 4%, 43% 2%, 45% 5%,
+    47% 1%, 49% 3%, 51% 1%, 53% 4%, 55% 2%, 57% 5%,
+    59% 1%, 61% 3%, 63% 1%, 65% 4%, 67% 2%, 69% 5%,
+    71% 1%, 73% 3%, 75% 1%, 77% 4%, 79% 2%, 81% 5%,
+    83% 1%, 85% 3%, 87% 1%, 89% 4%, 91% 2%, 93% 5%,
+    95% 1%, 97% 3%, 99% 1%, 100% 4%,
+    100% 96%, 99% 98%, 97% 95%, 95% 99%, 93% 96%,
+    91% 98%, 89% 95%, 87% 99%, 85% 96%, 83% 98%,
+    81% 95%, 79% 99%, 77% 96%, 75% 98%, 73% 95%,
+    71% 99%, 69% 96%, 67% 98%, 65% 95%, 63% 99%,
+    61% 96%, 59% 98%, 57% 95%, 55% 99%, 53% 96%,
+    51% 98%, 49% 95%, 47% 99%, 45% 96%, 43% 98%,
+    41% 95%, 39% 99%, 37% 96%, 35% 98%, 33% 95%,
+    31% 99%, 29% 96%, 27% 98%, 25% 95%, 23% 99%,
+    21% 96%, 19% 98%, 17% 95%, 15% 99%, 13% 96%,
+    11% 98%, 9% 95%, 7% 99%, 6% 96%, 4% 98%,
+    3% 95%, 1% 99%, 0% 97%
+  );
+}
+
+/* Global Resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

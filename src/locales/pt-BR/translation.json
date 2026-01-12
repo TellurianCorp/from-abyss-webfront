@@ -11,6 +11,7 @@
   "footer": {
     "aboutUs": "Sobre nós",
     "focusEditorial": "Foco editorial",
+    "roadmap": "Roadmap",
     "contactUs": "Entre em contato"
   },
   "navbar": {
@@ -387,6 +388,45 @@
       "repost": "{{name}} republicou seu post",
       "reply": "{{name}} respondeu seu post",
       "mention": "{{name}} te mencionou"
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap do Projeto",
+    "subtitle": "Status de desenvolvimento ao vivo sincronizado do GitHub",
+    "loading": "Carregando dados do roadmap...",
+    "syncing": "Sincronizando...",
+    "lastSync": "Sincronizado {{time}}",
+    "refresh": "Atualizar",
+    "refreshing": "Atualizando...",
+    "allRepositories": "Todos os Repositórios",
+    "milestones": "Marcos",
+    "featuresPlanned": "Recursos & Trabalho Planejado",
+    "issues": "Issues",
+    "dueDate": "Prazo: {{date}}",
+    "noData": "Nenhum marco ou issue de roadmap disponível",
+    "moreIssues": "+{{count}} issues adicionais",
+    "clickToView": "Clique para detalhes",
+    "note": "Dados sincronizados do GitHub. Atualizações ocorrem a cada 10 minutos para respeitar os limites da API.",
+    "stats": {
+      "repositories": "Repositórios",
+      "milestones": "Marcos",
+      "issues": "Issues",
+      "completion": "Conclusão"
+    },
+    "modal": {
+      "description": "Descrição",
+      "progress": "Progresso",
+      "of": "de",
+      "issuesCompleted": "issues concluídas",
+      "dueDate": "Prazo",
+      "created": "Criado em",
+      "lastUpdated": "Última atualização",
+      "milestone": "Marco",
+      "completed": "Concluído",
+      "inProgress": "Em Progresso",
+      "open": "Aberta",
+      "closed": "Fechada",
+      "noDescription": "Nenhuma descrição fornecida."
     }
   },
   "metrics": {

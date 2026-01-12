@@ -1,0 +1,992 @@
+.roadmap-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Header */
+.roadmap-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(176, 58, 58, 0.25);
+}
+
+.roadmap-header-content {
+  flex: 1;
+  min-width: 280px;
+}
+
+.roadmap-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0 0 0.5rem;
+  color: var(--bone);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.roadmap-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.roadmap-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.roadmap-sync-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.roadmap-sync-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+}
+
+.roadmap-sync-dot.syncing {
+  background: var(--sepia);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.roadmap-last-update {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  white-space: nowrap;
+}
+
+.roadmap-refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(138, 110, 84, 0.4);
+  color: var(--bone);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Space Grotesk', sans-serif;
+  border-radius: 2px;
+}
+
+.roadmap-refresh-btn:hover:not(:disabled) {
+  background: rgba(138, 110, 84, 0.15);
+  border-color: var(--sepia);
+}
+
+.roadmap-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.refresh-icon {
+  font-size: 1.1rem;
+  display: inline-block;
+  line-height: 1;
+}
+
+.refresh-icon.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Stats Overview */
+.roadmap-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(138, 110, 84, 0.2);
+  padding: 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stat-card.accent {
+  border-color: rgba(176, 58, 58, 0.4);
+  background: rgba(176, 58, 58, 0.08);
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--bone);
+  font-family: 'Share Tech Mono', monospace;
+  line-height: 1;
+}
+
+.stat-card.accent .stat-value {
+  color: var(--blood);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Repository Tabs */
+.repo-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+
+.repo-tab {
+  padding: 0.6rem 1.25rem;
+  background: transparent;
+  border: 1px solid rgba(138, 110, 84, 0.25);
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.repo-tab:hover {
+  border-color: var(--sepia);
+  color: var(--bone);
+}
+
+.repo-tab.active {
+  background: rgba(176, 58, 58, 0.15);
+  border-color: var(--blood);
+  color: var(--bone);
+}
+
+/* Error State */
+.roadmap-error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(176, 58, 58, 0.1);
+  border: 1px solid rgba(176, 58, 58, 0.3);
+  border-left: 3px solid var(--blood);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: var(--bone);
+}
+
+.error-icon {
+  color: var(--blood);
+  font-size: 1.1rem;
+}
+
+/* Loading State */
+.roadmap-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1.5rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(176, 58, 58, 0.2);
+  border-top-color: var(--blood);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.roadmap-loading p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Repo Sections */
+.roadmap-repos {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.repo-section {
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.9) 0%, rgba(12, 12, 12, 0.95) 100%);
+  border: 1px solid rgba(138, 110, 84, 0.2);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.repo-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blood) 0%, var(--sepia) 50%, transparent 100%);
+}
+
+.repo-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.repo-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.repo-name {
+  font-size: 1.35rem;
+  color: var(--bone);
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+
+.repo-description {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.repo-quick-stats {
+  display: flex;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+
+.quick-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.quick-stat-icon {
+  color: var(--sepia);
+}
+
+/* Section Labels */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sepia);
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.section-label-icon {
+  font-size: 0.9rem;
+}
+
+/* Milestones */
+.milestones-section {
+  margin-bottom: 1.75rem;
+}
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.milestone-card {
+  background: rgba(12, 12, 12, 0.5);
+  border: 1px solid rgba(138, 110, 84, 0.15);
+  padding: 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  font-family: inherit;
+  width: 100%;
+}
+
+.milestone-card:hover {
+  border-color: var(--sepia);
+  background: rgba(138, 110, 84, 0.06);
+  transform: translateY(-2px);
+}
+
+.milestone-card.completed {
+  border-color: rgba(74, 222, 128, 0.25);
+}
+
+.milestone-card.completed:hover {
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.milestone-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.milestone-state {
+  font-size: 1rem;
+  color: var(--sepia);
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+
+.milestone-state.closed {
+  color: #4ade80;
+}
+
+.milestone-title {
+  font-size: 1rem;
+  color: var(--bone);
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.milestone-description {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.milestone-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.progress-bar {
+  height: 5px;
+  background: rgba(138, 110, 84, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blood) 0%, #d45555 100%);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.milestone-card.completed .progress-fill {
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: var(--bone);
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 600;
+}
+
+.progress-count {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.milestone-due {
+  font-size: 0.75rem;
+  color: var(--sepia);
+  margin: 0;
+}
+
+.milestone-view-hint {
+  font-size: 0.7rem;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.2s;
+  margin-top: auto;
+}
+
+.milestone-card:hover .milestone-view-hint {
+  opacity: 1;
+}
+
+/* Issues */
+.issues-section {
+  margin-bottom: 0.5rem;
+}
+
+.issues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.issue-item {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(12, 12, 12, 0.4);
+  border: 1px solid rgba(138, 110, 84, 0.1);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+  font-family: inherit;
+  width: 100%;
+}
+
+.issue-item:hover {
+  background: rgba(138, 110, 84, 0.06);
+  border-color: rgba(138, 110, 84, 0.25);
+}
+
+.issue-item.closed {
+  opacity: 0.65;
+}
+
+.issue-item.closed:hover {
+  opacity: 0.85;
+}
+
+.issue-state {
+  font-size: 0.9rem;
+  color: var(--sepia);
+  line-height: 1;
+}
+
+.issue-state.closed {
+  color: #4ade80;
+}
+
+.issue-number {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  min-width: 40px;
+}
+
+.issue-title {
+  font-size: 0.9rem;
+  color: var(--bone);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.issue-item.closed .issue-title {
+  text-decoration: line-through;
+  text-decoration-color: rgba(138, 110, 84, 0.4);
+}
+
+.issue-labels {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.issue-label {
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.issue-label-more {
+  font-size: 0.65rem;
+  color: var(--muted);
+  padding: 0.15rem 0.4rem;
+}
+
+.issue-view-hint {
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  font-size: 0.9rem;
+}
+
+.issue-item:hover .issue-view-hint {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.issues-more {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Empty State */
+.repo-empty {
+  padding: 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.empty-icon {
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+.empty-text {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Footer Note */
+.roadmap-footer-note {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(138, 110, 84, 0.25);
+  text-align: center;
+}
+
+.roadmap-footer-note p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ========================
+   MODAL STYLES
+   ======================== */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1.5rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-container {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+  border: 1px solid rgba(138, 110, 84, 0.3);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid rgba(138, 110, 84, 0.3);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.15s ease;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: rgba(176, 58, 58, 0.2);
+  border-color: var(--blood);
+  color: var(--bone);
+}
+
+.modal-header {
+  padding: 1.75rem 1.75rem 1.25rem;
+  border-bottom: 1px solid rgba(138, 110, 84, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sepia);
+  font-weight: 600;
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-right: 2.5rem;
+}
+
+.modal-state-icon {
+  font-size: 1.25rem;
+  color: var(--sepia);
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+.modal-state-icon.completed {
+  color: #4ade80;
+}
+
+.modal-title {
+  font-size: 1.35rem;
+  color: var(--bone);
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.modal-issue-number {
+  color: var(--muted);
+  font-weight: 400;
+  margin-right: 0.5rem;
+}
+
+.modal-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.modal-status.open {
+  background: rgba(138, 110, 84, 0.2);
+  color: var(--sepia);
+}
+
+.modal-status.closed {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+.modal-body {
+  padding: 1.5rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modal-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.modal-label {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+.modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.modal-section-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0;
+  font-weight: 600;
+}
+
+.modal-description {
+  font-size: 0.95rem;
+  color: var(--bone);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-issue-body {
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+  max-height: 200px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.modal-empty-description {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.modal-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-progress-bar {
+  height: 8px;
+  background: rgba(138, 110, 84, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.modal-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blood) 0%, #d45555 100%);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.modal-progress-fill.completed {
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+}
+
+.modal-progress-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.modal-progress-percent {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bone);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.modal-progress-detail {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.modal-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(138, 110, 84, 0.2);
+}
+
+.modal-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.modal-meta-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.modal-meta-value {
+  font-size: 0.9rem;
+  color: var(--bone);
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+@media (max-width: 768px) {
+  .roadmap-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .roadmap-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .roadmap-actions {
+    justify-content: space-between;
+  }
+
+  .roadmap-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .repo-tabs {
+    margin: 0 -1rem 2rem;
+    padding: 0 1rem 0.5rem;
+  }
+
+  .repo-section {
+    padding: 1.25rem;
+  }
+
+  .repo-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .repo-quick-stats {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .milestones-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-item {
+    grid-template-columns: auto auto 1fr auto;
+    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .issue-labels {
+    grid-column: 3 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    margin-left: calc(0.9rem + 0.5rem + 40px);
+  }
+
+  .issue-view-hint {
+    display: none;
+  }
+
+  .modal-container {
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .modal-body {
+    padding: 1.25rem;
+  }
+
+  .modal-title {
+    font-size: 1.15rem;
+  }
+
+  .modal-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .roadmap-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .refresh-text {
+    display: none;
+  }
+
+  .roadmap-refresh-btn {
+    padding: 0.5rem;
+  }
+
+  .issue-item {
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+  }
+
+  .issue-number {
+    display: none;
+  }
+
+  .issue-labels {
+    margin-left: calc(0.9rem + 0.5rem);
+  }
+}
