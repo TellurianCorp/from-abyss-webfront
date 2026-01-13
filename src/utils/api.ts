@@ -89,6 +89,7 @@ export const API_ENDPOINTS = {
   microblog: {
     base: '/v1/microblog',
     timeline: '/v1/microblog/timeline',
+    createPost: '/v1/microblog/posts',
     likePost: (postId: string) => `/v1/microblog/posts/${postId}/like`,
     follow: '/v1/microblog/follow',
     notifications: {
@@ -114,5 +115,33 @@ export const API_ENDPOINTS = {
     login: '/v1/admin/login',
     logout: '/v1/admin/logout',
     me: '/v1/admin/me',
+  },
+  // Communication features endpoints
+  pitches: {
+    base: '/v1/pitches',
+    list: '/v1/pitches',
+    get: (id: string) => `/v1/pitches/${id}`,
+    create: '/v1/pitches',
+    update: (id: string) => `/v1/pitches/${id}`,
+    delete: (id: string) => `/v1/pitches/${id}`,
+  },
+  feedback: {
+    base: '/v1/feedback',
+    create: '/v1/feedback',
+    get: (id: string) => `/v1/feedback/${id}`,
+    byContent: (contentId: string) => `/v1/feedback/content/${contentId}`,
+    byPitch: (pitchId: string) => `/v1/feedback/pitch/${pitchId}`,
+    update: (id: string) => `/v1/feedback/${id}`,
+    delete: (id: string) => `/v1/feedback/${id}`,
+  },
+  workflows: {
+    base: '/v1/workflows',
+    create: '/v1/workflows',
+    get: (id: string) => `/v1/workflows/${id}`,
+    byContent: (contentId: string) => `/v1/workflows/content/${contentId}`,
+    byPitch: (pitchId: string) => `/v1/workflows/pitch/${pitchId}`,
+    byAssignee: (assigneeId: string) => `/v1/workflows/assignee/${assigneeId}`,
+    update: (id: string) => `/v1/workflows/${id}`,
+    delete: (id: string) => `/v1/workflows/${id}`,
   },
 } as const

@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import FollowButton from './FollowButton'
 import Notifications from './Notifications'
+import { PostComposer } from './PostComposer'
 import './MicroblogTimeline.css'
 
 interface Post {
@@ -41,16 +42,16 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchTimeline()
-  }, [])
+  // Memoize timeline URL
+  const timelineUrl = useMemo(() => apiUrl(`${API_ENDPOINTS.microblog.timeline}?limit=20`), [])
 
-  const fetchTimeline = async () => {
+  // Memoize fetchTimeline to prevent unnecessary re-renders
+  const fetchTimeline = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
 
-      const response = await fetch(apiUrl(`${API_ENDPOINTS.microblog.timeline}?limit=20`))
+      const response = await fetch(timelineUrl)
       
       if (!response.ok) {
         // Check if response is JSON before trying to parse
@@ -88,9 +89,14 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [timelineUrl]) // Depend on timelineUrl
 
-  const formatDate = (dateString: string): string => {
+  useEffect(() => {
+    fetchTimeline()
+  }, [fetchTimeline])
+
+  // Memoize formatDate to avoid recreating on every render
+  const formatDate = useCallback((dateString: string): string => {
     const date = new Date(dateString)
     const now = new Date()
     const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
@@ -101,9 +107,10 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
     if (diffInSeconds < 604800) return t('microblog.time.daysAgo', { count: Math.floor(diffInSeconds / 86400) })
     
     return date.toLocaleDateString()
-  }
+  }, [t])
 
-  const handleLike = async (postId: string) => {
+  // Memoize handleLike to prevent unnecessary re-renders of post items
+  const handleLike = useCallback(async (postId: string) => {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.microblog.likePost(postId)), {
         method: 'POST',
@@ -120,7 +127,10 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
     } catch (err) {
       console.error('Error liking post:', err)
     }
-  }
+  }, [posts]) // Depend on posts for state updates
+
+  // Memoize computed values
+  const hasPosts = useMemo(() => posts.length > 0, [posts.length])
 
   if (loading) {
     return (
@@ -154,6 +164,9 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
           {userId && <Notifications userId={userId} />}
         </div>
       </div>
+      {userId && (
+        <PostComposer onPostCreated={fetchTimeline} />
+      )}
       <div className="microblog-posts">
         {posts.map((post) => (
           <article key={post.id} className="microblog-post">
@@ -223,7 +236,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
           </article>
         ))}
       </div>
-      {posts.length === 0 && (
+      {!hasPosts && (
         <div className="microblog-empty">
           <p>{t('microblog.empty')}</p>
         </div>
