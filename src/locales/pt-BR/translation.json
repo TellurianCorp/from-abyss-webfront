@@ -388,6 +388,28 @@
       "repost": "{{name}} republicou seu post",
       "reply": "{{name}} respondeu seu post",
       "mention": "{{name}} te mencionou"
+    },
+    "composer": {
+      "title": "Criar Post",
+      "placeholder": "O que está em sua mente?",
+      "contentWarning": "Aviso de Conteúdo",
+      "cwPlaceholder": "Digite o texto do aviso de conteúdo",
+      "visibility": "Visibilidade",
+      "visibilityOptions": {
+        "public": "Público",
+        "unlisted": "Não listado",
+        "followers": "Apenas seguidores",
+        "private": "Privado"
+      },
+      "submit": "Publicar",
+      "submitting": "Publicando...",
+      "shortcut": "Pressione Ctrl+Enter para publicar",
+      "error": {
+        "empty": "O conteúdo do post não pode estar vazio",
+        "tooLong": "O conteúdo do post excede o comprimento máximo",
+        "cwRequired": "O texto do aviso de conteúdo é obrigatório quando habilitado",
+        "submitFailed": "Falha ao criar post. Por favor, tente novamente."
+      }
     }
   },
   "roadmap": {

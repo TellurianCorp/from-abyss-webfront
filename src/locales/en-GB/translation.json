@@ -388,6 +388,28 @@
       "repost": "{{name}} reposted your post",
       "reply": "{{name}} replied to your post",
       "mention": "{{name}} mentioned you"
+    },
+    "composer": {
+      "title": "Create Post",
+      "placeholder": "What's on your mind?",
+      "contentWarning": "Content Warning",
+      "cwPlaceholder": "Enter content warning text",
+      "visibility": "Visibility",
+      "visibilityOptions": {
+        "public": "Public",
+        "unlisted": "Unlisted",
+        "followers": "Followers-only",
+        "private": "Private"
+      },
+      "submit": "Post",
+      "submitting": "Posting...",
+      "shortcut": "Press Ctrl+Enter to post",
+      "error": {
+        "empty": "Post content cannot be empty",
+        "tooLong": "Post content exceeds maximum length",
+        "cwRequired": "Content warning text is required when enabled",
+        "submitFailed": "Failed to create post. Please try again."
+      }
     }
   },
   "roadmap": {
