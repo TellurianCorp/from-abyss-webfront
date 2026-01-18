@@ -61,21 +61,130 @@
   },
   "admin": {
     "eyebrow": "From Abyss Control",
-    "title": "Guardian dashboard",
-    "description": "Operational oversight for the Cult. Monitor federal feeds, moderation queues, and system health from here.",
+    "title": "Guardian Dashboard",
+    "description": "Monitor and manage all From Abyss Media services, metrics, and operations from a single command center.",
+    "hero": {
+      "description": "Monitor and manage all From Abyss Media services, metrics, and operations from a single command center.",
+      "activeServices": "Active Services",
+      "uptime": "Uptime"
+    },
     "metrics": {
       "activeSessions": "Active Sessions",
       "signalQueue": "Signal Queue",
       "federatedMentions": "Federated Mentions"
     },
+    "sections": {
+      "systemOverview": {
+        "title": "System Overview",
+        "description": "Real-time metrics and system health"
+      },
+      "servicesHub": {
+        "title": "Services Hub",
+        "description": "Manage all From Abyss Media services and integrations"
+      },
+      "systemMetrics": {
+        "title": "System Metrics",
+        "description": "Detailed performance and health metrics"
+      }
+    },
+    "services": {
+      "koliseum": {
+        "name": "Koliseum",
+        "description": "Gaming & matchmaking platform"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "description": "Channel management & analytics"
+      },
+      "patreon": {
+        "name": "Patreon",
+        "description": "Membership & campaign management"
+      },
+      "feediverse": {
+        "name": "Feediverse",
+        "description": "Federated horror content feed"
+      },
+      "users": {
+        "name": "Users",
+        "description": "User management & administration"
+      },
+      "openService": "Open {{name}}"
+    },
+    "users": {
+      "title": "User Management",
+      "description": "Manage users in the From Abyss Media platform",
+      "stats": {
+        "total": "Total Users",
+        "currentPage": "Current Page"
+      },
+      "searchPlaceholder": "Search users...",
+      "refresh": "Refresh",
+      "loading": "Loading users...",
+      "noUsers": "No users found",
+      "verified": "Yes",
+      "unverified": "No",
+      "create": "Create User",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "previous": "Previous",
+      "next": "Next",
+      "showing": "Showing",
+      "of": "of",
+      "editUser": "Edit User",
+      "userDetails": "User Details",
+      "confirmDelete": "Confirm Delete",
+      "deleteConfirmMessage": "Are you sure you want to delete this user? This action cannot be undone.",
+      "cancel": "Cancel",
+      "save": "Save",
+      "close": "Close",
+      "confirm": "Delete",
+      "table": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "fediverse": "Fediverse",
+        "verified": "Verified",
+        "created": "Created",
+        "actions": "Actions"
+      },
+      "form": {
+        "lifeauthSub": "LifeAuth Sub",
+        "name": "Name",
+        "email": "Email",
+        "emailVerified": "Email Verified",
+        "fediverseUsername": "Fediverse Username",
+        "fediverseUsernamePlaceholder": "Leave empty to auto-generate",
+        "fediverseUsernameHint": "Optional. Must be lowercase alphanumeric with underscores/hyphens, max 30 chars. If empty, will be generated from email.",
+        "uploadPhoto": "Upload Photo",
+        "selectedFile": "Selected:",
+        "currentPhoto": "Current photo:"
+      },
+      "uploading": "Uploading...",
+      "details": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "fediverse": "Fediverse Handle",
+        "emailVerified": "Email Verified",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At"
+      },
+      "noHandle": "N/A",
+      "createHandle": "Create",
+      "createFediverseHandle": "Create Fediverse Handle",
+      "creating": "Creating..."
+    },
     "actions": {
-      "title": "Actions & Rituals",
-      "runFederationSync": "Run federation sync",
-      "reviewQueuedEssays": "Review queued essays",
+      "title": "Quick Actions",
+      "subtitle": "Common administrative tasks",
+      "runFederationSync": "Run Federation Sync",
+      "reviewQueuedEssays": "Review Queued Essays",
       "spotlightWatchParty": "Spotlight: Community Watch Party"
     },
     "incidentFeed": {
-      "title": "Incident feed",
+      "title": "Activity Feed",
+      "subtitle": "Recent system events and notifications",
       "remoteArtUpload": "Remote art upload failed (retrying, 12:41 UTC)",
       "atProtocolRelay": "AT Protocol relay 03 connected (12:10 UTC)",
       "qaReport": "New Tellurian QA report ready (11:58 UTC)"
@@ -311,6 +420,15 @@
         "weeksAgo": "{{count}} weeks ago",
         "monthsAgo": "{{count}} months ago",
         "yearsAgo": "{{count}} years ago"
+      }
+    },
+    "admin": {
+      "loading": "Loading Feediverse data...",
+      "retry": "Retry",
+      "refresh": "Refresh",
+      "stats": {
+        "totalItems": "Total Items",
+        "activeSources": "Active Sources"
       }
     }
   },

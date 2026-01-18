@@ -111,6 +111,9 @@ export function AdminNavbar() {
                 textTransform: 'uppercase',
               }}
             >
+              <NavDropdown.Item as={Link} to="/admin/users" onClick={handleNavClick}>
+                {t('admin.services.users.name', 'Users')}
+              </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/patreon" onClick={handleNavClick}>
                 Patreon
               </NavDropdown.Item>

@@ -1,0 +1,580 @@
+.adminUsersPage {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0c0c0c 0%, #1a1a1a 100%);
+  color: #e8e2d9;
+  padding-top: 100px;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: 'Special Elite', cursive;
+  font-size: 2.5rem;
+  color: #e8e2d9;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.description {
+  color: #b3a18e;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.errorAlert {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.5);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.errorIcon {
+  font-size: 1.2rem;
+}
+
+.errorClose {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #e8e2d9;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.statsBar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: #b3a18e;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e8e2d9;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.searchBox {
+  flex: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #e8e2d9;
+  font-size: 1rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.createButton {
+  padding: 0.75rem 1.5rem;
+  background: rgba(40, 167, 69, 0.2);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+  border-radius: 4px;
+  color: #28a745;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+}
+
+.createButton:hover {
+  background: rgba(40, 167, 69, 0.3);
+  border-color: rgba(40, 167, 69, 0.4);
+}
+
+.refreshButton {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #e8e2d9;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+}
+
+.refreshButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #b3a18e;
+}
+
+.usersTable {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.usersTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.usersTable thead {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.usersTable th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b3a18e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.usersTable td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.usersTable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.verifiedBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.verified {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.unverified {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.viewButton,
+.editButton,
+.deleteButton {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8e2d9;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.viewButton:hover {
+  background: rgba(0, 123, 255, 0.2);
+  border-color: rgba(0, 123, 255, 0.4);
+}
+
+.editButton:hover {
+  background: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255, 193, 7, 0.4);
+}
+
+.deleteButton:hover {
+  background: rgba(220, 53, 69, 0.2);
+  border-color: rgba(220, 53, 69, 0.4);
+}
+
+.noData {
+  text-align: center;
+  padding: 2rem;
+  color: #b3a18e;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.paginationButton {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #e8e2d9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.paginationButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationInfo {
+  color: #b3a18e;
+  font-size: 0.9rem;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modal {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #e8e2d9;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  color: #e8e2d9;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.modalClose:hover {
+  color: #b3a18e;
+}
+
+.modalBody {
+  padding: 1.5rem;
+}
+
+.modalFooter {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #b3a18e;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.formGroup input[type='checkbox'] {
+  margin-right: 0.5rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #e8e2d9;
+  font-size: 1rem;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.detailGroup {
+  margin-bottom: 1.5rem;
+}
+
+.detailGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #b3a18e;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.detailGroup p {
+  margin: 0;
+  color: #e8e2d9;
+  font-size: 1rem;
+}
+
+.userDetailAvatar {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.userDetailAvatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.uploadStatus {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #b3a18e;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.fileName {
+  display: block;
+  margin-top: 0.5rem;
+  color: #b3a18e;
+  font-size: 0.85rem;
+}
+
+.currentPhoto {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.currentPhoto span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #b3a18e;
+  font-size: 0.9rem;
+}
+
+.photoPreview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.fediverseHandle {
+  font-family: 'Courier New', monospace;
+  color: #8b9dc3;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.noHandle {
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.formHint {
+  display: block;
+  margin-top: 0.25rem;
+  color: #b3a18e;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.handleActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.createHandleButton {
+  padding: 0.25rem 0.75rem;
+  background: #8b9dc3;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.createHandleButton:hover {
+  background: #9aadd0;
+}
+
+.createHandleButton:active {
+  background: #7a8db3;
+}
+
+.cancelButton,
+.saveButton,
+.closeButton {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.2s ease;
+}
+
+.cancelButton,
+.closeButton {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8e2d9;
+}
+
+.cancelButton:hover,
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.saveButton {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border-color: rgba(40, 167, 69, 0.3);
+}
+
+.saveButton:hover {
+  background: rgba(40, 167, 69, 0.3);
+}
+
+.deleteButton {
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border-color: rgba(220, 53, 69, 0.3);
+}
+
+.deleteButton:hover {
+  background: rgba(220, 53, 69, 0.3);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .usersTable {
+    overflow-x: auto;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+
+  .modal {
+    margin: 1rem;
+  }
+}
