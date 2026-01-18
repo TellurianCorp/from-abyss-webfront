@@ -62,20 +62,129 @@
   "admin": {
     "eyebrow": "From Abyss Control",
     "title": "Painel do Guardião",
-    "description": "Supervisão operacional para o Culto. Monitore feeds federados, filas de moderação e saúde do sistema a partir daqui.",
+    "description": "Monitore e gerencie todos os serviços, métricas e operações do From Abyss Media a partir de um único centro de comando.",
+    "hero": {
+      "description": "Monitore e gerencie todos os serviços, métricas e operações do From Abyss Media a partir de um único centro de comando.",
+      "activeServices": "Serviços Ativos",
+      "uptime": "Tempo de Atividade"
+    },
     "metrics": {
       "activeSessions": "Sessões Ativas",
       "signalQueue": "Fila de Sinais",
       "federatedMentions": "Menções Federadas"
     },
+    "sections": {
+      "systemOverview": {
+        "title": "Visão Geral do Sistema",
+        "description": "Métricas em tempo real e saúde do sistema"
+      },
+      "servicesHub": {
+        "title": "Hub de Serviços",
+        "description": "Gerencie todos os serviços e integrações do From Abyss Media"
+      },
+      "systemMetrics": {
+        "title": "Métricas do Sistema",
+        "description": "Métricas detalhadas de desempenho e saúde"
+      }
+    },
+    "services": {
+      "koliseum": {
+        "name": "Koliseum",
+        "description": "Plataforma de jogos e matchmaking"
+      },
+      "youtube": {
+        "name": "YouTube",
+        "description": "Gerenciamento de canal e análises"
+      },
+      "patreon": {
+        "name": "Patreon",
+        "description": "Gerenciamento de assinaturas e campanhas"
+      },
+      "feediverse": {
+        "name": "Feediverse",
+        "description": "Feed de conteúdo de horror federado"
+      },
+      "users": {
+        "name": "Usuários",
+        "description": "Gerenciamento e administração de usuários"
+      },
+      "openService": "Abrir {{name}}"
+    },
+    "users": {
+      "title": "Gerenciamento de Usuários",
+      "description": "Gerencie usuários na plataforma From Abyss Media",
+      "stats": {
+        "total": "Total de Usuários",
+        "currentPage": "Página Atual"
+      },
+      "searchPlaceholder": "Buscar usuários...",
+      "refresh": "Atualizar",
+      "loading": "Carregando usuários...",
+      "noUsers": "Nenhum usuário encontrado",
+      "verified": "Sim",
+      "unverified": "Não",
+      "create": "Criar Usuário",
+      "view": "Ver",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "showing": "Mostrando",
+      "of": "de",
+      "editUser": "Editar Usuário",
+      "userDetails": "Detalhes do Usuário",
+      "confirmDelete": "Confirmar Exclusão",
+      "deleteConfirmMessage": "Tem certeza de que deseja excluir este usuário? Esta ação não pode ser desfeita.",
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "close": "Fechar",
+      "confirm": "Excluir",
+      "table": {
+        "id": "ID",
+        "name": "Nome",
+        "email": "E-mail",
+        "fediverse": "Fediverse",
+        "verified": "Verificado",
+        "created": "Criado",
+        "actions": "Ações"
+      },
+      "form": {
+        "lifeauthSub": "LifeAuth Sub",
+        "name": "Nome",
+        "email": "E-mail",
+        "emailVerified": "E-mail Verificado",
+        "fediverseUsername": "Nome de Usuário Fediverse",
+        "fediverseUsernamePlaceholder": "Deixe vazio para gerar automaticamente",
+        "fediverseUsernameHint": "Opcional. Deve ser alfanumérico em minúsculas com underscores/hífens, máximo 30 caracteres. Se vazio, será gerado a partir do e-mail.",
+        "uploadPhoto": "Enviar Foto",
+        "selectedFile": "Selecionado:",
+        "currentPhoto": "Foto atual:"
+      },
+      "uploading": "Enviando...",
+      "details": {
+        "id": "ID",
+        "name": "Nome",
+        "email": "E-mail",
+        "fediverse": "Handle Fediverse",
+        "emailVerified": "E-mail Verificado",
+        "createdAt": "Criado Em",
+        "updatedAt": "Atualizado Em"
+      },
+      "noHandle": "N/A",
+      "createHandle": "Criar",
+      "createFediverseHandle": "Criar Handle Fediverse",
+      "creating": "Criando..."
+    },
     "actions": {
-      "title": "Ações e Rituais",
-      "runFederationSync": "Executar sincronização de federação",
-      "reviewQueuedEssays": "Revisar ensaios na fila",
+      "title": "Ações Rápidas",
+      "subtitle": "Tarefas administrativas comuns",
+      "runFederationSync": "Executar Sincronização de Federação",
+      "reviewQueuedEssays": "Revisar Ensaios na Fila",
       "spotlightWatchParty": "Destaque: Watch Party da Comunidade"
     },
     "incidentFeed": {
-      "title": "Feed de Incidentes",
+      "title": "Feed de Atividades",
+      "subtitle": "Eventos recentes do sistema e notificações",
       "remoteArtUpload": "Upload de arte remoto falhou (tentando novamente, 12:41 UTC)",
       "atProtocolRelay": "Relé do Protocolo AT 03 conectado (12:10 UTC)",
       "qaReport": "Novo relatório QA Tellurian pronto (11:58 UTC)"
@@ -311,6 +420,15 @@
         "weeksAgo": "{{count}} semanas atrás",
         "monthsAgo": "{{count}} meses atrás",
         "yearsAgo": "{{count}} anos atrás"
+      }
+    },
+    "admin": {
+      "loading": "Carregando dados do Feediverse...",
+      "retry": "Tentar Novamente",
+      "refresh": "Atualizar",
+      "stats": {
+        "totalItems": "Total de Itens",
+        "activeSources": "Fontes Ativas"
       }
     }
   },

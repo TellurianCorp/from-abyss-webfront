@@ -1,83 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { apiUrl, API_ENDPOINTS } from '../utils/api';
+import { useSyncMetrics, useSecurityMetrics, useDatabaseStats } from '../hooks/useMetrics';
 import './MetricsDashboard.css';
-
-interface SyncMetrics {
-  lastSyncTime: string;
-  totalSyncs: number;
-  successfulSyncs: number;
-  failedSyncs: number;
-  postsSynced: number;
-  actorsSynced: number;
-  averageSyncTime: number;
-  lastError?: string;
-}
-
-interface SecurityMetrics {
-  totalRequests: number;
-  blockedRequests: number;
-  rateLimitHits: number;
-  invalidSignatures: number;
-  replayAttempts: number;
-  requestsByInstance: Record<string, number>;
-}
-
-interface DatabaseStats {
-  posts: number;
-  actors: number;
-  followers: number;
-  unreadNotifications: number;
-}
 
 const MetricsDashboard: React.FC = () => {
   const { t } = useTranslation();
-  const [syncMetrics, setSyncMetrics] = useState<SyncMetrics | null>(null);
-  const [securityMetrics, setSecurityMetrics] = useState<SecurityMetrics | null>(null);
-  const [dbStats, setDbStats] = useState<DatabaseStats | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'sync' | 'security' | 'database'>('sync');
 
-  useEffect(() => {
-    fetchMetrics();
-    const interval = setInterval(fetchMetrics, 30000); // Update every 30 seconds
-    return () => clearInterval(interval);
-  }, []);
+  // Use React Query hooks with smart polling (10s interval, pauses when tab hidden)
+  const syncQuery = useSyncMetrics();
+  const securityQuery = useSecurityMetrics();
+  const databaseQuery = useDatabaseStats();
 
-  const fetchMetrics = async () => {
-    try {
-      const [syncRes, securityRes, dbRes] = await Promise.all([
-        fetch(apiUrl(API_ENDPOINTS.microblog.metrics.sync)),
-        fetch(apiUrl(API_ENDPOINTS.microblog.metrics.security)),
-        fetch(apiUrl(API_ENDPOINTS.microblog.metrics.database)),
-      ]);
+  const syncMetrics = syncQuery.data;
+  const securityMetrics = securityQuery.data;
+  const dbStats = databaseQuery.data;
 
-      if (syncRes.ok) {
-        const syncData = await syncRes.json();
-        setSyncMetrics(syncData);
-      } else if (syncRes.status !== 404) {
-        console.error('Error fetching sync metrics:', syncRes.status, syncRes.statusText);
-      }
-
-      if (securityRes.ok) {
-        const securityData = await securityRes.json();
-        setSecurityMetrics(securityData);
-      } else if (securityRes.status !== 404) {
-        console.error('Error fetching security metrics:', securityRes.status, securityRes.statusText);
-      }
-
-      if (dbRes.ok) {
-        const dbData = await dbRes.json();
-        setDbStats(dbData);
-      } else if (dbRes.status !== 404) {
-        console.error('Error fetching database metrics:', dbRes.status, dbRes.statusText);
-      }
-    } catch (error) {
-      console.error('Error fetching metrics:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const isLoading = useMemo(() => 
+    syncQuery.isLoading || securityQuery.isLoading || databaseQuery.isLoading,
+    [syncQuery.isLoading, securityQuery.isLoading, databaseQuery.isLoading]
+  );
 
   const formatTime = (timeString: string): string => {
     if (!timeString) return t('metrics.never');

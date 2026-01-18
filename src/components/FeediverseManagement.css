@@ -1,0 +1,306 @@
+.feediverse-management {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.feediverse-loading,
+.feediverse-error {
+  padding: 1rem;
+  text-align: center;
+  color: var(--muted, #B3A18E);
+}
+
+.feediverse-error {
+  color: var(--blood, #B03A3A);
+}
+
+.feediverse-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(145deg, rgba(25, 25, 28, 0.8), rgba(15, 15, 18, 0.8));
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.feediverse-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feediverse-stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted, #B3A18E);
+  font-weight: 500;
+}
+
+.feediverse-stat-value {
+  font-size: 1.25rem;
+  color: var(--bone, #E8E2D9);
+  font-weight: 700;
+}
+
+.feediverse-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.feediverse-btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, rgba(35, 35, 40, 0.9), rgba(20, 20, 25, 0.9));
+  color: var(--bone, #E8E2D9);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.feediverse-btn:hover {
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(25, 25, 30, 0.95));
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.feediverse-btn-primary {
+  background: linear-gradient(145deg, rgba(138, 110, 84, 0.3), rgba(100, 80, 60, 0.3));
+  border-color: var(--sepia, #8A6E54);
+}
+
+.feediverse-btn-primary:hover {
+  background: linear-gradient(145deg, rgba(138, 110, 84, 0.5), rgba(100, 80, 60, 0.5));
+  border-color: var(--bone, #E8E2D9);
+}
+
+.feediverse-btn-secondary {
+  background: linear-gradient(145deg, rgba(60, 60, 70, 0.9), rgba(40, 40, 50, 0.9));
+}
+
+.feediverse-btn-danger {
+  background: linear-gradient(145deg, rgba(176, 58, 58, 0.3), rgba(130, 40, 40, 0.3));
+  border-color: var(--blood, #B03A3A);
+}
+
+.feediverse-btn-danger:hover {
+  background: linear-gradient(145deg, rgba(176, 58, 58, 0.5), rgba(130, 40, 40, 0.5));
+}
+
+.feediverse-btn-warning {
+  background: linear-gradient(145deg, rgba(200, 150, 50, 0.3), rgba(150, 110, 30, 0.3));
+  border-color: #C89632;
+}
+
+.feediverse-btn-success {
+  background: linear-gradient(145deg, rgba(50, 150, 50, 0.3), rgba(30, 110, 30, 0.3));
+  border-color: #329632;
+}
+
+.feediverse-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.feediverse-tabs button {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted, #B3A18E);
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.feediverse-tabs button:hover {
+  color: var(--bone, #E8E2D9);
+}
+
+.feediverse-tabs button.active {
+  color: var(--bone, #E8E2D9);
+  border-bottom-color: var(--sepia, #8A6E54);
+}
+
+.feediverse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.feediverse-header h3 {
+  margin: 0;
+  color: var(--bone, #E8E2D9);
+}
+
+.feediverse-form {
+  background: linear-gradient(145deg, rgba(25, 25, 28, 0.8), rgba(15, 15, 18, 0.8));
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.feediverse-form h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--bone, #E8E2D9);
+}
+
+.feediverse-form-group {
+  margin-bottom: 1rem;
+}
+
+.feediverse-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--muted, #B3A18E);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.feediverse-form-group input,
+.feediverse-form-group textarea,
+.feediverse-form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(20, 20, 25, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: var(--bone, #E8E2D9);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.feediverse-form-group input:focus,
+.feediverse-form-group textarea:focus,
+.feediverse-form-group select:focus {
+  outline: none;
+  border-color: var(--sepia, #8A6E54);
+}
+
+.feediverse-form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.feediverse-profiles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feediverse-profile-card {
+  background: linear-gradient(145deg, rgba(25, 25, 28, 0.8), rgba(15, 15, 18, 0.8));
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+}
+
+.feediverse-profile-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.feediverse-profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--sepia, #8A6E54);
+}
+
+.feediverse-profile-info {
+  flex: 1;
+}
+
+.feediverse-profile-info h4 {
+  margin: 0 0 0.25rem 0;
+  color: var(--bone, #E8E2D9);
+}
+
+.feediverse-profile-acct {
+  margin: 0 0 0.5rem 0;
+  color: var(--muted, #B3A18E);
+  font-size: 0.85rem;
+}
+
+.feediverse-profile-bio {
+  margin: 0.5rem 0 0 0;
+  color: var(--muted, #B3A18E);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.feediverse-profile-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-active,
+.status-inactive {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.status-active {
+  background: rgba(50, 150, 50, 0.2);
+  color: #4CAF50;
+}
+
+.status-inactive {
+  background: rgba(176, 58, 58, 0.2);
+  color: #B03A3A;
+}
+
+.feediverse-profile-details {
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feediverse-profile-details p {
+  margin: 0.5rem 0;
+  color: var(--muted, #B3A18E);
+  font-size: 0.85rem;
+}
+
+.feediverse-profile-details strong {
+  color: var(--bone, #E8E2D9);
+  margin-right: 0.5rem;
+}
+
+.feediverse-profile-details a {
+  color: var(--sepia, #8A6E54);
+  text-decoration: none;
+}
+
+.feediverse-profile-details a:hover {
+  text-decoration: underline;
+}
+
+.feediverse-profile-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}

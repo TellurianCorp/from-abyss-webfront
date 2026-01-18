@@ -1,0 +1,117 @@
+.workflow-board {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.workflow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.workflow-header h3 {
+  margin: 0;
+}
+
+.workflow-header button {
+  padding: 6px 12px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.workflow-form {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.workflow-form input,
+.workflow-form select,
+.workflow-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.workflow-form button {
+  padding: 8px 16px;
+  background: #198754;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.workflow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.workflow-item {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #0d6efd;
+}
+
+.workflow-header-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.workflow-header-item h4 {
+  margin: 0;
+  flex: 1;
+}
+
+.workflow-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.workflow-priority,
+.workflow-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.workflow-assignee,
+.workflow-notes,
+.workflow-due {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.workflow-empty {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+.workflow-loading,
+.workflow-error {
+  text-align: center;
+  padding: 20px;
+}
+
+.workflow-error {
+  color: #dc3545;
+}

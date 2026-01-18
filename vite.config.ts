@@ -39,6 +39,27 @@ export default defineConfig(({ mode }) => {
       sourcemap: false,
       // Optimize chunk size
       chunkSizeWarningLimit: 1000,
+      // Enable code splitting and tree shaking
+      rollupOptions: {
+        output: {
+          // Manual chunk splitting for better caching
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+            'i18n-vendor': ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
+            'bootstrap-vendor': ['bootstrap', 'react-bootstrap'],
+          },
+          // Optimize chunk file names for better caching
+          chunkFileNames: 'assets/js/[name]-[hash].js',
+          entryFileNames: 'assets/js/[name]-[hash].js',
+          assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+        },
+      },
+      // Enable CSS code splitting
+      cssCodeSplit: true,
+      // Optimize asset inlining threshold (smaller files inline, larger ones separate)
+      assetsInlineLimit: 4096,
+      // Enable terser for better minification (if needed, but esbuild is faster)
+      // minify: 'terser', // Uncomment if you need more aggressive minification
     },
     // Ensure proper handling of static assets
     publicDir: 'public',

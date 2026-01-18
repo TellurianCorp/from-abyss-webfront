@@ -1,5 +1,8 @@
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { AdminNavbar } from '../components/AdminNavbar'
+import { FeediverseManagement } from '../components/FeediverseManagement'
 import { PatreonManagement } from '../components/PatreonManagement'
 import { YouTubeManagement } from '../components/YouTubeManagement'
 import MetricsDashboard from '../components/MetricsDashboard'
@@ -8,64 +11,78 @@ import styles from '../styles/Admin.module.css'
 export function Admin() {
   const { t } = useTranslation()
 
-  const adminMetrics = [
-    { label: t('admin.metrics.activeSessions'), value: '342' },
-    { label: t('admin.metrics.signalQueue'), value: '18' },
-    { label: t('admin.metrics.federatedMentions'), value: '1,024' },
-  ]
+  const adminMetrics = useMemo(() => [
+    { label: t('admin.metrics.activeSessions'), value: '342', trend: '+12%' },
+    { label: t('admin.metrics.signalQueue'), value: '18', trend: '-5%' },
+    { label: t('admin.metrics.federatedMentions'), value: '1,024', trend: '+8%' },
+  ], [t])
 
-  const adminActions = [
-    { label: t('admin.actions.runFederationSync'), action: 'federation-sync', icon: '🔄' },
-    { label: t('admin.actions.reviewQueuedEssays'), action: 'review-essays', icon: '📝' },
-    { label: t('admin.actions.spotlightWatchParty'), action: 'watch-party', icon: '🎬' },
-  ]
+  const adminActions = useMemo(() => [
+    { label: t('admin.actions.runFederationSync'), action: 'federation-sync', icon: '🔄', color: 'primary' },
+    { label: t('admin.actions.reviewQueuedEssays'), action: 'review-essays', icon: '📝', color: 'secondary' },
+    { label: t('admin.actions.spotlightWatchParty'), action: 'watch-party', icon: '🎬', color: 'accent' },
+  ], [t])
 
-  const incidentFeed = [
-    { text: t('admin.incidentFeed.remoteArtUpload'), status: 'warning', time: '12:41 UTC' },
-    { text: t('admin.incidentFeed.atProtocolRelay'), status: 'success', time: '12:10 UTC' },
-    { text: t('admin.incidentFeed.qaReport'), status: 'info', time: '11:58 UTC' },
-  ]
+  const incidentFeed = useMemo(() => [
+    { text: t('admin.incidentFeed.remoteArtUpload'), status: 'warning', time: '12:41 UTC', priority: 'medium' },
+    { text: t('admin.incidentFeed.atProtocolRelay'), status: 'success', time: '12:10 UTC', priority: 'low' },
+    { text: t('admin.incidentFeed.qaReport'), status: 'info', time: '11:58 UTC', priority: 'low' },
+  ], [t])
 
-  const koliseumStats = [
+  const koliseumStats = useMemo(() => [
     { label: t('koliseum.stats.playersOnline'), value: '128' },
     { label: t('koliseum.stats.lobbiesActive'), value: '8' },
     { label: t('koliseum.stats.matchApproval'), value: '97%' },
-  ]
+  ], [t])
 
-  const services = [
+  const services = useMemo(() => [
     {
       id: 'koliseum',
-      name: 'Koliseum',
-      description: 'Gaming & matchmaking platform',
+      name: t('admin.services.koliseum.name'),
+      description: t('admin.services.koliseum.description'),
       status: 'active',
       stats: koliseumStats,
       link: '/koliseum-admin',
       color: 'blood',
+      icon: '⚔️',
     },
     {
       id: 'youtube',
-      name: 'YouTube',
-      description: 'Channel management & analytics',
+      name: t('admin.services.youtube.name'),
+      description: t('admin.services.youtube.description'),
       status: 'active',
       component: 'YouTubeManagement',
       color: 'sepia',
+      icon: '📺',
     },
     {
       id: 'patreon',
-      name: 'Patreon',
-      description: 'Membership & campaign management',
+      name: t('admin.services.patreon.name'),
+      description: t('admin.services.patreon.description'),
       status: 'active',
       component: 'PatreonManagement',
       color: 'bone',
+      icon: '💎',
     },
     {
       id: 'feediverse',
-      name: 'Feediverse',
-      description: 'Federated horror content feed',
+      name: t('admin.services.feediverse.name'),
+      description: t('admin.services.feediverse.description'),
       status: 'active',
       color: 'muted',
+      component: 'FeediverseManagement',
+      icon: '🌐',
     },
-  ]
+    {
+      id: 'users',
+      name: t('admin.services.users.name'),
+      description: t('admin.services.users.description'),
+      status: 'active',
+      link: '/admin/users',
+      color: 'blood',
+      icon: '👥',
+    },
+  ], [koliseumStats, t])
 
   const getServiceColorClass = (color: string) => {
     switch (color) {
@@ -86,129 +103,182 @@ export function Admin() {
     }
   }
 
+  const handleAction = (action: string) => {
+    console.log(`Action: ${action}`)
+    // TODO: Implement action handlers
+  }
+
   return (
     <div className={styles.adminPage}>
       <AdminNavbar />
-      <div style={{ paddingTop: '100px' }}>
-      <section className={styles.adminMetrics}>
-        {adminMetrics.map((metric) => (
-          <article key={metric.label} className={styles.adminMetricCard}>
-            <p className={styles.adminMetricLabel}>{metric.label}</p>
-            <h2>{metric.value}</h2>
-          </article>
-        ))}
-      </section>
+      
+      <div className={styles.adminContainer}>
+        {/* Hero Section */}
+        <section className={styles.adminHero}>
+          <div className={styles.heroContent}>
+            <p className={styles.heroEyebrow}>{t('admin.eyebrow') || 'From Abyss Control'}</p>
+            <h1 className={styles.heroTitle}>{t('admin.title') || 'Guardian Dashboard'}</h1>
+            <p className={styles.heroDescription}>
+              {t('admin.hero.description')}
+            </p>
+          </div>
+          <div className={styles.heroStats}>
+            <div className={styles.heroStat}>
+              <span className={styles.heroStatValue}>4</span>
+              <span className={styles.heroStatLabel}>{t('admin.hero.activeServices')}</span>
+            </div>
+            <div className={styles.heroStat}>
+              <span className={styles.heroStatValue}>99.8%</span>
+              <span className={styles.heroStatLabel}>{t('admin.hero.uptime')}</span>
+            </div>
+          </div>
+        </section>
 
-      <section className={styles.adminServicesHub}>
-        <div className={styles.adminSectionHeader}>
-          <h2 className={styles.adminSectionTitle}>Services Hub</h2>
-          <p className={styles.adminSectionDescription}>Manage all From Abyss Media services and integrations</p>
-        </div>
-        <div className={styles.adminServicesGrid}>
-          {services.map((service) => {
-            if (service.component) {
-              // For services with components, render them directly with service card styling
-              return (
-                <div key={service.id} className={`${styles.adminServiceCard} ${getServiceColorClass(service.color)} ${styles.serviceWithComponent}`}>
-                  <div className={styles.adminServiceHeader}>
-                    <div>
-                      <h3 className={styles.adminServiceName}>{service.name}</h3>
-                      <p className={styles.adminServiceDescription}>{service.description}</p>
+        {/* Key Metrics */}
+        <section className={styles.metricsSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>{t('admin.sections.systemOverview.title')}</h2>
+            <p className={styles.sectionDescription}>{t('admin.sections.systemOverview.description')}</p>
+          </div>
+          <div className={styles.metricsGrid}>
+            {adminMetrics.map((metric) => (
+              <div key={metric.label} className={styles.metricCard}>
+                <div className={styles.metricHeader}>
+                  <p className={styles.metricLabel}>{metric.label}</p>
+                  {metric.trend && (
+                    <span className={styles.metricTrend}>
+                      {metric.trend}
+                    </span>
+                  )}
+                </div>
+                <h3 className={styles.metricValue}>{metric.value}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Services Hub */}
+        <section className={styles.servicesSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>{t('admin.sections.servicesHub.title')}</h2>
+            <p className={styles.sectionDescription}>{t('admin.sections.servicesHub.description')}</p>
+          </div>
+          <div className={styles.servicesGrid}>
+            {services.map((service) => {
+              if (service.component) {
+                return (
+                  <div key={service.id} className={`${styles.serviceCard} ${getServiceColorClass(service.color)} ${styles.serviceWithComponent}`}>
+                    <div className={styles.serviceCardHeader}>
+                      <div className={styles.serviceCardTitle}>
+                        <span className={styles.serviceIcon}>{service.icon}</span>
+                        <div>
+                          <h3 className={styles.serviceName}>{service.name}</h3>
+                          <p className={styles.serviceDescription}>{service.description}</p>
+                        </div>
+                      </div>
+                      <span className={`${styles.serviceStatus} ${service.status === 'active' ? styles.statusActive : styles.statusInactive}`}>
+                        {service.status === 'active' ? '●' : '○'}
+                      </span>
                     </div>
-                    <span className={`${styles.adminServiceStatus} ${service.status === 'active' ? styles.statusActive : styles.statusInactive}`}>
+                    <div className={styles.serviceContent}>
+                      {service.component === 'YouTubeManagement' && <YouTubeManagement />}
+                      {service.component === 'PatreonManagement' && <PatreonManagement />}
+                      {service.component === 'FeediverseManagement' && <FeediverseManagement />}
+                    </div>
+                  </div>
+                )
+              }
+              return (
+                <div key={service.id} className={`${styles.serviceCard} ${getServiceColorClass(service.color)}`}>
+                  <div className={styles.serviceCardHeader}>
+                    <div className={styles.serviceCardTitle}>
+                      <span className={styles.serviceIcon}>{service.icon}</span>
+                      <div>
+                        <h3 className={styles.serviceName}>{service.name}</h3>
+                        <p className={styles.serviceDescription}>{service.description}</p>
+                      </div>
+                    </div>
+                    <span className={`${styles.serviceStatus} ${service.status === 'active' ? styles.statusActive : styles.statusInactive}`}>
                       {service.status === 'active' ? '●' : '○'}
                     </span>
                   </div>
-                  {service.component === 'YouTubeManagement' && <YouTubeManagement />}
-                  {service.component === 'PatreonManagement' && <PatreonManagement />}
+                  {service.stats && (
+                    <div className={styles.serviceStats}>
+                      {service.stats.map((stat) => (
+                        <div key={stat.label} className={styles.serviceStat}>
+                          <span className={styles.serviceStatLabel}>{stat.label}</span>
+                          <strong className={styles.serviceStatValue}>{stat.value}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {service.link && (
+                    <Link to={service.link} className={styles.serviceLink}>
+                      {service.id === 'koliseum' ? t('koliseum.admin.openComprehensiveConsole') : t('admin.services.openService', { name: service.name })}
+                      <span className={styles.serviceLinkArrow}>→</span>
+                    </Link>
+                  )}
                 </div>
               )
-            }
-            // For services without components, render full service card
-            return (
-              <div key={service.id} className={`${styles.adminServiceCard} ${getServiceColorClass(service.color)}`}>
-                <div className={styles.adminServiceHeader}>
-                  <div>
-                    <h3 className={styles.adminServiceName}>{service.name}</h3>
-                    <p className={styles.adminServiceDescription}>{service.description}</p>
-                  </div>
-                  <span className={`${styles.adminServiceStatus} ${service.status === 'active' ? styles.statusActive : styles.statusInactive}`}>
-                    {service.status === 'active' ? '●' : '○'}
+            })}
+          </div>
+        </section>
+
+        {/* Main Content Grid */}
+        <div className={styles.mainGrid}>
+          {/* Quick Actions */}
+          <section className={styles.actionsPanel}>
+            <div className={styles.panelHeader}>
+              <h3 className={styles.panelTitle}>{t('admin.actions.title')}</h3>
+              <p className={styles.panelSubtitle}>{t('admin.actions.subtitle')}</p>
+            </div>
+            <div className={styles.actionsGrid}>
+              {adminActions.map((action, index) => (
+                <button
+                  key={index}
+                  className={`${styles.actionButton} ${styles[`action${action.color.charAt(0).toUpperCase() + action.color.slice(1)}`]}`}
+                  onClick={() => handleAction(action.action)}
+                >
+                  <span className={styles.actionIcon}>{action.icon}</span>
+                  <span className={styles.actionLabel}>{action.label}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          {/* Incident Feed */}
+          <section className={styles.incidentsPanel}>
+            <div className={styles.panelHeader}>
+              <h3 className={styles.panelTitle}>{t('admin.incidentFeed.title')}</h3>
+              <p className={styles.panelSubtitle}>{t('admin.incidentFeed.subtitle')}</p>
+            </div>
+            <div className={styles.incidentsList}>
+              {incidentFeed.map((incident, index) => (
+                <div key={index} className={`${styles.incidentItem} ${getIncidentStatusClass(incident.status)}`}>
+                  <span className={styles.incidentIcon}>
+                    {incident.status === 'success' ? '✓' : incident.status === 'warning' ? '⚠' : 'ℹ'}
                   </span>
-                </div>
-                {service.stats && (
-                  <div className={styles.adminServiceStats}>
-                    {service.stats.map((stat) => (
-                      <div key={stat.label} className={styles.adminServiceStat}>
-                        <span className={styles.adminServiceStatLabel}>{stat.label}</span>
-                        <strong className={styles.adminServiceStatValue}>{stat.value}</strong>
-                      </div>
-                    ))}
+                  <div className={styles.incidentContent}>
+                    <p className={styles.incidentText}>{incident.text}</p>
+                    <span className={styles.incidentTime}>{incident.time}</span>
                   </div>
-                )}
-                {service.link && (
-                  <a
-                    className={styles.adminServiceLink}
-                    href={service.link}
-                    target={service.link.startsWith('http') ? '_blank' : undefined}
-                    rel={service.link.startsWith('http') ? 'noreferrer' : undefined}
-                  >
-                    {service.id === 'koliseum' ? t('koliseum.admin.openComprehensiveConsole') : `Open ${service.name}`}
-                  </a>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      </section>
-
-      <div className={styles.adminMainGrid}>
-        <section className={`${styles.adminPanel} ${styles.adminQuickActions}`}>
-          <div className={styles.adminPanelHeader}>
-            <h3>{t('admin.actions.title')}</h3>
-          </div>
-          <div className={styles.adminActionsGrid}>
-            {adminActions.map((action, index) => (
-              <button
-                key={index}
-                className={styles.adminActionBtn}
-                onClick={() => {
-                  // Placeholder for action handlers
-                  console.log(`Action: ${action.action}`)
-                }}
-              >
-                <span className={styles.adminActionIcon}>{action.icon}</span>
-                <span className={styles.adminActionLabel}>{action.label}</span>
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className={`${styles.adminPanel} ${styles.adminIncidentFeed}`}>
-          <div className={styles.adminPanelHeader}>
-            <h3>{t('admin.incidentFeed.title')}</h3>
-          </div>
-          <div className={styles.adminIncidentList}>
-            {incidentFeed.map((incident, index) => (
-              <div key={index} className={`${styles.adminIncidentItem} ${getIncidentStatusClass(incident.status)}`}>
-                <span className={styles.adminIncidentStatusIcon}>
-                  {incident.status === 'success' ? '✓' : incident.status === 'warning' ? '⚠' : 'ℹ'}
-                </span>
-                <div className={styles.adminIncidentContent}>
-                  <p className={styles.adminIncidentText}>{incident.text}</p>
-                  <span className={styles.adminIncidentTime}>{incident.time}</span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* Metrics Dashboard */}
+        <section className={styles.metricsDashboardSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>{t('admin.sections.systemMetrics.title')}</h2>
+            <p className={styles.sectionDescription}>{t('admin.sections.systemMetrics.description')}</p>
+          </div>
+          <div className={styles.metricsDashboardContainer}>
+            <MetricsDashboard />
           </div>
         </section>
       </div>
-      </div>
-
-      <section className="metrics-section">
-        <h2>{t('metrics.sync.title')}</h2>
-        <MetricsDashboard />
-      </section>
     </div>
   )
 }

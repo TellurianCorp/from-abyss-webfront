@@ -108,6 +108,18 @@ export const API_ENDPOINTS = {
   feediverse: {
     base: '/v1/feediverse',
     horror: '/v1/feediverse/horror',
+    highlightedProfiles: '/v1/feediverse/highlighted-profiles',
+    admin: {
+      instances: '/v1/admin/feediverse/instances',
+      highlightedProfiles: {
+        base: '/v1/admin/feediverse/highlighted-profiles',
+        list: '/v1/admin/feediverse/highlighted-profiles',
+        create: '/v1/admin/feediverse/highlighted-profiles',
+        get: (id: string) => `/v1/admin/feediverse/highlighted-profiles/${id}`,
+        update: (id: string) => `/v1/admin/feediverse/highlighted-profiles/${id}`,
+        delete: (id: string) => `/v1/admin/feediverse/highlighted-profiles/${id}`,
+      },
+    },
   },
   // Admin endpoints
   admin: {
@@ -115,6 +127,16 @@ export const API_ENDPOINTS = {
     login: '/v1/admin/login',
     logout: '/v1/admin/logout',
     me: '/v1/admin/me',
+    users: {
+      base: '/v1/admin/users',
+      list: '/v1/admin/users',
+      create: '/v1/admin/users',
+      get: (id: string | number) => `/v1/admin/users/${id}`,
+      update: (id: string | number) => `/v1/admin/users/${id}`,
+      delete: (id: string | number) => `/v1/admin/users/${id}`,
+      uploadPhoto: (id: string | number) => `/v1/admin/users/${id}/photo`,
+      createFediverseHandle: (id: string | number) => `/v1/admin/users/${id}/fediverse-handle`,
+    },
   },
   // Communication features endpoints
   pitches: {

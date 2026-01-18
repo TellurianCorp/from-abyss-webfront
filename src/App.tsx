@@ -13,6 +13,7 @@ const Roadmap = lazy(() => import('./pages/Roadmap').then(m => ({ default: m.Roa
 const Microblog = lazy(() => import('./pages/Microblog').then(m => ({ default: m.Microblog })))
 const Admin = lazy(() => import('./pages/Admin').then(m => ({ default: m.Admin })))
 const AdminPatreon = lazy(() => import('./pages/AdminPatreon').then(m => ({ default: m.AdminPatreon })))
+const AdminUsers = lazy(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })))
 const AdminLogin = lazy(() => import('./pages/AdminLogin').then(m => ({ default: m.AdminLogin })))
 const KoliseumAdmin = lazy(() => import('./pages/KoliseumAdmin').then(m => ({ default: m.KoliseumAdmin })))
 
@@ -52,6 +53,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminPatreon />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute>
+              <AdminUsers />
             </ProtectedRoute>
           }
         />
