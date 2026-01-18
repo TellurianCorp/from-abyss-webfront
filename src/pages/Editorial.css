@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.editorial-section .section-header h1 {
+.editorial-section h1 {
   font-size: clamp(2.5rem, 4vw, 4rem);
   margin: 0 0 1rem;
   color: var(--bone);
@@ -23,9 +23,49 @@
   font-style: italic;
 }
 
-.editorial-section .section-header p {
+.editorial-section p {
   font-size: 1.1rem;
   color: var(--muted);
   line-height: 1.6;
   margin: 0 0 2rem;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.highlight {
+  padding: 2rem;
+  background: rgba(16, 12, 10, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.highlight h3 {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  color: var(--bone);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.highlight p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.highlight ul {
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+  color: var(--bone);
+  line-height: 1.8;
+}
+
+.highlight ul li {
+  margin: 0.5rem 0;
 }

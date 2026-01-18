@@ -60,8 +60,38 @@ export function YouTubeManagement() {
         fetch(apiUrl(API_ENDPOINTS.youtube.stats)),
       ])
 
-      if (!channelRes.ok || !videosRes.ok || !statsRes.ok) {
-        throw new Error('Failed to fetch YouTube data')
+      // Check for errors and read error messages
+      const errors: string[] = []
+      
+      if (!channelRes.ok) {
+        try {
+          const errorData = await channelRes.json()
+          errors.push(`Channel: ${errorData.message || errorData.error || `HTTP ${channelRes.status}`}`)
+        } catch {
+          errors.push(`Channel: HTTP ${channelRes.status}`)
+        }
+      }
+      
+      if (!videosRes.ok) {
+        try {
+          const errorData = await videosRes.json()
+          errors.push(`Videos: ${errorData.message || errorData.error || `HTTP ${videosRes.status}`}`)
+        } catch {
+          errors.push(`Videos: HTTP ${videosRes.status}`)
+        }
+      }
+      
+      if (!statsRes.ok) {
+        try {
+          const errorData = await statsRes.json()
+          errors.push(`Stats: ${errorData.message || errorData.error || `HTTP ${statsRes.status}`}`)
+        } catch {
+          errors.push(`Stats: HTTP ${statsRes.status}`)
+        }
+      }
+
+      if (errors.length > 0) {
+        throw new Error(errors.join('; '))
       }
 
       const [channelData, videosData, statsData] = await Promise.all([
@@ -70,9 +100,10 @@ export function YouTubeManagement() {
         statsRes.json(),
       ])
 
-      setChannelInfo(channelData.data)
-      setVideos(videosData.data || [])
-      setStats(statsData.data)
+      // Handle different response formats
+      setChannelInfo(channelData.id ? channelData : channelData.data)
+      setVideos(videosData.data || videosData || [])
+      setStats(statsData.subscribers !== undefined ? statsData : statsData.data)
     } catch (err) {
       console.error('Error fetching YouTube data:', err)
       setError(err instanceof Error ? err.message : 'Failed to load YouTube data')
@@ -92,8 +123,38 @@ export function YouTubeManagement() {
         fetch(apiUrl(API_ENDPOINTS.youtube.stats)),
       ])
 
-      if (!channelRes.ok || !videosRes.ok || !statsRes.ok) {
-        throw new Error('Failed to refresh YouTube data')
+      // Check for errors and read error messages
+      const errors: string[] = []
+      
+      if (!channelRes.ok) {
+        try {
+          const errorData = await channelRes.json()
+          errors.push(`Channel: ${errorData.message || errorData.error || `HTTP ${channelRes.status}`}`)
+        } catch {
+          errors.push(`Channel: HTTP ${channelRes.status}`)
+        }
+      }
+      
+      if (!videosRes.ok) {
+        try {
+          const errorData = await videosRes.json()
+          errors.push(`Videos: ${errorData.message || errorData.error || `HTTP ${videosRes.status}`}`)
+        } catch {
+          errors.push(`Videos: HTTP ${videosRes.status}`)
+        }
+      }
+      
+      if (!statsRes.ok) {
+        try {
+          const errorData = await statsRes.json()
+          errors.push(`Stats: ${errorData.message || errorData.error || `HTTP ${statsRes.status}`}`)
+        } catch {
+          errors.push(`Stats: HTTP ${statsRes.status}`)
+        }
+      }
+
+      if (errors.length > 0) {
+        throw new Error(errors.join('; '))
       }
 
       const [channelData, videosData, statsData] = await Promise.all([
@@ -102,9 +163,10 @@ export function YouTubeManagement() {
         statsRes.json(),
       ])
 
-      setChannelInfo(channelData.data)
-      setVideos(videosData.data || [])
-      setStats(statsData.data)
+      // Handle different response formats
+      setChannelInfo(channelData.id ? channelData : channelData.data)
+      setVideos(videosData.data || videosData || [])
+      setStats(statsData.subscribers !== undefined ? statsData : statsData.data)
       setCacheStatus('Data refreshed successfully')
       setTimeout(() => setCacheStatus(''), 3000)
     } catch (err) {
@@ -137,7 +199,10 @@ export function YouTubeManagement() {
     }
   }
 
-  const formatNumber = (num: number): string => {
+  const formatNumber = (num: number | undefined | null): string => {
+    if (num === undefined || num === null || isNaN(num)) {
+      return '0'
+    }
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`
     }
@@ -239,15 +304,15 @@ export function YouTubeManagement() {
         <div className="youtube-stats">
           <div className="youtube-stat-item">
             <span className="youtube-stat-label">{t('youtube.admin.stats.subscribers')}</span>
-            <strong className="youtube-stat-value">{formatNumber(stats.subscribers)}</strong>
+            <strong className="youtube-stat-value">{formatNumber(stats.subscribers ?? 0)}</strong>
           </div>
           <div className="youtube-stat-item">
             <span className="youtube-stat-label">{t('youtube.admin.stats.videos')}</span>
-            <strong className="youtube-stat-value">{formatNumber(stats.videos)}</strong>
+            <strong className="youtube-stat-value">{formatNumber(stats.videos ?? 0)}</strong>
           </div>
           <div className="youtube-stat-item">
             <span className="youtube-stat-label">{t('youtube.admin.stats.views')}</span>
-            <strong className="youtube-stat-value">{formatNumber(stats.views)}</strong>
+            <strong className="youtube-stat-value">{formatNumber(stats.views ?? 0)}</strong>
           </div>
         </div>
       )}
@@ -274,7 +339,7 @@ export function YouTubeManagement() {
                   <div className="youtube-video-details">
                     <h5 className="youtube-video-title">{video.title}</h5>
                     <div className="youtube-video-meta">
-                      <span>{formatNumber(video.viewCount)} {t('youtube.admin.views')}</span>
+                      <span>{formatNumber(video.viewCount ?? 0)} {t('youtube.admin.views')}</span>
                       <span>{formatDate(video.publishedAt)}</span>
                     </div>
                   </div>

@@ -1,22 +1,110 @@
 .adminPage {
   min-height: 100vh;
   background: linear-gradient(180deg, rgba(12, 12, 12, 0.95), rgba(0, 0, 0, 0.8));
-  padding: 3rem 5vw 4rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+}
+
+.adminContainer {
+  padding: 120px 5vw 4rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .adminHero {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  background: rgba(18, 12, 8, 0.9);
-  border-radius: 28px;
-  padding: 2rem;
-  border: 1px dashed rgba(255, 255, 255, 0.3);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  background: linear-gradient(145deg, rgba(25, 20, 15, 0.95), rgba(15, 10, 8, 0.95));
+  border-radius: 12px;
+  padding: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.adminHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.heroEyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--bone);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.heroDescription {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.heroStats {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(145deg, rgba(30, 25, 20, 0.8), rgba(20, 15, 12, 0.8));
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.heroStatValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--bone);
+  line-height: 1;
+}
+
+.heroStatLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .adminEyebrow {
@@ -51,68 +139,107 @@
   background: linear-gradient(120deg, var(--sepia), var(--blood));
 }
 
-.adminMetrics {
+.metricsSection,
+.servicesSection,
+.metricsDashboardSection {
   display: flex;
-  gap: 1.25rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.adminMetrics article,
-.adminMetricCard {
-  flex: 1;
-  min-width: 180px;
-  padding: 1.2rem 1.4rem;
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--bone);
+  font-weight: 600;
+}
+
+.sectionDescription {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.metricCard {
+  padding: 1.5rem;
   background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
-  border-radius: 4px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
     inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
   position: relative;
+  overflow: hidden;
 }
 
-.adminMetrics article::before,
-.adminMetricCard::before {
+.metricCard::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
-.adminMetrics article:hover,
-.adminMetricCard:hover {
-  transform: translateY(-2px);
+.metricCard:hover {
+  transform: translateY(-4px);
   box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
     inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.6),
-    0 2px 0 rgba(255, 255, 255, 0.08);
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-.adminMetricLabel {
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.metricLabel {
   margin: 0;
   font-size: 0.75rem;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
+  font-weight: 500;
 }
 
-.adminMetrics article h2,
-.adminMetricCard h2 {
-  margin: 0.5rem 0 0;
-  font-size: 2rem;
-  color: var(--bone);
+.metricTrend {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
   font-weight: 600;
+}
+
+.metricValue {
+  margin: 0;
+  font-size: 2.25rem;
+  color: var(--bone);
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .adminGrid {
@@ -170,104 +297,94 @@
   gap: 0.75rem;
 }
 
-/* Services Hub Section */
-.adminServicesHub {
-  margin: 2rem 0;
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
 }
 
-.adminSectionHeader {
-  margin-bottom: 1.5rem;
-}
-
-.adminSectionTitle {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--bone);
-}
-
-.adminSectionDescription {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.adminServicesGrid {
+.serviceCard {
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
-
-.adminServiceCard {
-  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.1),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    0 1px 0 rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
-  width: 100%;
+  overflow: hidden;
 }
 
-.adminServiceCard::before {
+.serviceCard::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
+  height: 2px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
-.adminServiceCard:hover {
+.serviceCard:hover {
   transform: translateY(-4px);
   box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
     inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-    0 6px 12px rgba(0, 0, 0, 0.7),
-    0 2px 0 rgba(255, 255, 255, 0.08);
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-.adminServiceHeader {
+.serviceCardHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
-  flex: 0 0 auto;
-  min-width: 200px;
 }
 
-.adminServiceName {
-  margin: 0 0 0.25rem;
-  font-size: 1.3rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--bone);
+.serviceCardTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
 }
 
-.adminServiceDescription {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.adminServiceStatus {
-  font-size: 1.2rem;
+.serviceIcon {
+  font-size: 2rem;
   line-height: 1;
   flex-shrink: 0;
+}
+
+.serviceName {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bone);
+  font-weight: 600;
+}
+
+.serviceDescription {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.serviceStatus {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.serviceContent {
+  flex: 1;
 }
 
 .statusActive {
@@ -279,170 +396,274 @@
   color: var(--muted);
 }
 
-.adminServiceStats {
+.serviceStats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 0.75rem;
-  padding: 1rem;
-  background: linear-gradient(145deg, rgba(15, 15, 18, 0.8), rgba(8, 8, 10, 0.8));
-  border-radius: 3px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, rgba(15, 15, 18, 0.9), rgba(8, 8, 10, 0.9));
+  border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
-    0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.adminServiceStat {
+.serviceStat {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
-.adminServiceStatLabel {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+.serviceStatLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
+  font-weight: 500;
 }
 
-.adminServiceStatValue {
-  font-size: 1.1rem;
+.serviceStatValue {
+  font-size: 1.25rem;
   color: var(--bone);
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.adminServiceLink {
+.serviceLink {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.25rem;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.75rem;
-  border-radius: 999px;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  border-radius: 8px;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, rgba(35, 35, 40, 0.8), rgba(20, 20, 25, 0.8));
+  color: var(--bone);
+  font-weight: 600;
+  margin-top: auto;
 }
 
-.adminServiceLink:hover {
+.serviceLinkArrow {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.serviceLink:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.9), rgba(25, 25, 30, 0.9));
+}
+
+.serviceLink:hover .serviceLinkArrow {
+  transform: translateX(4px);
 }
 
 /* Service Color Variants */
-.serviceBlood .adminServiceCard {
+.serviceBlood .serviceCard {
   background: linear-gradient(145deg, rgba(60, 25, 25, 0.95), rgba(35, 15, 15, 0.95));
   border-color: rgba(176, 58, 58, 0.35);
   border-top-color: rgba(200, 70, 70, 0.4);
-  border-left-color: rgba(190, 65, 65, 0.35);
 }
 
-.serviceBlood .adminServiceLink {
+.serviceBlood .serviceLink {
   background: linear-gradient(120deg, var(--blood), rgba(176, 58, 58, 0.8));
   color: #fff;
   border-color: var(--blood);
 }
 
-.serviceSepia .adminServiceCard {
+.serviceSepia .serviceCard {
   background: linear-gradient(145deg, rgba(50, 40, 30, 0.95), rgba(30, 25, 18, 0.95));
   border-color: rgba(138, 110, 84, 0.35);
   border-top-color: rgba(160, 130, 100, 0.4);
-  border-left-color: rgba(150, 120, 90, 0.35);
 }
 
-.serviceSepia .adminServiceLink {
+.serviceSepia .serviceLink {
   background: linear-gradient(120deg, var(--sepia), rgba(138, 110, 84, 0.8));
   color: #050006;
   border-color: var(--sepia);
 }
 
-.serviceBone .adminServiceCard {
+.serviceBone .serviceCard {
   background: linear-gradient(145deg, rgba(50, 48, 45, 0.95), rgba(30, 28, 25, 0.95));
   border-color: rgba(232, 226, 217, 0.25);
   border-top-color: rgba(250, 245, 240, 0.3);
-  border-left-color: rgba(240, 235, 230, 0.28);
 }
 
-.serviceBone .adminServiceLink {
+.serviceBone .serviceLink {
   background: linear-gradient(120deg, rgba(232, 226, 217, 0.2), rgba(232, 226, 217, 0.1));
   color: var(--bone);
   border-color: rgba(232, 226, 217, 0.4);
 }
 
-.serviceMuted .adminServiceCard {
+.serviceMuted .serviceCard {
   background: linear-gradient(145deg, rgba(45, 40, 35, 0.95), rgba(28, 25, 22, 0.95));
   border-color: rgba(179, 161, 142, 0.3);
   border-top-color: rgba(200, 180, 160, 0.35);
-  border-left-color: rgba(190, 170, 150, 0.32);
 }
 
-.serviceMuted .adminServiceLink {
+.serviceMuted .serviceLink {
   background: linear-gradient(120deg, rgba(179, 161, 142, 0.3), rgba(179, 161, 142, 0.15));
   color: var(--bone);
   border-color: rgba(179, 161, 142, 0.5);
 }
 
-/* Main Grid Layout */
-.adminMainGrid {
+.mainGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
 }
 
-/* Quick Actions */
-.adminQuickActions {
+.metricsDashboardContainer {
+  background: linear-gradient(145deg, rgba(30, 30, 35, 0.95), rgba(18, 18, 22, 0.95));
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.actionsPanel,
+.incidentsPanel {
   background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
 }
 
-.adminPanelHeader {
-  margin-bottom: 1.25rem;
+.actionsPanel::before,
+.incidentsPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
-.adminPanelHeader h3 {
-  margin: 0;
-  letter-spacing: 0.25em;
+.panelHeader {
+  margin-bottom: 1.5rem;
+}
+
+.panelTitle {
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--highlight);
-  font-size: 1.1rem;
+  color: var(--bone);
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-.adminActionsGrid {
+.panelSubtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.actionsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-.adminActionBtn {
+.actionButton {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
   background: linear-gradient(145deg, rgba(35, 35, 40, 0.9), rgba(18, 18, 22, 0.9));
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 
     inset 0 1px 2px rgba(255, 255, 255, 0.08),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-    0 2px 4px rgba(0, 0, 0, 0.4);
+    0 2px 8px rgba(0, 0, 0, 0.4);
   color: var(--bone);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   text-align: left;
   position: relative;
+  overflow: hidden;
 }
 
-.adminActionBtn::before {
+.actionButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.actionButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
+    0 6px 16px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.actionButton.actionPrimary:hover {
+  background: linear-gradient(145deg, rgba(138, 110, 84, 0.2), rgba(100, 80, 60, 0.2));
+  border-color: rgba(138, 110, 84, 0.4);
+}
+
+.actionButton.actionSecondary:hover {
+  background: linear-gradient(145deg, rgba(232, 226, 217, 0.15), rgba(200, 190, 180, 0.15));
+  border-color: rgba(232, 226, 217, 0.3);
+}
+
+.actionButton.actionAccent:hover {
+  background: linear-gradient(145deg, rgba(176, 58, 58, 0.2), rgba(140, 45, 45, 0.2));
+  border-color: rgba(176, 58, 58, 0.4);
+}
+
+.actionIcon {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.actionLabel {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.incidentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.incidentItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, rgba(25, 25, 28, 0.9), rgba(15, 15, 18, 0.9));
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-left: 4px solid;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.incidentItem::before {
   content: '';
   position: absolute;
   top: 0;
@@ -452,78 +673,15 @@
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
 
-.adminActionBtn:hover {
-  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(22, 22, 26, 0.95));
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 
-    inset 0 1px 2px rgba(255, 255, 255, 0.12),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-    0 4px 8px rgba(0, 0, 0, 0.6),
-    0 2px 0 rgba(255, 255, 255, 0.06);
-}
-
-.adminActionIcon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.adminActionLabel {
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-}
-
-/* Incident Feed */
-.adminIncidentFeed {
-  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
-}
-
-.adminIncidentList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.adminIncidentItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem;
-  background: linear-gradient(145deg, rgba(25, 25, 28, 0.8), rgba(15, 15, 18, 0.8));
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 3px solid;
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.05),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
-    0 1px 2px rgba(0, 0, 0, 0.3);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-}
-
-.adminIncidentItem::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-}
-
-.adminIncidentItem:hover {
-  background: linear-gradient(145deg, rgba(30, 30, 33, 0.9), rgba(18, 18, 21, 0.9));
+.incidentItem:hover {
+  transform: translateX(4px);
   box-shadow: 
     inset 0 1px 1px rgba(255, 255, 255, 0.08),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.4),
-    0 2px 4px rgba(0, 0, 0, 0.4);
+    0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.adminIncidentStatusIcon {
-  font-size: 1.2rem;
+.incidentIcon {
+  font-size: 1.5rem;
   line-height: 1;
   flex-shrink: 0;
   margin-top: 0.1rem;
@@ -533,7 +691,7 @@
   border-left-color: #4ade80;
 }
 
-.incidentSuccess .adminIncidentStatusIcon {
+.incidentSuccess .incidentIcon {
   color: #4ade80;
 }
 
@@ -541,7 +699,7 @@
   border-left-color: #fbbf24;
 }
 
-.incidentWarning .adminIncidentStatusIcon {
+.incidentWarning .incidentIcon {
   color: #fbbf24;
 }
 
@@ -549,80 +707,86 @@
   border-left-color: #60a5fa;
 }
 
-.incidentInfo .adminIncidentStatusIcon {
+.incidentInfo .incidentIcon {
   color: #60a5fa;
 }
 
-.adminIncidentContent {
+.incidentContent {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
-.adminIncidentText {
+.incidentText {
   margin: 0;
   color: var(--bone);
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
-.adminIncidentTime {
+.incidentTime {
   font-size: 0.75rem;
   color: var(--muted);
   letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* Service Card Component Overrides */
-.adminServiceCard .adminPanel {
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
-}
-
-.adminServiceCard .adminPanel::before {
-  display: none;
-}
-
-.adminServiceCard .adminPanel h3 {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-}
-
 .serviceWithComponent {
   min-height: auto;
 }
 
-.serviceWithComponent .adminPanel {
-  margin-top: 0;
-  flex: 1;
+.serviceWithComponent .serviceContent {
+  margin-top: 0.5rem;
 }
 
-.serviceWithComponent .adminServiceHeader {
-  flex: 0 0 200px;
-}
-
-/* Responsive adjustments for Guardian Dashboard */
+/* Responsive adjustments */
 @media (max-width: 1200px) {
-  .adminMainGrid {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .servicesGrid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .adminHero {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
+  .adminContainer {
+    padding: 100px 3vw 2rem;
+    gap: 2rem;
   }
   
-  .adminActionsGrid {
+  .adminHero {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  
+  .heroStats {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  
+  .heroStat {
+    padding: 1rem 1.5rem;
+  }
+  
+  .heroStatValue {
+    font-size: 2rem;
+  }
+  
+  .metricsGrid {
     grid-template-columns: 1fr;
   }
   
-  .adminServiceStats {
-    grid-template-columns: repeat(3, 1fr);
+  .actionsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .serviceStats {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

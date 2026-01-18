@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
@@ -54,14 +54,19 @@ export function Patreon() {
   const [campaigns, setCampaigns] = useState<PatreonCampaign[]>([])
   const [tiers, setTiers] = useState<Record<string, PatreonTier[]>>({})
   const [loading, setLoading] = useState(true)
+  const [loadingStats, setLoadingStats] = useState(true)
+  const [loadingTiers, setLoadingTiers] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    const fetchPatreonData = async () => {
+  const fetchPatreonData = useCallback(async () => {
+    try {
+      setError(null)
+      setLoading(true)
+      setLoadingStats(true)
+      setLoadingTiers(true)
+      
+      // Fetch stats
       try {
-        setError(null)
-        
-        // Fetch stats
         const statsResponse = await fetch(`${API_BASE}/stats`)
         if (statsResponse.ok) {
           const statsData = await statsResponse.json()
@@ -70,8 +75,14 @@ export function Patreon() {
             total_patrons: statsData.total_patrons || 0,
           })
         }
+      } catch (err) {
+        console.error('Error fetching stats:', err)
+      } finally {
+        setLoadingStats(false)
+      }
 
-        // Fetch campaigns
+      // Fetch campaigns
+      try {
         const campaignsResponse = await fetch(`${API_BASE}/campaigns`)
         if (campaignsResponse.ok) {
           const campaignsData = await campaignsResponse.json()
@@ -85,39 +96,59 @@ export function Patreon() {
             setCampaigns(campaignsList)
 
             // Fetch tiers for all campaigns
-            for (const campaign of campaignsList) {
-              const tiersResponse = await fetch(`${API_BASE}/campaigns/${campaign.id}/tiers`)
-              if (tiersResponse.ok) {
-                const tiersData = await tiersResponse.json()
-                if (tiersData.data) {
-                  const tiersList = (tiersData.data as PatreonAPITier[])
-                    .map((tier) => ({
-                      id: tier.id,
-                      title: tier.attributes?.title || '',
-                      description: tier.attributes?.description || '',
-                      amount_cents: tier.attributes?.amount_cents || 0,
-                      patron_count: tier.attributes?.patron_count || 0,
-                      published: tier.attributes?.published || false,
-                      campaign_id: campaign.id,
-                    }))
-                    .filter((tier: PatreonTier) => tier.published)
-                    .sort((a: PatreonTier, b: PatreonTier) => a.amount_cents - b.amount_cents)
-                  setTiers((prev) => ({ ...prev, [campaign.id]: tiersList }))
+            if (campaignsList.length > 0) {
+              const tiersPromises = campaignsList.map(async (campaign) => {
+                try {
+                  const tiersResponse = await fetch(`${API_BASE}/campaigns/${campaign.id}/tiers`)
+                  if (tiersResponse.ok) {
+                    const tiersData = await tiersResponse.json()
+                    if (tiersData.data) {
+                      const tiersList = (tiersData.data as PatreonAPITier[])
+                        .map((tier) => ({
+                          id: tier.id,
+                          title: tier.attributes?.title || '',
+                          description: tier.attributes?.description || '',
+                          amount_cents: tier.attributes?.amount_cents || 0,
+                          patron_count: tier.attributes?.patron_count || 0,
+                          published: tier.attributes?.published || false,
+                          campaign_id: campaign.id,
+                        }))
+                        .filter((tier: PatreonTier) => tier.published)
+                        .sort((a: PatreonTier, b: PatreonTier) => a.amount_cents - b.amount_cents)
+                      return { campaignId: campaign.id, tiers: tiersList }
+                    }
+                  }
+                } catch (err) {
+                  console.error(`Error fetching tiers for campaign ${campaign.id}:`, err)
                 }
-              }
+                return { campaignId: campaign.id, tiers: [] }
+              })
+
+              const tiersResults = await Promise.all(tiersPromises)
+              const tiersMap: Record<string, PatreonTier[]> = {}
+              tiersResults.forEach(({ campaignId, tiers }) => {
+                tiersMap[campaignId] = tiers
+              })
+              setTiers(tiersMap)
             }
           }
         }
       } catch (err) {
-        console.error('Error fetching Patreon data:', err)
-        setError(t('patreon.error.fetchFailed', 'Failed to load Patreon information'))
+        console.error('Error fetching campaigns:', err)
       } finally {
-        setLoading(false)
+        setLoadingTiers(false)
       }
+    } catch (err) {
+      console.error('Error fetching Patreon data:', err)
+      setError(t('patreon.error.fetchFailed', 'Failed to load Patreon information'))
+    } finally {
+      setLoading(false)
     }
-
-    fetchPatreonData()
   }, [t])
+
+  useEffect(() => {
+    fetchPatreonData()
+  }, [fetchPatreonData])
 
   const formatCurrency = (cents: number) => {
     return `$${(cents / 100).toFixed(0)}`
@@ -146,29 +177,39 @@ export function Patreon() {
               <p>{t('patreon.page.subtitle', 'Support From Abyss Media and help us build the future of horror media.')}</p>
             </div>
             
-            {loading && (
-              <div className="patreon-loading">
-                <p>{t('patreon.loading', 'Loading...')}</p>
-              </div>
-            )}
-
             {error && (
               <div className="patreon-error">
-                <p>{error}</p>
+                <div className="patreon-error-content">
+                  <p>{error}</p>
+                  <button 
+                    className="patreon-retry-button"
+                    onClick={fetchPatreonData}
+                    aria-label={t('patreon.retry', 'Retry')}
+                  >
+                    {t('patreon.retry', 'Retry')}
+                  </button>
+                </div>
               </div>
             )}
 
-            {!loading && !error && (
+            {!error && (
               <>
                 {campaigns.length > 0 && campaigns[0].summary && (
                   <div 
-                    className="patreon-campaign-summary patreon-html-content"
+                    className={`patreon-campaign-summary patreon-html-content ${loading ? 'patreon-fade-in' : ''}`}
                     dangerouslySetInnerHTML={{ __html: campaigns[0].summary }}
                   />
                 )}
                 
-                {stats && (
-                  <div className="patreon-stats-large">
+                {loadingStats ? (
+                  <div className="patreon-stats-large patreon-skeleton">
+                    <div className="patreon-stat-large">
+                      <div className="patreon-skeleton-value"></div>
+                      <div className="patreon-skeleton-label"></div>
+                    </div>
+                  </div>
+                ) : stats && (
+                  <div className="patreon-stats-large patreon-fade-in">
                     <div className="patreon-stat-large">
                       <span className="patreon-stat-value-large">{stats.total_patrons}</span>
                       <span className="patreon-stat-label-large">{t('patreon.cta.patrons', 'Patrons')}</span>
@@ -176,14 +217,36 @@ export function Patreon() {
                   </div>
                 )}
 
-                {availableTiers.length > 0 && (
+                {loadingTiers ? (
                   <div className="patreon-tiers-detailed">
                     <h2 className="patreon-tiers-title-detailed">
                       {t('patreon.page.tiers.title', 'Membership Tiers')}
                     </h2>
                     <div className="patreon-tiers-grid">
-                      {availableTiers.map((tier) => (
-                        <div key={tier.id} className="patreon-tier-card">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="patreon-tier-card patreon-skeleton-card">
+                          <div className="patreon-tier-card-header">
+                            <div className="patreon-skeleton-text patreon-skeleton-title"></div>
+                            <div className="patreon-skeleton-text patreon-skeleton-price"></div>
+                          </div>
+                          <div className="patreon-skeleton-text patreon-skeleton-description"></div>
+                          <div className="patreon-skeleton-text patreon-skeleton-description"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : availableTiers.length > 0 && (
+                  <div className="patreon-tiers-detailed patreon-fade-in">
+                    <h2 className="patreon-tiers-title-detailed">
+                      {t('patreon.page.tiers.title', 'Membership Tiers')}
+                    </h2>
+                    <div className="patreon-tiers-grid">
+                      {availableTiers.map((tier, index) => (
+                        <div 
+                          key={tier.id} 
+                          className="patreon-tier-card"
+                          style={{ animationDelay: `${index * 0.1}s` }}
+                        >
                           <div className="patreon-tier-card-header">
                             <h3 className="patreon-tier-card-name">{tier.title}</h3>
                             <div className="patreon-tier-card-price">{formatCurrency(tier.amount_cents)}</div>
@@ -205,17 +268,20 @@ export function Patreon() {
                   </div>
                 )}
 
-                <div className="patreon-cta-final">
-                  <a
-                    className="patreon-cta-button-large"
-                    href={getPatreonUrl()}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <i className="fab fa-patreon" aria-hidden="true"></i>
-                    {t('patreon.cta.button', 'Become a Patron')}
-                  </a>
-                </div>
+                {!loading && (
+                  <div className="patreon-cta-final patreon-fade-in">
+                    <a
+                      className="patreon-cta-button-large"
+                      href={getPatreonUrl()}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={t('patreon.cta.button', 'Become a Patron')}
+                    >
+                      <i className="fab fa-patreon" aria-hidden="true"></i>
+                      {t('patreon.cta.button', 'Become a Patron')}
+                    </a>
+                  </div>
+                )}
               </>
             )}
           </section>
