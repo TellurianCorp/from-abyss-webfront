@@ -30,6 +30,33 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           secure: false,
         },
+        // Proxy para endpoints ActivityPub (desenvolvimento local)
+        // Em produção, isso é feito pelo nginx
+        '/.well-known/webfinger': {
+          target: apiTarget,
+          changeOrigin: true,
+          secure: false,
+        },
+        '/.well-known/nodeinfo': {
+          target: apiTarget,
+          changeOrigin: true,
+          secure: false,
+        },
+        '/nodeinfo': {
+          target: apiTarget,
+          changeOrigin: true,
+          secure: false,
+        },
+        '/actors': {
+          target: apiTarget,
+          changeOrigin: true,
+          secure: false,
+        },
+        '/inbox': {
+          target: apiTarget,
+          changeOrigin: true,
+          secure: false,
+        },
       },
     },
     build: {
