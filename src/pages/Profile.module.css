@@ -1,0 +1,908 @@
+/* Impact Label fonts for badge fields */
+@font-face {
+  font-family: 'Impact Label';
+  src: url('/fonts/Impact Label.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Impact Label Reversed';
+  src: url('/fonts/Impact Label Reversed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Override global background for profile page */
+:global(.page) :global(*) {
+  background-color: transparent !important;
+}
+
+:global(.page) :global(*)::before,
+:global(.page) :global(*)::after {
+  background-color: transparent !important;
+}
+
+/* Make main background transparent */
+:global(main) {
+  background: transparent !important;
+}
+
+.profileContainer {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Background image with blur effect - covers entire page */
+.profilePageBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/imgs/morgue.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(8px);
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Dark overlay for better readability */
+.profilePageOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.profileHeader {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: transparent;
+}
+
+.profileTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #E6DFC9;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(0, 0, 0, 0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.profileSubtitle {
+  color: rgba(230, 223, 201, 0.7);
+  font-size: 0.75rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.alertError,
+.alertSuccess {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alertError {
+  background: rgba(139, 0, 0, 0.3);
+  border: 2px solid rgba(139, 0, 0, 0.8);
+  color: #E6DFC9;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.alertSuccess {
+  background: rgba(100, 120, 80, 0.3);
+  border: 2px solid rgba(100, 120, 80, 0.8);
+  color: #E6DFC9;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.profileForm {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Grid Layout: Badge card and Form card */
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+/* Badge Card */
+.badgeCard {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 1.5rem;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form Card */
+.formCard {
+  background: transparent;
+}
+
+/* Police File Form Styles */
+.policeFileForm {
+  flex: 1;
+  min-width: 400px;
+  background: transparent;
+  padding: 2rem;
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+  position: relative;
+  font-family: 'Courier New', monospace;
+  color: #2c2416;
+  filter: none;
+}
+
+.policeFileForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Coffee stains */
+    radial-gradient(circle at 20% 30%, rgba(101, 67, 33, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(101, 67, 33, 0.02) 0%, transparent 50%),
+    /* Age spots */
+    radial-gradient(circle at 50% 50%, rgba(139, 115, 85, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.fileHeader {
+  border-bottom: 3px double #8b7355;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fileStamp {
+  background: #8b0000;
+  color: #f5f1e8;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  border: 2px solid #5a0000;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: rotate(-2deg);
+}
+
+.fileNumber {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #5a4a3a;
+  letter-spacing: 0.1em;
+}
+
+.fileContent {
+  margin: 1.5rem 0;
+}
+
+.fileSection {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed rgba(139, 115, 85, 0.3);
+}
+
+.fileSection:last-of-type {
+  border-bottom: none;
+}
+
+.fileLabel {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #5a4a3a;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.fileInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  padding: 0.75rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: inherit;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.fileInput:focus {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.fileInput::placeholder {
+  color: inherit;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.fileValue {
+  font-size: 0.9rem;
+  color: #2c2416;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+}
+
+.fileButton {
+  background: linear-gradient(180deg, #8b7355 0%, #6b5d4f 100%);
+  border: 2px solid #5a4a3a;
+  border-radius: 2px;
+  padding: 0.6rem 1.2rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #f5f1e8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.fileButton:hover {
+  background: linear-gradient(180deg, #9b8365 0%, #7b6d5f 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 3px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.fileButton:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.fileNotes {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(139, 115, 85, 0.3);
+}
+
+.fileTextarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  padding: 0.75rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: inherit;
+  resize: vertical;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.fileTextarea:focus {
+  outline: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.fileTextarea::placeholder {
+  color: inherit;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.fileFooter {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px double #8b7355;
+  text-align: right;
+}
+
+.fileDate {
+  font-size: 0.75rem;
+  color: #5a4a3a;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+/* Badge container - responsive version */
+.faBadge {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1024 / 1536;
+  margin: 0 auto;
+  background: transparent;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.faBadgeBase,
+.faBadgeBlood {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+}
+
+.faBadgeBlood {
+  z-index: 20; /* Topmost visual layer - above photo and text fields */
+  /* Ensure transparency is respected - PNG alpha channel should work */
+  background: none !important;
+  mix-blend-mode: normal;
+  opacity: 1;
+}
+
+/* Photo - from GIMP layer: x: 180, y: 726 (moved 30px up from 756), width: 286, height: 366 */
+/* Percentages relative to 1024x1536: left: 17.578125%, top: 47.265625%, width: 27.9296875%, height: 23.828125% */
+.faBadgePhoto {
+  position: absolute;
+  left: 17.478125%;
+  top: 40.165625%;
+  width: 27.9296875%;
+  height: 23.828125%;
+  object-fit: cover;
+  border-radius: 0.8%;
+  /* Strong sepia effect similar to Tailwind's sepia class (sepia(100%)) */
+  filter: sepia(80%) saturate(0.6) contrast(1.15) brightness(0.9);
+  z-index: 2;
+  /* Bevel/emboss effect to make it look fixed/embedded in the badge */
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    /* Outer shadow for depth */
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    /* Inset shadow to create embedded effect */
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.2),
+    /* Top highlight for bevel effect */
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    /* Bottom shadow for depth */
+    inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.faBadgePhotoPlaceholder {
+  position: absolute;
+  left: 17.578125%;
+  top: 37.265625%;
+  width: 27.9296875%;
+  height: 23.828125%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+  color: #E6DFC9;
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 4rem);
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  border-radius: 0.8%;
+  z-index: 2;
+  /* Bevel/emboss effect to match the photo */
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    /* Outer shadow for depth */
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    /* Inset shadow to create embedded effect */
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.2),
+    /* Top highlight for bevel effect */
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    /* Bottom shadow for depth */
+    inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.photoUploadButton {
+  position: absolute;
+  left: calc(17.478125% + 27.9296875% - 40px);
+  top: calc(40.165625% + 23.828125% - 40px);
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  color: #E6DFC9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+  z-index: 25; /* Above blood overlay for interaction */
+}
+
+.photoUploadButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.photoUploadButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Name field - x: 170, y: 900, width: 640, height: 70 */
+/* Percentages: left: 16.6016%, top: 58.5938%, width: 62.5%, height: 4.5573% */
+.faBadgeName {
+  position: absolute;
+  left: 31.6016%;
+  top: 63.6938%;
+  width: 49.5%;
+  height: 4.5573%;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.faBadgeNameInput {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  border: none;
+  font-size: clamp(23.04px, 2.4vw, 34.56px);
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #8b0000;
+  text-transform: uppercase;
+  font-family: 'Impact Label', 'Courier New', monospace;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  mix-blend-mode: normal;
+}
+
+.faBadgeNameInput:focus,
+.faBadgeNameInput:hover,
+.faBadgeNameInput:active {
+  background: transparent !important;
+  border: none;
+  outline: none;
+}
+
+.faBadgeNameDisplay {
+  width: 100%;
+  height: 100%;
+  font-size: clamp(23.04px, 2.4vw, 34.56px);
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #8b0000;
+  text-transform: uppercase;
+  font-family: 'Impact Label', 'Courier New', monospace;
+  font-weight: normal;
+  mix-blend-mode: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.faBadgeNameInput::placeholder {
+  color: inherit;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+/* ID field - x: 170, y: 990, width: 640, height: 60 */
+/* Percentages: left: 16.6016%, top: 64.4531%, width: 62.5%, height: 3.9063% */
+.faBadgeId {
+  position: absolute;
+  left: 27.6016%;
+  top: 68.9531%;
+  width: 53.5%;
+  height: 3.9063%;
+  display: flex;
+  align-items: center;
+  font-size: clamp(19.2px, 1.92vw, 26.88px);
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #8b0000;
+  text-transform: uppercase;
+  font-family: 'Impact Label', 'Courier New', monospace;
+  font-weight: normal;
+  mix-blend-mode: normal;
+  z-index: 3;
+}
+
+/* Clearance field - x: 170, y: 1070, width: 640, height: 60 */
+/* Percentages: left: 16.6016%, top: 69.6615%, width: 62.5%, height: 3.9063% */
+.faBadgeClearance {
+  position: absolute;
+  left: 16.6016%;
+  top: 80.6615%;
+  width: 65.5%;
+  height: 6.9063%;
+  display: flex;
+  align-items: center;
+  font-size: clamp(23.04px, 1.92vw, 28.8px);
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #8b0000;
+  text-transform: uppercase;
+  font-family: 'Impact Label', 'Courier New', monospace;
+  font-weight: normal;
+  mix-blend-mode: normal;
+  z-index: 3;
+}
+
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4a3e32;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-family: 'Courier New', monospace;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #8b7355;
+  border-radius: 3px;
+  color: #2c2418;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-family: 'Courier New', monospace;
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.input:focus {
+  outline: none;
+  border-color: #6b5d4f;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(107, 93, 79, 0.3);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: rgba(90, 74, 58, 0.6);
+}
+
+.helpText {
+  font-size: 0.7rem;
+  color: #6b5d4f;
+  margin-top: 0.5rem;
+  font-family: 'Courier New', monospace;
+  font-style: italic;
+}
+
+.pictureSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.pictureContainer {
+  position: relative;
+  width: 100px;
+  height: 120px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 3px solid #6b5d4f;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #f5f3e8 0%, #e8e5d8 100%);
+  /* Badge photo frame effect */
+  padding: 4px;
+}
+
+.pictureContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+  filter: grayscale(20%) contrast(1.1);
+}
+
+.profileImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #d4d0c0 0%, #c4beb0 100%);
+  color: #6b5d4f;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.uploadButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(180deg, #8b7355 0%, #6b5d4f 100%);
+  border: 2px solid #5a4a3a;
+  border-radius: 3px;
+  color: #f5f3e8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Courier New', monospace;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.uploadButton:hover {
+  background: linear-gradient(180deg, #9b8365 0%, #7b6d5f 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 3px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.uploadButton:active {
+  transform: translateY(0);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.uploadButton svg {
+  flex-shrink: 0;
+}
+
+.fediverseHandle {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid #8b7355;
+  border-radius: 3px;
+  color: #2c2418;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  width: 100%;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.buttonPrimary {
+  background: linear-gradient(180deg, rgba(139, 0, 0, 0.8), rgba(100, 0, 0, 0.9));
+  color: #E6DFC9;
+  border: 2px solid rgba(139, 0, 0, 1);
+  border-radius: 4px;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-family: 'Courier New', monospace;
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background: linear-gradient(180deg, rgba(160, 0, 0, 0.9), rgba(120, 0, 0, 1));
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.buttonPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonSecondary {
+  background: rgba(0, 0, 0, 0.6);
+  color: #E6DFC9;
+  border: 2px solid rgba(139, 0, 0, 0.6);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.buttonSecondary:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(139, 0, 0, 0.9);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.15),
+    0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #4a3e32;
+  font-family: 'Courier New', monospace;
+}
+
+.error {
+  color: #8b5a3a;
+}
+
+@media (max-width: 1200px) {
+  .profileContainer {
+    padding: 1rem;
+  }
+
+  .profileGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .badgeCard {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .policeFileForm {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .profileContainer {
+    padding: 0.5rem;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .buttonPrimary,
+  .buttonSecondary {
+    width: 100%;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .profileGrid {
+    gap: 1rem;
+  }
+
+  .policeFileForm {
+    padding: 1.5rem;
+  }
+
+  .faBadgeNameInput,
+  .faBadgeNameDisplay {
+    font-size: clamp(17.28px, 2.88vw, 26.88px) !important;
+  }
+
+  .faBadgeId {
+    font-size: clamp(15.36px, 2.4vw, 23.04px) !important;
+  }
+
+  .faBadgeClearance {
+    font-size: clamp(19.2px, 2.88vw, 26.88px) !important;
+  }
+}

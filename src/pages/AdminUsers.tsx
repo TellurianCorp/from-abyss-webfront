@@ -27,6 +27,7 @@ interface UserCreateRequest {
   lifeauth_sub?: string
   name: string
   email: string
+  password?: string
   email_verified: boolean
   fediverse_username?: string
 }
@@ -47,9 +48,12 @@ export function AdminUsers() {
   const [createForm, setCreateForm] = useState<UserCreateRequest>({
     name: '',
     email: '',
+    password: '',
     email_verified: false,
     fediverse_username: '',
   })
+  const [generatedPassword, setGeneratedPassword] = useState<string | null>(null)
+  const [generatingPassword, setGeneratingPassword] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [total, setTotal] = useState(0)
@@ -101,6 +105,7 @@ export function AdminUsers() {
     setCreateForm({
       name: '',
       email: '',
+      password: '',
       email_verified: false,
       fediverse_username: '',
     })
@@ -119,6 +124,9 @@ export function AdminUsers() {
       }
       if (createForm.lifeauth_sub && createForm.lifeauth_sub.trim() !== '') {
         requestBody.lifeauth_sub = createForm.lifeauth_sub
+      }
+      if (createForm.password && createForm.password.trim() !== '') {
+        requestBody.password = createForm.password
       }
       if (createForm.fediverse_username && createForm.fediverse_username.trim() !== '') {
         requestBody.fediverse_username = createForm.fediverse_username.trim().toLowerCase()
@@ -162,6 +170,7 @@ export function AdminUsers() {
       setCreateForm({
         name: '',
         email: '',
+        password: '',
         email_verified: false,
         fediverse_username: '',
       })
@@ -340,6 +349,36 @@ export function AdminUsers() {
       console.error('Error creating Fediverse handle:', err)
     } finally {
       setCreatingHandle(false)
+    }
+  }
+
+  const handleGeneratePassword = async (userId: number) => {
+    setGeneratingPassword(userId)
+    setError(null)
+    try {
+      const response = await fetch(apiUrl(API_ENDPOINTS.admin.users.generatePassword(userId)), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Failed to generate password')
+      }
+
+      const result = await response.json()
+      setGeneratedPassword(result.password)
+      
+      // Reload users to refresh the list
+      await loadUsers()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate password')
+      console.error('Error generating password:', err)
+    } finally {
+      setGeneratingPassword(null)
     }
   }
 
@@ -538,6 +577,16 @@ export function AdminUsers() {
                               {t('admin.users.edit', 'Edit')}
                             </button>
                             <button
+                              onClick={() => handleGeneratePassword(user.id)}
+                              className={styles.generatePasswordButton}
+                              disabled={generatingPassword === user.id}
+                              title={t('admin.users.generatePassword', 'Generate Temporary Password')}
+                            >
+                              {generatingPassword === user.id
+                                ? t('admin.users.generating', 'Generating...')
+                                : t('admin.users.generatePassword', 'Password')}
+                            </button>
+                            <button
                               onClick={() => setShowDeleteConfirm(user.id)}
                               className={styles.deleteButton}
                             >
@@ -623,6 +672,21 @@ export function AdminUsers() {
                     className={styles.formInput}
                     required
                   />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>{t('admin.users.form.password', 'Password')}</label>
+                  <input
+                    type="password"
+                    value={createForm.password || ''}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, password: e.target.value })
+                    }
+                    className={styles.formInput}
+                    placeholder={t('admin.users.form.passwordPlaceholder', 'Optional - leave empty if using OIDC')}
+                  />
+                  <small className={styles.formHint}>
+                    {t('admin.users.form.passwordHint', 'Optional. If provided, user can login with email and password. If empty, user must use OIDC (LifeAuth).')}
+                  </small>
                 </div>
                 <div className={styles.formGroup}>
                   <label>
@@ -909,6 +973,56 @@ export function AdminUsers() {
                   {creatingHandle
                     ? t('admin.users.creating', 'Creating...')
                     : t('admin.users.create', 'Create')}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Generated Password Modal */}
+        {generatedPassword && (
+          <div className={styles.modalOverlay} onClick={() => setGeneratedPassword(null)}>
+            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+              <div className={styles.modalHeader}>
+                <h2>{t('admin.users.temporaryPassword', 'Temporary Password Generated')}</h2>
+                <button
+                  className={styles.modalClose}
+                  onClick={() => setGeneratedPassword(null)}
+                >
+                  ×
+                </button>
+              </div>
+              <div className={styles.modalBody}>
+                <div className={styles.formGroup}>
+                  <p className={styles.warningText}>
+                    {t('admin.users.passwordWarning', 'This password will only be shown once. Please copy it now and share it securely with the user.')}
+                  </p>
+                  <div className={styles.passwordDisplay}>
+                    <input
+                      type="text"
+                      value={generatedPassword}
+                      readOnly
+                      className={styles.passwordInput}
+                      onClick={(e) => e.currentTarget.select()}
+                    />
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(generatedPassword)
+                        alert(t('admin.users.passwordCopied', 'Password copied to clipboard!'))
+                      }}
+                      className={styles.copyButton}
+                    >
+                      {t('admin.users.copy', 'Copy')}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.modalFooter}>
+                <button
+                  onClick={() => setGeneratedPassword(null)}
+                  className={styles.closeButton}
+                >
+                  {t('admin.users.close', 'Close')}
                 </button>
               </div>
             </div>

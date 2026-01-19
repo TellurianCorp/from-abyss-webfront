@@ -16,6 +16,7 @@ const AdminPatreon = lazy(() => import('./pages/AdminPatreon').then(m => ({ defa
 const AdminUsers = lazy(() => import('./pages/AdminUsers').then(m => ({ default: m.AdminUsers })))
 const AdminLogin = lazy(() => import('./pages/AdminLogin').then(m => ({ default: m.AdminLogin })))
 const KoliseumAdmin = lazy(() => import('./pages/KoliseumAdmin').then(m => ({ default: m.KoliseumAdmin })))
+const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/patreon" element={<Patreon />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/microblog" element={<Microblog />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route
           path="/admin"

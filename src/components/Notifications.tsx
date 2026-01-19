@@ -36,9 +36,15 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
       if (response.ok) {
         const data = await response.json();
         setNotifications(data.notifications || []);
+      } else if (response.status === 404) {
+        // Endpoint not implemented yet - silently handle
+        setNotifications([]);
       }
     } catch (error) {
+      // Only log non-404 errors
+      if (error instanceof Error && !error.message.includes('404')) {
       console.error('Error fetching notifications:', error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -54,9 +60,15 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
       if (response.ok) {
         const data = await response.json();
         setUnreadCount(data.count || 0);
+      } else if (response.status === 404) {
+        // Endpoint not implemented yet - silently handle
+        setUnreadCount(0);
       }
     } catch (error) {
+      // Only log non-404 errors
+      if (error instanceof Error && !error.message.includes('404')) {
       console.error('Error fetching unread count:', error);
+      }
     }
   }, [userId]);
 
@@ -152,7 +164,11 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
           }
         }}
       >
-        🔔
+        <img 
+          src="/imgs/from_abyss_bells.png" 
+          alt="Notifications" 
+          className="notifications-icon"
+        />
         {unreadCount > 0 && <span className="notifications-badge">{unreadCount}</span>}
       </button>
 

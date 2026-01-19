@@ -152,6 +152,9 @@
         "lifeauthSub": "LifeAuth Sub",
         "name": "Name",
         "email": "Email",
+        "password": "Password",
+        "passwordPlaceholder": "Optional - leave empty if using OIDC",
+        "passwordHint": "Optional. If provided, user can login with email and password. If empty, user must use OIDC (LifeAuth).",
         "emailVerified": "Email Verified",
         "fediverseUsername": "Fediverse Username",
         "fediverseUsernamePlaceholder": "Leave empty to auto-generate",
@@ -173,7 +176,13 @@
       "noHandle": "N/A",
       "createHandle": "Create",
       "createFediverseHandle": "Create Fediverse Handle",
-      "creating": "Creating..."
+      "creating": "Creating...",
+      "generatePassword": "Password",
+      "generating": "Generating...",
+      "temporaryPassword": "Temporary Password Generated",
+      "passwordWarning": "This password will only be shown once. Please copy it now and share it securely with the user.",
+      "passwordCopied": "Password copied to clipboard!",
+      "copy": "Copy"
     },
     "actions": {
       "title": "Quick Actions",
@@ -569,6 +578,22 @@
       "noDescription": "No description provided."
     }
   },
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Enter your credentials to access your account",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Sign In",
+    "cancel": "Cancel",
+    "back": "Back",
+    "loading": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "contactUs": "Contact us",
+    "useOIDC": "Or",
+    "oidc": "Sign in with LifeAuth"
+  },
   "metrics": {
     "never": "Never",
     "sync": {
@@ -597,6 +622,31 @@
       "actors": "Actors",
       "followers": "Followers",
       "unreadNotifications": "Unread Notifications"
+    }
+  },
+  "profile": {
+    "menu": "Profile menu",
+    "edit": "Edit Profile",
+    "logout": "Logout",
+    "title": "Edit Profile",
+    "subtitle": "Update your profile information",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "emailHelp": "Email cannot be changed",
+    "picture": "Profile Picture",
+    "uploadImage": "Update Image",
+    "fediverseHandle": "Fediverse Handle",
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "success": "Profile updated successfully!",
+    "loading": "Loading profile...",
+    "error": {
+      "load": "Failed to load profile",
+      "save": "Failed to save profile",
+      "notFound": "Profile not found"
     }
   }
 }

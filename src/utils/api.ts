@@ -136,6 +136,7 @@ export const API_ENDPOINTS = {
       delete: (id: string | number) => `/v1/admin/users/${id}`,
       uploadPhoto: (id: string | number) => `/v1/admin/users/${id}/photo`,
       createFediverseHandle: (id: string | number) => `/v1/admin/users/${id}/fediverse-handle`,
+      generatePassword: (id: string | number) => `/v1/admin/users/${id}/generate-password`,
     },
   },
   // Communication features endpoints

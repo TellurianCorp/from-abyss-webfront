@@ -51,16 +51,29 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
       setLoading(true)
       setError(null)
 
-      const response = await fetch(timelineUrl)
-      
-      if (!response.ok) {
-        // Check if response is JSON before trying to parse
-        const contentType = response.headers.get('content-type')
-        let errorMessage = `Failed to fetch timeline: ${response.status}`
+      // Fetch timeline and highlighted profiles in parallel
+      const [timelineResponse, highlightedProfilesResponse] = await Promise.allSettled([
+        fetch(timelineUrl),
+        fetch(apiUrl(API_ENDPOINTS.feediverse.highlightedProfiles))
+      ])
+
+      // Process timeline response
+      let timelinePosts: Post[] = []
+      if (timelineResponse.status === 'fulfilled' && timelineResponse.value.ok) {
+        const contentType = timelineResponse.value.headers.get('content-type')
+        if (contentType && contentType.includes('application/json')) {
+          const timelineData: TimelineResponse = await timelineResponse.value.json()
+          timelinePosts = timelineData.posts || []
+        }
+      } else if (timelineResponse.status === 'rejected') {
+        throw timelineResponse.reason
+      } else if (timelineResponse.status === 'fulfilled' && !timelineResponse.value.ok) {
+        const contentType = timelineResponse.value.headers.get('content-type')
+        let errorMessage = `Failed to fetch timeline: ${timelineResponse.value.status}`
         
         if (contentType && contentType.includes('application/json')) {
           try {
-            const errorData = await response.json()
+            const errorData = await timelineResponse.value.json()
             if (errorData.message) {
               errorMessage = errorData.message
             } else if (errorData.error) {
@@ -73,16 +86,81 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
         throw new Error(errorMessage)
       }
 
-      // Check Content-Type before parsing JSON
-      const contentType = response.headers.get('content-type')
-      if (!contentType || !contentType.includes('application/json')) {
-        const errorMessage = `Microblog API returned non-JSON response: ${contentType || 'unknown content type'}`
-        console.error(errorMessage)
-        throw new Error(errorMessage)
+      // Process highlighted profiles and fetch their posts
+      // TODO: Backend support needed - the timeline endpoint should include posts from highlighted profiles
+      // For now, we'll try to fetch from feediverse/horror endpoint which might include their posts
+      let highlightedPosts: Post[] = []
+      if (highlightedProfilesResponse.status === 'fulfilled' && highlightedProfilesResponse.value.ok) {
+        try {
+          const profilesData = await highlightedProfilesResponse.value.json()
+          // API returns { success: true, data: [...], count: ... }
+          const profilesArray = Array.isArray(profilesData?.data) ? profilesData.data : 
+                               Array.isArray(profilesData) ? profilesData : []
+          const activeProfiles = profilesArray.filter((p: any) => p.is_active)
+          
+          // Try to fetch posts from the feediverse horror feed which may include highlighted profile posts
+          // This is a workaround until the timeline endpoint is updated to include highlighted profiles
+          try {
+            const feediverseResponse = await fetch(apiUrl(`${API_ENDPOINTS.feediverse.horror}?limit=20`))
+            if (feediverseResponse.ok) {
+              const feediverseData = await feediverseResponse.json()
+              const feedItems = feediverseData.data || []
+              
+              // Filter feed items to only include posts from highlighted profiles
+              const highlightedAccts = new Set(activeProfiles.map((p: any) => 
+                (p.acct || `${p.username}@${p.domain}`).toLowerCase()
+              ))
+              
+              highlightedPosts = feedItems
+                .filter((item: any) => {
+                  // Check if the item's author matches any highlighted profile
+                  const itemAuthor = item.author?.toLowerCase() || ''
+                  const itemSource = item.source?.toLowerCase() || ''
+                  return highlightedAccts.has(itemAuthor) || 
+                         Array.from(highlightedAccts).some(acct => itemSource.includes(acct))
+                })
+                .map((item: any) => ({
+                  id: item.id || `feediverse-${item.link}`,
+                  authorId: item.author || '',
+                  authorName: item.author || item.title || 'Unknown',
+                  authorHandle: item.author || '',
+                  authorAvatar: undefined,
+                  content: item.description || item.title || '',
+                  mediaUrls: undefined,
+                  createdAt: item.publishedAt || new Date().toISOString(),
+                  likeCount: 0,
+                  repostCount: 0,
+                  replyCount: 0,
+                  federated: true,
+                  source: item.source || 'feediverse',
+                }))
+            }
+          } catch (err) {
+            console.warn('Failed to fetch highlighted profile posts from feediverse:', err)
+          }
+        } catch (err) {
+          console.warn('Failed to process highlighted profiles:', err)
+          // Don't fail the entire timeline if highlighted profiles fail
+        }
       }
 
-      const data: TimelineResponse = await response.json()
-      setPosts(data.posts || [])
+      // Merge and sort posts by creation date (newest first)
+      const allPosts = [...timelinePosts, ...highlightedPosts]
+      allPosts.sort((a, b) => {
+        const dateA = new Date(a.createdAt).getTime()
+        const dateB = new Date(b.createdAt).getTime()
+        return dateB - dateA
+      })
+
+      // Remove duplicates based on post ID
+      const uniquePosts = allPosts.reduce((acc, post) => {
+        if (!acc.find(p => p.id === post.id)) {
+          acc.push(post)
+        }
+        return acc
+      }, [] as Post[])
+
+      setPosts(uniquePosts)
     } catch (err) {
       console.error('Error fetching timeline:', err)
       setError(err instanceof Error ? err.message : 'Failed to load timeline')

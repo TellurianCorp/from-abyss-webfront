@@ -513,6 +513,76 @@
   background: #7a8db3;
 }
 
+.generatePasswordButton {
+  padding: 0.4rem 0.8rem;
+  background: #6b8e23;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.generatePasswordButton:hover:not(:disabled) {
+  background: #7ba02a;
+}
+
+.generatePasswordButton:active:not(:disabled) {
+  background: #5a7a1a;
+}
+
+.generatePasswordButton:disabled {
+  background: #555;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.passwordDisplay {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.passwordInput {
+  flex: 1;
+  padding: 0.75rem;
+  background: #2a2a2a;
+  border: 2px solid #8b9dc3;
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.copyButton {
+  padding: 0.75rem 1.5rem;
+  background: #8b9dc3;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.copyButton:hover {
+  background: #9aadd0;
+}
+
+.warningText {
+  color: #ffa500;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(255, 165, 0, 0.1);
+  border-left: 3px solid #ffa500;
+  border-radius: 4px;
+}
+
 .cancelButton,
 .saveButton,
 .closeButton {

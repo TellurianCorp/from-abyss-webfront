@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { LanguageSelector } from './LanguageSelector'
 import { WeatherShader } from './WeatherShader'
+import { ProfileDropdown } from './ProfileDropdown'
+import { useUser } from '../hooks/useUser'
 import styles from '../styles/Navbar.module.css'
 
 function getIssueNumber() {
@@ -13,6 +15,7 @@ function getIssueNumber() {
 
 export function Navbar() {
   const { t } = useTranslation()
+  const { userInfo } = useUser()
 
   const menuItems = [
     { id: 'articles', label: t('navbar.menu.articles', 'Articles'), url: '/editorial#articles' },
@@ -45,8 +48,19 @@ export function Navbar() {
             </div>
           </div>
           <div className={styles.navbarRight}>
-            <div className={styles.navbarLanguage}>
-              <LanguageSelector />
+            <div className={styles.navbarActions}>
+              {userInfo && (
+                <ProfileDropdown 
+                  userInfo={userInfo}
+                  onLogout={() => {
+                    // Clear user info from localStorage
+                    localStorage.removeItem('userInfo')
+                  }}
+                />
+              )}
+              <div className={styles.navbarLanguage}>
+                <LanguageSelector />
+              </div>
             </div>
           </div>
         </div>

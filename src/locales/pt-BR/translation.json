@@ -173,7 +173,13 @@
       "noHandle": "N/A",
       "createHandle": "Criar",
       "createFediverseHandle": "Criar Handle Fediverse",
-      "creating": "Criando..."
+      "creating": "Criando...",
+      "generatePassword": "Senha",
+      "generating": "Gerando...",
+      "temporaryPassword": "Senha Temporária Gerada",
+      "passwordWarning": "Esta senha será mostrada apenas uma vez. Por favor, copie agora e compartilhe com segurança com o usuário.",
+      "passwordCopied": "Senha copiada para a área de transferência!",
+      "copy": "Copiar"
     },
     "actions": {
       "title": "Ações Rápidas",
@@ -569,6 +575,22 @@
       "noDescription": "Nenhuma descrição fornecida."
     }
   },
+  "login": {
+    "title": "Entrar",
+    "subtitle": "Digite suas credenciais para acessar sua conta",
+    "email": "Email",
+    "emailPlaceholder": "seu.email@exemplo.com",
+    "password": "Senha",
+    "passwordPlaceholder": "Digite sua senha",
+    "submit": "Entrar",
+    "cancel": "Cancelar",
+    "back": "Voltar",
+    "loading": "Entrando...",
+    "noAccount": "Não tem uma conta?",
+    "contactUs": "Entre em contato",
+    "useOIDC": "Ou",
+    "oidc": "Entrar com LifeAuth"
+  },
   "metrics": {
     "never": "Nunca",
     "sync": {
@@ -597,6 +619,31 @@
       "actors": "Atores",
       "followers": "Seguidores",
       "unreadNotifications": "Notificações Não Lidas"
+    }
+  },
+  "profile": {
+    "menu": "Menu do perfil",
+    "edit": "Editar Perfil",
+    "logout": "Sair",
+    "title": "Editar Perfil",
+    "subtitle": "Atualize suas informações de perfil",
+    "name": "Nome",
+    "namePlaceholder": "Seu nome",
+    "email": "E-mail",
+    "emailPlaceholder": "seu.email@exemplo.com",
+    "emailHelp": "O e-mail não pode ser alterado",
+    "picture": "Foto de Perfil",
+    "uploadImage": "Atualizar Imagem",
+    "fediverseHandle": "Handle do Fediverse",
+    "cancel": "Cancelar",
+    "save": "Salvar Alterações",
+    "saving": "Salvando...",
+    "success": "Perfil atualizado com sucesso!",
+    "loading": "Carregando perfil...",
+    "error": {
+      "load": "Falha ao carregar perfil",
+      "save": "Falha ao salvar perfil",
+      "notFound": "Perfil não encontrado"
     }
   }
 }
