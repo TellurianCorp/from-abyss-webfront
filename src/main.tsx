@@ -7,6 +7,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import './index.css'
 import './i18n/config'
 import { ToastProvider } from './contexts/ToastContext'
+import { MicroblogProvider } from './contexts/MicroblogContext'
+import { ActivityPubProvider } from './contexts/ActivityPubContext'
+import { NotificationProvider } from './contexts/NotificationContext'
 import App from './App.tsx'
 
 // Configure React Query for optimal performance
@@ -28,7 +31,13 @@ createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ToastProvider>
-          <App />
+          <MicroblogProvider>
+            <ActivityPubProvider>
+              <NotificationProvider>
+                <App />
+              </NotificationProvider>
+            </ActivityPubProvider>
+          </MicroblogProvider>
         </ToastProvider>
       </BrowserRouter>
     </QueryClientProvider>

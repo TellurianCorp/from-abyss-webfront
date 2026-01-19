@@ -1,0 +1,108 @@
+/* Landing Page Layout - Horror Zine Aesthetic */
+
+.landingMain {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.landingGrid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blood, #B03A3A) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--blood, #B03A3A);
+  border-radius: 3px;
+}
+
+/* Main Feed */
+.mainFeed {
+  min-width: 0;
+}
+
+/* Tablet layout (768px - 1200px) */
+@media (max-width: 1200px) {
+  .landingMain {
+    padding: 1.5rem 1rem;
+  }
+
+  .landingGrid {
+    grid-template-columns: 280px 1fr;
+    gap: 1.5rem;
+  }
+
+  .sidebar {
+    top: 70px;
+    max-height: calc(100vh - 90px);
+  }
+}
+
+/* Mobile layout (< 768px) */
+@media (max-width: 768px) {
+  .landingMain {
+    padding: 1rem 0.5rem;
+  }
+
+  .landingGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    order: 2;
+  }
+
+  .mainFeed {
+    order: 1;
+  }
+}
+
+/* Very small screens (< 480px) */
+@media (max-width: 480px) {
+  .landingMain {
+    padding: 0.75rem 0.25rem;
+  }
+
+  .landingGrid {
+    gap: 0.75rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .sidebar {
+    display: none;
+  }
+
+  .landingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mainFeed {
+    width: 100%;
+  }
+}

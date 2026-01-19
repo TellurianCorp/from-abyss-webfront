@@ -28,11 +28,54 @@
   --radius-md: 8px;
   --radius-lg: 12px;
 
+  /* Extended Color Palette */
+  --blood-dark: #8B2929;
+  --blood-light: #C95050;
+  --bone-dark: #D4CCBE;
+  --sepia-light: #A38968;
+  --abyss-lighter: #1A1A1A;
+
+  /* Semantic Colors */
+  --color-success: #4CAF50;
+  --color-error: #F44336;
+  --color-warning: #FF9800;
+  --color-info: #2196F3;
+
+  /* Backgrounds */
+  --bg-primary: rgba(16, 12, 10, 0.6);
+  --bg-secondary: rgba(0, 0, 0, 0.2);
+  --bg-tertiary: rgba(0, 0, 0, 0.3);
+  --bg-hover: rgba(255, 255, 255, 0.05);
+
+  /* Borders */
+  --border-primary: rgba(255, 255, 255, 0.08);
+  --border-secondary: rgba(255, 255, 255, 0.05);
+  --border-blood: rgba(176, 58, 58, 0.3);
+
+  /* Gradients */
+  --gradient-blood: linear-gradient(135deg, var(--blood), var(--blood-dark));
+  --gradient-bone: linear-gradient(135deg, var(--bone), var(--bone-dark));
+  --gradient-abyss: linear-gradient(180deg, var(--abyss-black), var(--abyss-lighter));
+
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
   --shadow-blood: 0 0 20px rgba(176, 58, 58, 0.3);
+  --shadow-blood-intense: 0 0 30px rgba(176, 58, 58, 0.5);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+
+  /* Animations */
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.2s ease;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Z-index layers */
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-modal: 2000;
+  --z-toast: 10000;
 
   /* Torn Paper Clip Path */
   --torn-paper-clip: polygon(

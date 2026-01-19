@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { LanguageSelector } from './LanguageSelector'
 import { WeatherShader } from './WeatherShader'
 import { ProfileDropdown } from './ProfileDropdown'
+import { NotificationBell } from './navigation/NotificationBell'
 import { useUser } from '../hooks/useUser'
 import styles from '../styles/Navbar.module.css'
 
@@ -50,13 +51,16 @@ export function Navbar() {
           <div className={styles.navbarRight}>
             <div className={styles.navbarActions}>
               {userInfo && (
-                <ProfileDropdown 
-                  userInfo={userInfo}
-                  onLogout={() => {
-                    // Clear user info from localStorage
-                    localStorage.removeItem('userInfo')
-                  }}
-                />
+                <>
+                  <NotificationBell userId={userInfo.id} />
+                  <ProfileDropdown
+                    userInfo={userInfo}
+                    onLogout={() => {
+                      // Clear user info from localStorage
+                      localStorage.removeItem('userInfo')
+                    }}
+                  />
+                </>
               )}
               <div className={styles.navbarLanguage}>
                 <LanguageSelector />

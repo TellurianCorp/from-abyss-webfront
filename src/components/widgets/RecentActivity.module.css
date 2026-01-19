@@ -1,0 +1,158 @@
+/* RecentActivity Widget Styles */
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  color: var(--muted, #B3A18E);
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activityItem {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.activityItem:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.activityIcon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.activityIcon.follow {
+  background: rgba(138, 110, 84, 0.2);
+  color: var(--sepia, #8A6E54);
+}
+
+.activityIcon.like {
+  background: rgba(176, 58, 58, 0.2);
+  color: var(--blood, #B03A3A);
+}
+
+.activityIcon.repost {
+  background: rgba(138, 110, 84, 0.2);
+  color: var(--sepia, #8A6E54);
+}
+
+.activityIcon.reply,
+.activityIcon.post {
+  background: rgba(232, 226, 217, 0.1);
+  color: var(--bone, #E8E2D9);
+}
+
+.activityContent {
+  flex: 1;
+  display: flex;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(232, 226, 217, 0.2);
+}
+
+.avatarPlaceholder {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blood, #B03A3A), var(--sepia, #8A6E54));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bone, #E8E2D9);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 2px solid rgba(232, 226, 217, 0.2);
+}
+
+.activityInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.activityMessage {
+  color: var(--bone, #E8E2D9);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activityMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--muted, #B3A18E);
+}
+
+.domain {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.separator {
+  flex-shrink: 0;
+}
+
+.time {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .activityItem {
+    padding: 0.625rem;
+  }
+
+  .activityIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .activityIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .avatar,
+  .avatarPlaceholder {
+    width: 28px;
+    height: 28px;
+  }
+
+  .activityMessage {
+    font-size: 0.8125rem;
+  }
+
+  .activityMeta {
+    font-size: 0.6875rem;
+  }
+}

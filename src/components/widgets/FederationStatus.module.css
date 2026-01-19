@@ -1,0 +1,98 @@
+/* FederationStatus Widget Styles */
+
+.rotating {
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.viewMoreLink {
+  color: var(--blood, #B03A3A);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.viewMoreLink:hover {
+  color: #C95050;
+  text-decoration: underline;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blood, #B03A3A);
+  font-family: 'Space Grotesk', monospace;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: var(--muted, #B3A18E);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(138, 110, 84, 0.1);
+  border-radius: 4px;
+  color: var(--sepia, #8A6E54);
+  font-size: 0.875rem;
+}
+
+.activity svg {
+  flex-shrink: 0;
+}
+
+.warning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(176, 58, 58, 0.1);
+  border-left: 3px solid var(--blood, #B03A3A);
+  border-radius: 4px;
+  color: var(--blood, #B03A3A);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.warning svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .stats {
+    gap: 0.75rem;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.6875rem;
+  }
+}

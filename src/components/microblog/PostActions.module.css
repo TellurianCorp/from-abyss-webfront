@@ -1,0 +1,122 @@
+/* PostActions Component Styles */
+
+.postActions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: var(--muted, #B3A18E);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--bone, #E8E2D9);
+}
+
+.actionButton:active {
+  transform: scale(0.95);
+}
+
+.actionButton svg {
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  min-width: 1.5ch;
+}
+
+/* Liked state */
+.actionButton.liked {
+  color: var(--blood, #B03A3A);
+}
+
+.actionButton.liked:hover {
+  color: #C95050;
+  background: rgba(176, 58, 58, 0.1);
+}
+
+.actionButton.liked svg {
+  animation: heartBeat 0.3s ease;
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Reposted state */
+.actionButton.reposted {
+  color: var(--sepia, #8A6E54);
+}
+
+.actionButton.reposted:hover {
+  color: #A38968;
+  background: rgba(138, 110, 84, 0.1);
+}
+
+.actionButton.reposted svg {
+  animation: repostSpin 0.4s ease;
+}
+
+@keyframes repostSpin {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+/* Focus styles for accessibility */
+.actionButton:focus-visible {
+  outline: 2px solid var(--blood, #B03A3A);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .postActions {
+    gap: 0.5rem;
+  }
+
+  .actionButton {
+    padding: 0.5rem;
+  }
+
+  .actionButton svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .count {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .postActions {
+    display: none;
+  }
+}

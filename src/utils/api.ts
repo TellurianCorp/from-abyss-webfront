@@ -92,7 +92,19 @@ export const API_ENDPOINTS = {
     createPost: '/v1/microblog/posts',
     deletePost: (postId: string) => `/v1/microblog/posts/${postId}`,
     likePost: (postId: string) => `/v1/microblog/posts/${postId}/like`,
+    repost: (postId: string) => `/v1/microblog/posts/${postId}/repost`,
+    unrepost: (postId: string) => `/v1/microblog/posts/${postId}/unrepost`,
+    thread: (threadId: string) => `/v1/microblog/threads/${threadId}`,
+    uploadMedia: '/v1/microblog/media/upload',
+    trending: '/v1/microblog/trending',
+    suggestions: '/v1/microblog/suggestions',
+    search: '/v1/microblog/search',
     follow: '/v1/microblog/follow',
+    bookmarks: {
+      add: (postId: string) => `/v1/microblog/bookmarks/${postId}`,
+      remove: (postId: string) => `/v1/microblog/bookmarks/${postId}`,
+      list: '/v1/microblog/bookmarks',
+    },
     notifications: {
       base: '/v1/microblog/notifications',
       unreadCount: '/v1/microblog/notifications/unread-count',
@@ -115,6 +127,10 @@ export const API_ENDPOINTS = {
       sync: '/v1/activitypub/sync',
       accountVisibility: '/v1/activitypub/account-visibility',
       requestLogs: '/v1/activitypub/request-logs',
+      federationStatus: '/v1/activitypub/federation/status',
+      remoteInstances: '/v1/activitypub/federation/instances',
+      remoteFollowers: '/v1/activitypub/followers/remote',
+      activityLog: '/v1/activitypub/activity/recent',
     },
   // Feediverse endpoints
   feediverse: {

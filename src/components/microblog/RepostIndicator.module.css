@@ -1,0 +1,23 @@
+/* RepostIndicator Component Styles */
+
+.repostIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--sepia, #8A6E54);
+  font-size: 0.875rem;
+}
+
+.repostIndicator svg {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
