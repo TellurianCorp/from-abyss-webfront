@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import './ActorProfile.css';
 
 interface ActorProfileProps {
@@ -22,8 +21,6 @@ export const ActorProfile: React.FC<ActorProfileProps> = ({
   showBanner = true,
   size = 'medium',
 }) => {
-  const { t } = useTranslation();
-
   const displayName = actor.display_name || actor.username;
   const handle = actor.domain
     ? `@${actor.username}@${actor.domain}`
