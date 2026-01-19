@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { apiUrl } from '../utils/api'
+import { useToast } from '../hooks/useToast'
 import './UserLogin.css'
 
 interface UserLoginProps {
@@ -10,6 +11,7 @@ interface UserLoginProps {
 
 export function UserLogin({ onLoginSuccess, onCancel }: UserLoginProps) {
   const { t } = useTranslation()
+  const { success, error: showError } = useToast()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -61,26 +63,34 @@ export function UserLogin({ onLoginSuccess, onCancel }: UserLoginProps) {
           const userData = await meResponse.json()
           const userId = userData.id || userData.user_id
           if (userId) {
+            success('Login successful!', 'Welcome back')
             onLoginSuccess(String(userId), userData)
             return
           }
         }
         
         setError('Login successful but could not retrieve user information')
+        showError('Login successful but could not retrieve user information')
       } else {
         const errorData = await response.json().catch(() => ({}))
         // If direct login fails, offer OIDC as fallback
         if (response.status === 404 || response.status === 501) {
-          setError('Direct login not available. Please use OIDC login.')
+          const errorMsg = 'Direct login not available. Please use OIDC login.'
+          setError(errorMsg)
+          showError(errorMsg, 'Login Unavailable')
           setUseOIDC(true)
         } else {
-          setError(errorData.message || 'Invalid email or password. Please try again.')
+          const errorMsg = errorData.message || 'Invalid email or password. Please try again.'
+          setError(errorMsg)
+          showError(errorMsg, 'Login Failed')
           setPassword('')
         }
       }
     } catch (err) {
       console.error('Login error:', err)
-      setError('An error occurred during login. Please try again.')
+      const errorMsg = 'An error occurred during login. Please try again.'
+      setError(errorMsg)
+      showError(errorMsg, 'Login Error')
       setPassword('')
     } finally {
       setIsLoading(false)

@@ -1,0 +1,154 @@
+.pending-follow-requests {
+  background: rgba(16, 12, 10, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.pending-follow-requests-title {
+  color: var(--bone);
+  font-size: 1.25rem;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.pending-follow-requests-loading,
+.pending-follow-requests-empty,
+.pending-follow-requests-error {
+  color: var(--muted);
+  text-align: center;
+  padding: 1rem;
+}
+
+.pending-follow-requests-retry {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--blood);
+  color: var(--bone);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pending-follow-requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pending-follow-request-item {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.pending-follow-request-item:hover {
+  border-color: rgba(176, 58, 58, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.pending-follow-request-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.pending-follow-request-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.pending-follow-request-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pending-follow-request-name {
+  color: var(--bone);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.pending-follow-request-handle {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.pending-follow-request-bio {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+.pending-follow-request-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.pending-follow-request-approve,
+.pending-follow-request-reject {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.pending-follow-request-approve {
+  background: rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.pending-follow-request-approve:hover {
+  background: rgba(76, 175, 80, 0.5);
+  border-color: #4caf50;
+}
+
+.pending-follow-request-reject {
+  background: rgba(176, 58, 58, 0.3);
+  color: var(--blood);
+  border: 1px solid rgba(176, 58, 58, 0.5);
+}
+
+.pending-follow-request-reject:hover {
+  background: rgba(176, 58, 58, 0.5);
+  border-color: var(--blood);
+}
+
+@media (max-width: 768px) {
+  .pending-follow-requests {
+    padding: 1rem;
+  }
+
+  .pending-follow-request-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pending-follow-request-actions {
+    flex-direction: column;
+  }
+
+  .pending-follow-request-approve,
+  .pending-follow-request-reject {
+    width: 100%;
+  }
+}

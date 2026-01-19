@@ -508,11 +508,28 @@
         "missingParams": "Faltando ID do usuário ou do ator"
       }
     },
+    "activitypub": {
+      "followRequests": {
+        "title": "Solicitações de Seguimento Pendentes",
+        "loading": "Carregando...",
+        "empty": "Nenhuma solicitação de seguimento pendente",
+        "approve": "Aprovar",
+        "reject": "Rejeitar",
+        "confirmReject": "Tem certeza de que deseja rejeitar esta solicitação de seguimento?",
+        "retry": "Tentar novamente",
+        "error": {
+          "fetch": "Falha ao carregar solicitações de seguimento",
+          "approve": "Falha ao aprovar solicitação",
+          "reject": "Falha ao rejeitar solicitação"
+        }
+      }
+    },
     "notifications": {
       "title": "Notificações",
       "empty": "Sem notificações",
       "markAllRead": "Marcar todas como lidas",
-      "follow": "{{name}} começou a te seguir",
+      "follow": "{{name}} quer te seguir",
+      "followHint": "Verifique solicitações pendentes para aprovar",
       "like": "{{name}} curtiu seu post",
       "repost": "{{name}} republicou seu post",
       "reply": "{{name}} respondeu seu post",

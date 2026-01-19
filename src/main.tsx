@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './index.css'
 import './i18n/config'
+import { ToastProvider } from './contexts/ToastContext'
 import App from './App.tsx'
 
 // Configure React Query for optimal performance
@@ -26,7 +27,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <App />
+        <ToastProvider>
+          <App />
+        </ToastProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>,

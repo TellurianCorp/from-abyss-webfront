@@ -2,6 +2,7 @@ import './App.css'
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import Toaster from './components/Toaster'
 
 // Lazy load routes for code splitting - only load when needed
 const Landing = lazy(() => import('./pages/Landing').then(m => ({ default: m.Landing })))
@@ -32,51 +33,54 @@ const PageLoader = () => (
 
 function App() {
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/editorial" element={<Editorial />} />
-        <Route path="/patreon" element={<Patreon />} />
-        <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/microblog" element={<Microblog />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/patreon"
-          element={
-            <ProtectedRoute>
-              <AdminPatreon />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <ProtectedRoute>
-              <AdminUsers />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/koliseum-admin"
-          element={
-            <ProtectedRoute>
-              <KoliseumAdmin />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/" element={<Landing />} />
-      </Routes>
-    </Suspense>
+    <>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/editorial" element={<Editorial />} />
+          <Route path="/patreon" element={<Patreon />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/microblog" element={<Microblog />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/patreon"
+            element={
+              <ProtectedRoute>
+                <AdminPatreon />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute>
+                <AdminUsers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/koliseum-admin"
+            element={
+              <ProtectedRoute>
+                <KoliseumAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Landing />} />
+        </Routes>
+      </Suspense>
+      <Toaster />
+    </>
   )
 }
 

@@ -511,11 +511,28 @@
         "missingParams": "Missing user ID or actor ID"
       }
     },
+    "activitypub": {
+      "followRequests": {
+        "title": "Pending Follow Requests",
+        "loading": "Loading...",
+        "empty": "No pending follow requests",
+        "approve": "Approve",
+        "reject": "Reject",
+        "confirmReject": "Are you sure you want to reject this follow request?",
+        "retry": "Retry",
+        "error": {
+          "fetch": "Failed to load follow requests",
+          "approve": "Failed to approve request",
+          "reject": "Failed to reject request"
+        }
+      }
+    },
     "notifications": {
       "title": "Notifications",
       "empty": "No notifications",
       "markAllRead": "Mark all as read",
-      "follow": "{{name}} started following you",
+      "follow": "{{name}} wants to follow you",
+      "followHint": "Check pending requests to approve",
       "like": "{{name}} liked your post",
       "repost": "{{name}} reposted your post",
       "reply": "{{name}} replied to your post",

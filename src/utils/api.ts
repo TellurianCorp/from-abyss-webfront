@@ -105,6 +105,14 @@ export const API_ENDPOINTS = {
       database: '/v1/microblog/metrics/database',
     },
   },
+  // ActivityPub endpoints
+  activitypub: {
+    base: '/v1/activitypub',
+    pendingFollows: '/v1/activitypub/pending-follows',
+    approveFollowRequest: (id: string) => `/v1/activitypub/follow-requests/${id}/approve`,
+    rejectFollowRequest: (id: string) => `/v1/activitypub/follow-requests/${id}/reject`,
+    actor: (username: string) => `/actors/${username}`,
+  },
   // Feediverse endpoints
   feediverse: {
     base: '/v1/feediverse',

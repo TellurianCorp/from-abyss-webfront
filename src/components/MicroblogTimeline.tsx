@@ -4,6 +4,7 @@ import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import FollowButton from './FollowButton'
 import Notifications from './Notifications'
 import { PostComposer } from './PostComposer'
+import PendingFollowRequests from './PendingFollowRequests'
 import './MicroblogTimeline.css'
 
 interface Post {
@@ -259,6 +260,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
 
   return (
     <div className="microblog-timeline">
+      <PendingFollowRequests onUpdate={fetchTimeline} />
       <div className="microblog-header">
         <div className="header-content">
           <div>

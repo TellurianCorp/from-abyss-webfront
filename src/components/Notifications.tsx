@@ -124,15 +124,15 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
   const getNotificationText = (notification: Notification): string => {
     switch (notification.type) {
       case 'follow':
-        return t('microblog.notifications.follow', { name: notification.actorName });
+        return t('microblog.notifications.follow', { name: notification.actorName || 'Someone' });
       case 'like':
-        return t('microblog.notifications.like', { name: notification.actorName });
+        return t('microblog.notifications.like', { name: notification.actorName || 'Someone' });
       case 'repost':
-        return t('microblog.notifications.repost', { name: notification.actorName });
+        return t('microblog.notifications.repost', { name: notification.actorName || 'Someone' });
       case 'reply':
-        return t('microblog.notifications.reply', { name: notification.actorName });
+        return t('microblog.notifications.reply', { name: notification.actorName || 'Someone' });
       case 'mention':
-        return t('microblog.notifications.mention', { name: notification.actorName });
+        return t('microblog.notifications.mention', { name: notification.actorName || 'Someone' });
       default:
         return '';
     }
@@ -193,12 +193,21 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
                 <div
                   key={notification.id}
                   className={`notification-item ${notification.read ? 'read' : 'unread'}`}
-                  onClick={() => !notification.read && markAsRead(notification.id)}
                 >
-                  <div className="notification-content">
+                  <div 
+                    className="notification-content"
+                    onClick={() => !notification.read && markAsRead(notification.id)}
+                  >
                     <div className="notification-text">{getNotificationText(notification)}</div>
                     <div className="notification-time">{formatTime(notification.createdAt)}</div>
                   </div>
+                  {notification.type === 'follow' && !notification.read && (
+                    <div className="notification-actions">
+                      <span className="notification-hint">
+                        {t('microblog.notifications.followHint', 'Check pending requests to approve')}
+                      </span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

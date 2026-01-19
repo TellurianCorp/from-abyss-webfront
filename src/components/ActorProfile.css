@@ -1,0 +1,164 @@
+.actor-profile {
+  background: rgba(16, 12, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.actor-profile:hover {
+  border-color: rgba(176, 58, 58, 0.3);
+  background: rgba(16, 12, 10, 0.8);
+}
+
+.actor-profile-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.actor-profile-banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.actor-profile-content {
+  padding: 1rem;
+  position: relative;
+}
+
+.actor-profile-small .actor-profile-content {
+  padding: 0.75rem;
+}
+
+.actor-profile-large .actor-profile-content {
+  padding: 1.5rem;
+}
+
+.actor-profile-avatar-container {
+  margin-top: -40px;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.actor-profile-small .actor-profile-avatar-container {
+  margin-top: -30px;
+}
+
+.actor-profile-large .actor-profile-avatar-container {
+  margin-top: -50px;
+}
+
+.actor-profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(16, 12, 10, 0.9);
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.3);
+  display: block;
+}
+
+.actor-profile-small .actor-profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-width: 2px;
+}
+
+.actor-profile-large .actor-profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-width: 4px;
+}
+
+.actor-profile-avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(16, 12, 10, 0.9);
+  background: linear-gradient(135deg, rgba(176, 58, 58, 0.6), rgba(176, 58, 58, 0.3));
+  color: var(--bone);
+  font-weight: 600;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.actor-profile-small .actor-profile-avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  border-width: 2px;
+}
+
+.actor-profile-large .actor-profile-avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  font-size: 2.5rem;
+  border-width: 4px;
+}
+
+.actor-profile-info {
+  margin-top: 0.5rem;
+}
+
+.actor-profile-name {
+  color: var(--bone);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.actor-profile-small .actor-profile-name {
+  font-size: 0.95rem;
+}
+
+.actor-profile-large .actor-profile-name {
+  font-size: 1.25rem;
+}
+
+.actor-profile-handle {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.actor-profile-small .actor-profile-handle {
+  font-size: 0.85rem;
+}
+
+.actor-profile-bio {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.actor-profile-small .actor-profile-bio {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .actor-profile-banner {
+    height: 150px;
+  }
+
+  .actor-profile-content {
+    padding: 0.75rem;
+  }
+
+  .actor-profile-avatar-container {
+    margin-top: -35px;
+  }
+
+  .actor-profile-avatar {
+    width: 70px;
+    height: 70px;
+  }
+}
