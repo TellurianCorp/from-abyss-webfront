@@ -22,6 +22,25 @@
   align-items: center;
 }
 
+.delete-post-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.delete-post-button:hover {
+  background: rgba(176, 58, 58, 0.2);
+  border-color: var(--blood);
+  color: var(--blood);
+}
+
 .microblog-header h2 {
   margin: 0 0 0.5rem;
   font-size: 1.5rem;

@@ -40,6 +40,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Include cookies for authentication
         body: JSON.stringify({
           userId,
           followingId: actorId,
@@ -75,6 +76,7 @@ const FollowButton: React.FC<FollowButtonProps> = ({
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include', // Include cookies for authentication
         body: JSON.stringify({
           userId,
           followingId: actorId,

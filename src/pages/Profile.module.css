@@ -414,6 +414,9 @@
   /* Strong sepia effect similar to Tailwind's sepia class (sepia(100%)) */
   filter: sepia(80%) saturate(0.6) contrast(1.15) brightness(0.9);
   z-index: 2;
+  /* High-quality image rendering to prevent artifacts */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
   /* Bevel/emboss effect to make it look fixed/embedded in the badge */
   border: 2px solid rgba(0, 0, 0, 0.3);
   box-shadow: 
@@ -427,6 +430,10 @@
     inset 0 1px 1px rgba(255, 255, 255, 0.15),
     /* Bottom shadow for depth */
     inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+  /* Prevent pixelation artifacts and improve rendering */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .faBadgePhotoPlaceholder {

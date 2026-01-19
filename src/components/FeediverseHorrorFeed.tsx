@@ -222,6 +222,7 @@ export function FeediverseHorrorFeed() {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.microblog.likePost(postId)), {
         method: 'POST',
+        credentials: 'include', // Include cookies for authentication
       })
 
       if (response.ok) {

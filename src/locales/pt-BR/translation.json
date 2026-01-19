@@ -484,6 +484,11 @@
     "reply": "Responder",
     "repost": "Republicar",
     "federated": "Federado",
+    "delete": {
+      "label": "Excluir",
+      "confirm": "Tem certeza de que deseja excluir este post?",
+      "error": "Falha ao excluir post"
+    },
     "time": {
       "justNow": "Agora",
       "minutesAgo": "há {{count}}min",

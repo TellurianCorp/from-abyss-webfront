@@ -487,6 +487,11 @@
     "reply": "Reply",
     "repost": "Repost",
     "federated": "Federated",
+    "delete": {
+      "label": "Delete",
+      "confirm": "Are you sure you want to delete this post?",
+      "error": "Failed to delete post"
+    },
     "time": {
       "justNow": "Just now",
       "minutesAgo": "{{count}}m ago",

@@ -90,6 +90,7 @@ export const API_ENDPOINTS = {
     base: '/v1/microblog',
     timeline: '/v1/microblog/timeline',
     createPost: '/v1/microblog/posts',
+    deletePost: (postId: string) => `/v1/microblog/posts/${postId}`,
     likePost: (postId: string) => `/v1/microblog/posts/${postId}/like`,
     follow: '/v1/microblog/follow',
     notifications: {

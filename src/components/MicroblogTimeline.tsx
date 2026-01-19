@@ -53,7 +53,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
 
       // Fetch timeline and highlighted profiles in parallel
       const [timelineResponse, highlightedProfilesResponse] = await Promise.allSettled([
-        fetch(timelineUrl),
+        fetch(timelineUrl, { credentials: 'include' }), // Include cookies for authentication
         fetch(apiUrl(API_ENDPOINTS.feediverse.highlightedProfiles))
       ])
 
@@ -192,6 +192,7 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.microblog.likePost(postId)), {
         method: 'POST',
+        credentials: 'include', // Include cookies for authentication
       })
 
       if (response.ok) {
@@ -206,6 +207,31 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
       console.error('Error liking post:', err)
     }
   }, [posts]) // Depend on posts for state updates
+
+  // Handle delete post
+  const handleDelete = useCallback(async (postId: string) => {
+    if (!window.confirm(t('microblog.delete.confirm'))) {
+      return
+    }
+
+    try {
+      const response = await fetch(apiUrl(API_ENDPOINTS.microblog.deletePost(postId)), {
+        method: 'DELETE',
+        credentials: 'include', // Include cookies for authentication
+      })
+
+      if (response.ok) {
+        // Remove post from local state
+        setPosts(posts.filter(post => post.id !== postId))
+      } else {
+        const errorData = await response.json().catch(() => ({}))
+        alert(errorData.message || t('microblog.delete.error'))
+      }
+    } catch (err) {
+      console.error('Error deleting post:', err)
+      alert(t('microblog.delete.error'))
+    }
+  }, [posts, t]) // Depend on posts and t for state updates
 
   // Memoize computed values
   const hasPosts = useMemo(() => posts.length > 0, [posts.length])
@@ -266,6 +292,19 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
                     actorId={post.authorId}
                     userId={userId}
                   />
+                )}
+                {userId && post.authorId === userId && (
+                  <button
+                    className="delete-post-button"
+                    onClick={() => handleDelete(post.id)}
+                    aria-label={t('microblog.delete.label')}
+                    title={t('microblog.delete.label')}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    </svg>
+                  </button>
                 )}
               </div>
             </div>

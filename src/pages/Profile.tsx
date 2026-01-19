@@ -122,21 +122,83 @@ export function Profile() {
     fileInputRef.current?.click()
   }
 
+  const resizeImage = (file: File, maxWidth: number, maxHeight: number, quality: number = 0.9): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const img = new Image()
+        img.onload = () => {
+          // Calculate new dimensions maintaining aspect ratio
+          let width = img.width
+          let height = img.height
+
+          if (width > height) {
+            if (width > maxWidth) {
+              height = (height * maxWidth) / width
+              width = maxWidth
+            }
+          } else {
+            if (height > maxHeight) {
+              width = (width * maxHeight) / height
+              height = maxHeight
+            }
+          }
+
+          // Create canvas and resize
+          const canvas = document.createElement('canvas')
+          canvas.width = width
+          canvas.height = height
+          const ctx = canvas.getContext('2d')
+
+          if (!ctx) {
+            reject(new Error('Could not get canvas context'))
+            return
+          }
+
+          // Use high-quality image rendering
+          ctx.imageSmoothingEnabled = true
+          ctx.imageSmoothingQuality = 'high'
+          
+          // Draw resized image
+          ctx.drawImage(img, 0, 0, width, height)
+
+          // Convert to data URL with compression
+          const dataUrl = canvas.toDataURL('image/jpeg', quality)
+          resolve(dataUrl)
+        }
+        img.onerror = reject
+        img.src = e.target?.result as string
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    // For now, we'll convert to data URL and update the picture
-    // In a real implementation, you'd upload to a server
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      const result = reader.result as string
+    try {
+      // Resize and optimize image before displaying
+      // Badge photo area is approximately 286x366px, so we'll resize to 400x512px for good quality
+      const resizedImage = await resizeImage(file, 400, 512, 0.9)
       setFormData(prev => ({
         ...prev,
-        picture: result,
+        picture: resizedImage,
       }))
+    } catch (error) {
+      console.error('Error processing image:', error)
+      // Fallback to original if resize fails
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const result = reader.result as string
+        setFormData(prev => ({
+          ...prev,
+          picture: result,
+        }))
+      }
+      reader.readAsDataURL(file)
     }
-    reader.readAsDataURL(file)
   }
 
   const formatUserId = (id: string | undefined): string => {
