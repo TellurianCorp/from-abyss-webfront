@@ -12,6 +12,7 @@ interface UserInfo {
   email?: string
   picture?: string
   fediverse_handle?: string
+  account_visibility?: 'public' | 'private'
 }
 
 export function Profile() {
@@ -27,6 +28,7 @@ export function Profile() {
     name: '',
     email: '',
     picture: '',
+    account_visibility: 'public' as 'public' | 'private',
   })
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -55,10 +57,27 @@ export function Profile() {
       if (response.ok) {
         const userData = await response.json()
         setUserInfo(userData)
+        
+        // Fetch account visibility
+        let accountVisibility = 'public'
+        try {
+          const visibilityResponse = await fetch(apiUrl('/v1/activitypub/account-visibility'), {
+            method: 'GET',
+            credentials: 'include',
+          })
+          if (visibilityResponse.ok) {
+            const visibilityData = await visibilityResponse.json()
+            accountVisibility = visibilityData.visibility || 'public'
+          }
+        } catch (err) {
+          console.error('Failed to fetch account visibility:', err)
+        }
+        
         setFormData({
           name: userData.name || '',
           email: userData.email || '',
           picture: userData.picture || '',
+          account_visibility: accountVisibility as 'public' | 'private',
         })
       } else {
         setError(t('profile.error.load', 'Failed to load profile'))
@@ -91,6 +110,24 @@ export function Profile() {
       if (response.ok) {
         const updatedUser = await response.json()
         setUserInfo(updatedUser)
+        
+        // Update account visibility separately
+        try {
+          const visibilityResponse = await fetch(apiUrl('/v1/activitypub/account-visibility'), {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({ visibility: formData.account_visibility }),
+          })
+          if (!visibilityResponse.ok) {
+            console.error('Failed to update account visibility')
+          }
+        } catch (err) {
+          console.error('Error updating account visibility:', err)
+        }
+        
         setSuccess(true)
         
         // Update localStorage
@@ -374,6 +411,27 @@ export function Profile() {
                       {userInfo.fediverse_handle ? 'OBSERVER' : 'VISITOR'}
                     </div>
                   </div>
+
+                  {userInfo.fediverse_handle && (
+                    <div className={styles.fileSection}>
+                      <div className={styles.fileLabel}>ACCOUNT VISIBILITY:</div>
+                      <select
+                        id="account_visibility"
+                        name="account_visibility"
+                        value={formData.account_visibility}
+                        onChange={(e) => setFormData(prev => ({ ...prev, account_visibility: e.target.value as 'public' | 'private' }))}
+                        className={styles.fileInput}
+                      >
+                        <option value="public">{t('profile.accountVisibility.public', 'Public - Anyone can follow')}</option>
+                        <option value="private">{t('profile.accountVisibility.private', 'Private - Requires approval')}</option>
+                      </select>
+                      <div className={styles.fileHint}>
+                        {formData.account_visibility === 'private' 
+                          ? t('profile.accountVisibility.privateHint', 'Follow requests will require your approval')
+                          : t('profile.accountVisibility.publicHint', 'Follow requests will be automatically accepted')}
+                      </div>
+                    </div>
+                  )}
 
                   <div className={styles.fileSection}>
                     <div className={styles.fileLabel}>PHOTOGRAPH:</div>

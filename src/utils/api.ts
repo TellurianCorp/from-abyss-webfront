@@ -106,13 +106,16 @@ export const API_ENDPOINTS = {
     },
   },
   // ActivityPub endpoints
-  activitypub: {
-    base: '/v1/activitypub',
-    pendingFollows: '/v1/activitypub/pending-follows',
-    approveFollowRequest: (id: string) => `/v1/activitypub/follow-requests/${id}/approve`,
-    rejectFollowRequest: (id: string) => `/v1/activitypub/follow-requests/${id}/reject`,
-    actor: (username: string) => `/actors/${username}`,
-  },
+    activitypub: {
+      base: '/v1/activitypub',
+      pendingFollows: '/v1/activitypub/pending-follows',
+      approveFollowRequest: (id: string) => `/v1/activitypub/follow-requests/${id}/approve`,
+      rejectFollowRequest: (id: string) => `/v1/activitypub/follow-requests/${id}/reject`,
+      actor: (username: string) => `/actors/${username}`,
+      sync: '/v1/activitypub/sync',
+      accountVisibility: '/v1/activitypub/account-visibility',
+      requestLogs: '/v1/activitypub/request-logs',
+    },
   // Feediverse endpoints
   feediverse: {
     base: '/v1/feediverse',

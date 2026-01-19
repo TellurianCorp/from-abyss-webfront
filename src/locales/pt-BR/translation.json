@@ -188,6 +188,11 @@
       "reviewQueuedEssays": "Revisar Ensaios na Fila",
       "spotlightWatchParty": "Destaque: Watch Party da Comunidade"
     },
+    "activitypubMonitor": {
+      "title": "Monitor ActivityPub",
+      "loading": "Carregando...",
+      "noActivity": "Nenhuma atividade recente"
+    },
     "incidentFeed": {
       "title": "Feed de Atividades",
       "subtitle": "Eventos recentes do sistema e notificações",
@@ -666,6 +671,12 @@
       "load": "Falha ao carregar perfil",
       "save": "Falha ao salvar perfil",
       "notFound": "Perfil não encontrado"
+    },
+    "accountVisibility": {
+      "public": "Público - Qualquer um pode seguir",
+      "private": "Privado - Requer aprovação",
+      "publicHint": "Solicitações de follow serão aceitas automaticamente",
+      "privateHint": "Solicitações de follow precisarão da sua aprovação"
     }
   }
 }

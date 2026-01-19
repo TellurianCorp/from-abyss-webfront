@@ -191,6 +191,11 @@
       "reviewQueuedEssays": "Review Queued Essays",
       "spotlightWatchParty": "Spotlight: Community Watch Party"
     },
+    "activitypubMonitor": {
+      "title": "ActivityPub Monitor",
+      "loading": "Loading...",
+      "noActivity": "No recent activity"
+    },
     "incidentFeed": {
       "title": "Activity Feed",
       "subtitle": "Recent system events and notifications",
@@ -669,6 +674,12 @@
       "load": "Failed to load profile",
       "save": "Failed to save profile",
       "notFound": "Profile not found"
+    },
+    "accountVisibility": {
+      "public": "Public - Anyone can follow",
+      "private": "Private - Requires approval",
+      "publicHint": "Follow requests will be automatically accepted",
+      "privateHint": "Follow requests will require your approval"
     }
   }
 }

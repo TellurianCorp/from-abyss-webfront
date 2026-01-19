@@ -6,6 +6,8 @@ import { FeediverseManagement } from '../components/FeediverseManagement'
 import { PatreonManagement } from '../components/PatreonManagement'
 import { YouTubeManagement } from '../components/YouTubeManagement'
 import MetricsDashboard from '../components/MetricsDashboard'
+import ActivityPubMonitor from '../components/ActivityPubMonitor'
+import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import styles from '../styles/Admin.module.css'
 
 export function Admin() {
@@ -103,9 +105,36 @@ export function Admin() {
     }
   }
 
-  const handleAction = (action: string) => {
+  const handleAction = async (action: string) => {
     console.log(`Action: ${action}`)
-    // TODO: Implement action handlers
+    
+    if (action === 'federation-sync') {
+      try {
+        const response = await fetch(apiUrl(API_ENDPOINTS.activitypub.sync), {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        
+        if (response.ok) {
+          const data = await response.json()
+          console.log('Federation sync completed:', data)
+          alert(`Federation sync completed!\n\nTasks: ${data.tasks?.length || 0}\nPending follow requests: ${data.pending_follow_requests || 0}\nLocal actors: ${data.local_actors || 0}`)
+        } else {
+          const error = await response.json().catch(() => ({ message: 'Unknown error' }))
+          console.error('Federation sync failed:', error)
+          alert(`Federation sync failed: ${error.message || 'Unknown error'}`)
+        }
+      } catch (error: any) {
+        console.error('Error running federation sync:', error)
+        alert(`Error running federation sync: ${error.message || 'Unknown error'}`)
+      }
+    } else {
+      // Other actions can be implemented here
+      console.log(`Action ${action} not yet implemented`)
+    }
   }
 
   return (
@@ -133,6 +162,9 @@ export function Admin() {
             </div>
           </div>
         </section>
+
+        {/* ActivityPub Monitor */}
+        <ActivityPubMonitor />
 
         {/* Key Metrics */}
         <section className={styles.metricsSection}>
