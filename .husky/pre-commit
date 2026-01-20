@@ -1,0 +1,27 @@
+echo "🔍 Running pre-commit checks..."
+echo ""
+
+echo "📝 Type checking TypeScript files..."
+npm run type-check || {
+  echo ""
+  echo "❌ TypeScript type check failed!"
+  echo "   Please fix the type errors before committing."
+  echo "   You can skip this check with: git commit --no-verify"
+  exit 1
+}
+
+echo "✅ Type check passed!"
+echo ""
+
+echo "🔎 Linting code..."
+npm run lint || {
+  echo ""
+  echo "❌ Linting failed!"
+  echo "   Please fix the linting errors before committing."
+  echo "   You can skip this check with: git commit --no-verify"
+  exit 1
+}
+
+echo "✅ Linting passed!"
+echo ""
+echo "✅ All pre-commit checks passed! Proceeding with commit..."
