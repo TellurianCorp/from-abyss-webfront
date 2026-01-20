@@ -2,10 +2,10 @@ import './App.css'
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { ExternalRedirect } from './components/ExternalRedirect'
 import Toaster from './components/Toaster'
 
 // Lazy load routes for code splitting - only load when needed
-const Landing = lazy(() => import('./pages/Landing').then(m => ({ default: m.Landing })))
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })))
 const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })))
 const Editorial = lazy(() => import('./pages/Editorial').then(m => ({ default: m.Editorial })))
@@ -133,7 +133,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<ExternalRedirect to="https://www.fromabyss.com" />} />
         </Routes>
       </Suspense>
       <Toaster />
