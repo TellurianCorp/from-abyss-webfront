@@ -5,9 +5,19 @@ import pageStyles from '../styles/Page.module.css'
 import cardStyles from '../styles/Cards.module.css'
 import footerStyles from '../styles/Footer.module.css'
 import './Editorial.css'
+import { useSEO } from '../hooks/useSEO'
 
 export function Editorial() {
   const { t } = useTranslation()
+
+  useSEO({
+    title: t('seo.editorial.title'),
+    description: t('seo.editorial.description'),
+    image: 'https://fromabyss.com/imgs/cover.png',
+    url: 'https://fromabyss.com/editorial',
+    type: 'website',
+    siteName: 'From Abyss Media',
+  })
 
   const featureHighlights = [
     {

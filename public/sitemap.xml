@@ -3,90 +3,46 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  <!-- Homepage -->
   <url>
     <loc>https://fromabyss.com/</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- About Page -->
   <url>
     <loc>https://fromabyss.com/about</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Contact Page -->
   <url>
     <loc>https://fromabyss.com/contact</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Editorial Page -->
   <url>
     <loc>https://fromabyss.com/editorial</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- Patreon Page -->
   <url>
     <loc>https://fromabyss.com/patreon</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <!-- TV Section -->
-  <url>
-    <loc>https://fromabyss.com/#tv</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <!-- Mission Section -->
-  <url>
-    <loc>https://fromabyss.com/#mission</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <!-- Editorial Sections -->
-  <url>
-    <loc>https://fromabyss.com/editorial#articles</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fromabyss.com/editorial#comics</loc>
-    <lastmod>2025-12-08</lastmod>
+    <loc>https://fromabyss.com/roadmap</loc>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fromabyss.com/editorial#books</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fromabyss.com/editorial#music</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fromabyss.com/editorial#games</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://fromabyss.com/editorial#movies</loc>
-    <lastmod>2025-12-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://fromabyss.com/microblog</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

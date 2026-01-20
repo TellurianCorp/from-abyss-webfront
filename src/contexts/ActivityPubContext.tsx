@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback, useEffect, ReactNode } from 'react'
+import { createContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
 
 export interface RemoteInstance {
@@ -92,7 +92,7 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
   const [remoteInstances, setRemoteInstances] = useState<RemoteInstance[]>([])
   const [followRequests, setFollowRequests] = useState<FollowRequest[]>([])
   const [highlightedProfiles, setHighlightedProfiles] = useState<HighlightedProfile[]>([])
-  const [stats, setStats] = useState<FederationStats | null>(null)
+  const [stats] = useState<FederationStats | null>(null)
   const [recentActivity, setRecentActivity] = useState<FederationActivity[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)

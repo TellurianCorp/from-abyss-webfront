@@ -4,6 +4,8 @@ Allow: /
 
 # Disallow admin area from search engines
 Disallow: /admin/
+Disallow: /profile
+Disallow: /koliseum-admin
 
 # Allow all images
 Allow: /imgs/

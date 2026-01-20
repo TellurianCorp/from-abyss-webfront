@@ -6,6 +6,7 @@ import pageStyles from '../styles/Page.module.css'
 import cardStyles from '../styles/Cards.module.css'
 import footerStyles from '../styles/Footer.module.css'
 import './Contact.css'
+import { useSEO } from '../hooks/useSEO'
 
 interface FormData {
   name: string
@@ -23,6 +24,15 @@ interface FormErrors {
 
 export function Contact() {
   const { t } = useTranslation()
+
+  useSEO({
+    title: t('seo.contact.title'),
+    description: t('seo.contact.description'),
+    image: 'https://fromabyss.com/imgs/cover.png',
+    url: 'https://fromabyss.com/contact',
+    type: 'website',
+    siteName: 'From Abyss Media',
+  })
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',

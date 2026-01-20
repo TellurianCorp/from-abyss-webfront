@@ -1,0 +1,94 @@
+.follow-user-input-container {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.follow-user-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.follow-user-input-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.follow-user-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--bone);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.follow-user-input:focus {
+  outline: none;
+  border-color: var(--highlight);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(176, 58, 58, 0.1);
+}
+
+.follow-user-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.follow-user-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.follow-user-input-button {
+  padding: 0.75rem 1.5rem;
+  background: var(--blood);
+  border: none;
+  border-radius: 8px;
+  color: var(--bone);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.follow-user-input-button:hover:not(:disabled) {
+  background: rgba(176, 58, 58, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(176, 58, 58, 0.3);
+}
+
+.follow-user-input-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.follow-user-input-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.follow-user-input-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .follow-user-input-wrapper {
+    flex-direction: column;
+  }
+
+  .follow-user-input-button {
+    width: 100%;
+  }
+}

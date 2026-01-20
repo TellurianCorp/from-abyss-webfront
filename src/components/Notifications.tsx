@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { apiUrl, API_ENDPOINTS } from '../utils/api';
 import './Notifications.css';
@@ -24,6 +25,9 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
 
   const fetchNotifications = React.useCallback(async () => {
     if (!userId) return;
@@ -71,6 +75,50 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
       }
     }
   }, [userId]);
+
+  // Calculate dropdown position when opening or scrolling/resizing
+  useEffect(() => {
+    const updatePosition = () => {
+      if (isOpen && buttonRef.current) {
+        const buttonRect = buttonRef.current.getBoundingClientRect();
+        setMenuPosition({
+          top: buttonRect.bottom + window.scrollY + 8, // 8px = 0.5rem
+          right: window.innerWidth - buttonRect.right + window.scrollX,
+        });
+      }
+    };
+
+    if (isOpen) {
+      updatePosition();
+      window.addEventListener('scroll', updatePosition, true);
+      window.addEventListener('resize', updatePosition);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', updatePosition, true);
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [isOpen]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+        buttonRef.current && !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     if (userId) {
@@ -153,27 +201,16 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
     return new Date(dateString).toLocaleDateString();
   };
 
-  return (
-    <div className="notifications-container">
-      <button
-        className="notifications-toggle"
-        onClick={() => {
-          setIsOpen(!isOpen);
-          if (!isOpen) {
-            fetchNotifications();
-          }
-        }}
-      >
-        <img 
-          src="/imgs/from_abyss_bells.png" 
-          alt="Notifications" 
-          className="notifications-icon"
-        />
-        {unreadCount > 0 && <span className="notifications-badge">{unreadCount}</span>}
-      </button>
-
-      {isOpen && (
-        <div className="notifications-dropdown">
+  const dropdownContent = isOpen ? (
+    <div
+      ref={dropdownRef}
+      className="notifications-dropdown"
+      style={{
+        position: 'fixed',
+        top: `${menuPosition.top}px`,
+        right: `${menuPosition.right}px`,
+      }}
+    >
           <div className="notifications-header">
             <h3>{t('microblog.notifications.title')}</h3>
             {unreadCount > 0 && (
@@ -213,7 +250,29 @@ const Notifications: React.FC<NotificationsProps> = ({ userId }) => {
             </div>
           )}
         </div>
-      )}
+  ) : null;
+
+  return (
+    <div className="notifications-container">
+      <button
+        ref={buttonRef}
+        className="notifications-toggle"
+        onClick={() => {
+          setIsOpen(!isOpen);
+          if (!isOpen) {
+            fetchNotifications();
+          }
+        }}
+      >
+        <img 
+          src="/imgs/from_abyss_bells.png" 
+          alt="Notifications" 
+          className="notifications-icon"
+        />
+        {unreadCount > 0 && <span className="notifications-badge">{unreadCount}</span>}
+      </button>
+
+      {isOpen && typeof document !== 'undefined' && createPortal(dropdownContent, document.body)}
     </div>
   );
 };

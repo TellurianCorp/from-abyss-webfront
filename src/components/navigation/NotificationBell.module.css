@@ -33,32 +33,28 @@
 }
 
 .bellIcon {
-  transition: transform 0.3s ease;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  transition: all 0.3s ease;
+  object-fit: contain;
+  display: block;
 }
 
-/* Bell animation when there are unread notifications */
+/* Activity icon animation when there are unread notifications */
 .notificationBell:has(.badge) .bellIcon {
-  animation: bellRing 2s ease-in-out infinite;
+  animation: activityPulse 2s ease-in-out infinite;
 }
 
-@keyframes bellRing {
+@keyframes activityPulse {
   0%, 100% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(15deg);
-  }
-  20% {
-    transform: rotate(-15deg);
-  }
-  30% {
-    transform: rotate(10deg);
-  }
-  40% {
-    transform: rotate(-10deg);
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    transform: rotate(0deg);
+    transform: scale(1.1);
+    opacity: 0.8;
   }
 }
 
@@ -99,8 +95,10 @@
   }
 
   .bellIcon {
-    width: 20px;
-    height: 20px;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
   }
 
   .badge {

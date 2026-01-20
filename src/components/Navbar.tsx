@@ -25,6 +25,7 @@ export function Navbar() {
     { id: 'music', label: t('navbar.menu.music', 'Music'), url: '/editorial#music' },
     { id: 'games', label: t('navbar.menu.games', 'Games'), url: '/editorial#games' },
     { id: 'movies', label: t('navbar.menu.movies', 'Movies'), url: '/editorial#movies' },
+    { id: 'horrorverse', label: t('navbar.menu.horrorverse', 'Horrorverse'), url: '/microblog' },
   ]
 
   return (

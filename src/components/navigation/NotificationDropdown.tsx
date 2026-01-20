@@ -5,13 +5,12 @@ import { NotificationItem } from './NotificationItem'
 import styles from './NotificationDropdown.module.css'
 
 interface NotificationDropdownProps {
-  userId: string
   onClose: () => void
 }
 
 type NotificationFilter = 'all' | 'follows' | 'likes' | 'replies' | 'mentions'
 
-export function NotificationDropdown({ userId, onClose }: NotificationDropdownProps) {
+export function NotificationDropdown({ onClose }: NotificationDropdownProps) {
   const { t } = useTranslation()
   const { notifications, unreadCount, markAllAsRead, loading } = useNotifications()
   const [filter, setFilter] = useState<NotificationFilter>('all')

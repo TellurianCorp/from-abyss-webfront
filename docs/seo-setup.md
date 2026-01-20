@@ -54,7 +54,7 @@ function ArticlePage({ article }) {
     title: `${article.title} - From Abyss Media`,
     description: article.excerpt,
     image: article.coverImage,
-    url: `https://fromabyss.media/articles/${article.slug}`,
+    url: `https://fromabyss.com/articles/${article.slug}`,
     type: 'article'
   })
   
@@ -83,7 +83,7 @@ function ReviewPage({ review }) {
       name: 'From Abyss Media',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://fromabyss.media/imgs/logo.png'
+        url: 'https://fromabyss.com/imgs/logo.png'
       }
     }
   })
@@ -152,7 +152,7 @@ The robots.txt file:
 
 ## URL Configuration
 
-**Important:** Update the base URL (`https://fromabyss.media`) in:
+**Important:** Update the base URL (`https://fromabyss.com`) in:
 - `index.html` (meta tags)
 - `public/sitemap.xml`
 - `src/utils/seo.ts` (defaultSEO object)
@@ -168,3 +168,15 @@ Consider adding:
 - Multi-language support (hreflang tags)
 - RSS feed for content
 - Analytics integration (Google Analytics, etc.)
+
+
+## Prerendered Route Shells
+
+A post-build script generates route-specific HTML shells so social crawlers and search engines
+can read page-level meta tags even when they do not execute JavaScript.
+
+- Script: `scripts/prerender-routes.mjs`
+- Trigger: `npm run build` (via `postbuild`)
+- Output: `dist/<route>/index.html` for public routes
+
+Update the `routes` list in the script when new public pages are added.

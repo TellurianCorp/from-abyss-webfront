@@ -16,8 +16,8 @@ const defaultSEO: Required<SEOData> = {
   title: 'From Abyss Media - Horror Social Network, Reviews & Multimedia Platform',
   description: 'Immersive platform for horror fans & creators. Social networking, reviews, essays, and multimedia productions converging at the intersection of technology and dread.',
   keywords: 'horror, horror games, horror reviews, horror social network, horror community, horror essays, horror podcasts, horror videos, ActivityPub, federated social network, From Abyss Media, Tellurian',
-  image: 'https://fromabyss.media/imgs/cover.png',
-  url: 'https://fromabyss.media/',
+  image: 'https://fromabyss.com/imgs/cover.png',
+  url: 'https://fromabyss.com/',
   type: 'website',
   siteName: 'From Abyss Media',
 }

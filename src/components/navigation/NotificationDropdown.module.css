@@ -1,9 +1,7 @@
 /* NotificationDropdown Component Styles - Horror Zine Aesthetic */
 
 .dropdown {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
+  position: relative;
   width: 400px;
   max-height: 600px;
   background: rgba(16, 12, 10, 0.95);
@@ -12,7 +10,7 @@
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.6),
     0 0 20px rgba(176, 58, 58, 0.1);
-  z-index: 1000;
+  z-index: 10000 !important;
   display: flex;
   flex-direction: column;
   animation: slideDown 0.2s ease;

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { LanguageSelector } from '../components/LanguageSelector'
 import './Roadmap.css'
+import { useSEO } from '../hooks/useSEO'
 
 interface GitHubMilestone {
   id: number
@@ -371,6 +372,15 @@ function DetailModal({
 
 export function Roadmap() {
   const { t } = useTranslation()
+
+  useSEO({
+    title: t('seo.roadmap.title'),
+    description: t('seo.roadmap.description'),
+    image: 'https://fromabyss.com/imgs/cover.png',
+    url: 'https://fromabyss.com/roadmap',
+    type: 'website',
+    siteName: 'From Abyss Media',
+  })
   const [roadmapData, setRoadmapData] = useState<RepoRoadmap[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

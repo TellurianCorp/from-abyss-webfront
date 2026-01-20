@@ -26,6 +26,9 @@ export function YouTubeHighlights() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [retrying, setRetrying] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  
+  const VIDEOS_PER_PAGE = 5
 
   const fetchVideos = async () => {
     try {
@@ -33,7 +36,7 @@ export function YouTubeHighlights() {
       setError(null)
       setRetrying(false)
       
-      const response = await fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=5`))
+      const response = await fetch(apiUrl(`${API_ENDPOINTS.youtube.videos}?limit=30`))
       
       if (!response.ok) {
         // Check if response is JSON before trying to parse
@@ -63,6 +66,7 @@ export function YouTubeHighlights() {
       
       const data: YouTubeResponse = await response.json()
       setVideos(data.data || [])
+      setCurrentPage(1) // Reset to first page when videos are loaded
     } catch (err) {
       console.error('Error fetching YouTube videos:', err)
       const errorMessage = err instanceof Error ? err.message : 'Failed to load videos'
@@ -132,10 +136,6 @@ export function YouTubeHighlights() {
   if (loading) {
     return (
       <section className="section youtube-section">
-        <div className="section-header">
-          <h2>{t('youtube.highlights.title')}</h2>
-          <p>{t('youtube.highlights.description')}</p>
-        </div>
         <div className="youtube-videos youtube-loading-state">
           {[1, 2, 3, 4, 5].map((i) => (
             <div key={i} className="card youtube-video-skeleton">
@@ -155,10 +155,6 @@ export function YouTubeHighlights() {
   if (error) {
     return (
       <section className="section youtube-section">
-        <div className="section-header">
-          <h2>{t('youtube.highlights.title')}</h2>
-          <p>{t('youtube.highlights.description')}</p>
-        </div>
         <div className="youtube-error">
           <p>{error}</p>
           <button 
@@ -177,10 +173,6 @@ export function YouTubeHighlights() {
   if (videos.length === 0) {
     return (
       <section className="section youtube-section">
-        <div className="section-header">
-          <h2>{t('youtube.highlights.title')}</h2>
-          <p>{t('youtube.highlights.description')}</p>
-        </div>
         <div className="youtube-empty">
           <p>{t('youtube.highlights.empty')}</p>
         </div>
@@ -188,14 +180,25 @@ export function YouTubeHighlights() {
     )
   }
 
+  // Calculate pagination
+  const totalPages = Math.ceil(videos.length / VIDEOS_PER_PAGE)
+  const startIndex = (currentPage - 1) * VIDEOS_PER_PAGE
+  const endIndex = startIndex + VIDEOS_PER_PAGE
+  const paginatedVideos = videos.slice(startIndex, endIndex)
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    // Scroll to top of videos section
+    const videosSection = document.querySelector('.youtube-videos')
+    if (videosSection) {
+      videosSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   return (
     <section className="section youtube-section" itemScope itemType="https://schema.org/ItemList">
-      <div className="section-header">
-        <h2 itemProp="name">{t('youtube.highlights.title')}</h2>
-        <p itemProp="description">{t('youtube.highlights.description')}</p>
-      </div>
       <div className="youtube-videos" role="list">
-        {videos.map((video) => (
+        {paginatedVideos.map((video) => (
           <article
             key={video.id}
             className="card youtube-video-card"
@@ -284,6 +287,44 @@ export function YouTubeHighlights() {
           </article>
         ))}
       </div>
+      
+      {/* Pagination Controls - Only show if more than 5 videos */}
+      {totalPages > 1 && (
+        <div className="youtube-pagination">
+        <button
+          className="youtube-pagination-button"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+        >
+          ← {t('youtube.highlights.pagination.prev', 'Prev')}
+        </button>
+        
+        <div className="youtube-pagination-pages">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`youtube-pagination-page ${currentPage === page ? 'active' : ''}`}
+              onClick={() => handlePageChange(page)}
+              aria-label={`Go to page ${page}`}
+              aria-current={currentPage === page ? 'page' : undefined}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
+        
+        <button
+          className="youtube-pagination-button"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          aria-label="Next page"
+        >
+          {t('youtube.highlights.pagination.next', 'Next')} →
+        </button>
+        </div>
+      )}
+
       <a
         className="youtube-cta"
         href="https://www.youtube.com/@fromabyssmedia"

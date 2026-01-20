@@ -1,0 +1,713 @@
+/* Admin Dashboard Revamp - Modern Glass Morphism Design */
+
+/* Page Container */
+.adminPage {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, rgb(12, 12, 12), rgb(0, 0, 0));
+  padding: 0;
+}
+
+.adminContainer {
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Dashboard Hero */
+.dashboardHero {
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboardHero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.heroEyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0;
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 5vw, 4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bone);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-top: 0.5rem;
+}
+
+.heroStats {
+  display: flex;
+  gap: 2rem;
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(145deg, rgba(50, 50, 55, 0.6), rgba(30, 30, 35, 0.6));
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.heroStat:hover {
+  background: linear-gradient(145deg, rgba(60, 60, 65, 0.7), rgba(40, 40, 45, 0.7));
+  transform: translateY(-2px);
+}
+
+.heroStatValue {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--bone);
+  line-height: 1;
+}
+
+.heroStatLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Section Header */
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--bone);
+  margin: 0;
+}
+
+.sectionDescription {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Metrics Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Metric Card */
+.metricCard {
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metricCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.metricCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.metricCard:hover::after {
+  opacity: 1;
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.metricLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0;
+}
+
+.metricTrend {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.metricTrendPositive {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+.metricTrendNegative {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.metricValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--bone);
+  line-height: 1.2;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Service Cards Grid */
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Service Card */
+.serviceCard {
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.serviceCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.serviceCard:hover::after {
+  opacity: 1;
+}
+
+.serviceCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.serviceCardTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+}
+
+.serviceIcon {
+  font-size: 3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.serviceName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bone);
+  margin: 0 0 0.5rem;
+}
+
+.serviceDescription {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.serviceStatus {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.statusActive {
+  color: #4ade80;
+  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.6));
+}
+
+.statusInactive {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.serviceContent {
+  position: relative;
+  z-index: 1;
+}
+
+.serviceStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 1;
+}
+
+.serviceStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.serviceStatLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.serviceStatValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bone);
+}
+
+.serviceLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, rgba(35, 35, 40, 0.8), rgba(20, 20, 25, 0.8));
+  color: var(--bone);
+  font-weight: 600;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.serviceLinkArrow {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.serviceLink:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.9), rgba(25, 25, 30, 0.9));
+}
+
+.serviceLink:hover .serviceLinkArrow {
+  transform: translateX(4px);
+}
+
+/* Service Color Variants */
+.serviceBlood {
+  background: linear-gradient(145deg, rgba(60, 25, 25, 0.95), rgba(35, 15, 15, 0.95));
+  border-color: rgba(176, 58, 58, 0.35);
+}
+
+.serviceSepia {
+  background: linear-gradient(145deg, rgba(50, 40, 30, 0.95), rgba(30, 25, 18, 0.95));
+  border-color: rgba(138, 110, 84, 0.35);
+}
+
+.serviceBone {
+  background: linear-gradient(145deg, rgba(50, 48, 45, 0.95), rgba(30, 28, 25, 0.95));
+  border-color: rgba(232, 226, 217, 0.25);
+}
+
+.serviceMuted {
+  background: linear-gradient(145deg, rgba(45, 40, 35, 0.95), rgba(28, 25, 22, 0.95));
+  border-color: rgba(179, 161, 142, 0.3);
+}
+
+/* Main Content Grid */
+.mainGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+/* Glass Panel */
+.glassPanel {
+  background: linear-gradient(145deg, rgba(40, 40, 45, 0.95), rgba(20, 20, 25, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.glassPanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.panelHeader {
+  margin-bottom: 1.5rem;
+}
+
+.panelTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--bone);
+  margin: 0 0 0.5rem;
+}
+
+.panelSubtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Action Buttons */
+.actionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(145deg, rgba(35, 35, 40, 0.9), rgba(18, 18, 22, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  color: var(--bone);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.actionButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.actionButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
+    0 6px 16px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.actionButton:hover::after {
+  opacity: 1;
+}
+
+.actionIcon {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.actionLabel {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Incident Feed */
+.incidentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.incidentItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, rgba(25, 25, 28, 0.9), rgba(15, 15, 18, 0.9));
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-left: 4px solid;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.incidentItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.incidentItem:hover {
+  transform: translateX(4px);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.incidentIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.incidentSuccess {
+  border-left-color: #4ade80;
+}
+
+.incidentSuccess .incidentIcon {
+  color: #4ade80;
+}
+
+.incidentWarning {
+  border-left-color: #fbbf24;
+}
+
+.incidentWarning .incidentIcon {
+  color: #fbbf24;
+}
+
+.incidentInfo {
+  border-left-color: #60a5fa;
+}
+
+.incidentInfo .incidentIcon {
+  color: #60a5fa;
+}
+
+.incidentContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.incidentText {
+  margin: 0;
+  color: var(--bone);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.incidentTime {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .adminContainer {
+    padding-top: 100px;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-bottom: 2rem;
+    gap: 2rem;
+  }
+  
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .heroStats {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  
+  .heroStat {
+    padding: 1rem 1.5rem;
+  }
+  
+  .heroStatValue {
+    font-size: 2rem;
+  }
+  
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .serviceStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

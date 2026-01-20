@@ -18,7 +18,16 @@
     "badge": "Conectando a comunidade global de horror",
     "issue": "Edição #{{issue}} · Despacho Zine",
     "eyebrow": "From Abyss Media",
-    "title": "Portal From Abyss"
+    "title": "Portal From Abyss",
+    "menu": {
+      "articles": "Artigos",
+      "comics": "Quadrinhos",
+      "books": "Livros",
+      "music": "Música",
+      "games": "Jogos",
+      "movies": "Filmes",
+      "horrorverse": "Horrorverse"
+    }
   },
   "koliseum": {
     "console": {
@@ -62,6 +71,7 @@
   "admin": {
     "eyebrow": "From Abyss Control",
     "title": "Painel do Guardião",
+    "logout": "Sair",
     "description": "Monitore e gerencie todos os serviços, métricas e operações do From Abyss Media a partir de um único centro de comando.",
     "hero": {
       "description": "Monitore e gerencie todos os serviços, métricas e operações do From Abyss Media a partir de um único centro de comando.",
@@ -280,6 +290,10 @@
       "visitChannel": "Visitar Canal",
       "retry": "Tentar Novamente",
       "retrying": "Tentando novamente...",
+      "pagination": {
+        "prev": "Anterior",
+        "next": "Próximo"
+      },
       "date": {
         "today": "Hoje",
         "yesterday": "Ontem",
@@ -513,6 +527,20 @@
         "missingParams": "Faltando ID do usuário ou do ator"
       }
     },
+    "followUserInput": {
+      "label": "Seguir usuário por handle",
+      "placeholder": "@usuario ou @usuario@dominio.com",
+      "hint": "Digite um handle de usuário para seguir. Use @usuario para usuários locais ou @usuario@dominio.com para usuários federados.",
+      "submit": "Seguir",
+      "submitting": "Seguindo...",
+      "success": "Seguiu {{handle}} com sucesso",
+      "error": {
+        "emptyHandle": "Por favor, digite um handle de usuário",
+        "invalidHandle": "Formato de handle inválido",
+        "invalidFederatedHandle": "Formato de handle federado inválido. Use @usuario@dominio.com",
+        "failed": "Falha ao seguir usuário"
+      }
+    },
     "activitypub": {
       "followRequests": {
         "title": "Solicitações de Seguimento Pendentes",
@@ -677,6 +705,36 @@
       "private": "Privado - Requer aprovação",
       "publicHint": "Solicitações de follow serão aceitas automaticamente",
       "privateHint": "Solicitações de follow precisarão da sua aprovação"
+    }
+  },
+  "seo": {
+    "landing": {
+      "title": "From Abyss Media - Rede social de horror, reviews e plataforma multimidia",
+      "description": "Plataforma imersiva para fas e criadores de horror. Rede social, reviews, ensaios e producoes multimidia no encontro entre tecnologia e medo."
+    },
+    "about": {
+      "title": "Sobre - From Abyss Media",
+      "description": "Conheca a From Abyss Media, plataforma da comunidade de horror para criadores e fas."
+    },
+    "contact": {
+      "title": "Contato - From Abyss Media",
+      "description": "Fale com a equipe da From Abyss Media para parcerias, suporte e imprensa."
+    },
+    "editorial": {
+      "title": "Editorial - From Abyss Media",
+      "description": "Hub editorial com ensaios, reviews, entrevistas e narrativas multimidia de horror."
+    },
+    "patreon": {
+      "title": "Apoie - From Abyss Media",
+      "description": "Apoie a From Abyss Media no Patreon e ajude a construir o futuro da midia de horror."
+    },
+    "roadmap": {
+      "title": "Roadmap - From Abyss Media",
+      "description": "Roadmap de produto da From Abyss Media e projetos relacionados no ecossistema."
+    },
+    "microblog": {
+      "title": "Microblog - From Abyss Media",
+      "description": "Feed de microblog federado da comunidade From Abyss Media."
     }
   }
 }

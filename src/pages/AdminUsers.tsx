@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AdminNavbar } from '../components/AdminNavbar'
+import { AdminSidebar } from '../components/AdminSidebar'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { useToast } from '../hooks/useToast'
 import styles from '../styles/AdminUsers.module.css'
+import layoutStyles from '../styles/AdminLayout.module.css'
 
 interface User {
   id: number
@@ -40,6 +43,7 @@ interface UserUpdateRequest {
 
 export function AdminUsers() {
   const { t } = useTranslation()
+  const { success, error: showError } = useToast()
   const [users, setUsers] = useState<User[]>([])
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [editingUser, setEditingUser] = useState<User | null>(null)
@@ -175,8 +179,11 @@ export function AdminUsers() {
         fediverse_username: '',
       })
       setCreatePhotoFile(null)
+      success(t('admin.users.userCreated', 'User created successfully'), 'Success')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create user')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create user'
+      setError(errorMessage)
+      showError(errorMessage, t('admin.users.createError', 'Failed to Create User'))
       console.error('Error creating user:', err)
     } finally {
       setLoading(false)
@@ -224,12 +231,15 @@ export function AdminUsers() {
         if (selectedUser?.id === updatedUser.id) {
           setSelectedUser(updatedUser)
         }
+        success(t('admin.users.userUpdated', 'User updated successfully'), 'Success')
       }
       
       setEditingUser(null)
       setEditForm({})
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update user')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to update user'
+      setError(errorMessage)
+      showError(errorMessage, t('admin.users.updateError', 'Failed to Update User'))
       console.error('Error updating user:', err)
     } finally {
       setLoading(false)
@@ -254,8 +264,11 @@ export function AdminUsers() {
       if (selectedUser?.id === userId) {
         setSelectedUser(null)
       }
+      success(t('admin.users.userDeleted', 'User deleted successfully'), 'Success')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete user')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to delete user'
+      setError(errorMessage)
+      showError(errorMessage, t('admin.users.deleteError', 'Failed to Delete User'))
       console.error('Error deleting user:', err)
     } finally {
       setLoading(false)
@@ -296,8 +309,12 @@ export function AdminUsers() {
       if (editingUser?.id === userId) {
         setEditingUser({ ...editingUser, picture: result.url })
       }
+      
+      success(t('admin.users.photoUploaded', 'Photo uploaded successfully'), 'Success')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to upload photo')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to upload photo'
+      setError(errorMessage)
+      showError(errorMessage, t('admin.users.photoUploadError', 'Photo Upload Failed'))
       console.error('Error uploading photo:', err)
     } finally {
       setUploadingPhoto(null)
@@ -344,8 +361,11 @@ export function AdminUsers() {
       // Close modal
       setShowFediverseHandleModal(null)
       setFediverseHandleInput('')
+      success(t('admin.users.fediverseHandleCreated', 'Fediverse handle created successfully'), 'Success')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create Fediverse handle')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to create Fediverse handle'
+      setError(errorMessage)
+      showError(errorMessage, t('admin.users.fediverseHandleError', 'Failed to Create Handle'))
       console.error('Error creating Fediverse handle:', err)
     } finally {
       setCreatingHandle(false)
@@ -371,11 +391,14 @@ export function AdminUsers() {
 
       const result = await response.json()
       setGeneratedPassword(result.password)
+      success(t('admin.users.passwordGenerated', 'Password generated successfully'), 'Success')
       
       // Reload users to refresh the list
       await loadUsers()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to generate password')
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate password'
+      setError(errorMessage)
+      showError(errorMessage, t('admin.users.passwordGenerateError', 'Failed to Generate Password'))
       console.error('Error generating password:', err)
     } finally {
       setGeneratingPassword(null)
@@ -433,17 +456,23 @@ export function AdminUsers() {
   }
 
   return (
-    <div className={styles.adminUsersPage}>
+    <div className={layoutStyles.adminPage}>
       <AdminNavbar />
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>{t('admin.users.title', 'User Management')}</h1>
-          <p className={styles.description}>
-            {t('admin.users.description', 'Manage users in the From Abyss Media platform')}
-          </p>
-        </div>
+      <div className={layoutStyles.adminLayout}>
+        <AdminSidebar />
+        <main className={layoutStyles.adminContent}>
+          <div className={layoutStyles.pageHeader}>
+            <h1 className={layoutStyles.pageTitle}>{t('admin.users.title', 'User Management')}</h1>
+            <p className={layoutStyles.pageDescription}>
+              {t('admin.users.description', 'Manage users, permissions, and accounts')}
+            </p>
+          </div>
+          <div className={styles.container}>
+            <p className={styles.description}>
+              {t('admin.users.description', 'Manage users in the From Abyss Media platform')}
+            </p>
 
-        {error && (
+            {error && (
           <div className={styles.errorAlert}>
             <span className={styles.errorIcon}>⚠</span>
             <span>{error}</span>
@@ -623,6 +652,7 @@ export function AdminUsers() {
             </div>
           </>
         )}
+          </div>
 
         {/* Create Modal */}
         {creatingUser && (
@@ -1008,7 +1038,7 @@ export function AdminUsers() {
                     <button
                       onClick={() => {
                         navigator.clipboard.writeText(generatedPassword)
-                        alert(t('admin.users.passwordCopied', 'Password copied to clipboard!'))
+                        success(t('admin.users.passwordCopied', 'Password copied to clipboard!'))
                       }}
                       className={styles.copyButton}
                     >
@@ -1067,6 +1097,7 @@ export function AdminUsers() {
             </div>
           </div>
         )}
+        </main>
       </div>
     </div>
   )

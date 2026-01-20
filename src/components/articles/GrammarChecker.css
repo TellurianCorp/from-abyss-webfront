@@ -1,0 +1,92 @@
+.grammar-checker {
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.check-button {
+  padding: 0.5rem 1rem;
+  background-color: #8b5cf6;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.check-button:hover:not(:disabled) {
+  background-color: #7c3aed;
+}
+
+.check-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.matches-list {
+  margin-top: 1rem;
+}
+
+.matches-list h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.match-item {
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.match-message {
+  margin-bottom: 0.5rem;
+}
+
+.match-message strong {
+  display: block;
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.match-context {
+  display: block;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.replacements {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.replacement-button {
+  padding: 0.25rem 0.75rem;
+  background-color: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.replacement-button:hover {
+  background-color: #bfdbfe;
+}

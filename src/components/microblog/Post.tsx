@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Post as PostType } from '../../contexts/MicroblogContext'
+import { type Post as PostType } from '../../contexts/MicroblogContext'
 import { PostCard } from './PostCard'
 import { PostActions } from './PostActions'
 import { PostMetadata } from './PostMetadata'
@@ -56,7 +56,6 @@ export function Post({
       {post.repostedBy && (
         <RepostIndicator
           userName={post.repostedBy.name}
-          userHandle={post.repostedBy.handle}
           userAvatar={post.repostedBy.avatar}
         />
       )}

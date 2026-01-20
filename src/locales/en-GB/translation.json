@@ -18,7 +18,16 @@
     "badge": "Connecting the global horror community",
     "issue": "Issue #{{issue}} · Zine Dispatch",
     "eyebrow": "From Abyss Media",
-    "title": "From Abyss Portal"
+    "title": "From Abyss Portal",
+    "menu": {
+      "articles": "Articles",
+      "comics": "Comics",
+      "books": "Books",
+      "music": "Music",
+      "games": "Games",
+      "movies": "Movies",
+      "horrorverse": "Horrorverse"
+    }
   },
   "koliseum": {
     "console": {
@@ -62,6 +71,7 @@
   "admin": {
     "eyebrow": "From Abyss Control",
     "title": "Guardian Dashboard",
+    "logout": "Logout",
     "description": "Monitor and manage all From Abyss Media services, metrics, and operations from a single command center.",
     "hero": {
       "description": "Monitor and manage all From Abyss Media services, metrics, and operations from a single command center.",
@@ -283,6 +293,10 @@
       "visitChannel": "Visit Channel",
       "retry": "Retry",
       "retrying": "Retrying...",
+      "pagination": {
+        "prev": "Prev",
+        "next": "Next"
+      },
       "date": {
         "today": "Today",
         "yesterday": "Yesterday",
@@ -516,6 +530,20 @@
         "missingParams": "Missing user ID or actor ID"
       }
     },
+    "followUserInput": {
+      "label": "Follow user by handle",
+      "placeholder": "@username or @username@domain.com",
+      "hint": "Enter a user handle to follow. Use @username for local users or @username@domain.com for federated users.",
+      "submit": "Follow",
+      "submitting": "Following...",
+      "success": "Successfully followed {{handle}}",
+      "error": {
+        "emptyHandle": "Please enter a user handle",
+        "invalidHandle": "Invalid handle format",
+        "invalidFederatedHandle": "Invalid federated handle format. Use @username@domain.com",
+        "failed": "Failed to follow user"
+      }
+    },
     "activitypub": {
       "followRequests": {
         "title": "Pending Follow Requests",
@@ -680,6 +708,36 @@
       "private": "Private - Requires approval",
       "publicHint": "Follow requests will be automatically accepted",
       "privateHint": "Follow requests will require your approval"
+    }
+  },
+  "seo": {
+    "landing": {
+      "title": "From Abyss Media - Horror Social Network, Reviews & Multimedia Platform",
+      "description": "Immersive platform for horror fans & creators. Social networking, reviews, essays, and multimedia productions converging at the intersection of technology and dread."
+    },
+    "about": {
+      "title": "About - From Abyss Media",
+      "description": "Learn about From Abyss Media, the horror community platform for creators and fans."
+    },
+    "contact": {
+      "title": "Contact - From Abyss Media",
+      "description": "Get in touch with the From Abyss Media team for partnerships, support, and media inquiries."
+    },
+    "editorial": {
+      "title": "Editorial - From Abyss Media",
+      "description": "Editorial hub for horror essays, reviews, interviews, and multimedia storytelling."
+    },
+    "patreon": {
+      "title": "Support - From Abyss Media",
+      "description": "Support From Abyss Media on Patreon and help build the future of horror media."
+    },
+    "roadmap": {
+      "title": "Roadmap - From Abyss Media",
+      "description": "Product roadmap for From Abyss Media and related projects across the ecosystem."
+    },
+    "microblog": {
+      "title": "Microblog - From Abyss Media",
+      "description": "Federated microblog feed for the From Abyss Media community."
     }
   }
 }

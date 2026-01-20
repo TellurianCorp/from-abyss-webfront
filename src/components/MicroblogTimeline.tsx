@@ -5,6 +5,7 @@ import { Post } from './microblog/Post'
 import { PostComposer } from './PostComposer'
 import PendingFollowRequests from './PendingFollowRequests'
 import Notifications from './Notifications'
+import FollowUserInput from './FollowUserInput'
 import './MicroblogTimeline.css'
 
 interface MicroblogTimelineProps {
@@ -26,10 +27,8 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
     deletePost: deletePostFromContext
   } = useMicroblog()
 
-  // Refresh timeline when component mounts
-  useEffect(() => {
-    refresh()
-  }, [refresh])
+  // Note: Timeline is already loaded by MicroblogContext on mount
+  // No need to call refresh() here to avoid infinite loop
 
   const handlePostCreated = () => {
     refresh()
@@ -58,9 +57,9 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
 
   // Infinite scroll handler
   useEffect(() => {
-    const handleScroll = () => {
-      if (loading || !hasMore) return
+    if (loading || !hasMore) return
 
+    const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight
       const scrollTop = document.documentElement.scrollTop
       const clientHeight = document.documentElement.clientHeight
@@ -103,6 +102,9 @@ export function MicroblogTimeline({ userId }: MicroblogTimelineProps) {
     <div className="microblog-timeline">
       {/* Pending follow requests */}
       <PendingFollowRequests onUpdate={refresh} />
+
+      {/* Follow user input */}
+      <FollowUserInput onFollowSuccess={refresh} />
 
       {/* Header with notifications */}
       <div className="microblog-header">

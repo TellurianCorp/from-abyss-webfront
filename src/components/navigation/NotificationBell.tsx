@@ -1,26 +1,50 @@
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useNotifications } from '../../hooks/useNotifications'
 import { NotificationDropdown } from './NotificationDropdown'
 import styles from './NotificationBell.module.css'
 
 interface NotificationBellProps {
-  userId: string
+  userId?: string
 }
 
-export function NotificationBell({ userId }: NotificationBellProps) {
+export function NotificationBell({}: NotificationBellProps) {
   const [isOpen, setIsOpen] = useState(false)
   const bellRef = useRef<HTMLButtonElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 })
   const { unreadCount } = useNotifications()
+
+  // Calculate dropdown position when opening or scrolling/resizing
+  useEffect(() => {
+    const updatePosition = () => {
+      if (isOpen && bellRef.current) {
+        const buttonRect = bellRef.current.getBoundingClientRect()
+        setMenuPosition({
+          top: buttonRect.bottom + window.scrollY + 8, // 8px = 0.5rem
+          right: window.innerWidth - buttonRect.right + window.scrollX,
+        })
+      }
+    }
+
+    if (isOpen) {
+      updatePosition()
+      window.addEventListener('scroll', updatePosition, true)
+      window.addEventListener('resize', updatePosition)
+    }
+
+    return () => {
+      window.removeEventListener('scroll', updatePosition, true)
+      window.removeEventListener('resize', updatePosition)
+    }
+  }, [isOpen])
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        bellRef.current &&
-        dropdownRef.current &&
-        !bellRef.current.contains(event.target as Node) &&
-        !dropdownRef.current.contains(event.target as Node)
+        dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+        bellRef.current && !bellRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false)
       }
@@ -66,18 +90,11 @@ export function NotificationBell({ userId }: NotificationBellProps) {
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
+        <img
+          src="/imgs/from_abyss_bells.png"
+          alt="Notifications"
           className={styles.bellIcon}
-        >
-          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-        </svg>
+        />
 
         {unreadCount > 0 && (
           <span className={styles.badge} aria-label={`${unreadCount} unread notifications`}>
@@ -86,10 +103,19 @@ export function NotificationBell({ userId }: NotificationBellProps) {
         )}
       </button>
 
-      {isOpen && (
-        <div ref={dropdownRef}>
-          <NotificationDropdown userId={userId} onClose={() => setIsOpen(false)} />
-        </div>
+      {isOpen && typeof document !== 'undefined' && createPortal(
+        <div
+          ref={dropdownRef}
+          style={{
+            position: 'fixed',
+            top: `${menuPosition.top}px`,
+            right: `${menuPosition.right}px`,
+            zIndex: 10000,
+          }}
+        >
+          <NotificationDropdown onClose={() => setIsOpen(false)} />
+        </div>,
+        document.body
       )}
     </div>
   )

@@ -163,10 +163,44 @@ export function YouTubeManagement() {
         statsRes.json(),
       ])
 
-      // Handle different response formats
-      setChannelInfo(channelData.id ? channelData : channelData.data)
-      setVideos(videosData.data || videosData || [])
-      setStats(statsData.subscribers !== undefined ? statsData : statsData.data)
+      // Handle different response formats and map to component interface
+      const rawChannel = channelData.id ? channelData : channelData.data
+      if (rawChannel) {
+        setChannelInfo({
+          id: rawChannel.id || '',
+          title: rawChannel.name || rawChannel.title || '',
+          description: rawChannel.description || '',
+          thumbnail: rawChannel.thumbnail || '',
+          subscribers: rawChannel.subscribers || 0,
+          videos: rawChannel.videoCount || 0,
+          views: rawChannel.viewCount || 0,
+          createdAt: rawChannel.createdAt || '',
+          customUrl: rawChannel.customUrl || '',
+        })
+      }
+
+      const rawVideos = videosData.data || videosData || []
+      setVideos(Array.isArray(rawVideos) ? rawVideos.map((video: any) => ({
+        id: video.id || '',
+        title: video.title || '',
+        description: video.description || '',
+        thumbnail: video.thumbnail || '',
+        publishedAt: video.publishedAt || '',
+        duration: video.duration || '',
+        viewCount: video.viewCount || 0,
+        likeCount: video.likeCount || 0,
+        commentCount: video.commentCount || 0,
+      })) : [])
+
+      const rawStats = statsData.subscribers !== undefined ? statsData : statsData.data
+      if (rawStats) {
+        setStats({
+          subscribers: rawStats.subscribers || 0,
+          videos: rawStats.totalVideos || rawStats.videos || 0,
+          views: rawStats.totalViews || rawStats.views || 0,
+          channelId: rawStats.channelId || channelData?.id || '',
+        })
+      }
       setCacheStatus('Data refreshed successfully')
       setTimeout(() => setCacheStatus(''), 3000)
     } catch (err) {
@@ -212,13 +246,19 @@ export function YouTubeManagement() {
     return num.toString()
   }
 
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+  const formatDate = (dateString: string | undefined): string => {
+    if (!dateString) return ''
+    try {
+      const date = new Date(dateString)
+      if (isNaN(date.getTime())) return dateString
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    } catch {
+      return dateString
+    }
   }
 
   if (loading) {

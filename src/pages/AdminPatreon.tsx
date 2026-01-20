@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AdminNavbar } from '../components/AdminNavbar'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { useToast } from '../hooks/useToast'
 
 interface PatreonUser {
   id: string
@@ -47,6 +48,7 @@ interface PatreonStats {
 
 export function AdminPatreon() {
   const { t } = useTranslation()
+  const { error: showError } = useToast()
   const [user, setUser] = useState<PatreonUser | null>(null)
   const [campaigns, setCampaigns] = useState<PatreonCampaign[]>([])
   const [tiers, setTiers] = useState<Record<string, PatreonTier[]>>({})
@@ -289,11 +291,11 @@ export function AdminPatreon() {
       } else {
         const errorData = await response.json().catch(() => ({}))
         console.error('Failed to update tier:', errorData)
-        alert(t('patreon.tiers.updateError') || 'Failed to update tier. Please try again.')
+        showError(t('patreon.tiers.updateError') || 'Failed to update tier. Please try again.', 'Update Failed')
       }
     } catch (err) {
       console.error('Error updating tier:', err)
-      alert(t('patreon.tiers.updateError') || 'Failed to update tier. Please try again.')
+      showError(t('patreon.tiers.updateError') || 'Failed to update tier. Please try again.', 'Update Error')
     }
   }
 

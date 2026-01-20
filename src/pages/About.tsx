@@ -5,9 +5,19 @@ import pageStyles from '../styles/Page.module.css'
 import cardStyles from '../styles/Cards.module.css'
 import footerStyles from '../styles/Footer.module.css'
 import './About.css'
+import { useSEO } from '../hooks/useSEO'
 
 export function About() {
   const { t } = useTranslation()
+
+  useSEO({
+    title: t('seo.about.title'),
+    description: t('seo.about.description'),
+    image: 'https://fromabyss.com/imgs/cover.png',
+    url: 'https://fromabyss.com/about',
+    type: 'website',
+    siteName: 'From Abyss Media',
+  })
 
   return (
     <div className={pageStyles.page}>

@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Notification } from '../../contexts/NotificationContext'
+import { type Notification } from '../../contexts/NotificationContext'
 import { useNotifications } from '../../hooks/useNotifications'
 import styles from './NotificationItem.module.css'
 

@@ -8,10 +8,12 @@ import { YouTubeManagement } from '../components/YouTubeManagement'
 import MetricsDashboard from '../components/MetricsDashboard'
 import ActivityPubMonitor from '../components/ActivityPubMonitor'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { useToast } from '../hooks/useToast'
 import styles from '../styles/Admin.module.css'
 
 export function Admin() {
   const { t } = useTranslation()
+  const { success, error: showError } = useToast()
 
   const adminMetrics = useMemo(() => [
     { label: t('admin.metrics.activeSessions'), value: '342', trend: '+12%' },
@@ -121,15 +123,18 @@ export function Admin() {
         if (response.ok) {
           const data = await response.json()
           console.log('Federation sync completed:', data)
-          alert(`Federation sync completed!\n\nTasks: ${data.tasks?.length || 0}\nPending follow requests: ${data.pending_follow_requests || 0}\nLocal actors: ${data.local_actors || 0}`)
+          success(
+            `Tasks: ${data.tasks?.length || 0}\nPending follow requests: ${data.pending_follow_requests || 0}\nLocal actors: ${data.local_actors || 0}`,
+            'Federation Sync Completed'
+          )
         } else {
           const error = await response.json().catch(() => ({ message: 'Unknown error' }))
           console.error('Federation sync failed:', error)
-          alert(`Federation sync failed: ${error.message || 'Unknown error'}`)
+          showError(error.message || 'Unknown error', 'Federation Sync Failed')
         }
       } catch (error: any) {
         console.error('Error running federation sync:', error)
-        alert(`Error running federation sync: ${error.message || 'Unknown error'}`)
+        showError(error.message || 'Unknown error', 'Federation Sync Error')
       }
     } else {
       // Other actions can be implemented here

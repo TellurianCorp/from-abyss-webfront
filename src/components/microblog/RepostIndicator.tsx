@@ -3,11 +3,10 @@ import styles from './RepostIndicator.module.css'
 
 interface RepostIndicatorProps {
   userName: string
-  userHandle: string
   userAvatar?: string
 }
 
-export function RepostIndicator({ userName, userHandle, userAvatar }: RepostIndicatorProps) {
+export function RepostIndicator({ userName, userAvatar }: RepostIndicatorProps) {
   const { t } = useTranslation()
 
   return (

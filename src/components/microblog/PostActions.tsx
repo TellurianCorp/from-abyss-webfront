@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Post } from '../../contexts/MicroblogContext'
+import { type Post } from '../../contexts/MicroblogContext'
 import styles from './PostActions.module.css'
 
 interface PostActionsProps {

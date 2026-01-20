@@ -106,3 +106,204 @@
     width: 100%;
   }
 }
+
+/* Magazine Layout - 3 Columns */
+.magazineMain {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.magazineGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.magazineColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.magazineColumnCenter {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 2rem;
+}
+
+.magazineSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.magazineSectionTitle {
+  font-family: 'Special Elite', cursive;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--blood, #B03A3A);
+  margin: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(176, 58, 58, 0.3);
+}
+
+.magazineHero {
+  margin-bottom: 3rem;
+}
+
+.magazineHeroImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(12, 12, 12, 0.9), rgba(176, 58, 58, 0.2));
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.magazinePlaceholder {
+  color: var(--muted, rgba(255, 255, 255, 0.4));
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.magazineHeroContent {
+  text-align: center;
+}
+
+.magazineHeroTitle {
+  font-family: 'Special Elite', cursive;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--bone, #E8E2D9);
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.magazineHeroSubtitle {
+  font-size: 1.1rem;
+  color: var(--muted, rgba(255, 255, 255, 0.7));
+  line-height: 1.6;
+  margin: 0;
+}
+
+.magazineCard {
+  background: rgba(12, 12, 12, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.magazineCard:hover {
+  border-color: rgba(176, 58, 58, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.magazineCardImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(12, 12, 12, 0.8), rgba(176, 58, 58, 0.15));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magazineCardContent {
+  padding: 1.25rem;
+}
+
+.magazineCardTitle {
+  font-family: 'Special Elite', cursive;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bone, #E8E2D9);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+.magazineCardExcerpt {
+  font-size: 0.9rem;
+  color: var(--muted, rgba(255, 255, 255, 0.7));
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.magazineCardMeta {
+  font-size: 0.85rem;
+  color: var(--blood, #B03A3A);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.magazineCardMeta:hover {
+  color: #C95050;
+}
+
+/* Responsive Magazine Layout */
+@media (max-width: 1200px) {
+  .magazineGrid {
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .magazineColumnCenter {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 968px) {
+  .magazineGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .magazineColumnCenter {
+    border-left: none;
+    border-right: none;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .magazineHeroTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .magazineMain {
+    padding: 1rem 0.5rem;
+  }
+
+  .magazineGrid {
+    gap: 1.5rem;
+  }
+
+  .magazineHeroTitle {
+    font-size: 1.75rem;
+  }
+
+  .magazineHeroSubtitle {
+    font-size: 1rem;
+  }
+}

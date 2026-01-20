@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
 import './Patreon.css'
+import { useSEO } from '../hooks/useSEO'
 
 interface PatreonCampaign {
   id: string
@@ -50,6 +51,15 @@ const API_BASE = '/v1/patreon'
 
 export function Patreon() {
   const { t } = useTranslation()
+
+  useSEO({
+    title: t('seo.patreon.title'),
+    description: t('seo.patreon.description'),
+    image: 'https://fromabyss.com/imgs/cover.png',
+    url: 'https://fromabyss.com/patreon',
+    type: 'website',
+    siteName: 'From Abyss Media',
+  })
   const [stats, setStats] = useState<PatreonStats | null>(null)
   const [campaigns, setCampaigns] = useState<PatreonCampaign[]>([])
   const [tiers, setTiers] = useState<Record<string, PatreonTier[]>>({})

@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback, useEffect, ReactNode } from 'react'
+import { createContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
 
 export interface Post {
@@ -62,7 +62,7 @@ interface MicroblogProviderProps {
   userId?: string
 }
 
-export function MicroblogProvider({ children, userId }: MicroblogProviderProps) {
+export function MicroblogProvider({ children }: MicroblogProviderProps) {
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -70,16 +70,17 @@ export function MicroblogProvider({ children, userId }: MicroblogProviderProps) 
   const [nextCursor, setNextCursor] = useState<string | undefined>(undefined)
   const [currentFilter, setCurrentFilter] = useState<'all' | 'following' | 'local' | 'federated'>('all')
   const [currentSort, setCurrentSort] = useState<'latest' | 'popular' | 'trending'>('latest')
+  const isInitialMount = useRef(true)
 
   // Fetch timeline posts
-  const fetchPosts = useCallback(async (append: boolean = false) => {
+  const fetchPosts = useCallback(async (append: boolean = false, cursor?: string) => {
     try {
       setLoading(true)
       setError(null)
 
       const params = new URLSearchParams({
         limit: '20',
-        ...(append && nextCursor ? { cursor: nextCursor } : {}),
+        ...(append && cursor ? { before: cursor } : {}),
         ...(currentFilter !== 'all' ? { filter: currentFilter } : {}),
         ...(currentSort !== 'latest' ? { sort: currentSort } : {})
       })
@@ -136,12 +137,23 @@ export function MicroblogProvider({ children, userId }: MicroblogProviderProps) 
     } finally {
       setLoading(false)
     }
-  }, [nextCursor, currentFilter, currentSort])
+  }, [currentFilter, currentSort])
 
-  // Initial load
+  // Initial load - only once on mount
   useEffect(() => {
     fetchPosts(false)
-  }, [currentFilter, currentSort]) // Refetch when filter or sort changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) // Empty deps - only run on mount
+
+  // Refetch when filter or sort changes (but not on initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
+    fetchPosts(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentFilter, currentSort])
 
   // Add a new post to the top of the timeline
   const addPost = useCallback((post: Post) => {
@@ -254,10 +266,15 @@ export function MicroblogProvider({ children, userId }: MicroblogProviderProps) 
     }
   }, [posts, updatePost])
 
-  // Load more posts (infinite scroll)
+  // Load more posts (infinite scroll) - use ref to get latest cursor
+  const nextCursorRef = useRef(nextCursor)
+  useEffect(() => {
+    nextCursorRef.current = nextCursor
+  }, [nextCursor])
+
   const loadMore = useCallback(async () => {
     if (!hasMore || loading) return
-    await fetchPosts(true)
+    await fetchPosts(true, nextCursorRef.current)
   }, [hasMore, loading, fetchPosts])
 
   // Refresh timeline (pull to refresh)
