@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
 import { useToast } from '../hooks/useToast'
 import './FeedManagement.css'
@@ -54,7 +53,6 @@ interface CreateFeedRequest {
 }
 
 export function FeedManagement() {
-  const { t } = useTranslation()
   const { success, error: showError } = useToast()
   const [feeds, setFeeds] = useState<Feed[]>([])
   const [selectedFeed, setSelectedFeed] = useState<Feed | null>(null)

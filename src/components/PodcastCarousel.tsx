@@ -116,17 +116,17 @@ export function PodcastCarousel() {
 
       if (diffDays === 0) return t('podcast.today', 'Today')
       if (diffDays === 1) return t('podcast.yesterday', 'Yesterday')
-      if (diffDays < 7) return t('podcast.daysAgo', { count: diffDays }, `${diffDays} days ago`)
+      if (diffDays < 7) return t('podcast.daysAgo', `${diffDays} days ago`, { count: diffDays })
       if (diffDays < 30) {
         const weeks = Math.floor(diffDays / 7)
-        return t('podcast.weeksAgo', { count: weeks }, `${weeks} weeks ago`)
+        return t('podcast.weeksAgo', `${weeks} weeks ago`, { count: weeks })
       }
       if (diffDays < 365) {
         const months = Math.floor(diffDays / 30)
-        return t('podcast.monthsAgo', { count: months }, `${months} months ago`)
+        return t('podcast.monthsAgo', `${months} months ago`, { count: months })
       }
       const years = Math.floor(diffDays / 365)
-      return t('podcast.yearsAgo', { count: years }, `${years} years ago`)
+      return t('podcast.yearsAgo', `${years} years ago`, { count: years })
     } catch {
       return dateString
     }
