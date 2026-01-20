@@ -167,6 +167,19 @@ export const API_ENDPOINTS = {
       generatePassword: (id: string | number) => `/v1/admin/users/${id}/generate-password`,
     },
   },
+  // Feed Administration endpoints
+  feeds: {
+    base: '/v1/admin/feeds',
+    list: '/v1/admin/feeds',
+    create: '/v1/admin/feeds',
+    get: (id: string) => `/v1/admin/feeds/${id}`,
+    update: (id: string) => `/v1/admin/feeds/${id}`,
+    delete: (id: string) => `/v1/admin/feeds/${id}`,
+    healthCheck: (id: string) => `/v1/admin/feeds/${id}/health-check`,
+    healthHistory: (id: string) => `/v1/admin/feeds/${id}/health-history`,
+    episodes: (id: string) => `/v1/admin/feeds/${id}/episodes`,
+    sync: (id: string) => `/v1/admin/feeds/${id}/sync`,
+  },
   // Communication features endpoints
   pitches: {
     base: '/v1/pitches',

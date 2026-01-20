@@ -1,5 +1,6 @@
 import { Navbar } from '../components/Navbar'
 import { YouTubeHighlights } from '../components/YouTubeHighlights'
+import { PodcastCarousel } from '../components/PodcastCarousel'
 import { useTranslation } from 'react-i18next'
 import pageStyles from '../styles/Page.module.css'
 import landingStyles from '../styles/Landing.module.css'
@@ -103,6 +104,8 @@ export function Landing() {
 
           {/* Right Column */}
           <div className={landingStyles.magazineColumn}>
+            <PodcastCarousel />
+
             <section className={landingStyles.magazineSection}>
               <h2 className={landingStyles.magazineSectionTitle}>Music & Sound</h2>
               <div className={landingStyles.magazineCard}>

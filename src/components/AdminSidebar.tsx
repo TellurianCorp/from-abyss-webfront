@@ -14,6 +14,7 @@ import {
   User,
   Zap,
   Activity,
+  Rss,
 } from 'react-feather'
 import styles from '../styles/AdminSidebar.module.css'
 
@@ -113,6 +114,20 @@ export function AdminSidebar() {
           icon: User,
           path: '/admin/users',
           module: 'users',
+        },
+      ],
+    },
+    {
+      id: 'feeds',
+      label: t('admin.sidebar.feeds', 'Feed Administration'),
+      icon: Rss,
+      items: [
+        {
+          id: 'feeds-management',
+          label: t('admin.sidebar.feedsManagement', 'Feed Management'),
+          icon: Rss,
+          path: '/admin/feeds',
+          module: 'feeds',
         },
       ],
     },

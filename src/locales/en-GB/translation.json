@@ -324,6 +324,19 @@
       }
     }
   },
+  "podcast": {
+    "latestEpisodes": "Latest Podcast Episodes",
+    "loading": "Loading podcasts...",
+    "error": "Unable to load podcasts at this time.",
+    "empty": "No podcast episodes available.",
+    "play": "Play Episode",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgo": "{{count}} days ago",
+    "weeksAgo": "{{count}} weeks ago",
+    "monthsAgo": "{{count}} months ago",
+    "yearsAgo": "{{count}} years ago"
+  },
   "zine": {
     "notes": {
       "title": "Dispatch notes",

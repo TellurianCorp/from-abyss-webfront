@@ -5,6 +5,7 @@ import { AdminNavbar } from '../components/AdminNavbar'
 import { FeediverseManagement } from '../components/FeediverseManagement'
 import { PatreonManagement } from '../components/PatreonManagement'
 import { YouTubeManagement } from '../components/YouTubeManagement'
+import { FeedManagement } from '../components/FeedManagement'
 import MetricsDashboard from '../components/MetricsDashboard'
 import ActivityPubMonitor from '../components/ActivityPubMonitor'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
@@ -76,6 +77,15 @@ export function Admin() {
       color: 'muted',
       component: 'FeediverseManagement',
       icon: '🌐',
+    },
+    {
+      id: 'feeds',
+      name: 'Feed Administration',
+      description: 'Gerenciar feeds RSS, podcasts e artigos',
+      status: 'active',
+      color: 'muted',
+      component: 'FeedManagement',
+      icon: '📡',
     },
     {
       id: 'users',
@@ -221,6 +231,7 @@ export function Admin() {
                       {service.component === 'YouTubeManagement' && <YouTubeManagement />}
                       {service.component === 'PatreonManagement' && <PatreonManagement />}
                       {service.component === 'FeediverseManagement' && <FeediverseManagement />}
+                      {service.component === 'FeedManagement' && <FeedManagement />}
                     </div>
                   </div>
                 )

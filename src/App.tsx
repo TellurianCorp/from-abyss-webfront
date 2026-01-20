@@ -18,6 +18,7 @@ const AdminUsers = lazy(() => import('./pages/AdminUsers').then(m => ({ default:
 const AdminFediverse = lazy(() => import('./pages/AdminFediverse').then(m => ({ default: m.AdminFediverse })))
 const AdminYouTube = lazy(() => import('./pages/AdminYouTube').then(m => ({ default: m.AdminYouTube })))
 const AdminActivityPub = lazy(() => import('./pages/AdminActivityPub').then(m => ({ default: m.AdminActivityPub })))
+const AdminFeeds = lazy(() => import('./pages/AdminFeeds').then(m => ({ default: m.AdminFeeds })))
 const AdminLogin = lazy(() => import('./pages/AdminLogin').then(m => ({ default: m.AdminLogin })))
 const KoliseumAdmin = lazy(() => import('./pages/KoliseumAdmin').then(m => ({ default: m.KoliseumAdmin })))
 const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })))
@@ -97,6 +98,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AdminYouTube />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/feeds"
+            element={
+              <ProtectedRoute>
+                <AdminFeeds />
               </ProtectedRoute>
             }
           />
