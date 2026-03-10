@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "type-check": "tsc -b --noEmit",
     "preview": "vite preview",
+    "start": "serve -s dist -l ${PORT:-3000}",
     "postbuild": "node scripts/prerender-routes.mjs",
     "prepare": "husky",
     "pre-commit": "npm run type-check && npm run lint"
@@ -42,6 +43,7 @@
     "husky": "^9.1.7",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
+    "serve": "^14.2.4",
     "vite": "^7.2.4"
   }
 }
