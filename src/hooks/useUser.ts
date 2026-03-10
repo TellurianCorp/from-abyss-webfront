@@ -26,16 +26,23 @@ export function useUser() {
     // Also try to fetch from API
     const fetchUserInfo = async () => {
       try {
+        const token = localStorage.getItem('auth_token')
+        if (!token) {
+          setIsLoading(false)
+          return
+        }
+
         const { apiUrl } = await import('../utils/api')
+        const headers: HeadersInit = { Authorization: `Bearer ${token}` }
         let response = await fetch(apiUrl('/v1/auth/me'), {
           method: 'GET',
-          credentials: 'include',
+          headers,
         })
 
         if (!response.ok) {
           response = await fetch(apiUrl('/v1/me'), {
             method: 'GET',
-            credentials: 'include',
+            headers,
           })
         }
 

@@ -179,6 +179,9 @@ export const API_ENDPOINTS = {
     healthHistory: (id: string) => `/v1/admin/feeds/${id}/health-history`,
     episodes: (id: string) => `/v1/admin/feeds/${id}/episodes`,
     sync: (id: string) => `/v1/admin/feeds/${id}/sync`,
+    // Public endpoints (no auth required)
+    publicList: '/v1/feeds',
+    publicEpisodes: (id: string) => `/v1/feeds/${id}/episodes`,
   },
   // Communication features endpoints
   pitches: {
