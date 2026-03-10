@@ -97,119 +97,141 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch federation status
-  const fetchFederationStatus = useCallback(async () => {
+  // Fetch federation status — returns true on success
+  const fetchFederationStatus = useCallback(async (): Promise<boolean> => {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.activitypub.federationStatus), {
         credentials: 'include'
       })
-
       if (response.ok) {
         const data = await response.json()
         setFederationStatus(data)
+        return true
       }
+      return false
     } catch (err) {
       console.error('Error fetching federation status:', err)
+      return false
     }
   }, [])
 
-  // Fetch remote instances
-  const fetchRemoteInstances = useCallback(async () => {
+  // Fetch remote instances — returns true on success
+  const fetchRemoteInstances = useCallback(async (): Promise<boolean> => {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.activitypub.remoteInstances), {
         credentials: 'include'
       })
-
       if (response.ok) {
         const data = await response.json()
         setRemoteInstances(data.instances || [])
+        return true
       }
+      return false
     } catch (err) {
       console.error('Error fetching remote instances:', err)
+      return false
     }
   }, [])
 
-  // Fetch follow requests
-  const fetchFollowRequests = useCallback(async () => {
+  // Fetch follow requests — returns true on success
+  const fetchFollowRequests = useCallback(async (): Promise<boolean> => {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.activitypub.pendingFollows), {
         credentials: 'include'
       })
-
       if (response.ok) {
         const data = await response.json()
         setFollowRequests(data.requests || data || [])
+        return true
       }
+      return false
     } catch (err) {
       console.error('Error fetching follow requests:', err)
+      return false
     }
   }, [])
 
-  // Fetch highlighted profiles
-  const fetchHighlightedProfiles = useCallback(async () => {
+  // Fetch highlighted profiles — returns true on success
+  const fetchHighlightedProfiles = useCallback(async (): Promise<boolean> => {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.feediverse.highlightedProfiles))
-
       if (response.ok) {
         const data = await response.json()
         // API returns { success: true, data: [...], count: ... }
         const profilesArray = Array.isArray(data?.data) ? data.data :
                              Array.isArray(data) ? data : []
         setHighlightedProfiles(profilesArray)
+        return true
       }
+      return false
     } catch (err) {
       console.error('Error fetching highlighted profiles:', err)
+      return false
     }
   }, [])
 
-  // Fetch recent activity
-  const fetchRecentActivity = useCallback(async () => {
+  // Fetch recent activity — returns true on success
+  const fetchRecentActivity = useCallback(async (): Promise<boolean> => {
     try {
       const response = await fetch(apiUrl(API_ENDPOINTS.activitypub.activityLog), {
         credentials: 'include'
       })
-
       if (response.ok) {
         const data = await response.json()
         setRecentActivity(data.activities || [])
+        return true
       }
+      return false
     } catch (err) {
       console.error('Error fetching recent activity:', err)
+      return false
     }
   }, [])
 
-  // Initial load
+  // Initial load + polling (stops polling when API is unreachable)
   useEffect(() => {
+    let active = true
+
     const loadData = async () => {
       setLoading(true)
       setError(null)
 
-      try {
-        await Promise.allSettled([
-          fetchFederationStatus(),
-          fetchRemoteInstances(),
-          fetchFollowRequests(),
-          fetchHighlightedProfiles(),
-          fetchRecentActivity()
-        ])
-      } catch (err) {
-        console.error('Error loading ActivityPub data:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load federation data')
-      } finally {
-        setLoading(false)
+      const results = await Promise.all([
+        fetchFederationStatus(),
+        fetchRemoteInstances(),
+        fetchFollowRequests(),
+        fetchHighlightedProfiles(),
+        fetchRecentActivity()
+      ])
+
+      if (!active) return
+      setLoading(false)
+
+      if (!results.some(Boolean)) {
+        setError('Federation API unreachable')
       }
     }
 
     loadData()
 
-    // Poll for updates every 60 seconds
-    const interval = setInterval(() => {
-      fetchFederationStatus()
-      fetchFollowRequests()
-      fetchRecentActivity()
+    // Poll every 60 seconds; stop if all fetches fail (API is down)
+    const interval = setInterval(async () => {
+      if (!active) return
+      const results = await Promise.all([
+        fetchFederationStatus(),
+        fetchFollowRequests(),
+        fetchRecentActivity()
+      ])
+      if (!results.some(Boolean)) {
+        active = false
+        clearInterval(interval)
+      }
     }, 60000)
 
-    return () => clearInterval(interval)
+    return () => {
+      active = false
+      clearInterval(interval)
+    }
   }, [fetchFederationStatus, fetchRemoteInstances, fetchFollowRequests, fetchHighlightedProfiles, fetchRecentActivity])
 
   // Approve follow request
