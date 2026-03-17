@@ -1,5 +1,5 @@
 import { createContext, useState, useCallback, useEffect, type ReactNode } from 'react'
-import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { apiUrl, API_ENDPOINTS, isNetworkError, logApiUnreachableOnce } from '../utils/api'
 
 export interface RemoteInstance {
   id: string
@@ -110,7 +110,8 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
       }
       return false
     } catch (err) {
-      console.error('Error fetching federation status:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching federation status:', err)
       return false
     }
   }, [])
@@ -128,7 +129,8 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
       }
       return false
     } catch (err) {
-      console.error('Error fetching remote instances:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching remote instances:', err)
       return false
     }
   }, [])
@@ -146,7 +148,8 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
       }
       return false
     } catch (err) {
-      console.error('Error fetching follow requests:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching follow requests:', err)
       return false
     }
   }, [])
@@ -165,7 +168,8 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
       }
       return false
     } catch (err) {
-      console.error('Error fetching highlighted profiles:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching highlighted profiles:', err)
       return false
     }
   }, [])
@@ -183,7 +187,8 @@ export function ActivityPubProvider({ children }: ActivityPubProviderProps) {
       }
       return false
     } catch (err) {
-      console.error('Error fetching recent activity:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching recent activity:', err)
       return false
     }
   }, [])

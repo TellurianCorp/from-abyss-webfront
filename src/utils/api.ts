@@ -212,3 +212,22 @@ export const API_ENDPOINTS = {
     delete: (id: string) => `/v1/workflows/${id}`,
   },
 } as const
+
+/** True if the error is a network/connection failure (e.g. API not running). */
+export function isNetworkError(err: unknown): boolean {
+  if (err instanceof TypeError) {
+    return err.message === 'Failed to fetch'
+  }
+  return false
+}
+
+let apiUnreachableLogged = false
+
+/** In dev, log once that the API is unreachable so the console is not flooded. */
+export function logApiUnreachableOnce(): void {
+  if (!import.meta.env.DEV || apiUnreachableLogged) return
+  apiUnreachableLogged = true
+  console.warn(
+    '[From Abyss] API unreachable (e.g. not running). Start the API on port 8080 to load data. From workspace root: docker-compose up -d'
+  )
+}

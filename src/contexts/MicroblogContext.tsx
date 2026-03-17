@@ -1,5 +1,5 @@
 import { createContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
-import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { apiUrl, API_ENDPOINTS, isNetworkError, logApiUnreachableOnce } from '../utils/api'
 
 export interface Post {
   id: string
@@ -132,7 +132,8 @@ export function MicroblogProvider({ children }: MicroblogProviderProps) {
         setHasMore(!!data.next)
       }
     } catch (err) {
-      console.error('Error fetching timeline:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching timeline:', err)
       setError(err instanceof Error ? err.message : 'Failed to load timeline')
     } finally {
       setLoading(false)

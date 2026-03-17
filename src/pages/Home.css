@@ -1,0 +1,47 @@
+.home-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.home-section {
+  width: 100%;
+}
+
+.home-section h1 {
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  margin: 0 0 1rem;
+  color: var(--bone);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.home-subtitle {
+  font-size: 1.3rem;
+  color: var(--sepia);
+  margin: 0 0 2rem;
+  font-style: italic;
+}
+
+.home-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.home-link {
+  color: var(--highlight);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.home-link:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--highlight);
+  color: var(--bone);
+}

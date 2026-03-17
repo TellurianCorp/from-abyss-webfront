@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { apiUrl, API_ENDPOINTS, isNetworkError, logApiUnreachableOnce } from '../utils/api'
 import landingStyles from '../styles/Landing.module.css'
 import './PodcastCarousel.css'
 
@@ -144,7 +144,8 @@ export function PodcastCarousel() {
 
       setLatestEpisodes(episodes)
     } catch (err) {
-      console.error('Error fetching latest podcast episodes:', err)
+      if (isNetworkError(err)) logApiUnreachableOnce()
+      else console.error('Error fetching latest podcast episodes:', err)
       setError(err instanceof Error ? err.message : 'Failed to load podcasts')
     } finally {
       setLoading(false)

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { apiUrl, API_ENDPOINTS, isNetworkError, logApiUnreachableOnce } from '../utils/api'
 import './YouTubeHighlights.css'
 
 interface VideoInfo {
@@ -68,17 +68,16 @@ export function YouTubeHighlights() {
       setVideos(data.data || [])
       setCurrentPage(1) // Reset to first page when videos are loaded
     } catch (err) {
-      console.error('Error fetching YouTube videos:', err)
+      if (isNetworkError(err)) {
+        logApiUnreachableOnce()
+      } else {
+        console.error('Error fetching YouTube videos:', err)
+        if (err instanceof Error) {
+          console.error('Error details:', { message: err.message, stack: err.stack, name: err.name })
+        }
+      }
       const errorMessage = err instanceof Error ? err.message : 'Failed to load videos'
       setError(errorMessage)
-      // Log more details for debugging
-      if (err instanceof Error) {
-        console.error('Error details:', {
-          message: err.message,
-          stack: err.stack,
-          name: err.name
-        })
-      }
     } finally {
       setLoading(false)
     }
