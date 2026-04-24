@@ -2,7 +2,6 @@ import './App.css'
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
-import { ExternalRedirect } from './components/ExternalRedirect'
 import Toaster from './components/Toaster'
 
 // Lazy load routes for code splitting - only load when needed
@@ -134,16 +133,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/"
-            element={
-              import.meta.env.DEV ? (
-                <Landing />
-              ) : (
-                <ExternalRedirect to="https://www.fromabyss.com" />
-              )
-            }
-          />
+          <Route path="/" element={<Landing />} />
         </Routes>
       </Suspense>
       <Toaster />
