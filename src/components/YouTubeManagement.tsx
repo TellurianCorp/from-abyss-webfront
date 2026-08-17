@@ -180,7 +180,7 @@ export function YouTubeManagement() {
       }
 
       const rawVideos = videosData.data || videosData || []
-      setVideos(Array.isArray(rawVideos) ? rawVideos.map((video: any) => ({
+      setVideos(Array.isArray(rawVideos) ? rawVideos.map((video: Partial<VideoInfo>) => ({
         id: video.id || '',
         title: video.title || '',
         description: video.description || '',

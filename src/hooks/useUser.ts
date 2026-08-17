@@ -5,7 +5,7 @@ interface UserInfo {
   email?: string
   name?: string
   picture?: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export function useUser() {

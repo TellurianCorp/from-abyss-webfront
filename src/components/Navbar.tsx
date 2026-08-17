@@ -53,7 +53,7 @@ export function Navbar() {
             <div className={styles.navbarActions}>
               {userInfo && (
                 <>
-                  <NotificationBell userId={userInfo.id} />
+                  <NotificationBell />
                   <ProfileDropdown
                     userInfo={userInfo}
                     onLogout={() => {

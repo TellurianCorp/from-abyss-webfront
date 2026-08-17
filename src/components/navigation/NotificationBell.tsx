@@ -4,11 +4,8 @@ import { useNotifications } from '../../hooks/useNotifications'
 import { NotificationDropdown } from './NotificationDropdown'
 import styles from './NotificationBell.module.css'
 
-interface NotificationBellProps {
-  userId?: string
-}
-
-export function NotificationBell({}: NotificationBellProps) {
+// The signed-in user comes from useNotifications(), so this component takes no props.
+export function NotificationBell() {
   const [isOpen, setIsOpen] = useState(false)
   const bellRef = useRef<HTMLButtonElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)

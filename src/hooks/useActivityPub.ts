@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { ActivityPubContext, type ActivityPubContextType } from '../contexts/ActivityPubContext'
+import { ActivityPubContext } from '../contexts/ActivityPubContext.context'
+import type { ActivityPubContextType } from '../contexts/ActivityPubContext'
 
 export function useActivityPub(): ActivityPubContextType {
   const context = useContext(ActivityPubContext)

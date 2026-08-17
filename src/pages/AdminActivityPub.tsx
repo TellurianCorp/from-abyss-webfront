@@ -31,9 +31,9 @@ export function AdminActivityPub() {
         console.error('Federation sync failed:', error)
         showError(error.message || 'Unknown error', 'Federation Sync Failed')
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error running federation sync:', error)
-      showError(error.message || 'Unknown error', 'Federation Sync Error')
+      showError(error instanceof Error ? error.message : 'Unknown error', 'Federation Sync Error')
     }
   }
 

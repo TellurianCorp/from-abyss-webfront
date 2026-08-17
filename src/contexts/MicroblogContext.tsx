@@ -1,5 +1,6 @@
-import { createContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
+import { useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import { apiUrl, API_ENDPOINTS, isNetworkError, logApiUnreachableOnce } from '../utils/api'
+import { MicroblogContext } from './MicroblogContext.context'
 
 export interface Post {
   id: string
@@ -54,8 +55,6 @@ export interface MicroblogContextType {
   setFilter: (filter: 'all' | 'following' | 'local' | 'federated') => void
   setSort: (sort: 'latest' | 'popular' | 'trending') => void
 }
-
-export const MicroblogContext = createContext<MicroblogContextType | undefined>(undefined)
 
 interface MicroblogProviderProps {
   children: ReactNode

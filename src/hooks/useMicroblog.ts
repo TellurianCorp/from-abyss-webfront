@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { MicroblogContext, type MicroblogContextType } from '../contexts/MicroblogContext'
+import { MicroblogContext } from '../contexts/MicroblogContext.context'
+import type { MicroblogContextType } from '../contexts/MicroblogContext'
 
 export function useMicroblog(): MicroblogContextType {
   const context = useContext(MicroblogContext)

@@ -56,9 +56,9 @@ const ActivityPubMonitor: React.FC = () => {
       }
       
       setError(null);
-    } catch (err: any) {
+    } catch (err) {
       console.error('Error fetching activity logs:', err);
-      setError(err.message || 'Failed to fetch activity logs');
+      setError(err instanceof Error ? err.message : 'Failed to fetch activity logs');
     } finally {
       setIsLoading(false);
     }

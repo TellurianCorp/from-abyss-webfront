@@ -40,11 +40,10 @@ const FollowUserInput: React.FC<FollowUserInputProps> = ({ onFollowSuccess }) =>
     if (currentDomain === 'localhost' || currentDomain === '127.0.0.1') {
       // In development, API might be on a different port
       currentDomain = 'localhost:8080';
-    } else if (!currentDomain.includes(':')) {
-      // If no port, assume standard HTTPS
-      currentDomain = currentDomain;
     }
-    
+    // Any other hostname is used as-is; without a port it resolves over standard HTTPS.
+
+
     // Use https for production, http for localhost
     const protocol = currentDomain.includes('localhost') ? 'http' : 'https';
     return `${protocol}://${currentDomain}/actors/${cleanHandle}`;

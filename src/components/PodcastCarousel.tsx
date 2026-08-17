@@ -106,7 +106,7 @@ export function PodcastCarousel() {
 
       const feedsData = await feedsResponse.json()
       const podcastFeeds: PodcastFeed[] = Array.isArray(feedsData)
-        ? feedsData.filter((feed: any) => feed.feed_type === 'podcast')
+        ? feedsData.filter((feed: PodcastFeed & { feed_type?: string }) => feed.feed_type === 'podcast')
         : []
 
       if (podcastFeeds.length === 0) {

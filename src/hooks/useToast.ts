@@ -1,6 +1,12 @@
-/**
- * Re-export useToast hook for convenience
- * This allows importing from hooks instead of contexts
- */
-export { useToast } from '../contexts/ToastContext';
+import { useContext } from 'react';
+import { ToastContext, type ToastContextType } from '../contexts/ToastContext.context';
+
+export function useToast(): ToastContextType {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error('useToast must be used within a ToastProvider');
+  }
+  return context;
+}
+
 export type { Toast, ToastType } from '../contexts/ToastContext';

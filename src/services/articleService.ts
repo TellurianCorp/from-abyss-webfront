@@ -43,6 +43,17 @@ export interface ArticleAsset {
   created_at: string
 }
 
+export interface ArticleRevision {
+  id: string
+  article_id: string
+  language_code: string
+  content: string
+  status: string
+  reviewer_id?: number
+  notes?: string
+  created_at: string
+}
+
 export interface ArticleCreateRequest {
   translations: Record<string, ArticleTranslationInput>
   tags?: string[]
@@ -276,8 +287,8 @@ class ArticleService {
   /**
    * Get revisions
    */
-  async getRevisions(articleId: string): Promise<any[]> {
-    return apiClient.get<any[]>(apiUrl(`/v1/articles/${articleId}/revisions`))
+  async getRevisions(articleId: string): Promise<ArticleRevision[]> {
+    return apiClient.get<ArticleRevision[]>(apiUrl(`/v1/articles/${articleId}/revisions`))
   }
 
   /**

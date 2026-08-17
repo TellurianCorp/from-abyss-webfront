@@ -1,5 +1,6 @@
-import { createContext, useState, useCallback, useEffect, type ReactNode } from 'react'
+import { useState, useCallback, useEffect, type ReactNode } from 'react'
 import { apiUrl, API_ENDPOINTS, isNetworkError, logApiUnreachableOnce } from '../utils/api'
+import { ActivityPubContext } from './ActivityPubContext.context'
 
 export interface RemoteInstance {
   id: string
@@ -80,8 +81,6 @@ export interface ActivityPubContextType {
   refreshStatus: () => Promise<void>
   refreshFollowRequests: () => Promise<void>
 }
-
-export const ActivityPubContext = createContext<ActivityPubContextType | undefined>(undefined)
 
 interface ActivityPubProviderProps {
   children: ReactNode

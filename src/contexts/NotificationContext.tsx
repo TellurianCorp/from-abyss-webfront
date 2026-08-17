@@ -1,5 +1,6 @@
-import { createContext, useState, useCallback, useEffect, type ReactNode } from 'react'
+import { useState, useCallback, useEffect, type ReactNode } from 'react'
 import { apiUrl, API_ENDPOINTS } from '../utils/api'
+import { NotificationContext } from './NotificationContext.context'
 
 export interface Notification {
   id: string
@@ -27,8 +28,6 @@ export interface NotificationContextType {
   refresh: () => Promise<void>
   addNotification: (notification: Notification) => void
 }
-
-export const NotificationContext = createContext<NotificationContextType | undefined>(undefined)
 
 interface NotificationProviderProps {
   children: ReactNode
