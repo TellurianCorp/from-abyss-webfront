@@ -10,7 +10,7 @@
  * - Loading state management
  */
 
-import { API_BASE_URL, apiUrl } from '../utils/api'
+import { apiUrl } from '../utils/api'
 
 export interface ApiError {
   status: number
@@ -36,9 +36,10 @@ class ApiClient {
   private requestInterceptors: Array<(config: RequestInit) => RequestInit> = []
   private responseInterceptors: Array<(response: Response) => Response | Promise<Response>> = []
 
-  constructor(baseUrl: string = API_BASE_URL) {
-    // Store baseUrl for future use if needed
-    console.log('ApiClient initialized with baseUrl:', baseUrl);
+  // No baseUrl parameter: the class never used one. URLs are built by apiUrl(),
+  // which resolves the base from the environment, so a constructor argument only
+  // advertised a configurability that did not exist.
+  constructor() {
     this.defaultHeaders = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -94,12 +95,25 @@ class ApiClient {
     const url = endpoint.startsWith('http') ? endpoint : apiUrl(endpoint)
 
     // Merge default headers with custom headers
-    const headers = {
-      ...this.defaultHeaders,
-      ...fetchOptions.headers,
+    const headers: Record<string, string> = {
+      ...(this.defaultHeaders as Record<string, string>),
+      ...(fetchOptions.headers as Record<string, string> | undefined),
+    }
+
+    // FormData must set its own Content-Type, because only the browser knows the
+    // multipart boundary. upload() deletes the header, but the merge above
+    // reinstates the JSON default over it, so the check has to live here: every
+    // multipart body was going out declared as JSON with no boundary, which the
+    // server cannot parse.
+    if (fetchOptions.body instanceof FormData) {
+      delete headers['Content-Type']
     }
 
     let config: RequestInit = {
+      // Session cookies are the only authentication the API accepts. Set before
+      // the interceptors run so an interceptor cannot drop it by spreading over
+      // the config.
+      credentials: 'include',
       ...fetchOptions,
       headers,
     }
@@ -284,7 +298,9 @@ class ApiClient {
     formData: FormData,
     options: RequestOptions = {}
   ): Promise<T> {
-    // Remove Content-Type header to let browser set it with boundary
+    // Content-Type is stripped in request(), which is the only place that can do
+    // it: the default headers are merged in there and would otherwise reinstate
+    // the JSON type over anything removed here.
     const { headers, ...restOptions } = options
     const uploadHeaders = headers ? { ...headers } : {}
     delete (uploadHeaders as Record<string, unknown>)['Content-Type']
@@ -301,18 +317,11 @@ class ApiClient {
 // Create singleton instance
 export const apiClient = new ApiClient()
 
-// Add authentication interceptor
-apiClient.addRequestInterceptor((config) => {
-  // Add authentication token if available
-  const token = localStorage.getItem('auth_token')
-  if (token) {
-    config.headers = {
-      ...config.headers,
-      'Authorization': `Bearer ${token}`,
-    }
-  }
-  return config
-})
+// Authentication is the session cookie, attached by credentials: 'include' in
+// request(). There is deliberately no bearer-token interceptor here: the one
+// that used to live at this spot read localStorage['auth_token'], a key nothing
+// in this codebase ever writes, and the API has no bearer-token path at all -
+// its middleware reads the session_id cookie and nothing else.
 
 // Add response logging interceptor (development only)
 if (import.meta.env.DEV) {
