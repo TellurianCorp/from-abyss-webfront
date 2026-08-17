@@ -26,7 +26,11 @@ export function useSmartPolling(options: UseSmartPollingOptions) {
   } = options
 
   const isVisible = useVisibility()
-  const intervalRef = useRef<number | null>(null)
+  // ReturnType<typeof setInterval> rather than number: the browser returns a
+  // number but Node's typings return a Timeout object, and both are in scope in
+  // this project. Naming the concrete type made the file compile only as long as
+  // Node's globals happened not to be pulled into the app project.
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const callbackRef = useRef(callback)
 
   // Update callback ref when it changes
