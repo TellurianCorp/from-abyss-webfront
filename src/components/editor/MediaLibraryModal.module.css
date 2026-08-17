@@ -1,0 +1,269 @@
+.overlay {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1.5rem;
+  position: fixed;
+  z-index: 1050;
+}
+
+.dialog {
+  background: var(--ash, #16130f);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  max-width: 62rem;
+  width: 100%;
+}
+
+.header {
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.tab,
+.tabActive {
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: var(--muted, #a8a29e);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.85rem;
+}
+
+.tab:hover {
+  color: var(--bone, #e8e6e3);
+}
+
+.tabActive {
+  background: rgba(179, 37, 43, 0.18);
+  color: var(--bone, #e8e6e3);
+}
+
+.close {
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: var(--muted, #a8a29e);
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0.35rem;
+}
+
+.close:hover {
+  color: var(--bone, #e8e6e3);
+}
+
+.body {
+  display: grid;
+  /* The details panel keeps a fixed measure so the grid does not reflow when a
+     long filename lands in it. */
+  grid-template-columns: 1fr 18rem;
+  min-height: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.details {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.detailsTitle {
+  color: var(--bone, #e8e6e3);
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+
+.search,
+.input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: var(--bone, #e8e6e3);
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  width: 100%;
+}
+
+.search:focus,
+.input:focus {
+  border-color: var(--blood, #b3252b);
+  outline: none;
+}
+
+.label {
+  color: var(--muted, #a8a29e);
+  font-size: 0.8rem;
+}
+
+.checkbox {
+  align-items: center;
+  color: var(--muted, #a8a29e);
+  display: flex;
+  font-size: 0.8rem;
+  gap: 0.4rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card,
+.cardSelected {
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.4rem;
+  width: 100%;
+}
+
+.cardSelected {
+  border-color: var(--blood, #b3252b);
+}
+
+.card img,
+.cardSelected img {
+  aspect-ratio: 4 / 3;
+  border-radius: 3px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cardIcon {
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  color: var(--muted, #a8a29e);
+  display: flex;
+  justify-content: center;
+}
+
+.cardName {
+  color: var(--muted, #a8a29e);
+  font-size: 0.72rem;
+  /* Filenames are long and arbitrary; one clipped line keeps the grid even. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropzone {
+  align-items: center;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: var(--muted, #a8a29e);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 16rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.fileInput {
+  display: none;
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding: 0.75rem;
+}
+
+.primary,
+.secondary {
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5rem 1rem;
+}
+
+.primary {
+  background: var(--blood, #b3252b);
+  border: 1px solid var(--blood, #b3252b);
+  color: #fff;
+}
+
+.primary:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--bone, #e8e6e3);
+}
+
+.notice,
+.hint {
+  color: var(--muted, #a8a29e);
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.error {
+  color: var(--blood, #b3252b);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+@media (max-width: 48rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .details {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+[data-theme='light'] .dialog {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='light'] .search,
+[data-theme='light'] .input {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #111827;
+}

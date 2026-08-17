@@ -13,6 +13,7 @@ import {
   Minus,
   RotateCcw,
   RotateCw,
+  Image as ImageIcon,
   Terminal,
   Underline,
   Video,
@@ -27,9 +28,11 @@ export interface EditorToolbarProps {
   editor: Editor
   /** Opens the link editor. Falls back to a prompt when not supplied. */
   onEditLink?: () => void
+  /** Opens the media library. The image action is hidden without it. */
+  onInsertImage?: () => void
 }
 
-export function EditorToolbar({ editor, onEditLink }: EditorToolbarProps) {
+export function EditorToolbar({ editor, onEditLink, onInsertImage }: EditorToolbarProps) {
   const { t } = useTranslation()
 
   /**
@@ -57,6 +60,8 @@ export function EditorToolbar({ editor, onEditLink }: EditorToolbarProps) {
       alignJustify: instance.isActive({ textAlign: 'justify' }),
       canUndo: instance.can().undo(),
       canRedo: instance.can().redo(),
+      figureSelected: instance.isActive('figureImage'),
+      figureAlign: (instance.getAttributes('figureImage').align as string) ?? null,
     }),
   })
 
@@ -218,7 +223,30 @@ export function EditorToolbar({ editor, onEditLink }: EditorToolbarProps) {
         />
       </div>
 
+      {/* Only shown while a figure is selected: alignment applies to that
+          figure, and a control that silently does nothing is worse than none. */}
+      {state.figureSelected && (
+        <div className={styles.group}>
+          {(['left', 'center', 'right', 'wide', 'full'] as const).map((align) => (
+            <ToolbarButton
+              key={align}
+              glyph={align === 'wide' ? '↔' : align === 'full' ? '⤢' : align[0].toUpperCase()}
+              label={t(`editor.image.align_${align}`, `Image ${align}`)}
+              isActive={state.figureAlign === align}
+              onClick={() => editor.chain().focus().setFigureAlignment(align).run()}
+            />
+          ))}
+        </div>
+      )}
+
       <div className={styles.group}>
+        {onInsertImage && (
+          <ToolbarButton
+            icon={ImageIcon}
+            label={t('editor.toolbar.image', 'Insert an image')}
+            onClick={onInsertImage}
+          />
+        )}
         <ToolbarButton
           icon={LinkIcon}
           label={t('editor.toolbar.link', 'Link')}
