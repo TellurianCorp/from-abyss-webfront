@@ -1,0 +1,151 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.filterLabel {
+  color: var(--muted, #a8a29e);
+  font-size: 0.85rem;
+}
+
+.select {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: var(--bone, #e8e6e3);
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+}
+
+.newButton {
+  align-items: center;
+  background: var(--blood, #b3252b);
+  border-radius: 4px;
+  color: #fff;
+  display: inline-flex;
+  gap: 0.35rem;
+  /* Pushed to the far end so the primary action is always in the same place. */
+  margin-left: auto;
+  padding: 0.45rem 0.9rem;
+  text-decoration: none;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.65rem 0.5rem;
+  text-align: left;
+}
+
+.table th {
+  color: var(--muted, #a8a29e);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--bone, #e8e6e3);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.title:hover {
+  color: var(--blood, #b3252b);
+}
+
+.languages,
+.updated {
+  color: var(--muted, #a8a29e);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.actionsHeader,
+.actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.action {
+  color: var(--muted, #a8a29e);
+  display: inline-flex;
+  padding: 0.3rem;
+}
+
+.action:hover {
+  color: var(--bone, #e8e6e3);
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.pageButton {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: var(--bone, #e8e6e3);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.35rem 0.8rem;
+}
+
+.pageButton:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.pageInfo,
+.notice {
+  color: var(--muted, #a8a29e);
+  font-size: 0.85rem;
+}
+
+.error {
+  color: var(--blood, #b3252b);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 48rem) {
+  /* Languages and the updated date are the first things worth losing on a
+     narrow screen; the title and status are not. */
+  .table th:nth-child(3),
+  .table td:nth-child(3),
+  .table th:nth-child(4),
+  .table td:nth-child(4) {
+    display: none;
+  }
+}
+
+[data-theme='light'] .select {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #111827;
+}
+
+[data-theme='light'] .table th,
+[data-theme='light'] .table td {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='light'] .title {
+  color: #111827;
+}

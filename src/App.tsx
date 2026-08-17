@@ -18,6 +18,8 @@ const AdminUsers = lazy(() => import('./pages/AdminUsers').then(m => ({ default:
 const AdminFediverse = lazy(() => import('./pages/AdminFediverse').then(m => ({ default: m.AdminFediverse })))
 const AdminYouTube = lazy(() => import('./pages/AdminYouTube').then(m => ({ default: m.AdminYouTube })))
 const AdminActivityPub = lazy(() => import('./pages/AdminActivityPub').then(m => ({ default: m.AdminActivityPub })))
+const AdminArticles = lazy(() => import('./pages/AdminArticles').then(m => ({ default: m.AdminArticles })))
+const AdminArticleEditor = lazy(() => import('./pages/AdminArticleEditor').then(m => ({ default: m.AdminArticleEditor })))
 const AdminFeeds = lazy(() => import('./pages/AdminFeeds').then(m => ({ default: m.AdminFeeds })))
 const AdminLogin = lazy(() => import('./pages/AdminLogin').then(m => ({ default: m.AdminLogin })))
 const KoliseumAdmin = lazy(() => import('./pages/KoliseumAdmin').then(m => ({ default: m.KoliseumAdmin })))
@@ -114,6 +116,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <KoliseumAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/articles"
+            element={
+              <ProtectedRoute>
+                <AdminArticles />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/articles/new"
+            element={
+              <ProtectedRoute>
+                <AdminArticleEditor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/articles/:id/edit"
+            element={
+              <ProtectedRoute>
+                <AdminArticleEditor />
               </ProtectedRoute>
             }
           />

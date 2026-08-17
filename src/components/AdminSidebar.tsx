@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
+  FileText,
   Layout,
   Home,
   Globe,
@@ -100,6 +101,20 @@ export function AdminSidebar() {
           icon: CreditCard,
           path: '/admin/patreon',
           module: 'patreon',
+        },
+      ],
+    },
+    {
+      id: 'content',
+      label: t('admin.sidebar.content', 'Content'),
+      icon: FileText,
+      items: [
+        {
+          id: 'content-articles',
+          label: t('admin.sidebar.articles', 'Articles'),
+          icon: FileText,
+          path: '/admin/articles',
+          module: 'content',
         },
       ],
     },
