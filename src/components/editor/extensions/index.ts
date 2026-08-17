@@ -2,6 +2,7 @@ import type { Extensions } from '@tiptap/core'
 import { CharacterCount, Placeholder } from '@tiptap/extensions'
 import StarterKit from '@tiptap/starter-kit'
 
+import { FigureImage } from './FigureImage'
 import { TextAlign } from './TextAlign'
 
 export interface BuildExtensionsOptions {
@@ -32,6 +33,9 @@ export function buildEditorExtensions(options: BuildExtensionsOptions = {}): Ext
         protocols: ['http', 'https', 'mailto'],
       },
     }),
+    // Without an image node the schema cannot represent a picture, and
+    // ProseMirror deletes what it cannot represent.
+    FigureImage,
     TextAlign.configure({
       types: ['heading', 'paragraph'],
       defaultAlignment: 'left',
@@ -43,5 +47,7 @@ export function buildEditorExtensions(options: BuildExtensionsOptions = {}): Ext
   ]
 }
 
+export { FigureImage } from './FigureImage'
+export type { FigureAlignment, FigureImageAttributes } from './FigureImage'
 export { TextAlign } from './TextAlign'
 export type { TextAlignment, TextAlignOptions } from './TextAlign'
