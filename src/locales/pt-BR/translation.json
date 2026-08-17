@@ -159,7 +159,7 @@
         "actions": "Ações"
       },
       "form": {
-        "lifeauthSub": "LifeAuth Sub",
+        "lifeauthSub": "Subject OIDC",
         "name": "Nome",
         "email": "E-mail",
         "emailVerified": "E-mail Verificado",
@@ -657,7 +657,8 @@
     "noAccount": "Não tem uma conta?",
     "contactUs": "Entre em contato",
     "useOIDC": "Ou",
-    "oidc": "Entrar com LifeAuth"
+    "oidc": "Entrar com Abyss",
+    "oidcDescription": "Você será redirecionado para concluir o processo de autenticação."
   },
   "metrics": {
     "never": "Nunca",

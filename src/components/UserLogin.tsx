@@ -5,7 +5,7 @@ import { useToast } from '../hooks/useToast'
 import './UserLogin.css'
 
 interface UserLoginProps {
-  onLoginSuccess: (userId: string, userInfo: any) => void
+  onLoginSuccess: (userId: string, userInfo: Record<string, unknown>) => void
   onCancel?: () => void
 }
 
@@ -100,13 +100,13 @@ export function UserLogin({ onLoginSuccess, onCancel }: UserLoginProps) {
   const handleOIDCLogin = () => {
     setIsLoading(true)
     
-    // The /v1/auth/login endpoint uses OIDC and redirects to LifeAuth
+    // The /v1/auth/login endpoint uses OIDC and redirects to authentik
     // Store the return URL so we can come back after authentication
     const returnUrl = window.location.href
     sessionStorage.setItem('authReturnUrl', returnUrl)
-    
+
     // Redirect to the OIDC login endpoint
-    // This will redirect to LifeAuth, then back to /v1/auth/callback
+    // This will redirect to authentik, then back to /v1/auth/callback
     window.location.href = apiUrl('/v1/auth/login')
   }
 
@@ -120,7 +120,7 @@ export function UserLogin({ onLoginSuccess, onCancel }: UserLoginProps) {
           </div>
           <div className="user-login-content">
             <p className="user-login-description">
-              You will be redirected to LifeAuth to complete the authentication process.
+              {t('login.oidcDescription', 'You will be redirected to complete the authentication process.')}
             </p>
             <div className="user-login-actions">
               <button
@@ -147,7 +147,7 @@ export function UserLogin({ onLoginSuccess, onCancel }: UserLoginProps) {
                 onClick={handleOIDCLogin}
                 disabled={isLoading}
               >
-                {isLoading ? t('login.loading', 'Redirecting...') : t('login.oidc', 'Sign In with LifeAuth')}
+                {isLoading ? t('login.loading', 'Redirecting...') : t('login.oidc', 'Sign In With Abyss')}
               </button>
             </div>
           </div>
@@ -221,7 +221,7 @@ export function UserLogin({ onLoginSuccess, onCancel }: UserLoginProps) {
               onClick={() => setUseOIDC(true)}
               disabled={isLoading}
             >
-              {t('login.oidc', 'Sign in with LifeAuth')}
+              {t('login.oidc', 'Sign In With Abyss')}
             </button>
           </p>
           <p>{t('login.noAccount', "Don't have an account?")} <a href="/contact">{t('login.contactUs', 'Contact us')}</a></p>

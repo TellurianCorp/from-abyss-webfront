@@ -159,12 +159,12 @@
         "actions": "Actions"
       },
       "form": {
-        "lifeauthSub": "LifeAuth Sub",
+        "lifeauthSub": "OIDC Subject",
         "name": "Name",
         "email": "Email",
         "password": "Password",
         "passwordPlaceholder": "Optional - leave empty if using OIDC",
-        "passwordHint": "Optional. If provided, user can login with email and password. If empty, user must use OIDC (LifeAuth).",
+        "passwordHint": "Optional. If provided, user can login with email and password. If empty, user must use OIDC (authentik).",
         "emailVerified": "Email Verified",
         "fediverseUsername": "Fediverse Username",
         "fediverseUsernamePlaceholder": "Leave empty to auto-generate",
@@ -660,7 +660,8 @@
     "noAccount": "Don't have an account?",
     "contactUs": "Contact us",
     "useOIDC": "Or",
-    "oidc": "Sign in with LifeAuth"
+    "oidc": "Sign In With Abyss",
+    "oidcDescription": "You will be redirected to complete the authentication process."
   },
   "metrics": {
     "never": "Never",

@@ -121,7 +121,7 @@ export function AdminUsers() {
     setError(null)
     try {
       // Prepare request body - only include optional fields if they're provided
-      const requestBody: any = {
+      const requestBody: Record<string, unknown> = {
         name: createForm.name,
         email: createForm.email,
         email_verified: createForm.email_verified,
@@ -206,7 +206,7 @@ export function AdminUsers() {
     setError(null)
     try {
       // Only send fields that are actually being updated (not picture - that's handled by upload)
-      const updateBody: any = {}
+      const updateBody: Record<string, unknown> = {}
       if (editForm.name !== undefined) updateBody.name = editForm.name
       if (editForm.email !== undefined) updateBody.email = editForm.email
       if (editForm.email_verified !== undefined) updateBody.email_verified = editForm.email_verified
@@ -327,7 +327,7 @@ export function AdminUsers() {
     setCreatingHandle(true)
     setError(null)
     try {
-      const requestBody: any = {}
+      const requestBody: Record<string, unknown> = {}
       if (fediverseHandleInput.trim() !== '') {
         requestBody.fediverse_username = fediverseHandleInput.trim().toLowerCase()
       }
@@ -669,7 +669,7 @@ export function AdminUsers() {
               </div>
               <div className={styles.modalBody}>
                 <div className={styles.formGroup}>
-                  <label>{t('admin.users.form.lifeauthSub', 'LifeAuth Sub')}</label>
+                  <label>{t('admin.users.form.lifeauthSub', 'OIDC Subject')}</label>
                   <input
                     type="text"
                     value={createForm.lifeauth_sub || ''}
@@ -715,7 +715,7 @@ export function AdminUsers() {
                     placeholder={t('admin.users.form.passwordPlaceholder', 'Optional - leave empty if using OIDC')}
                   />
                   <small className={styles.formHint}>
-                    {t('admin.users.form.passwordHint', 'Optional. If provided, user can login with email and password. If empty, user must use OIDC (LifeAuth).')}
+                    {t('admin.users.form.passwordHint', 'Optional. If provided, user can login with email and password. If empty, user must use OIDC (authentik).')}
                   </small>
                 </div>
                 <div className={styles.formGroup}>
