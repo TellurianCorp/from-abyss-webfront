@@ -358,3 +358,18 @@ body:not(.dark-mode) [data-theme='light'] .fa-article {
   outline: 2px solid var(--blood, #b3252b);
   outline-offset: 3px;
 }
+
+/* Grammar matches ----------------------------------------------------------
+ * Decorations, never marks: they live outside the document, so nothing a check
+ * produced is ever persisted. */
+
+.fa-spell-match {
+  cursor: pointer;
+  text-decoration: underline wavy var(--sepia, #c8a24a);
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.2em;
+}
+
+.fa-spell-match:hover {
+  background: rgba(200, 162, 74, 0.12);
+}

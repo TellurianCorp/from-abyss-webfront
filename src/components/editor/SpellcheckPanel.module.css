@@ -1,0 +1,145 @@
+.panel {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0.85rem;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.title {
+  color: var(--bone, #e8e6e3);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.run {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: var(--bone, #e8e6e3);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.82rem;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.run:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.spinning {
+  animation: fa-spin 1s linear infinite;
+}
+
+@keyframes fa-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinning {
+    animation: none;
+  }
+}
+
+.count,
+.clean,
+.error,
+.noReplacement {
+  font-size: 0.82rem;
+  margin: 0 0 0.5rem;
+}
+
+.count {
+  color: var(--muted, #a8a29e);
+}
+
+.stale {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.clean {
+  align-items: center;
+  color: var(--muted, #a8a29e);
+  display: flex;
+  gap: 0.35rem;
+}
+
+.error {
+  color: var(--blood, #b3252b);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  max-height: 22rem;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.item {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  padding: 0.55rem 0.6rem;
+}
+
+.message {
+  color: var(--bone, #e8e6e3);
+  font-size: 0.85rem;
+  margin: 0 0 0.4rem;
+}
+
+.replacements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.replacement {
+  background: rgba(179, 37, 43, 0.16);
+  border: 1px solid rgba(179, 37, 43, 0.5);
+  border-radius: 3px;
+  color: var(--bone, #e8e6e3);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.replacement:hover {
+  background: rgba(179, 37, 43, 0.3);
+}
+
+.noReplacement {
+  color: var(--muted, #a8a29e);
+}
+
+.ignore {
+  background: transparent;
+  border: 0;
+  color: var(--muted, #a8a29e);
+  cursor: pointer;
+  font-size: 0.78rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+[data-theme='light'] .panel {
+  background: #f9fafb;
+  border-color: rgba(0, 0, 0, 0.12);
+}
