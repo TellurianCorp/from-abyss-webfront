@@ -1,0 +1,31 @@
+.wrapper {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wrapper:focus-within {
+  border-color: var(--blood, #b3252b);
+}
+
+.surface {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/*
+ * Padding lives on the editable element rather than a wrapper, so clicking the
+ * margin still places the caret instead of missing the document.
+ */
+.content {
+  min-height: 24rem;
+  padding: 1.25rem 1.5rem;
+}
+
+[data-theme='light'] .wrapper {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.15);
+}
