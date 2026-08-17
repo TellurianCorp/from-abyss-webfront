@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -63,5 +64,23 @@ export default defineConfig(({ mode }) => {
     },
     // Ensure proper handling of static assets
     publicDir: 'public',
+    test: {
+      // jsdom rather than node: the code worth testing here parses and
+      // serialises HTML, and both DOMPurify and ProseMirror need a real DOM.
+      environment: 'jsdom',
+      include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+      // Explicit imports rather than injected globals, so a test file reads the
+      // same as any other module and TypeScript needs no extra ambient types.
+      globals: false,
+      restoreMocks: true,
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'html'],
+        // Only what has tests is worth reporting on; a repo-wide number here
+        // would be noise rather than signal.
+        include: ['src/**/*.ts', 'src/**/*.tsx'],
+        exclude: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/main.tsx', 'src/vite-env.d.ts'],
+      },
+    },
   }
 })

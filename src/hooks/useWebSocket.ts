@@ -30,7 +30,9 @@ export function useWebSocket<T = unknown>(options: UseWebSocketOptions<T>) {
   // and the exposed reconnect() open a fresh socket.
   const [connectionAttempt, setConnectionAttempt] = useState(0)
   const wsRef = useRef<WebSocket | null>(null)
-  const reconnectTimeoutRef = useRef<number | null>(null)
+  // See useSmartPolling: setTimeout's return type differs between the browser
+  // and Node typings, and both are in scope here.
+  const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const reconnectCountRef = useRef(0)
   const shouldReconnectRef = useRef(true)
 

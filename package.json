@@ -12,7 +12,10 @@
     "start": "serve -s dist -l ${PORT:-3000}",
     "postbuild": "node scripts/prerender-routes.mjs",
     "prepare": "husky",
-    "pre-commit": "npm run type-check && npm run lint"
+    "pre-commit": "npm run type-check && npm run lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
@@ -35,15 +38,18 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/coverage-v8": "^3.2.7",
     "baseline-browser-mapping": "^2.10.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "serve": "^14.2.4",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "serve": "^14.2.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vitest": "^3.2.7"
   }
 }
