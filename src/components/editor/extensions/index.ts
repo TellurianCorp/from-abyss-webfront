@@ -2,7 +2,9 @@ import type { Extensions } from '@tiptap/core'
 import { CharacterCount, Placeholder } from '@tiptap/extensions'
 import StarterKit from '@tiptap/starter-kit'
 
+import { Embed } from './Embed'
 import { FigureImage } from './FigureImage'
+import { AudioBlock, VideoBlock } from './MediaBlock'
 import { TextAlign } from './TextAlign'
 
 export interface BuildExtensionsOptions {
@@ -36,6 +38,9 @@ export function buildEditorExtensions(options: BuildExtensionsOptions = {}): Ext
     // Without an image node the schema cannot represent a picture, and
     // ProseMirror deletes what it cannot represent.
     FigureImage,
+    AudioBlock,
+    VideoBlock,
+    Embed,
     TextAlign.configure({
       types: ['heading', 'paragraph'],
       defaultAlignment: 'left',
@@ -47,6 +52,8 @@ export function buildEditorExtensions(options: BuildExtensionsOptions = {}): Ext
   ]
 }
 
+export { Embed } from './Embed'
+export { AudioBlock, VideoBlock } from './MediaBlock'
 export { FigureImage } from './FigureImage'
 export type { FigureAlignment, FigureImageAttributes } from './FigureImage'
 export { TextAlign } from './TextAlign'

@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
+import { useArticleEmbeds } from './ArticleEmbeds'
 import { sanitizeArticleHtml } from './sanitizeArticleHtml'
 // The same sheet the editing surface loads, so what an author saw is what a
 // reader gets.
@@ -21,8 +22,16 @@ export interface ArticleContentProps {
 export function ArticleContent({ html, className }: ArticleContentProps) {
   const clean = useMemo(() => sanitizeArticleHtml(html), [html])
 
+  // State rather than a ref, so the hook re-runs once the node exists.
+  const [container, setContainer] = useState<HTMLElement | null>(null)
+
+  // Embeds are stored as a provider and an id, never as an iframe, so the
+  // players have to be built here or a reader sees empty divs.
+  useArticleEmbeds(container, clean)
+
   return (
     <div
+      ref={setContainer}
       className={className ? `fa-article ${className}` : 'fa-article'}
       dangerouslySetInnerHTML={{ __html: clean }}
     />
