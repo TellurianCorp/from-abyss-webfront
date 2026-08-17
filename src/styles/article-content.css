@@ -180,3 +180,104 @@ body:not(.dark-mode) [data-theme='light'] .fa-article {
   background: rgba(0, 0, 0, 0.04);
   border-color: rgba(0, 0, 0, 0.1);
 }
+
+/* Figures ------------------------------------------------------------------
+ * Alignment is a class here for the same reason it is on paragraphs: the API's
+ * sanitizer forbids the style attribute. */
+
+.fa-figure {
+  margin: 1.75rem 0;
+}
+
+.fa-figure img,
+.fa-figure video {
+  border-radius: 4px;
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.fa-figcaption {
+  color: var(--muted, #a8a29e);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* An empty caption is normal — most images do not have one — so it takes up no
+ * room in the published view. The editor overrides this to keep it clickable. */
+.fa-figcaption:empty {
+  display: none;
+}
+
+.fa-figure.fa-align-left {
+  margin-right: auto;
+  max-width: 50%;
+}
+
+.fa-figure.fa-align-right {
+  margin-left: auto;
+  max-width: 50%;
+}
+
+.fa-figure.fa-align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fa-figure.fa-align-center img,
+.fa-figure.fa-align-wide img,
+.fa-figure.fa-align-full img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Wide and full break out of the reading measure, bounded by the viewport so a
+ * narrow screen does not gain a horizontal scrollbar. */
+.fa-figure.fa-align-wide {
+  margin-left: calc(50% - min(45vw, 32rem));
+  margin-right: calc(50% - min(45vw, 32rem));
+  max-width: min(90vw, 64rem);
+}
+
+.fa-figure.fa-align-full {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: 100vw;
+}
+
+.fa-figure.fa-align-full img {
+  border-radius: 0;
+}
+
+@media (max-width: 48rem) {
+  /* Floated halves and breakouts stop making sense on a phone. */
+  .fa-figure.fa-align-left,
+  .fa-figure.fa-align-right,
+  .fa-figure.fa-align-wide,
+  .fa-figure.fa-align-full {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+  }
+}
+
+/* In the editor an empty caption stays visible and hintable, so it can be
+ * clicked into and filled. */
+.fa-article--editing .fa-figcaption:empty {
+  display: block;
+  min-height: 1.25rem;
+}
+
+.fa-article--editing .fa-figcaption:empty::before {
+  color: var(--muted, #a8a29e);
+  content: attr(data-placeholder);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.fa-article--editing .fa-figure.ProseMirror-selectednode {
+  outline: 2px solid var(--blood, #b3252b);
+  outline-offset: 3px;
+}
