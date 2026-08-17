@@ -29,7 +29,7 @@
 }
 
 .article-content {
-  background: white;
+  background: var(--ash, #16130f);
   padding: 2rem;
   border-radius: 0.5rem;
 }
@@ -72,34 +72,9 @@
 }
 
 .article-body {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  color: #111827;
-}
-
-.article-body :global(p) {
-  margin-bottom: 1.5rem;
-}
-
-.article-body :global(h2) {
-  font-size: 1.875rem;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-.article-body :global(h3) {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.article-body :global(img) {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-  margin: 1.5rem 0;
+  /* Typography lives in styles/article-content.css, shared with the editor so
+     the two cannot drift. Only the reading width belongs to this page. */
+  max-width: 46rem;
 }
 
 .article-assets-gallery {

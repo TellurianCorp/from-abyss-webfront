@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import articleService, { type Article } from '../services/articleService'
+import { ArticleContent } from '../components/articles/ArticleContent'
 import './ArticleView.css'
 
 export function ArticleView() {
@@ -83,10 +84,7 @@ export function ArticleView() {
           <div className="article-excerpt">{translation.excerpt}</div>
         )}
 
-        <div
-          className="article-body"
-          dangerouslySetInnerHTML={{ __html: translation.content }}
-        />
+        <ArticleContent html={translation.content} className="article-body" />
 
         {article.assets && article.assets.length > 0 && (
           <div className="article-assets-gallery">
