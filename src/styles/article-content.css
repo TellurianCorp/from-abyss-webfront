@@ -281,3 +281,80 @@ body:not(.dark-mode) [data-theme='light'] .fa-article {
   outline: 2px solid var(--blood, #b3252b);
   outline-offset: 3px;
 }
+
+/* Native players ----------------------------------------------------------- */
+
+.fa-audio,
+.fa-video {
+  margin: 1.75rem 0;
+}
+
+.fa-audio-player {
+  width: 100%;
+}
+
+.fa-video-player {
+  border-radius: 4px;
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Embedded players ---------------------------------------------------------
+ * The stored markup is an empty div carrying a provider and an id; the iframe
+ * is built at render time. Sizing lives on the wrapper so the frame has
+ * something to fill before it loads. */
+
+.fa-embed {
+  margin: 1.75rem 0;
+  position: relative;
+  width: 100%;
+}
+
+.fa-embed-video {
+  aspect-ratio: 16 / 9;
+}
+
+.fa-embed-audio {
+  /* Spotify's player is a fixed-height widget rather than a ratio. */
+  height: 152px;
+}
+
+.fa-embed-frame {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* In the editor the placeholder must stay visible and selectable even before
+ * anything is framed, or an embed looks like nothing happened. */
+.fa-article--editing .fa-embed {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+}
+
+.fa-article--editing .fa-embed::after {
+  align-items: center;
+  color: var(--muted, #a8a29e);
+  content: attr(data-embed-provider);
+  display: flex;
+  font-size: 0.8rem;
+  inset: 0;
+  justify-content: center;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  position: absolute;
+  text-transform: uppercase;
+}
+
+.fa-article--editing .fa-embed.ProseMirror-selectednode,
+.fa-article--editing .fa-audio.ProseMirror-selectednode,
+.fa-article--editing .fa-video.ProseMirror-selectednode {
+  outline: 2px solid var(--blood, #b3252b);
+  outline-offset: 3px;
+}

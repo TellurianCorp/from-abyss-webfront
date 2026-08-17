@@ -15,6 +15,7 @@ import {
   RotateCw,
   Terminal,
   Underline,
+  Video,
   X,
 } from 'react-feather'
 import { useTranslation } from 'react-i18next'
@@ -58,6 +59,22 @@ export function EditorToolbar({ editor, onEditLink }: EditorToolbarProps) {
       canRedo: instance.can().redo(),
     }),
   })
+
+  const insertEmbed = () => {
+    const url = window.prompt(
+      t('editor.embed.prompt', 'Paste a YouTube, Vimeo or Spotify link'),
+      '',
+    )
+    if (!url) return
+
+    // setEmbedFromUrl returns false for anything outside the allowlist, so the
+    // writer is told rather than left with nothing having happened.
+    if (!editor.chain().focus().setEmbedFromUrl(url).run()) {
+      window.alert(
+        t('editor.embed.unsupported', 'That link is not from a supported provider.'),
+      )
+    }
+  }
 
   const editLink = () => {
     if (onEditLink) {
@@ -207,6 +224,11 @@ export function EditorToolbar({ editor, onEditLink }: EditorToolbarProps) {
           label={t('editor.toolbar.link', 'Link')}
           isActive={state.link}
           onClick={editLink}
+        />
+        <ToolbarButton
+          icon={Video}
+          label={t('editor.toolbar.embed', 'Embed a video or track')}
+          onClick={insertEmbed}
         />
         <ToolbarButton
           icon={Minus}
