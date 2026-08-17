@@ -5,10 +5,12 @@ import StarterKit from '@tiptap/starter-kit'
 import { Embed } from './Embed'
 import { FigureImage } from './FigureImage'
 import { AudioBlock, VideoBlock } from './MediaBlock'
+import { Spellcheck } from './Spellcheck'
 import { TextAlign } from './TextAlign'
 
 export interface BuildExtensionsOptions {
   placeholder?: string
+  onSpellMatchClick?: (id: string, rect: DOMRect) => void
 }
 
 /**
@@ -49,10 +51,12 @@ export function buildEditorExtensions(options: BuildExtensionsOptions = {}): Ext
       placeholder: options.placeholder ?? '',
     }),
     CharacterCount,
+    Spellcheck.configure({ onMatchClick: options.onSpellMatchClick }),
   ]
 }
 
 export { Embed } from './Embed'
+export { Spellcheck, spellcheckPluginKey } from './Spellcheck'
 export { AudioBlock, VideoBlock } from './MediaBlock'
 export { FigureImage } from './FigureImage'
 export type { FigureAlignment, FigureImageAttributes } from './FigureImage'

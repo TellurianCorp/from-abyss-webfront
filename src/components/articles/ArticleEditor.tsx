@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import type { Editor } from '@tiptap/react'
 import { RichTextEditor } from '../editor/RichTextEditor'
 import { useTranslation } from 'react-i18next'
 import { Moon, Sun } from 'react-feather'
@@ -7,7 +8,8 @@ import articleService, { type Article, type ArticleTranslationInput, type Articl
 import { ArticleTranslationTabs } from './ArticleTranslationTabs'
 import { ArticleAssetsManager } from './ArticleAssetsManager'
 import { ArticleMetadataForm } from './ArticleMetadataForm'
-import { GrammarChecker } from './GrammarChecker'
+import { SpellcheckPanel } from '../editor/SpellcheckPanel'
+import { useSpellcheck } from '../editor/spellcheck/useSpellcheck'
 import { WorkflowStatusBadge } from './WorkflowStatusBadge'
 import './ArticleEditor.css'
 
@@ -34,6 +36,10 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
   const [ogImageUrl, setOgImageUrl] = useState<string>('')
   const [assets, setAssets] = useState<ArticleAsset[]>([])
   const [uploadingAsset, setUploadingAsset] = useState(false)
+  // Held here rather than inside the editor so the spellcheck panel, which sits
+  // beside the document, can drive it.
+  const [editorInstance, setEditorInstance] = useState<Editor | null>(null)
+  const spellcheck = useSpellcheck(editorInstance, currentLanguage as 'pt-BR' | 'en-GB')
 
   // Load article if editing
   useEffect(() => {
@@ -279,6 +285,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
                  remounts it rather than diffing HTML into a live document. */
               key={currentLanguage}
               language={currentLanguage}
+              onReady={setEditorInstance}
               value={currentTranslation.content || ''}
               onChange={(value) => {
                 setTranslations({
@@ -331,9 +338,14 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
             </details>
           </div>
 
-          <GrammarChecker
-            text={currentTranslation.content || ''}
-            language={currentLanguage as 'pt-BR' | 'en-GB'}
+          <SpellcheckPanel
+            matches={spellcheck.matches}
+            isChecking={spellcheck.isChecking}
+            isUpToDate={spellcheck.isUpToDate}
+            error={spellcheck.error}
+            onRun={() => void spellcheck.run()}
+            onApply={spellcheck.apply}
+            onDismiss={spellcheck.dismiss}
           />
         </div>
 

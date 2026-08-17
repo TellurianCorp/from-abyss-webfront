@@ -1,3 +1,4 @@
+import type { Editor } from '@tiptap/react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -28,6 +29,12 @@ export interface RichTextEditorProps {
   readOnly?: boolean
   /** BCP-47 tag driving the browser's own spellchecker. */
   language?: string
+  /**
+   * Receives the editor once it exists, so a sibling panel can drive it. The
+   * spellchecker lives outside the editor chrome because its results belong
+   * beside the document, not on top of it.
+   */
+  onReady?: (editor: Editor) => void
 }
 
 /** How long typing settles before the parent is told. */
@@ -39,6 +46,7 @@ export function RichTextEditor({
   placeholder,
   readOnly = false,
   language,
+  onReady,
 }: RichTextEditorProps) {
   const onChangeRef = useRef(onChange)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -82,6 +90,10 @@ export function RichTextEditor({
   useEffect(() => {
     editor?.setEditable(!readOnly)
   }, [editor, readOnly])
+
+  useEffect(() => {
+    if (editor) onReady?.(editor)
+  }, [editor, onReady])
 
   // Flush a pending change on unmount, so navigating away immediately after
   // typing does not lose the last few characters.
