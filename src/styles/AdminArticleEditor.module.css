@@ -1,0 +1,14 @@
+/*
+ * The admin content area is padded for dashboards. An editor wants the width
+ * back, but only where there is width to reclaim.
+ */
+.editorSurface {
+  max-width: 100%;
+}
+
+@media (min-width: 1400px) {
+  .editorSurface {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
