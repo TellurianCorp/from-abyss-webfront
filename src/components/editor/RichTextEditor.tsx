@@ -1,9 +1,11 @@
 import { EditorContent, useEditor } from '@tiptap/react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { buildEditorExtensions } from './extensions'
 import { normalizeLegacyHtml } from './html/normalizeLegacyHtml'
 import { EditorToolbar } from './EditorToolbar'
+import { MediaLibraryModal, type MediaInsertDetails } from './MediaLibraryModal'
+import type { MediaItem } from '../../services/mediaService'
 // The same sheet the published article uses, so the editing surface and the
 // result are styled by one source rather than two that drift.
 import '../../styles/article-content.css'
@@ -49,6 +51,7 @@ export function RichTextEditor({
   // it, or Quill's bullet lists silently come back numbered. Computed once via a
   // lazy initialiser: `value` is the opening document, not a live binding.
   const [initialContent] = useState(() => normalizeLegacyHtml(value).html)
+  const [mediaOpen, setMediaOpen] = useState(false)
 
   const editor = useEditor({
     extensions: buildEditorExtensions({ placeholder }),
@@ -90,12 +93,43 @@ export function RichTextEditor({
     }
   }, [editor])
 
+  const insertImage = useCallback(
+    (item: MediaItem, details: MediaInsertDetails) => {
+      if (!editor || !item.url) return
+
+      editor
+        .chain()
+        .focus()
+        .setFigureImage({
+          src: item.url,
+          alt: details.altText || null,
+          width: item.width ?? null,
+          mediaId: item.id,
+        })
+        .run()
+
+      // The caption is the node's content, so it is written after insertion
+      // rather than passed as an attribute.
+      if (details.caption) editor.chain().insertContent(details.caption).run()
+    },
+    [editor],
+  )
+
   if (!editor) return null
 
   return (
     <div className={styles.wrapper}>
-      {!readOnly && <EditorToolbar editor={editor} />}
+      {!readOnly && (
+        <EditorToolbar editor={editor} onInsertImage={() => setMediaOpen(true)} />
+      )}
       <EditorContent editor={editor} className={styles.surface} />
+
+      <MediaLibraryModal
+        isOpen={mediaOpen}
+        onClose={() => setMediaOpen(false)}
+        accept="image"
+        onSelect={insertImage}
+      />
     </div>
   )
 }
