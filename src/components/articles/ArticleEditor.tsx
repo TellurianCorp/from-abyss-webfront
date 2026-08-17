@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { QuillEditor } from './QuillEditor'
+import { RichTextEditor } from '../editor/RichTextEditor'
 import { useTranslation } from 'react-i18next'
 import { Moon, Sun } from 'react-feather'
 import { useDarkMode } from '../../hooks/useDarkMode'
@@ -274,7 +274,11 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
 
           <div className="form-group">
             <label htmlFor="content">Conteúdo *</label>
-            <QuillEditor
+            <RichTextEditor
+              /* The editor is uncontrolled after mount, so switching language
+                 remounts it rather than diffing HTML into a live document. */
+              key={currentLanguage}
+              language={currentLanguage}
               value={currentTranslation.content || ''}
               onChange={(value) => {
                 setTranslations({

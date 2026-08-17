@@ -1,0 +1,54 @@
+.button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--muted, #a8a29e);
+  cursor: pointer;
+  display: inline-flex;
+  height: 1.9rem;
+  justify-content: center;
+  min-width: 1.9rem;
+  padding: 0 0.35rem;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--bone, #e8e6e3);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--blood, #b3252b);
+  outline-offset: 1px;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.active {
+  background: rgba(179, 37, 43, 0.18);
+  border-color: var(--blood, #b3252b);
+  color: var(--bone, #e8e6e3);
+}
+
+.glyph {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+[data-theme='light'] .button {
+  color: #4b5563;
+}
+
+[data-theme='light'] .button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.06);
+  color: #111827;
+}
+
+[data-theme='light'] .active {
+  color: #111827;
+}

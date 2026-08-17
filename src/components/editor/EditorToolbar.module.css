@@ -1,0 +1,41 @@
+.toolbar {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.4rem 0.5rem;
+  /* Sticky so the controls stay reachable in a long article. */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.group {
+  display: flex;
+  gap: 0.15rem;
+}
+
+/* Separator between groups, drawn rather than added as an element. */
+.group:not(:last-child)::after {
+  align-self: center;
+  background: rgba(255, 255, 255, 0.14);
+  content: '';
+  height: 1.2rem;
+  margin: 0 0.35rem;
+  width: 1px;
+}
+
+.struck {
+  text-decoration: line-through;
+}
+
+[data-theme='light'] .toolbar {
+  background: #f3f4f6;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='light'] .group:not(:last-child)::after {
+  background: rgba(0, 0, 0, 0.14);
+}

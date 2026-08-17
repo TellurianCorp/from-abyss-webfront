@@ -48,6 +48,19 @@ export default defineConfig(({ mode }) => {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
             'i18n-vendor': ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
             'bootstrap-vendor': ['bootstrap', 'react-bootstrap'],
+            // Kept out of the main bundle: only the authoring routes load it,
+            // and readers should not pay for the editor.
+            //
+            // @tiptap/pm is deliberately absent. It exposes no "." export, only
+            // subpaths such as /state and /view, so naming it here fails the
+            // build outright. Its ProseMirror packages are reached through these
+            // entries and land in the same chunk.
+            'editor-vendor': [
+              '@tiptap/core',
+              '@tiptap/react',
+              '@tiptap/starter-kit',
+              '@tiptap/extensions',
+            ],
           },
           // Optimize chunk file names for better caching
           chunkFileNames: 'assets/js/[name]-[hash].js',

@@ -1,0 +1,182 @@
+/*
+ * Article content styling.
+ *
+ * Loaded by both the editor and the published view, which is the whole point:
+ * a WYSIWYG editor that does not look like the result is not doing its job.
+ *
+ * Class names here are a data contract, not decoration. They are written into
+ * persisted HTML by the editor's schema and allowlisted by the API's sanitizer,
+ * so they cannot be CSS Module classes — those are hashed at build time, and the
+ * stored markup needs names that stay stable. Everything is fa- prefixed and
+ * lives in this one global sheet; component chrome uses CSS Modules as usual.
+ */
+
+.fa-article {
+  color: var(--bone, #e8e6e3);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.fa-article > *:first-child {
+  margin-top: 0;
+}
+
+.fa-article > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Headings ---------------------------------------------------------------- */
+
+.fa-article h2,
+.fa-article h3,
+.fa-article h4 {
+  color: var(--bone, #e8e6e3);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 2rem 0 0.75rem;
+}
+
+.fa-article h2 {
+  font-size: 1.6rem;
+}
+
+.fa-article h3 {
+  font-size: 1.3rem;
+}
+
+.fa-article h4 {
+  font-size: 1.1rem;
+}
+
+/* Text -------------------------------------------------------------------- */
+
+.fa-article p {
+  margin: 0 0 1.1rem;
+}
+
+.fa-article a {
+  color: var(--blood, #b3252b);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.fa-article a:hover {
+  color: var(--bone, #e8e6e3);
+}
+
+.fa-article ul,
+.fa-article ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.6rem;
+}
+
+.fa-article li {
+  margin-bottom: 0.35rem;
+}
+
+.fa-article li > p {
+  margin: 0;
+}
+
+.fa-article blockquote {
+  border-left: 3px solid var(--blood, #b3252b);
+  color: var(--muted, #a8a29e);
+  font-style: italic;
+  margin: 1.5rem 0;
+  padding: 0.25rem 0 0.25rem 1.15rem;
+}
+
+.fa-article pre {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  margin: 0 0 1.1rem;
+  overflow-x: auto;
+  padding: 0.9rem 1rem;
+}
+
+.fa-article pre code {
+  background: none;
+  border: 0;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.fa-article code {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+}
+
+.fa-article hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 2rem 0;
+}
+
+.fa-article mark {
+  background: var(--sepia, #c8a24a);
+  color: #14110f;
+  padding: 0 0.15em;
+}
+
+/* Alignment ---------------------------------------------------------------
+ * These classes exist because the API's sanitizer forbids the style attribute.
+ * An editor emitting style="text-align: …" would have it discarded on save. */
+
+.fa-align-left {
+  text-align: left;
+}
+
+.fa-align-center {
+  text-align: center;
+}
+
+.fa-align-right {
+  text-align: right;
+}
+
+.fa-align-justify {
+  text-align: justify;
+}
+
+/* Editing surface ---------------------------------------------------------- */
+
+.fa-article--editing:focus {
+  outline: none;
+}
+
+/* Placeholder for an empty document, supplied by the Placeholder extension. */
+.fa-article--editing p.is-editor-empty:first-child::before {
+  color: var(--muted, #a8a29e);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Light theme -------------------------------------------------------------
+ * The default above is the dark palette the site uses. Only the values that
+ * actually differ are restated here. */
+
+[data-theme='light'] .fa-article,
+body:not(.dark-mode) [data-theme='light'] .fa-article {
+  color: #1f2937;
+}
+
+[data-theme='light'] .fa-article h2,
+[data-theme='light'] .fa-article h3,
+[data-theme='light'] .fa-article h4 {
+  color: #111827;
+}
+
+[data-theme='light'] .fa-article code {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='light'] .fa-article pre {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
