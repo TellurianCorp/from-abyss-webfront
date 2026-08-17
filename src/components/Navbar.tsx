@@ -5,6 +5,7 @@ import { WeatherShader } from './WeatherShader'
 import { ProfileDropdown } from './ProfileDropdown'
 import { NotificationBell } from './navigation/NotificationBell'
 import { useUser } from '../hooks/useUser'
+import { apiUrl } from '../utils/api'
 import styles from '../styles/Navbar.module.css'
 
 function getIssueNumber() {
@@ -51,7 +52,7 @@ export function Navbar() {
           </div>
           <div className={styles.navbarRight}>
             <div className={styles.navbarActions}>
-              {userInfo && (
+              {userInfo ? (
                 <>
                   <NotificationBell />
                   <ProfileDropdown
@@ -62,6 +63,12 @@ export function Navbar() {
                     }}
                   />
                 </>
+              ) : (
+                // Plain anchor, not a router Link: the OIDC flow starts on the
+                // API, which is a different origin in production.
+                <a className={styles.navbarLogin} href={apiUrl('/v1/auth/login')}>
+                  {t('login.oidc', 'Sign In With Abyss')}
+                </a>
               )}
               <div className={styles.navbarLanguage}>
                 <LanguageSelector />
