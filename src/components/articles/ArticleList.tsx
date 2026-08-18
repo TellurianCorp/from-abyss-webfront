@@ -14,7 +14,7 @@ interface ArticleListProps {
 }
 
 export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListProps) {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [articles, setArticles] = useState<Article[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -55,14 +55,14 @@ export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListPr
         setTotal(response?.total ?? 0)
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao carregar artigos')
+      setError(err instanceof Error ? err.message : t('articles.list.error', 'Could not load articles'))
     } finally {
       setLoading(false)
     }
   }
 
   if (loading) {
-    return <div>Carregando...</div>
+    return <div>{t('articles.list.loading', 'Loading...')}</div>
   }
 
   if (error) {
@@ -106,7 +106,7 @@ export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListPr
                   <div className="article-card-header">
                     {!usePublicEndpoint && <WorkflowStatusBadge status={article.status} />}
                     <span className="article-date">
-                      {new Date(article.created_at).toLocaleDateString('pt-BR')}
+                      {new Date(article.created_at).toLocaleDateString(i18n.language)}
                     </span>
                   </div>
                   <h3 className="article-card-title">

@@ -193,7 +193,8 @@ html[data-theme="dark"] .form-group textarea::placeholder {
   cursor: not-allowed;
 }
 
-/* Quill Editor styles are in QuillEditor.css */
+/* Article body styling lives in styles/article-content.css, shared with the
+   published view so the two cannot drift. */
 
 @media (max-width: 1024px) {
   .editor-content {

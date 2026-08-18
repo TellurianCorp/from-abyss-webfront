@@ -7,7 +7,7 @@ import './ArticleView.css'
 
 export function ArticleView() {
   const { slug } = useParams<{ slug: string }>()
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [article, setArticle] = useState<Article | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -34,7 +34,7 @@ export function ArticleView() {
   }
 
   if (loading) {
-    return <div className="article-view-loading">Carregando...</div>
+    return <div className="article-view-loading">{t('articles.view.loading', 'Loading...')}</div>
   }
 
   if (error || !article) {
@@ -66,12 +66,12 @@ export function ArticleView() {
           <div className="article-meta">
             <span className="article-date">
               {article.published_at
-                ? new Date(article.published_at).toLocaleDateString('pt-BR', {
+                ? new Date(article.published_at).toLocaleDateString(i18n.language, {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })
-                : new Date(article.created_at).toLocaleDateString('pt-BR', {
+                : new Date(article.created_at).toLocaleDateString(i18n.language, {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
