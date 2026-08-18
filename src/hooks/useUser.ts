@@ -44,8 +44,14 @@ export function useUser() {
           if (userIdValue) {
             const user = { ...userData, id: String(userIdValue) }
             setUserInfo(user)
-            localStorage.setItem('userInfo', JSON.stringify(user))
             setCanWriteArticles(userData.can_write_articles === true)
+
+            // The capability is deliberately not cached: a stale permission
+            // is worse than a brief absence, and the API decides access on
+            // every request either way. Persist everything else as before.
+            const cacheableUser = { ...user }
+            delete cacheableUser.can_write_articles
+            localStorage.setItem('userInfo', JSON.stringify(cacheableUser))
           }
         } else if (response.status === 401) {
           // Session gone or expired: drop the cached copy so the UI stops
