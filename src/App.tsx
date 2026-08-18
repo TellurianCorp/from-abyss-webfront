@@ -123,25 +123,25 @@ function App() {
           <Route
             path="/admin/articles"
             element={
-              <ProtectedRoute>
+              <WriterRoute>
                 <AdminArticles />
-              </ProtectedRoute>
+              </WriterRoute>
             }
           />
           <Route
             path="/admin/articles/new"
             element={
-              <ProtectedRoute>
+              <WriterRoute>
                 <AdminArticleEditor />
-              </ProtectedRoute>
+              </WriterRoute>
             }
           />
           <Route
             path="/admin/articles/:id/edit"
             element={
-              <ProtectedRoute>
+              <WriterRoute>
                 <AdminArticleEditor />
-              </ProtectedRoute>
+              </WriterRoute>
             }
           />
           <Route
