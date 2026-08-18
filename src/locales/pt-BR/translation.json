@@ -29,6 +29,9 @@
       "horrorverse": "Horrorverse"
     }
   },
+  "articles": {
+    "newArticle": "Novo artigo"
+  },
   "koliseum": {
     "console": {
       "eyebrow": "Console Koliseum",
