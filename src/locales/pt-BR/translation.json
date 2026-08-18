@@ -171,7 +171,10 @@
         "fediverseUsernameHint": "Opcional. Deve ser alfanumérico em minúsculas com underscores/hífens, máximo 30 caracteres. Se vazio, será gerado a partir do e-mail.",
         "uploadPhoto": "Enviar Foto",
         "selectedFile": "Selecionado:",
-        "currentPhoto": "Foto atual:"
+        "currentPhoto": "Foto atual:",
+        "password": "Senha",
+        "passwordHint": "Opcional. Se preenchida, o usuario pode entrar com e-mail e senha. Se vazia, precisa usar o OIDC (authentik).",
+        "passwordPlaceholder": "Opcional - deixe vazio se usar OIDC"
       },
       "uploading": "Enviando...",
       "details": {
@@ -212,6 +215,26 @@
       "remoteArtUpload": "Upload de arte remoto falhou (tentando novamente, 12:41 UTC)",
       "atProtocolRelay": "Relé do Protocolo AT 03 conectado (12:10 UTC)",
       "qaReport": "Novo relatório QA Tellurian pronto (11:58 UTC)"
+    },
+    "sidebar": {
+      "title": "Administração",
+      "dashboard": "Painel",
+      "overview": "Visão geral",
+      "fediverse": "Fediverso",
+      "fediverseOverview": "Visão do Fediverso",
+      "activitypub": "ActivityPub",
+      "youtube": "YouTube",
+      "youtubeOverview": "Visão do YouTube",
+      "patreon": "Patreon",
+      "patreonOverview": "Visão do Patreon",
+      "users": "Usuários",
+      "usersManagement": "Gestão de usuários",
+      "feeds": "Feeds",
+      "feedsManagement": "Gestão de feeds",
+      "koliseum": "Koliseum",
+      "koliseumAdmin": "Administração do Koliseum",
+      "content": "Conteúdo",
+      "articles": "Artigos"
     }
   },
   "platform": {
@@ -752,6 +775,149 @@
     "microblog": {
       "title": "Microblog - From Abyss Media",
       "description": "Feed de microblog federado da comunidade From Abyss Media."
+    }
+  },
+  "editor": {
+    "placeholder": "Escreva o artigo...",
+    "toolbar": {
+      "label": "Formatação",
+      "undo": "Desfazer",
+      "redo": "Refazer",
+      "heading2": "Título",
+      "heading3": "Subtítulo",
+      "bold": "Negrito",
+      "italic": "Itálico",
+      "underline": "Sublinhado",
+      "strike": "Tachado",
+      "code": "Código",
+      "codeBlock": "Bloco de código",
+      "alignLeft": "Alinhar à esquerda",
+      "alignCenter": "Centralizar",
+      "alignRight": "Alinhar à direita",
+      "alignJustify": "Justificar",
+      "bulletList": "Lista com marcadores",
+      "orderedList": "Lista numerada",
+      "blockquote": "Citação",
+      "link": "Link",
+      "image": "Inserir imagem",
+      "embed": "Incorporar vídeo ou faixa",
+      "horizontalRule": "Divisória",
+      "clearFormatting": "Limpar formatação"
+    },
+    "link": {
+      "prompt": "Endereço do link"
+    },
+    "embed": {
+      "prompt": "Cole um link do YouTube, Vimeo ou Spotify",
+      "unsupported": "Esse link não é de um provedor suportado."
+    },
+    "image": {
+      "align_left": "Imagem à esquerda",
+      "align_center": "Imagem centralizada",
+      "align_right": "Imagem à direita",
+      "align_wide": "Imagem larga",
+      "align_full": "Imagem em largura total"
+    },
+    "media": {
+      "title": "Biblioteca de mídia",
+      "tabLibrary": "Biblioteca",
+      "tabUpload": "Enviar",
+      "close": "Fechar",
+      "searchPlaceholder": "Buscar por nome ou texto alternativo",
+      "loading": "Carregando...",
+      "empty": "Nada aqui ainda. Envie algo para começar.",
+      "dropHint": "Solte um arquivo aqui, ou escolha um.",
+      "limitHint": "Até {{mb}} MB.",
+      "browse": "Escolher arquivo",
+      "uploading": "Enviando... {{percent}}%",
+      "tooLarge": "Esse arquivo é maior que {{mb}} MB.",
+      "unsupportedType": "Esse tipo de arquivo não é suportado.",
+      "details": "Detalhes",
+      "altLabel": "Texto alternativo",
+      "decorative": "Decorativa, dispensa descrição",
+      "captionLabel": "Legenda",
+      "altRequired": "Descreva a imagem, ou marque como decorativa, para que funcione para quem não a vê.",
+      "nothingSelected": "Escolha algo para inserir.",
+      "insert": "Inserir",
+      "cancel": "Cancelar"
+    },
+    "spellcheck": {
+      "panelTitle": "Revisão de texto",
+      "run": "Verificar",
+      "running": "Verificando...",
+      "runHint": "Verifica gramática e estilo. Seu navegador já sublinha erros de grafia enquanto você escreve.",
+      "noIssues": "Nada a apontar.",
+      "issuesFound_one": "{{count}} sugestão",
+      "issuesFound_other": "{{count}} sugestões",
+      "stale": "- o texto mudou desde esta verificação",
+      "noReplacement": "Sem correção sugerida.",
+      "ignore": "Ignorar"
+    }
+  },
+  "articles": {
+    "admin": {
+      "title": "Artigos",
+      "description": "Rascunhos e publicados, em português e inglês."
+    },
+    "list": {
+      "new": "Novo artigo",
+      "untitled": "Sem título",
+      "loading": "Carregando...",
+      "empty": "Nenhum artigo ainda. Escreva o primeiro.",
+      "filterStatus": "Status",
+      "anyStatus": "Qualquer",
+      "colTitle": "Título",
+      "colStatus": "Status",
+      "colLanguages": "Idiomas",
+      "colUpdated": "Atualizado",
+      "colActions": "Ações",
+      "edit": "Editar",
+      "view": "Ver",
+      "previous": "Anterior",
+      "next": "Próxima",
+      "pageInfo": "{{from}}-{{to}} de {{total}}",
+      "error": "Erro ao carregar artigos"
+    },
+    "status": {
+      "draft": "Rascunho",
+      "in_review": "Em revisão",
+      "reviewed": "Revisado",
+      "approved": "Aprovado",
+      "published": "Publicado",
+      "archived": "Arquivado"
+    },
+    "editor": {
+      "newTitle": "Novo artigo",
+      "editTitle": "Editar artigo",
+      "loading": "Carregando...",
+      "fieldTitle": "Título",
+      "fieldTitlePlaceholder": "Título do artigo",
+      "fieldSubtitle": "Subtítulo",
+      "fieldSubtitlePlaceholder": "Subtítulo (opcional)",
+      "fieldExcerpt": "Resumo",
+      "fieldExcerptPlaceholder": "Resumo para cards e redes sociais",
+      "fieldContent": "Conteúdo",
+      "seoSection": "Meta tags (SEO)",
+      "metaTitle": "Meta title",
+      "metaDescription": "Meta description",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "errorLoad": "Erro ao carregar o artigo",
+      "errorSave": "Erro ao salvar o artigo",
+      "errorUpload": "Erro ao enviar a imagem",
+      "errorFeatured": "Erro ao definir a imagem destacada",
+      "errorRemove": "Erro ao remover a imagem",
+      "saveFirstForAssets": "Salve o artigo antes de adicionar imagens",
+      "darkModeOn": "Ativar modo escuro",
+      "darkModeOff": "Ativar modo claro"
+    },
+    "view": {
+      "loading": "Carregando...",
+      "notFound": "Artigo não encontrado",
+      "translationMissing": "Tradução não disponível",
+      "gallery": "Galeria de imagens",
+      "tags": "Tags:",
+      "topics": "Tópicos:"
     }
   }
 }

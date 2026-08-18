@@ -21,7 +21,7 @@ interface ArticleEditorProps {
 const SUPPORTED_LANGUAGES = ['pt-BR', 'en-GB']
 
 export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { isDark, toggleDarkMode } = useDarkMode()
   const [currentLanguage, setCurrentLanguage] = useState<string>(i18n.language || 'pt-BR')
   const [article, setArticle] = useState<Article | null>(null)
@@ -94,7 +94,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
       setOgImageUrl(loadedArticle.og_image_url || '')
       setAssets(loadedArticle.assets || [])
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao carregar artigo')
+      setError(err instanceof Error ? err.message : t('articles.editor.errorLoad', 'Could not load the article'))
     } finally {
       setLoading(false)
     }
@@ -129,7 +129,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
         onSave()
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao salvar artigo')
+      setError(err instanceof Error ? err.message : t('articles.editor.errorSave', 'Could not save the article'))
     } finally {
       setSaving(false)
     }
@@ -137,7 +137,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
 
   const handleUploadAsset = async (file: File, altText?: string, isFeatured?: boolean) => {
     if (!articleId) {
-      setError('Salve o artigo antes de adicionar imagens')
+      setError(t('articles.editor.saveFirstForAssets', 'Save the article before adding images'))
       return
     }
 
@@ -147,7 +147,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
       // Reload article to get updated assets
       await loadArticle()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao fazer upload da imagem')
+      setError(err instanceof Error ? err.message : t('articles.editor.errorUpload', 'Could not upload the image'))
     } finally {
       setUploadingAsset(false)
     }
@@ -160,7 +160,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
       await articleService.setFeaturedAsset(articleId, assetId)
       await loadArticle()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao definir imagem destacada')
+      setError(err instanceof Error ? err.message : t('articles.editor.errorFeatured', 'Could not set the featured image'))
     }
   }
 
@@ -171,7 +171,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
       await articleService.removeAsset(articleId, assetId)
       await loadArticle()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao remover imagem')
+      setError(err instanceof Error ? err.message : t('articles.editor.errorRemove', 'Could not remove the image'))
     }
   }
 
@@ -189,20 +189,24 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
   }, {} as Record<string, { complete: boolean }>)
 
   if (loading) {
-    return <div>Carregando...</div>
+    return <div>{t('articles.editor.loading', 'Loading...')}</div>
   }
 
   return (
     <div className="article-editor">
       <div className="editor-header">
-        <h2>{articleId ? 'Editar Artigo' : 'Novo Artigo'}</h2>
+        <h2>
+          {articleId
+            ? t('articles.editor.editTitle', 'Edit article')
+            : t('articles.editor.newTitle', 'New article')}
+        </h2>
         <div className="editor-header-actions">
           <button
             type="button"
             onClick={toggleDarkMode}
             className="dark-mode-toggle"
-            title={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-            aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+            title={isDark ? t('articles.editor.darkModeOff', 'Switch to light mode') : t('articles.editor.darkModeOn', 'Switch to dark mode')}
+            aria-label={isDark ? t('articles.editor.darkModeOff', 'Switch to light mode') : t('articles.editor.darkModeOn', 'Switch to dark mode')}
           >
             {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -222,7 +226,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
       <div className="editor-content">
         <div className="editor-main">
           <div className="form-group">
-            <label htmlFor="title">Título *</label>
+            <label htmlFor="title">{t('articles.editor.fieldTitle', 'Title')} *</label>
             <input
               type="text"
               id="title"
@@ -236,12 +240,12 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
                   },
                 })
               }}
-              placeholder="Título do artigo"
+              placeholder={t('articles.editor.fieldTitlePlaceholder', 'Article title')}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="subtitle">Subtítulo</label>
+            <label htmlFor="subtitle">{t('articles.editor.fieldSubtitle', 'Subtitle')}</label>
             <input
               type="text"
               id="subtitle"
@@ -255,12 +259,12 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
                   },
                 })
               }}
-              placeholder="Subtítulo (opcional)"
+              placeholder={t('articles.editor.fieldSubtitlePlaceholder', 'Subtitle (optional)')}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="excerpt">Resumo</label>
+            <label htmlFor="excerpt">{t('articles.editor.fieldExcerpt', 'Excerpt')}</label>
             <textarea
               id="excerpt"
               value={currentTranslation.excerpt || ''}
@@ -273,13 +277,13 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
                   },
                 })
               }}
-              placeholder="Resumo para cards e redes sociais"
+              placeholder={t('articles.editor.fieldExcerptPlaceholder', 'Summary for cards and social media')}
               rows={3}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="content">Conteúdo *</label>
+            <label htmlFor="content">{t('articles.editor.fieldContent', 'Content')} *</label>
             <RichTextEditor
               /* The editor is uncontrolled after mount, so switching language
                  remounts it rather than diffing HTML into a live document. */
@@ -296,13 +300,13 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
                   },
                 })
               }}
-              placeholder="Digite o conteúdo do artigo..."
+              placeholder={t('editor.placeholder', 'Write the article...')}
             />
           </div>
 
           <div className="form-group">
             <details>
-              <summary>Meta Tags (SEO)</summary>
+              <summary>{t('articles.editor.seoSection', 'Meta tags (SEO)')}</summary>
               <div style={{ marginTop: '1rem' }}>
                 <label htmlFor="meta-title">Meta Title</label>
                 <input
@@ -376,7 +380,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
               disabled={saving}
               className="btn-save"
             >
-              {saving ? 'Salvando...' : 'Salvar'}
+              {saving ? t('articles.editor.saving', 'Saving...') : t('articles.editor.save', 'Save')}
             </button>
           </div>
         </div>

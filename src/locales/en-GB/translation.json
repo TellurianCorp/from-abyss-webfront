@@ -215,6 +215,26 @@
       "remoteArtUpload": "Remote art upload failed (retrying, 12:41 UTC)",
       "atProtocolRelay": "AT Protocol relay 03 connected (12:10 UTC)",
       "qaReport": "New Tellurian QA report ready (11:58 UTC)"
+    },
+    "sidebar": {
+      "title": "Administration",
+      "dashboard": "Dashboard",
+      "overview": "Overview",
+      "fediverse": "Fediverse",
+      "fediverseOverview": "Fediverse overview",
+      "activitypub": "ActivityPub",
+      "youtube": "YouTube",
+      "youtubeOverview": "YouTube overview",
+      "patreon": "Patreon",
+      "patreonOverview": "Patreon overview",
+      "users": "Users",
+      "usersManagement": "User management",
+      "feeds": "Feeds",
+      "feedsManagement": "Feed management",
+      "koliseum": "Koliseum",
+      "koliseumAdmin": "Koliseum administration",
+      "content": "Content",
+      "articles": "Articles"
     }
   },
   "platform": {
@@ -755,6 +775,149 @@
     "microblog": {
       "title": "Microblog - From Abyss Media",
       "description": "Federated microblog feed for the From Abyss Media community."
+    }
+  },
+  "editor": {
+    "placeholder": "Write the article...",
+    "toolbar": {
+      "label": "Formatting",
+      "undo": "Undo",
+      "redo": "Redo",
+      "heading2": "Heading",
+      "heading3": "Subheading",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "code": "Inline code",
+      "codeBlock": "Code block",
+      "alignLeft": "Align left",
+      "alignCenter": "Align centre",
+      "alignRight": "Align right",
+      "alignJustify": "Justify",
+      "bulletList": "Bullet list",
+      "orderedList": "Numbered list",
+      "blockquote": "Quote",
+      "link": "Link",
+      "image": "Insert an image",
+      "embed": "Embed a video or track",
+      "horizontalRule": "Divider",
+      "clearFormatting": "Clear formatting"
+    },
+    "link": {
+      "prompt": "Link URL"
+    },
+    "embed": {
+      "prompt": "Paste a YouTube, Vimeo or Spotify link",
+      "unsupported": "That link is not from a supported provider."
+    },
+    "image": {
+      "align_left": "Image left",
+      "align_center": "Image centred",
+      "align_right": "Image right",
+      "align_wide": "Image wide",
+      "align_full": "Image full width"
+    },
+    "media": {
+      "title": "Media library",
+      "tabLibrary": "Library",
+      "tabUpload": "Upload",
+      "close": "Close",
+      "searchPlaceholder": "Search by name or alt text",
+      "loading": "Loading...",
+      "empty": "Nothing here yet. Upload something to begin.",
+      "dropHint": "Drop a file here, or choose one.",
+      "limitHint": "Up to {{mb}} MB.",
+      "browse": "Choose a file",
+      "uploading": "Uploading... {{percent}}%",
+      "tooLarge": "That file is larger than {{mb}} MB.",
+      "unsupportedType": "That file type is not supported.",
+      "details": "Details",
+      "altLabel": "Alt text",
+      "decorative": "Decorative, needs no description",
+      "captionLabel": "Caption",
+      "altRequired": "Describe the image, or mark it decorative, so it works for readers who cannot see it.",
+      "nothingSelected": "Choose something to insert.",
+      "insert": "Insert",
+      "cancel": "Cancel"
+    },
+    "spellcheck": {
+      "panelTitle": "Writing check",
+      "run": "Check",
+      "running": "Checking...",
+      "runHint": "Checks grammar and style. Your browser already underlines misspellings as you type.",
+      "noIssues": "Nothing to flag.",
+      "issuesFound_one": "{{count}} suggestion",
+      "issuesFound_other": "{{count}} suggestions",
+      "stale": "- text changed since this check",
+      "noReplacement": "No suggested correction.",
+      "ignore": "Ignore"
+    }
+  },
+  "articles": {
+    "admin": {
+      "title": "Articles",
+      "description": "Drafts and published pieces, in Portuguese and English."
+    },
+    "list": {
+      "new": "New article",
+      "untitled": "Untitled",
+      "loading": "Loading...",
+      "empty": "No articles yet. Write the first one.",
+      "filterStatus": "Status",
+      "anyStatus": "Any",
+      "colTitle": "Title",
+      "colStatus": "Status",
+      "colLanguages": "Languages",
+      "colUpdated": "Updated",
+      "colActions": "Actions",
+      "edit": "Edit",
+      "view": "View",
+      "previous": "Previous",
+      "next": "Next",
+      "pageInfo": "{{from}}-{{to}} of {{total}}",
+      "error": "Could not load articles"
+    },
+    "status": {
+      "draft": "Draft",
+      "in_review": "In review",
+      "reviewed": "Reviewed",
+      "approved": "Approved",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "editor": {
+      "newTitle": "New article",
+      "editTitle": "Edit article",
+      "loading": "Loading...",
+      "fieldTitle": "Title",
+      "fieldTitlePlaceholder": "Article title",
+      "fieldSubtitle": "Subtitle",
+      "fieldSubtitlePlaceholder": "Subtitle (optional)",
+      "fieldExcerpt": "Excerpt",
+      "fieldExcerptPlaceholder": "Summary for cards and social media",
+      "fieldContent": "Content",
+      "seoSection": "Meta tags (SEO)",
+      "metaTitle": "Meta title",
+      "metaDescription": "Meta description",
+      "save": "Save",
+      "saving": "Saving...",
+      "errorLoad": "Could not load the article",
+      "errorSave": "Could not save the article",
+      "errorUpload": "Could not upload the image",
+      "errorFeatured": "Could not set the featured image",
+      "errorRemove": "Could not remove the image",
+      "saveFirstForAssets": "Save the article before adding images",
+      "darkModeOn": "Switch to dark mode",
+      "darkModeOff": "Switch to light mode"
+    },
+    "view": {
+      "loading": "Loading...",
+      "notFound": "Article not found",
+      "translationMissing": "Translation not available",
+      "gallery": "Image gallery",
+      "tags": "Tags:",
+      "topics": "Topics:"
     }
   }
 }
