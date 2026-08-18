@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { updateSEO, addStructuredData, type SEOData } from '../utils/seo'
+import { updateSEO, addStructuredData, type SEOData, type StructuredDataType } from '../utils/seo'
 
 /**
  * React hook for managing SEO meta tags
@@ -38,7 +38,7 @@ export function useSEO(data: SEOData): void {
  * ```
  */
 export function useStructuredData(
-  type: 'WebSite' | 'Article' | 'Organization',
+  type: StructuredDataType,
   data: Record<string, unknown>
 ): void {
   const dataString = JSON.stringify(data)

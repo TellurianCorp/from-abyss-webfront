@@ -1,0 +1,27 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.45rem 0.5rem;
+  border: 1px solid var(--fa-border, #333);
+  border-radius: 4px;
+  background: var(--fa-surface, #141414);
+  color: inherit;
+  font: inherit;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+.error {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--fa-danger, #d05353);
+}

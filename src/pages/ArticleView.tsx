@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import articleService, { type Article } from '../services/articleService'
 import { ArticleContent } from '../components/articles/ArticleContent'
+import { ArticleTypeBadge } from '../components/articles/ArticleTypeBadge'
+import { articleTypeLabel } from '../components/articles/articleTypeLabel'
+import { useSEO, useStructuredData } from '../hooks/useSEO'
 import './ArticleView.css'
 
 export function ArticleView() {
@@ -17,6 +20,48 @@ export function ArticleView() {
       loadArticle()
     }
   }, [slug, i18n.language])
+
+  const language = i18n.language || 'pt-BR'
+  const translation = article?.translations?.[language] ||
+                      Object.values(article?.translations || {})[0]
+
+  // Every article page served the site's default title and description until
+  // now: nothing here emitted SEO at all, even though the editor has collected
+  // meta_title, meta_description and og_image_url all along. Built with useMemo
+  // because useSEO depends on object identity and a fresh object every render
+  // would rewrite the document head on each one.
+  const seo = useMemo(() => {
+    if (!article || !translation) return {}
+    const canonical = `https://fromabyss.com/articles/${article.slug}`
+    return {
+      title: `${translation.meta_title || translation.title} - From Abyss Media`,
+      description: translation.meta_description || translation.excerpt || undefined,
+      keywords: translation.meta_keywords?.join(', ') || undefined,
+      image: article.og_image_url || article.featured_asset?.url || undefined,
+      url: canonical,
+      type: 'article',
+    }
+  }, [article, translation])
+
+  useSEO(seo)
+
+  // articleSection is schema.org's field for the section of a publication a
+  // piece belongs to, which is exactly what an editorial type is. It is where
+  // the classification earns its keep beyond the badge.
+  useStructuredData('Article', useMemo(() => {
+    if (!article || !translation) return {}
+    return {
+      headline: translation.title,
+      description: translation.meta_description || translation.excerpt || undefined,
+      image: article.og_image_url || article.featured_asset?.url || undefined,
+      datePublished: article.published_at || article.created_at,
+      dateModified: article.updated_at,
+      inLanguage: translation.language_code || language,
+      articleSection: article.type ? articleTypeLabel(article.type, language) : undefined,
+      publisher: { '@type': 'Organization', name: 'From Abyss Media' },
+      mainEntityOfPage: `https://fromabyss.com/articles/${article.slug}`,
+    }
+  }, [article, translation, language]))
 
   const loadArticle = async () => {
     if (!slug) return
@@ -41,9 +86,6 @@ export function ArticleView() {
     return <div className="article-view-error">{error || 'Artigo não encontrado'}</div>
   }
 
-  const translation = article.translations?.[i18n.language || 'pt-BR'] || 
-                     Object.values(article.translations || {})[0]
-
   if (!translation) {
     return <div className="article-view-error">Tradução não disponível</div>
   }
@@ -64,6 +106,7 @@ export function ArticleView() {
           <h1>{translation.title}</h1>
           {translation.subtitle && <h2 className="article-subtitle">{translation.subtitle}</h2>}
           <div className="article-meta">
+            <ArticleTypeBadge type={article.type} linked />
             <span className="article-date">
               {article.published_at
                 ? new Date(article.published_at).toLocaleDateString(i18n.language, {

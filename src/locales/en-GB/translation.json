@@ -30,7 +30,83 @@
     }
   },
   "articles": {
-    "newArticle": "New article"
+    "newArticle": "New article",
+    "admin": {
+      "title": "Articles",
+      "description": "Drafts and published pieces, in Portuguese and English."
+    },
+    "list": {
+      "new": "New article",
+      "untitled": "Untitled",
+      "loading": "Loading...",
+      "empty": "No articles yet. Write the first one.",
+      "filterStatus": "Status",
+      "anyStatus": "Any",
+      "colTitle": "Title",
+      "colStatus": "Status",
+      "colLanguages": "Languages",
+      "colUpdated": "Updated",
+      "colActions": "Actions",
+      "edit": "Edit",
+      "view": "View",
+      "previous": "Previous",
+      "next": "Next",
+      "pageInfo": "{{from}}-{{to}} of {{total}}",
+      "error": "Could not load articles"
+    },
+    "status": {
+      "draft": "Draft",
+      "in_review": "In review",
+      "reviewed": "Reviewed",
+      "approved": "Approved",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "editor": {
+      "newTitle": "New article",
+      "editTitle": "Edit article",
+      "loading": "Loading...",
+      "fieldTitle": "Title",
+      "fieldTitlePlaceholder": "Article title",
+      "fieldSubtitle": "Subtitle",
+      "fieldSubtitlePlaceholder": "Subtitle (optional)",
+      "fieldExcerpt": "Excerpt",
+      "fieldExcerptPlaceholder": "Summary for cards and social media",
+      "fieldContent": "Content",
+      "seoSection": "Meta tags (SEO)",
+      "metaTitle": "Meta title",
+      "metaDescription": "Meta description",
+      "save": "Save",
+      "saving": "Saving...",
+      "errorLoad": "Could not load the article",
+      "errorSave": "Could not save the article",
+      "errorUpload": "Could not upload the image",
+      "errorFeatured": "Could not set the featured image",
+      "errorRemove": "Could not remove the image",
+      "saveFirstForAssets": "Save the article before adding images",
+      "darkModeOn": "Switch to dark mode",
+      "darkModeOff": "Switch to light mode"
+    },
+    "view": {
+      "loading": "Loading...",
+      "notFound": "Article not found",
+      "translationMissing": "Translation not available",
+      "gallery": "Image gallery",
+      "tags": "Tags:",
+      "topics": "Topics:"
+    },
+    "type": {
+      "label": "Type",
+      "none": "No type",
+      "hint": "News, Review, Opinion and the rest. Optional.",
+      "loadError": "Could not load the types",
+      "retiredOption": "{{name}} (retired)",
+      "filterLabel": "Type",
+      "all": "All types",
+      "notFoundTitle": "Type not found",
+      "notFound": "There is no article type with this address.",
+      "backToAll": "See all articles"
+    }
   },
   "admin": {
     "eyebrow": "From Abyss Control",
@@ -189,7 +265,34 @@
       "feeds": "Feeds",
       "feedsManagement": "Feed management",
       "content": "Content",
-      "articles": "Articles"
+      "articles": "Articles",
+      "articleTypes": "Article Types"
+    },
+    "articleTypes": {
+      "title": "Article types",
+      "description": "The editorial vocabulary: News, Review, Opinion and the rest. Names are served from here, so an edit shows up on the site immediately.",
+      "loading": "Loading...",
+      "colName": "Name",
+      "colSlug": "Slug",
+      "colOrder": "Order",
+      "colActions": "Actions",
+      "edit": "Edit",
+      "retire": "Retire",
+      "retired": "{{name}} retired. {{count}} article(s) keep showing it.",
+      "creating": "New type",
+      "editing": "Edit {{name}}",
+      "slug": "Slug",
+      "slugHint": "Lowercase words joined by hyphens. Cannot be changed later: it is part of the public address.",
+      "namePt": "Name (pt-BR)",
+      "nameEn": "Name (en-GB)",
+      "nameHint": "Both languages are required: a missing one would show as a bare slug to half the readers.",
+      "descriptionPt": "Description (pt-BR)",
+      "descriptionEn": "Description (en-GB)",
+      "descriptionHint": "Used as the page description for the type page.",
+      "displayOrder": "Display order",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel"
     }
   },
   "platform": {
@@ -807,72 +910,6 @@
       "stale": "- text changed since this check",
       "noReplacement": "No suggested correction.",
       "ignore": "Ignore"
-    }
-  },
-  "articles": {
-    "admin": {
-      "title": "Articles",
-      "description": "Drafts and published pieces, in Portuguese and English."
-    },
-    "list": {
-      "new": "New article",
-      "untitled": "Untitled",
-      "loading": "Loading...",
-      "empty": "No articles yet. Write the first one.",
-      "filterStatus": "Status",
-      "anyStatus": "Any",
-      "colTitle": "Title",
-      "colStatus": "Status",
-      "colLanguages": "Languages",
-      "colUpdated": "Updated",
-      "colActions": "Actions",
-      "edit": "Edit",
-      "view": "View",
-      "previous": "Previous",
-      "next": "Next",
-      "pageInfo": "{{from}}-{{to}} of {{total}}",
-      "error": "Could not load articles"
-    },
-    "status": {
-      "draft": "Draft",
-      "in_review": "In review",
-      "reviewed": "Reviewed",
-      "approved": "Approved",
-      "published": "Published",
-      "archived": "Archived"
-    },
-    "editor": {
-      "newTitle": "New article",
-      "editTitle": "Edit article",
-      "loading": "Loading...",
-      "fieldTitle": "Title",
-      "fieldTitlePlaceholder": "Article title",
-      "fieldSubtitle": "Subtitle",
-      "fieldSubtitlePlaceholder": "Subtitle (optional)",
-      "fieldExcerpt": "Excerpt",
-      "fieldExcerptPlaceholder": "Summary for cards and social media",
-      "fieldContent": "Content",
-      "seoSection": "Meta tags (SEO)",
-      "metaTitle": "Meta title",
-      "metaDescription": "Meta description",
-      "save": "Save",
-      "saving": "Saving...",
-      "errorLoad": "Could not load the article",
-      "errorSave": "Could not save the article",
-      "errorUpload": "Could not upload the image",
-      "errorFeatured": "Could not set the featured image",
-      "errorRemove": "Could not remove the image",
-      "saveFirstForAssets": "Save the article before adding images",
-      "darkModeOn": "Switch to dark mode",
-      "darkModeOff": "Switch to light mode"
-    },
-    "view": {
-      "loading": "Loading...",
-      "notFound": "Article not found",
-      "translationMissing": "Translation not available",
-      "gallery": "Image gallery",
-      "tags": "Tags:",
-      "topics": "Topics:"
     }
   }
 }

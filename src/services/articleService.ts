@@ -1,5 +1,6 @@
 import apiClient from './apiClient'
 import { apiUrl } from '../utils/api'
+import type { ArticleType } from './articleTypeService'
 
 export interface Article {
   id: string
@@ -11,6 +12,11 @@ export interface Article {
   published_at?: string
   created_at: string
   updated_at: string
+  /**
+   * Absent on every article written before types existed, which today is most
+   * of them. Everything that renders it has to tolerate that.
+   */
+  type?: ArticleType
   translations?: Record<string, ArticleTranslation>
   featured_asset?: ArticleAsset
   assets?: ArticleAsset[]
@@ -60,6 +66,7 @@ export interface ArticleCreateRequest {
   topics?: string[]
   primary_language: 'pt-BR' | 'en-GB'
   og_image_url?: string
+  type_slug?: string
 }
 
 export interface ArticleTranslationInput {
@@ -77,6 +84,19 @@ export interface ArticleUpdateRequest {
   tags?: string[]
   topics?: string[]
   og_image_url?: string
+  /**
+   * Three states, and the distinction is load-bearing:
+   *
+   * - `undefined` leaves the article's type alone. JSON.stringify drops the key
+   *   entirely, so an editor that has not finished loading sends nothing and the
+   *   server preserves what is already there.
+   * - `''` clears the type.
+   * - a slug sets it.
+   *
+   * Typing this as `string` instead would collapse the first two states and a
+   * half-loaded editor would silently untype the article on the next save.
+   */
+  type_slug?: string
 }
 
 export interface ArticleStatusUpdateRequest {
@@ -90,6 +110,19 @@ export interface ArticleListFilters {
   tags?: string[]
   topics?: string[]
   lang?: 'pt-BR' | 'en-GB'
+  limit?: number
+  offset?: number
+}
+
+/**
+ * What a reader is allowed to ask for. Deliberately narrower than
+ * ArticleListFilters, mirroring the server: the public endpoint has no status
+ * or author filter, and this type is how the frontend stops anyone from
+ * casually adding one.
+ */
+export interface PublicArticleListFilters {
+  lang?: string
+  type?: string
   limit?: number
   offset?: number
 }
@@ -201,14 +234,14 @@ class ArticleService {
   /**
    * List public articles
    */
-  async listPublicArticles(
-    languageCode: string = 'pt-BR',
-    limit: number = 20,
-    offset: number = 0
-  ): Promise<ArticleListResponse> {
-    return apiClient.get<ArticleListResponse>(
-      apiUrl(`/v1/articles/public?lang=${languageCode}&limit=${limit}&offset=${offset}`)
-    )
+  async listPublicArticles(filters: PublicArticleListFilters = {}): Promise<ArticleListResponse> {
+    const params = new URLSearchParams()
+    params.append('lang', filters.lang || 'pt-BR')
+    params.append('limit', String(filters.limit ?? 20))
+    params.append('offset', String(filters.offset ?? 0))
+    if (filters.type) params.append('type', filters.type)
+
+    return apiClient.get<ArticleListResponse>(apiUrl(`/v1/articles/public?${params.toString()}`))
   }
 
   /**

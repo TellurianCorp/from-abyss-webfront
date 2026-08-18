@@ -14,6 +14,7 @@ import {
   Users,
   User,
   Rss,
+  Tag,
 } from 'react-feather'
 import styles from '../styles/AdminSidebar.module.css'
 
@@ -112,6 +113,13 @@ export function AdminSidebar() {
           label: t('admin.sidebar.articles', 'Articles'),
           icon: FileText,
           path: '/admin/articles',
+          module: 'content',
+        },
+        {
+          id: 'content-article-types',
+          label: t('admin.sidebar.articleTypes', 'Article Types'),
+          icon: Tag,
+          path: '/admin/article-types',
           module: 'content',
         },
       ],

@@ -1,0 +1,20 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.select {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--fa-border, #333);
+  border-radius: 4px;
+  background: var(--fa-surface, #141414);
+  color: inherit;
+  font: inherit;
+}

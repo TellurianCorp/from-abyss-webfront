@@ -1,0 +1,21 @@
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin: 0 0 0.35rem;
+}
+
+.description {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.notFound {
+  padding: 2rem 0;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 0.75rem;
+}
