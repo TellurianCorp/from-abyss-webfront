@@ -11,6 +11,7 @@ interface UserInfo {
 export function useUser() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [canWriteArticles, setCanWriteArticles] = useState(false)
 
   useEffect(() => {
     // Paint from the last known user so the header does not flicker, then
@@ -44,12 +45,14 @@ export function useUser() {
             const user = { ...userData, id: String(userIdValue) }
             setUserInfo(user)
             localStorage.setItem('userInfo', JSON.stringify(user))
+            setCanWriteArticles(userData.can_write_articles === true)
           }
         } else if (response.status === 401) {
           // Session gone or expired: drop the cached copy so the UI stops
           // showing a signed-in state that no longer exists.
           setUserInfo(null)
           localStorage.removeItem('userInfo')
+          setCanWriteArticles(false)
         }
       } catch (error) {
         console.error('Failed to fetch user info:', error)
@@ -61,5 +64,5 @@ export function useUser() {
     fetchUserInfo()
   }, [])
 
-  return { userInfo, isLoading }
+  return { userInfo, isLoading, canWriteArticles }
 }

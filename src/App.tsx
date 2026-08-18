@@ -1,7 +1,8 @@
 import './App.css'
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { ProtectedRoute } from './components/ProtectedRoute'
+import { AdminRoute } from './components/AdminRoute'
+import { WriterRoute } from './components/WriterRoute'
 import Toaster from './components/Toaster'
 
 // Lazy load routes for code splitting - only load when needed
@@ -58,65 +59,65 @@ function App() {
           <Route
             path="/admin"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <Admin />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/patreon"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AdminPatreonPage />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/users"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AdminUsers />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/fediverse"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AdminFediverse />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/fediverse/activitypub"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AdminActivityPub />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/youtube"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AdminYouTube />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/feeds"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AdminFeeds />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
             path="/koliseum-admin"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <KoliseumAdmin />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route
@@ -146,17 +147,17 @@ function App() {
           <Route
             path="/articles/new"
             element={
-              <ProtectedRoute>
+              <WriterRoute>
                 <ArticleEditor />
-              </ProtectedRoute>
+              </WriterRoute>
             }
           />
           <Route
             path="/articles/:id/edit"
             element={
-              <ProtectedRoute>
+              <WriterRoute>
                 <ArticleEditor />
-              </ProtectedRoute>
+              </WriterRoute>
             }
           />
           <Route path="/" element={<Landing />} />
