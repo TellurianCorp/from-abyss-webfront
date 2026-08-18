@@ -13,8 +13,6 @@ import {
   CreditCard,
   Users,
   User,
-  Zap,
-  Activity,
   Rss,
 } from 'react-feather'
 import styles from '../styles/AdminSidebar.module.css'
@@ -143,20 +141,6 @@ export function AdminSidebar() {
           icon: Rss,
           path: '/admin/feeds',
           module: 'feeds',
-        },
-      ],
-    },
-    {
-      id: 'koliseum',
-      label: t('admin.sidebar.koliseum', 'Koliseum'),
-      icon: Zap,
-      items: [
-        {
-          id: 'koliseum-admin',
-          label: t('admin.sidebar.koliseumAdmin', 'Koliseum Admin'),
-          icon: Activity,
-          path: '/koliseum-admin',
-          module: 'koliseum',
         },
       ],
     },

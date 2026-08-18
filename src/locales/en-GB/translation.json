@@ -32,45 +32,6 @@
   "articles": {
     "newArticle": "New article"
   },
-  "koliseum": {
-    "console": {
-      "eyebrow": "Koliseum Console",
-      "title": "Comprehensive Administration",
-      "description": "Manage matches, rituals, and community signals through the Koliseum API. This dashboard mirrors the cult's competitive pulse.",
-      "liveQueue": "Live queue",
-      "highlights": "Highlights",
-      "apiQuickLinks": "API quick links",
-      "openApiAdmin": "Open Koliseum API admin",
-      "swaggerUI": "Swagger UI"
-    },
-    "queue": {
-      "matchWaiting": "Match #435 waiting approval",
-      "modderSubmission": "Modder submission \"Neon Abbey\" pending scan",
-      "latencyAlert": "Latency spike alert: lobby 14"
-    },
-    "highlights": {
-      "tournaments": "Cross-federation tournaments every Friday",
-      "artifactVault": "Artifact vault 03 synced with API feed",
-      "rituals": "Player-driven rituals now trending in cult circles"
-    },
-    "endpoints": {
-      "listServers": "List servers",
-      "serverMetrics": "Server metrics",
-      "startStopRestart": "Start/stop/restart",
-      "playerStats": "Player stats",
-      "leaderboard": "Leaderboard",
-      "matchHistory": "Match history"
-    },
-    "stats": {
-      "playersOnline": "Players online",
-      "lobbiesActive": "Lobbies active",
-      "matchApproval": "Match approval"
-    },
-    "admin": {
-      "stats": "Koliseum stats",
-      "openComprehensiveConsole": "Open comprehensive console"
-    }
-  },
   "admin": {
     "eyebrow": "From Abyss Control",
     "title": "Guardian Dashboard",
@@ -101,10 +62,6 @@
       }
     },
     "services": {
-      "koliseum": {
-        "name": "Koliseum",
-        "description": "Gaming & matchmaking platform"
-      },
       "youtube": {
         "name": "YouTube",
         "description": "Channel management & analytics"
@@ -231,8 +188,6 @@
       "usersManagement": "User management",
       "feeds": "Feeds",
       "feedsManagement": "Feed management",
-      "koliseum": "Koliseum",
-      "koliseumAdmin": "Koliseum administration",
       "content": "Content",
       "articles": "Articles"
     }

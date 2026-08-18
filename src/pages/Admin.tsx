@@ -34,23 +34,7 @@ export function Admin() {
     { text: t('admin.incidentFeed.qaReport'), status: 'info', time: '11:58 UTC', priority: 'low' },
   ], [t])
 
-  const koliseumStats = useMemo(() => [
-    { label: t('koliseum.stats.playersOnline'), value: '128' },
-    { label: t('koliseum.stats.lobbiesActive'), value: '8' },
-    { label: t('koliseum.stats.matchApproval'), value: '97%' },
-  ], [t])
-
   const services = useMemo(() => [
-    {
-      id: 'koliseum',
-      name: t('admin.services.koliseum.name'),
-      description: t('admin.services.koliseum.description'),
-      status: 'active',
-      stats: koliseumStats,
-      link: '/koliseum-admin',
-      color: 'blood',
-      icon: '⚔️',
-    },
     {
       id: 'youtube',
       name: t('admin.services.youtube.name'),
@@ -96,7 +80,7 @@ export function Admin() {
       color: 'blood',
       icon: '👥',
     },
-  ], [koliseumStats, t])
+  ], [t])
 
   const getServiceColorClass = (color: string) => {
     switch (color) {
@@ -250,19 +234,9 @@ export function Admin() {
                       {service.status === 'active' ? '●' : '○'}
                     </span>
                   </div>
-                  {service.stats && (
-                    <div className={styles.serviceStats}>
-                      {service.stats.map((stat) => (
-                        <div key={stat.label} className={styles.serviceStat}>
-                          <span className={styles.serviceStatLabel}>{stat.label}</span>
-                          <strong className={styles.serviceStatValue}>{stat.value}</strong>
-                        </div>
-                      ))}
-                    </div>
-                  )}
                   {service.link && (
                     <Link to={service.link} className={styles.serviceLink}>
-                      {service.id === 'koliseum' ? t('koliseum.admin.openComprehensiveConsole') : t('admin.services.openService', { name: service.name })}
+                      {t('admin.services.openService', { name: service.name })}
                       <span className={styles.serviceLinkArrow}>→</span>
                     </Link>
                   )}

@@ -32,45 +32,6 @@
   "articles": {
     "newArticle": "Novo artigo"
   },
-  "koliseum": {
-    "console": {
-      "eyebrow": "Console Koliseum",
-      "title": "Administração Abrangente",
-      "description": "Gerencie partidas, rituais e sinais da comunidade através da API Koliseum. Este painel reflete o pulso competitivo do culto.",
-      "liveQueue": "Fila ao vivo",
-      "highlights": "Destaques",
-      "apiQuickLinks": "Links rápidos da API",
-      "openApiAdmin": "Abrir administração da API Koliseum",
-      "swaggerUI": "Swagger UI"
-    },
-    "queue": {
-      "matchWaiting": "Partida #435 aguardando aprovação",
-      "modderSubmission": "Submissão de modder \"Neon Abbey\" pendente de verificação",
-      "latencyAlert": "Alerta de pico de latência: lobby 14"
-    },
-    "highlights": {
-      "tournaments": "Torneios entre federações toda sexta-feira",
-      "artifactVault": "Cofre de artefatos 03 sincronizado com feed da API",
-      "rituals": "Rituais conduzidos por jogadores agora em alta nos círculos do culto"
-    },
-    "endpoints": {
-      "listServers": "Listar servidores",
-      "serverMetrics": "Métricas do servidor",
-      "startStopRestart": "Iniciar/parar/reiniciar",
-      "playerStats": "Estatísticas do jogador",
-      "leaderboard": "Tabela de classificação",
-      "matchHistory": "Histórico de partidas"
-    },
-    "stats": {
-      "playersOnline": "Jogadores online",
-      "lobbiesActive": "Lobbies ativos",
-      "matchApproval": "Aprovação de partidas"
-    },
-    "admin": {
-      "stats": "Estatísticas do Koliseum",
-      "openComprehensiveConsole": "Abrir console abrangente"
-    }
-  },
   "admin": {
     "eyebrow": "From Abyss Control",
     "title": "Painel do Guardião",
@@ -101,10 +62,6 @@
       }
     },
     "services": {
-      "koliseum": {
-        "name": "Koliseum",
-        "description": "Plataforma de jogos e matchmaking"
-      },
       "youtube": {
         "name": "YouTube",
         "description": "Gerenciamento de canal e análises"
@@ -231,8 +188,6 @@
       "usersManagement": "Gestão de usuários",
       "feeds": "Feeds",
       "feedsManagement": "Gestão de feeds",
-      "koliseum": "Koliseum",
-      "koliseumAdmin": "Administração do Koliseum",
       "content": "Conteúdo",
       "articles": "Artigos"
     }

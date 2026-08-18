@@ -117,9 +117,6 @@ export function AdminNavbar() {
               <NavDropdown.Item as={Link} to="/admin/patreon" onClick={handleNavClick}>
                 Patreon
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/koliseum-admin" onClick={handleNavClick}>
-                Koliseum
-              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link
               as={Link}

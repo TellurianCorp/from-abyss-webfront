@@ -23,7 +23,6 @@ const AdminArticles = lazy(() => import('./pages/AdminArticles').then(m => ({ de
 const AdminArticleEditor = lazy(() => import('./pages/AdminArticleEditor').then(m => ({ default: m.AdminArticleEditor })))
 const AdminFeeds = lazy(() => import('./pages/AdminFeeds').then(m => ({ default: m.AdminFeeds })))
 const AdminLogin = lazy(() => import('./pages/AdminLogin').then(m => ({ default: m.AdminLogin })))
-const KoliseumAdmin = lazy(() => import('./pages/KoliseumAdmin').then(m => ({ default: m.KoliseumAdmin })))
 const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Profile })))
 const Articles = lazy(() => import('./pages/Articles').then(m => ({ default: m.Articles })))
 const ArticleEditor = lazy(() => import('./pages/ArticleEditor').then(m => ({ default: m.ArticleEditor })))
@@ -109,14 +108,6 @@ function App() {
             element={
               <AdminRoute>
                 <AdminFeeds />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/koliseum-admin"
-            element={
-              <AdminRoute>
-                <KoliseumAdmin />
               </AdminRoute>
             }
           />
