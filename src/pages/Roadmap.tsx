@@ -66,12 +66,6 @@ const TRACKED_REPOS = [
     description: 'Golang control layer serving REST/GraphQL endpoints'
   },
   {
-    owner: 'FromAbyssStudio',
-    repo: 'koliseum',
-    displayName: 'Koliseum',
-    description: 'Gaming platform and competitive infrastructure'
-  },
-  {
     owner: 'TellurianCorp',
     repo: 'HydraMedia',
     displayName: 'Hydra Media',

@@ -275,11 +275,6 @@
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
-.adminPanel.koliseum {
-  background: rgba(176, 58, 58, 0.15);
-  border-color: rgba(176, 58, 58, 0.35);
-}
-
 .adminPanel h3 {
   margin-top: 0;
   letter-spacing: 0.25em;
@@ -394,37 +389,6 @@
 
 .statusInactive {
   color: var(--muted);
-}
-
-.serviceStats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1rem;
-  padding: 1.25rem;
-  background: linear-gradient(145deg, rgba(15, 15, 18, 0.9), rgba(8, 8, 10, 0.9));
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.serviceStat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.serviceStatLabel {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.serviceStatValue {
-  font-size: 1.25rem;
-  color: var(--bone);
-  font-weight: 700;
 }
 
 .serviceLink {
@@ -784,9 +748,5 @@
   
   .actionsGrid {
     grid-template-columns: 1fr;
-  }
-  
-  .serviceStats {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
