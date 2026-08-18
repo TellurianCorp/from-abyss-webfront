@@ -27,6 +27,8 @@ const Profile = lazy(() => import('./pages/Profile').then(m => ({ default: m.Pro
 const Articles = lazy(() => import('./pages/Articles').then(m => ({ default: m.Articles })))
 const ArticleEditor = lazy(() => import('./pages/ArticleEditor').then(m => ({ default: m.ArticleEditor })))
 const ArticleView = lazy(() => import('./pages/ArticleView').then(m => ({ default: m.ArticleView })))
+const ArticlesByType = lazy(() => import('./pages/ArticlesByType').then(m => ({ default: m.ArticlesByType })))
+const AdminArticleTypes = lazy(() => import('./pages/AdminArticleTypes').then(m => ({ default: m.AdminArticleTypes })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -53,6 +55,9 @@ function App() {
           <Route path="/microblog" element={<Microblog />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/articles" element={<Articles />} />
+          {/* Two segments, so it never competes with /articles/:slug. No
+              existing article URL changes. */}
+          <Route path="/articles/type/:typeSlug" element={<ArticlesByType />} />
           <Route path="/articles/:slug" element={<ArticleView />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
@@ -117,6 +122,16 @@ function App() {
               <WriterRoute>
                 <AdminArticles />
               </WriterRoute>
+            }
+          />
+          {/* AdminRoute, not WriterRoute: the vocabulary is administered with
+              the admin_session, which is a different session from a writer's. */}
+          <Route
+            path="/admin/article-types"
+            element={
+              <AdminRoute>
+                <AdminArticleTypes />
+              </AdminRoute>
             }
           />
           <Route

@@ -1,22 +1,31 @@
 import { useState } from 'react'
+import { ArticleTypeSelect } from './ArticleTypeSelect'
+import type { ArticleType } from '../../services/articleTypeService'
 import './ArticleMetadataForm.css'
 
 interface ArticleMetadataFormProps {
   tags: string[]
   topics: string[]
   ogImageUrl?: string
+  /** `undefined` while the article loads, `''` for no type, otherwise a slug. */
+  typeSlug?: string
+  currentType?: ArticleType
   onTagsChange: (tags: string[]) => void
   onTopicsChange: (topics: string[]) => void
   onOgImageUrlChange: (url: string) => void
+  onTypeSlugChange: (slug: string) => void
 }
 
 export function ArticleMetadataForm({
   tags,
   topics,
   ogImageUrl,
+  typeSlug,
+  currentType,
   onTagsChange,
   onTopicsChange,
   onOgImageUrlChange,
+  onTypeSlugChange,
 }: ArticleMetadataFormProps) {
   const [tagInput, setTagInput] = useState('')
   const [topicInput, setTopicInput] = useState('')
@@ -46,6 +55,14 @@ export function ArticleMetadataForm({
   return (
     <div className="article-metadata-form">
       <h3>Metadados</h3>
+
+      <div className="form-group">
+        <ArticleTypeSelect
+          value={typeSlug}
+          current={currentType}
+          onChange={onTypeSlugChange}
+        />
+      </div>
 
       <div className="form-group">
         <label htmlFor="tags">Tags</label>

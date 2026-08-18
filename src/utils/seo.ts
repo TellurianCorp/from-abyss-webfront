@@ -2,6 +2,13 @@
  * SEO utility functions for managing meta tags dynamically
  */
 
+/**
+ * The schema.org types this site actually emits. CollectionPage is what a
+ * listing of articles by type is: schema.org has no better fit, and Article
+ * would be a lie about a page that is a list.
+ */
+export type StructuredDataType = 'WebSite' | 'Article' | 'Organization' | 'CollectionPage'
+
 export interface SEOData {
   title?: string
   description?: string
@@ -88,7 +95,7 @@ function updateLinkTag(rel: string, href: string): void {
 /**
  * Generates structured data JSON-LD for a page
  */
-export function generateStructuredData(type: 'WebSite' | 'Article' | 'Organization', data: Record<string, unknown>): string {
+export function generateStructuredData(type: StructuredDataType, data: Record<string, unknown>): string {
   const baseStructure = {
     '@context': 'https://schema.org',
     '@type': type,
@@ -101,7 +108,7 @@ export function generateStructuredData(type: 'WebSite' | 'Article' | 'Organizati
 /**
  * Adds structured data to the page
  */
-export function addStructuredData(data: Record<string, unknown>, type: 'WebSite' | 'Article' | 'Organization' = 'WebSite'): void {
+export function addStructuredData(data: Record<string, unknown>, type: StructuredDataType = 'WebSite'): void {
   const script = document.createElement('script')
   script.type = 'application/ld+json'
   script.textContent = generateStructuredData(type, data)

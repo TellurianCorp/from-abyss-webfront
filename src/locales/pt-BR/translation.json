@@ -30,7 +30,83 @@
     }
   },
   "articles": {
-    "newArticle": "Novo artigo"
+    "newArticle": "Novo artigo",
+    "admin": {
+      "title": "Artigos",
+      "description": "Rascunhos e publicados, em português e inglês."
+    },
+    "list": {
+      "new": "Novo artigo",
+      "untitled": "Sem título",
+      "loading": "Carregando...",
+      "empty": "Nenhum artigo ainda. Escreva o primeiro.",
+      "filterStatus": "Status",
+      "anyStatus": "Qualquer",
+      "colTitle": "Título",
+      "colStatus": "Status",
+      "colLanguages": "Idiomas",
+      "colUpdated": "Atualizado",
+      "colActions": "Ações",
+      "edit": "Editar",
+      "view": "Ver",
+      "previous": "Anterior",
+      "next": "Próxima",
+      "pageInfo": "{{from}}-{{to}} de {{total}}",
+      "error": "Erro ao carregar artigos"
+    },
+    "status": {
+      "draft": "Rascunho",
+      "in_review": "Em revisão",
+      "reviewed": "Revisado",
+      "approved": "Aprovado",
+      "published": "Publicado",
+      "archived": "Arquivado"
+    },
+    "editor": {
+      "newTitle": "Novo artigo",
+      "editTitle": "Editar artigo",
+      "loading": "Carregando...",
+      "fieldTitle": "Título",
+      "fieldTitlePlaceholder": "Título do artigo",
+      "fieldSubtitle": "Subtítulo",
+      "fieldSubtitlePlaceholder": "Subtítulo (opcional)",
+      "fieldExcerpt": "Resumo",
+      "fieldExcerptPlaceholder": "Resumo para cards e redes sociais",
+      "fieldContent": "Conteúdo",
+      "seoSection": "Meta tags (SEO)",
+      "metaTitle": "Meta title",
+      "metaDescription": "Meta description",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "errorLoad": "Erro ao carregar o artigo",
+      "errorSave": "Erro ao salvar o artigo",
+      "errorUpload": "Erro ao enviar a imagem",
+      "errorFeatured": "Erro ao definir a imagem destacada",
+      "errorRemove": "Erro ao remover a imagem",
+      "saveFirstForAssets": "Salve o artigo antes de adicionar imagens",
+      "darkModeOn": "Ativar modo escuro",
+      "darkModeOff": "Ativar modo claro"
+    },
+    "view": {
+      "loading": "Carregando...",
+      "notFound": "Artigo não encontrado",
+      "translationMissing": "Tradução não disponível",
+      "gallery": "Galeria de imagens",
+      "tags": "Tags:",
+      "topics": "Tópicos:"
+    },
+    "type": {
+      "label": "Tipo",
+      "none": "Sem tipo",
+      "hint": "Notícia, Crítica, Opinião e afins. Opcional.",
+      "loadError": "Não foi possível carregar os tipos",
+      "retiredOption": "{{name}} (aposentado)",
+      "filterLabel": "Tipo",
+      "all": "Todos os tipos",
+      "notFoundTitle": "Tipo não encontrado",
+      "notFound": "Não existe um tipo de artigo neste endereço.",
+      "backToAll": "Ver todos os artigos"
+    }
   },
   "admin": {
     "eyebrow": "From Abyss Control",
@@ -189,7 +265,34 @@
       "feeds": "Feeds",
       "feedsManagement": "Gestão de feeds",
       "content": "Conteúdo",
-      "articles": "Artigos"
+      "articles": "Artigos",
+      "articleTypes": "Tipos de Artigo"
+    },
+    "articleTypes": {
+      "title": "Tipos de artigo",
+      "description": "O vocabulário editorial: Notícia, Crítica, Opinião e afins. Os nomes vêm daqui, então uma edição aparece no site na hora.",
+      "loading": "Carregando...",
+      "colName": "Nome",
+      "colSlug": "Slug",
+      "colOrder": "Ordem",
+      "colActions": "Ações",
+      "edit": "Editar",
+      "retire": "Aposentar",
+      "retired": "{{name}} aposentado. {{count}} artigo(s) continuam exibindo o selo.",
+      "creating": "Novo tipo",
+      "editing": "Editar {{name}}",
+      "slug": "Slug",
+      "slugHint": "Palavras minúsculas unidas por hífen. Não pode mudar depois: faz parte do endereço público.",
+      "namePt": "Nome (pt-BR)",
+      "nameEn": "Nome (en-GB)",
+      "nameHint": "Os dois idiomas são obrigatórios: a falta de um mostraria só o slug para metade dos leitores.",
+      "descriptionPt": "Descrição (pt-BR)",
+      "descriptionEn": "Descrição (en-GB)",
+      "descriptionHint": "Usada como descrição da página do tipo.",
+      "displayOrder": "Ordem de exibição",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "cancel": "Cancelar"
     }
   },
   "platform": {
@@ -807,72 +910,6 @@
       "stale": "- o texto mudou desde esta verificação",
       "noReplacement": "Sem correção sugerida.",
       "ignore": "Ignorar"
-    }
-  },
-  "articles": {
-    "admin": {
-      "title": "Artigos",
-      "description": "Rascunhos e publicados, em português e inglês."
-    },
-    "list": {
-      "new": "Novo artigo",
-      "untitled": "Sem título",
-      "loading": "Carregando...",
-      "empty": "Nenhum artigo ainda. Escreva o primeiro.",
-      "filterStatus": "Status",
-      "anyStatus": "Qualquer",
-      "colTitle": "Título",
-      "colStatus": "Status",
-      "colLanguages": "Idiomas",
-      "colUpdated": "Atualizado",
-      "colActions": "Ações",
-      "edit": "Editar",
-      "view": "Ver",
-      "previous": "Anterior",
-      "next": "Próxima",
-      "pageInfo": "{{from}}-{{to}} de {{total}}",
-      "error": "Erro ao carregar artigos"
-    },
-    "status": {
-      "draft": "Rascunho",
-      "in_review": "Em revisão",
-      "reviewed": "Revisado",
-      "approved": "Aprovado",
-      "published": "Publicado",
-      "archived": "Arquivado"
-    },
-    "editor": {
-      "newTitle": "Novo artigo",
-      "editTitle": "Editar artigo",
-      "loading": "Carregando...",
-      "fieldTitle": "Título",
-      "fieldTitlePlaceholder": "Título do artigo",
-      "fieldSubtitle": "Subtítulo",
-      "fieldSubtitlePlaceholder": "Subtítulo (opcional)",
-      "fieldExcerpt": "Resumo",
-      "fieldExcerptPlaceholder": "Resumo para cards e redes sociais",
-      "fieldContent": "Conteúdo",
-      "seoSection": "Meta tags (SEO)",
-      "metaTitle": "Meta title",
-      "metaDescription": "Meta description",
-      "save": "Salvar",
-      "saving": "Salvando...",
-      "errorLoad": "Erro ao carregar o artigo",
-      "errorSave": "Erro ao salvar o artigo",
-      "errorUpload": "Erro ao enviar a imagem",
-      "errorFeatured": "Erro ao definir a imagem destacada",
-      "errorRemove": "Erro ao remover a imagem",
-      "saveFirstForAssets": "Salve o artigo antes de adicionar imagens",
-      "darkModeOn": "Ativar modo escuro",
-      "darkModeOff": "Ativar modo claro"
-    },
-    "view": {
-      "loading": "Carregando...",
-      "notFound": "Artigo não encontrado",
-      "translationMissing": "Tradução não disponível",
-      "gallery": "Galeria de imagens",
-      "tags": "Tags:",
-      "topics": "Tópicos:"
     }
   }
 }

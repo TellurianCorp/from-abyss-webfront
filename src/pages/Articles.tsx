@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ArticleList } from '../components/articles/ArticleList'
+import { ArticleTypeFilter } from '../components/articles/ArticleTypeFilter'
 import { useUser } from '../hooks/useUser'
 import styles from './Articles.module.css'
 
@@ -17,6 +18,7 @@ export function Articles() {
           </Link>
         </div>
       )}
+      <ArticleTypeFilter />
       <ArticleList />
     </div>
   )
