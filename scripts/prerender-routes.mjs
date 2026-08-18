@@ -52,7 +52,47 @@ const routes = [
     title: 'Microblog - From Abyss Media',
     description: 'Federated microblog feed for the From Abyss Media community.',
   },
+  {
+    path: '/articles',
+    title: 'Articles - From Abyss Media',
+    description: 'News, reviews, opinion and essays on horror across games, film, books and music.',
+  },
 ]
+
+// The seeded article types, duplicated from
+// from-abyss-api/migrations/017_create_article_types.up.sql.
+//
+// The duplication is real and does not go away. `make migrate-up` runs psql -f,
+// which cannot read a shared JSON file, and this script must not call the API:
+// it runs during the Railway build, and a postbuild step failing because the
+// API is briefly unavailable would take down a whole deploy for a cosmetic gain.
+//
+// A type created later through the admin screen gets the SPA shell plus client
+// side useSEO, which is exactly what every article page already gets today, so
+// it is not a regression -- only a missed optimisation for the eleven that ship
+// with the product. Editing this list is optional; leaving it stale costs
+// nothing beyond that.
+const articleTypes = [
+  { slug: 'news', name: 'News', description: 'Horror news: announcements, releases and what just happened.' },
+  { slug: 'review', name: 'Reviews', description: 'Reviews of horror games, films, books, comics and music.' },
+  { slug: 'opinion', name: 'Opinion', description: 'Opinion pieces and arguments about horror and its culture.' },
+  { slug: 'interview', name: 'Interviews', description: 'Conversations with the people who make horror.' },
+  { slug: 'feature', name: 'Features', description: 'Long-form features and reported pieces on horror.' },
+  { slug: 'editorial', name: 'Editorials', description: 'Editorials from From Abyss Media.' },
+  { slug: 'essay', name: 'Essays', description: 'Critical essays on horror as a form.' },
+  { slug: 'list', name: 'Lists', description: 'Ranked and curated lists across horror media.' },
+  { slug: 'retrospective', name: 'Retrospectives', description: 'Looking back at the horror that shaped the genre.' },
+  { slug: 'guide', name: 'Guides', description: 'Practical guides and how-tos for horror fans and creators.' },
+  { slug: 'report', name: 'Reports', description: 'Reports from events, festivals and the horror industry.' },
+]
+
+for (const articleType of articleTypes) {
+  routes.push({
+    path: `/articles/type/${articleType.slug}`,
+    title: `${articleType.name} - From Abyss Media`,
+    description: articleType.description,
+  })
+}
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')

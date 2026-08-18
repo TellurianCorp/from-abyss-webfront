@@ -34,6 +34,11 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
   const [tags, setTags] = useState<string[]>([])
   const [topics, setTopics] = useState<string[]>([])
   const [ogImageUrl, setOgImageUrl] = useState<string>('')
+  // undefined means "not loaded yet", and it is not the same as '' meaning "no
+  // type". Sending '' before the article arrives would clear a type the writer
+  // never touched; undefined is dropped by JSON.stringify and the server leaves
+  // the column alone.
+  const [typeSlug, setTypeSlug] = useState<string | undefined>(undefined)
   const [assets, setAssets] = useState<ArticleAsset[]>([])
   const [uploadingAsset, setUploadingAsset] = useState(false)
   // Held here rather than inside the editor so the spellcheck panel, which sits
@@ -55,6 +60,8 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
         }
       })
       setTranslations(emptyTranslations)
+      // A new article has nothing to preserve, so the control is usable at once.
+      setTypeSlug('')
     }
   }, [articleId])
 
@@ -93,6 +100,7 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
       setTopics(loadedArticle.topics || [])
       setOgImageUrl(loadedArticle.og_image_url || '')
       setAssets(loadedArticle.assets || [])
+      setTypeSlug(loadedArticle.type?.slug ?? '')
     } catch (err) {
       setError(err instanceof Error ? err.message : t('articles.editor.errorLoad', 'Could not load the article'))
     } finally {
@@ -112,6 +120,11 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
           tags,
           topics,
           og_image_url: ogImageUrl || undefined,
+          // Passed straight through rather than through `|| undefined`, which
+          // is what og_image_url does above: that idiom cannot express
+          // "clear it", and here the difference between '' and undefined is
+          // exactly what keeps a half-loaded editor from untyping an article.
+          type_slug: typeSlug,
         })
       } else {
         // Create new article
@@ -122,6 +135,9 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
           topics,
           primary_language: primaryLanguage as 'pt-BR' | 'en-GB',
           og_image_url: ogImageUrl || undefined,
+          // On create there is nothing to preserve, so '' and "absent" mean the
+          // same thing and the empty string can be dropped.
+          type_slug: typeSlug || undefined,
         })
       }
 
@@ -358,9 +374,12 @@ export function ArticleEditor({ articleId, onSave }: ArticleEditorProps) {
             tags={tags}
             topics={topics}
             ogImageUrl={ogImageUrl}
+            typeSlug={typeSlug}
+            currentType={article?.type}
             onTagsChange={setTags}
             onTopicsChange={setTopics}
             onOgImageUrlChange={setOgImageUrl}
+            onTypeSlugChange={setTypeSlug}
           />
 
           {articleId && (

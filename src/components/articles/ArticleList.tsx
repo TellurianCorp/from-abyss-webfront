@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import articleService, { type Article } from '../../services/articleService'
 import { WorkflowStatusBadge } from './WorkflowStatusBadge'
+import { ArticleTypeBadge } from './ArticleTypeBadge'
 import './ArticleList.css'
 
 interface ArticleListProps {
@@ -11,9 +12,11 @@ interface ArticleListProps {
     author_id?: number
   }
   usePublicEndpoint?: boolean // Use public endpoint (only published articles)
+  /** Restricts the list to one editorial type. Public listing only. */
+  typeSlug?: string
 }
 
-export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListProps) {
+export function ArticleList({ filters, usePublicEndpoint = true, typeSlug }: ArticleListProps) {
   const { t, i18n } = useTranslation()
   const [articles, setArticles] = useState<Article[]>([])
   const [loading, setLoading] = useState(true)
@@ -24,7 +27,14 @@ export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListPr
 
   useEffect(() => {
     loadArticles()
-  }, [page, filters, usePublicEndpoint, i18n.language])
+  }, [page, filters, usePublicEndpoint, typeSlug, i18n.language])
+
+  // Page 3 of News is not page 3 of everything. Without this, switching type
+  // while deep in the pagination lands on an empty page that looks like the
+  // type has no articles.
+  useEffect(() => {
+    setPage(1)
+  }, [typeSlug])
 
   const loadArticles = async () => {
     setLoading(true)
@@ -33,11 +43,12 @@ export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListPr
       
       // Use public endpoint if no specific filters or if explicitly requested
       if (usePublicEndpoint && (!filters || (!filters.status && !filters.author_id))) {
-        const response = await articleService.listPublicArticles(
-          languageCode,
+        const response = await articleService.listPublicArticles({
+          lang: languageCode,
+          type: typeSlug,
           limit,
-          (page - 1) * limit
-        )
+          offset: (page - 1) * limit,
+        })
         // Ensure articles is always an array
         const articlesArray = Array.isArray(response?.articles) ? response.articles : []
         setArticles(articlesArray)
@@ -105,6 +116,7 @@ export function ArticleList({ filters, usePublicEndpoint = true }: ArticleListPr
                 <div key={article.id} className="article-card">
                   <div className="article-card-header">
                     {!usePublicEndpoint && <WorkflowStatusBadge status={article.status} />}
+                    <ArticleTypeBadge type={article.type} linked={usePublicEndpoint} />
                     <span className="article-date">
                       {new Date(article.created_at).toLocaleDateString(i18n.language)}
                     </span>
