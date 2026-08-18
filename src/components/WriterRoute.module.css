@@ -1,0 +1,8 @@
+.checking {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+  color: var(--bone, #e8e8e8);
+}
